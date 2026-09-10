@@ -1,0 +1,12 @@
+family,label,learner,role,units,median_mre,median_cost_cv,median_proxy_ratio,median_top1_agreement,median_pareto_jaccard,source
+REPLICATION-ICSE19,Kaltenecker/NewRuns,original/literature regression,primary,7,0.2570133940611869,0.43523823016124863,0.9959660305570518,1.0,0.6,artifacts/newruns_systems/system_summary.csv
+REPLICATION-ICSE19,Kaltenecker/NewRuns,sk-rf-log,sensitivity,7,0.10008213246723793,0.43523823016124863,0.9961963608114612,1.0,0.42857142857142855,artifacts/strong_learner_overnight/replication/sk-rf-log/newruns/system_summary.csv
+REPLICATION-ICSE19,Kaltenecker/NewRuns,sk-hgbt-log,sensitivity,7,0.06652763281934249,0.43523823016124863,0.9959660305570518,1.0,0.5,artifacts/strong_learner_overnight/replication/sk-hgbt-log/newruns/system_summary.csv
+REPLICATION-ICPE20,x264 matrix,original/literature regression,primary,4,nan,nan,nan,0.9117647058823529,nan,artifacts/x264_matrix/scenario_summary.csv
+REPLICATION-ICPE20,x264 matrix,sk-hgbt-log,bounded sensitivity,4,nan,nan,nan,0.8095238095238095,nan,artifacts/strong_learner_overnight/replication/sk-hgbt-log/x264_matrix_slice/scenario_summary.csv
+ENERGY,Twins/green configuration,ridge-log,primary,28,0.09352354352112123,0.5039302027910708,0.9938856593626508,0.5,0.5479166666666666,artifacts/twins_generated_representative_100s/scenario_summary.csv
+WORKLOAD,ICSE 2023 workload-impact,ridge-log,baseline,9,nan,0.68309073487241,0.966991811773932,0.7142857142857143,0.5,artifacts/workload_batch_overnight/system_summary.csv
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,primary,9,nan,0.68309073487241,0.9665262317219829,0.7142857142857143,0.5714285714285714,artifacts/strong_learner_overnight/workload/sk-hgbt-log/system_summary.csv
+LCBENCH,LCBench lightweight archive,ridge-raw,primary,1,nan,0.9997500876999825,0.8262910928466947,0.2857142857142857,0.5,artifacts/lcbench_data_2k_lw/study_summary.csv
+LCBENCH,LCBench lightweight archive,sk-hgbt-raw,sensitivity,1,nan,0.9997500876999825,0.8262910928466947,0.42857142857142855,0.4,artifacts/lcbench_data_2k_lw_skhgbt/study_summary.csv
+LINUX,TuxKConfig cross-version,sk-hgbt-log,primary,7,0.09595078075970145,1.1225433779971656,1.000897044949389,0.2857142857142857,0.3,artifacts/linux_hgbt_full_strategy/release_summary.csv

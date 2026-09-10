@@ -1,0 +1,9 @@
+hypothesis,scopes,supports,refutes,inconclusive,global_verdict
+H1a,7,7,0,0,supported (7/7)
+H1b,7,0,1,6,"mixed (sup=0, ref=1, inc=6 of 7)"
+H2a,7,7,0,0,supported (7/7)
+H2b,7,0,5,2,refuted (5/7)
+H2c,7,0,5,2,refuted (5/7)
+H3a,7,7,0,0,supported (7/7)
+H4a,7,7,0,0,supported (7/7)
+H4b,7,7,0,0,supported (7/7)

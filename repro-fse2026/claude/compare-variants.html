@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paper Variant Diff Explorer</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f0f1a;--surface:#1a1a2e;--surface2:#252540;--text:#ddd;--text2:#8888aa;--border:#2a2a44;--accent:#e94560;--col1:#ff9f43;--col2:#54a0ff;--col3:#5f27cd;--addbg:#0a2e1a;--addfg:#5cdf8a;--delbg:#2e0a0a;--delfg:#e95a5a}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);height:100vh;display:flex;flex-direction:column;overflow:hidden;font-size:13px}
+.tbar{background:var(--surface);border-bottom:1px solid var(--border);padding:5px 10px;display:flex;align-items:center;gap:8px;flex-shrink:0;flex-wrap:wrap;z-index:100}
+.tbar h1{font-size:13px;font-weight:600;white-space:nowrap}
+.tbar .s{width:1px;height:20px;background:var(--border);flex-shrink:0}
+.tbg{display:flex;align-items:center;gap:3px}
+.tbar button,.tbar .btn{background:var(--surface2);color:var(--text);border:1px solid var(--border);padding:2px 8px;border-radius:3px;cursor:pointer;font-size:11px}
+.tbar button:hover{background:#1a3a6a}
+.tbar button:disabled{opacity:.3;cursor:default}
+#pageInfo{font-size:11px;color:var(--text2);min-width:70px;text-align:center}
+#zoomLevel{font-size:12px;color:var(--text2);min-width:34px;text-align:center}
+.main{display:flex;flex:1;overflow:hidden}
+.cols{display:flex;flex:1;overflow:hidden}
+.col{flex:1;min-width:0;display:flex;flex-direction:column;border-right:1px solid var(--border);overflow:hidden}
+.col:last-child{border-right:none}
+.ch{font-size:10px;font-weight:600;padding:4px 6px;background:var(--surface);border-bottom:1px solid var(--border);text-align:center;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;justify-content:center;gap:6px}
+.c1 .ch{color:var(--col1)} .c2 .ch{color:var(--col2)} .c3 .ch{color:var(--col3)}
+.pw{flex:1;overflow:auto;position:relative;background:#080812;cursor:crosshair}
+.pw canvas{display:block;margin:0 auto}
+.cs{position:relative;display:inline-block;min-width:100%}
+.ac{position:absolute;top:0;left:0;pointer-events:none}
+
+#side{width:320px;background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;font-size:12px}
+#side.hide{width:0;border:none}
+.sh{font-size:10px;padding:5px 8px 2px;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;display:flex;justify-content:space-between;align-items:center}
+#fl{flex:0 1 auto;overflow-y:auto;padding:2px 5px;max-height:35vh}
+#diffPanel{flex:1;overflow-y:auto;border-top:1px solid var(--border);padding:4px 6px;display:none;font-family:'SF Mono','Menlo','Monaco','Consolas',monospace;font-size:10px;line-height:1.5}
+#diffPanel.show{display:block}
+#diffPanel .dh{padding:3px 4px;color:var(--text2);font-weight:600;font-size:10px;font-family:inherit}
+#diffPanel .dh .dhv{font-weight:400}
+#diffPanel .ds{display:flex;gap:0;margin:2px 0}
+#diffPanel .ds .ln{width:28px;text-align:right;color:var(--text2);padding:0 4px;flex-shrink:0;user-select:none}
+#diffPanel .ds .ln.da{color:var(--addfg)} #diffPanel .ds .ln.dd{color:var(--delfg)}
+#diffPanel .ds .dc{flex:1;padding:0 4px;white-space:pre-wrap;word-break:break-word}
+#diffPanel .ds.add{background:var(--addbg)} #diffPanel .ds.del{background:var(--delbg)}
+#diffPanel .ds.add .dc{color:var(--addfg)} #diffPanel .ds.del .dc{color:var(--delfg)}
+#diffPanel .ds.same .dc{color:var(--text)}
+#diffPanel .ds.sep{text-align:center;color:var(--text2);padding:4px;font-size:9px;font-family:inherit}
+#diffPanel .empty{color:var(--text2);padding:12px 8px;text-align:center;font-size:11px;font-family:inherit}
+#diffPanel .loading{color:var(--text2);padding:8px;text-align:center;font-size:10px;font-family:inherit}
+#diffPanel .err{color:var(--accent);padding:8px;text-align:center;font-size:10px;font-family:inherit}
+
+.fi{background:var(--surface2);border-radius:4px;padding:4px 5px;margin-bottom:2px;cursor:pointer;transition:background .1s;border-left:3px solid transparent}
+.fi:hover{background:#1a2a4a}
+.fi.sel{border-left-color:var(--accent);background:#1e1e3a}
+.fi .fn{font-size:11px;font-weight:500;display:flex;align-items:center;gap:4px}
+.fi .fn .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.fi .fd{font-size:9px;color:var(--text2);margin-top:1px;display:flex;gap:3px;flex-wrap:wrap;align-items:center}
+.fi .fd .tag{display:inline-block;padding:0 4px;border-radius:2px;font-size:8px;line-height:14px}
+
+#af{padding:5px 8px;border-top:1px solid var(--border);display:flex;gap:4px;flex-wrap:wrap}
+#af input[type=text]{flex:1;min-width:50px;background:var(--surface2);color:var(--text);border:1px solid var(--border);padding:3px 5px;border-radius:3px;font-size:11px}
+#af input[type=color]{width:22px;height:22px;border:1px solid var(--border);border-radius:3px;background:none;cursor:pointer;padding:1px}
+#af button{background:var(--accent);color:#fff;border:none;padding:3px 8px;border-radius:3px;cursor:pointer;font-size:11px}
+
+#sb{border-top:1px solid var(--border);padding:2px 10px;font-size:10px;color:var(--text2);display:flex;justify-content:space-between;flex-shrink:0}
+#sb .er{color:var(--accent)}
+
+@media(max-width:900px){
+  .main{flex-direction:column}
+  .cols{flex-direction:column}
+  .col{border-right:none;border-bottom:1px solid var(--border);min-height:200px}
+  #side{width:100%;border-left:none;border-top:1px solid var(--border);max-height:180px}
+}
+</style>
+</head>
+<body>
+
+<div class="tbar">
+  <h1>&#9670; Variant Diff Explorer</h1>
+  <div class="s"></div>
+  <div class="tbg">
+    <button id="pp">&#9664;</button>
+    <span id="pageInfo">&ndash;</span>
+    <button id="np">&#9654;</button>
+  </div>
+  <div class="s"></div>
+  <div class="tbg">
+    <button id="zo">&#8722;</button>
+    <span id="zoomLevel">100%</span>
+    <button id="zi">+</button>
+  </div>
+  <div class="s"></div>
+  <div class="tbg">
+    <span style="font-size:10px;color:var(--text2)">Pg</span>
+    <input type="number" id="gp" min="1" value="1" style="width:34px;background:var(--surface2);color:var(--text);border:1px solid var(--border);padding:2px 3px;border-radius:3px;font-size:11px;text-align:center">
+  </div>
+  <div class="s"></div>
+  <div class="tbg">
+    <button id="exp">Export</button>
+    <button id="imp">Import</button>
+    <input type="file" id="impf" accept=".json" style="display:none">
+  </div>
+  <div class="s"></div>
+  <div class="tbg">
+    <button id="ts">&#9776;</button>
+  </div>
+</div>
+
+<div class="main">
+  <div class="cols" id="cols">
+    <div class="col c1">
+      <div class="ch" id="ch0">V1 &mdash; Construct Validity</div>
+      <div class="pw" id="pw0"><div class="cs" id="cs0"></div></div>
+    </div>
+    <div class="col c2">
+      <div class="ch" id="ch1">V2 &mdash; Decision Impact</div>
+      <div class="pw" id="pw1"><div class="cs" id="cs1"></div></div>
+    </div>
+    <div class="col c3">
+      <div class="ch" id="ch2">V3 &mdash; Methodology</div>
+      <div class="pw" id="pw2"><div class="cs" id="cs2"></div></div>
+    </div>
+  </div>
+  <div id="side">
+    <div class="sh">Features <span style="font-weight:400;font-size:9px" id="fcount"></span></div>
+    <div id="fl"></div>
+    <div id="diffPanel"></div>
+    <div id="af">
+      <input type="text" id="fn" placeholder="New feature..." maxlength="50">
+      <input type="color" id="fc" value="#e94560">
+      <button id="afb">+</button>
+    </div>
+  </div>
+</div>
+
+<div id="sb"><span id="sl">Ready</span><span id="sr"></span></div>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+const VCOLS=['#ff9f43','#54a0ff','#5f27cd'];
+const VNAMES=['Construct Validity','Decision Impact','Methodology'];
+const PURLS=[
+  'cost-sampling-variant1-construct-validity.pdf',
+  'cost-sampling-variant2-decision-impact.pdf',
+  'cost-sampling-variant3-methodology.pdf'
+];
+
+let docs=[null,null,null], tPgs=[0,0,0], loading=[0,0,0];
+let curPg=1, zoom=1.0;
+let feats=[], selFeat=null;
+let drag=null, dragR=null, dragV=null;
+const textCache = [{},{},{}];
+
+function log(m,e){let s=document.getElementById('sl');s.textContent=m;s.classList.toggle('er',!!e)}
+const pi=document.getElementById('pageInfo');
+const zl=document.getElementById('zoomLevel');
+
+function gs(){
+  let w=document.getElementById('pw0');
+  let fit = w ? (w.clientWidth-4)/612 : 1;
+  return Math.max(0.1, fit * zoom);
+}
+
+async function ld(i){
+  if(loading[i]) return; loading[i]=1;
+  try{
+    let r=await fetch(PURLS[i]);
+    if(!r.ok) throw new Error('HTTP '+r.status+' for '+PURLS[i]);
+    let b=await r.arrayBuffer();
+    let p=await pdfjsLib.getDocument({data:b}).promise;
+    docs[i]=p; tPgs[i]=p.numPages;
+    log('Loaded V'+(i+1)+': '+p.numPages+'p');
+  }catch(e){
+    log('FAILED V'+(i+1)+': '+e.message,1);
+    console.error(e);
+  }
+  loading[i]=0;
+}
+
+async function rnd(v,pn){
+  let p=docs[v]; if(!p) return;
+  let cs=document.getElementById('cs'+v); if(!cs) return;
+  cs.innerHTML='';
+  try{
+    let pg=await p.getPage(pn), sc=gs(), vp=pg.getViewport({scale:sc});
+    let ca=document.createElement('canvas'); ca.className='pdf-canvas';
+    ca.width=vp.width; ca.height=vp.height; cs.appendChild(ca);
+    let ac=document.createElement('canvas'); ac.className='ac';
+    ac.width=vp.width; ac.height=vp.height;
+    ac.dataset.v=v; ac.dataset.p=pn; cs.appendChild(ac);
+    let ctx=ca.getContext('2d');
+    await pg.render({canvasContext:ctx,viewport:vp}).promise;
+    drawAn(ac); setAn(ac);
+  }catch(e){log('V'+(v+1)+' p'+pn+': '+e.message,1)}
+}
+
+async function rndAll(pn){
+  let p=pn||curPg;
+  for(let i=0;i<3;i++) if(docs[i]&&p<=tPgs[i]) await rnd(i,p);
+  ui();
+}
+
+function ui(){
+  if(isNaN(curPg)||curPg<1) curPg=1;
+  let mx=Math.max(...tPgs.filter(x=>x>0),1);
+  if(!isFinite(mx)) mx=1;
+  pi.textContent=curPg+' / '+mx;
+  try{document.getElementById('gp').value=curPg}catch(e){}
+  document.getElementById('pp').disabled=curPg<=1;
+  document.getElementById('np').disabled=curPg>=mx;
+  zl.textContent=Math.round(zoom*100)+'%';
+  document.getElementById('sr').textContent='p'+curPg+' @ '+Math.round(gs()*100)+'%';
+}
+
+async function setPg(n){
+  n=parseInt(n); if(isNaN(n)||n<1) n=1;
+  let mx=Math.max(...tPgs.filter(x=>x>0),1);
+  if(!isFinite(mx)) mx=1;
+  curPg=Math.max(1,Math.min(n,mx));
+  await rndAll(curPg);
+}
+
+async function chZ(d){zoom=Math.max(.3,Math.min(3,zoom+d));await rndAll(curPg)}
+
+// Feature system
+function gid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+
+function addF(name,color,anns,doSel){
+  let f={id:gid(),name:name.trim()||'Unnamed',color:color||'#e94560',visible:true,annotations:anns||[]};
+  feats.push(f);
+  if(doSel!==false) selFeat=f.id;
+  renderF(); rA();
+  return f;
+}
+
+function delF(id){
+  feats=feats.filter(f=>f.id!==id);
+  if(selFeat===id) selFeat=feats.length?feats[0].id:null;
+  renderF(); rA();
+  if(selFeat) navF(selFeat);
+  else document.getElementById('diffPanel').classList.remove('show');
+}
+
+function getAn(v,p){
+  let r=[];
+  for(let f of feats){
+    if(!f.visible) continue;
+    for(let a of f.annotations){
+      if(a.variant===v&&a.page===p)
+        r.push({...a,fName:f.name,fColor:f.color,fId:f.id});
+    }
+  }
+  return r;
+}
+
+function drawAn(ca){
+  let ctx=ca.getContext('2d');
+  ctx.clearRect(0,0,ca.width,ca.height);
+  let v=parseInt(ca.dataset.v),p=parseInt(ca.dataset.p);
+  let anns=getAn(v,p);
+  let selF=feats.find(x=>x.id===selFeat);
+  for(let a of anns){
+    let isSel=selF && a.fId===selFeat;
+    let alpha=isSel?'99':'44';
+    ctx.fillStyle=a.fColor+alpha;
+    ctx.strokeStyle=a.fColor;
+    ctx.lineWidth=isSel?3:1.5;
+    let rx=a.x*ca.width, ry=a.y*ca.height, rw=a.w*ca.width, rh=a.h*ca.height;
+    ctx.beginPath(); ctx.rect(rx,ry,rw,rh); ctx.fill(); ctx.stroke();
+    if(isSel){
+      ctx.fillStyle=a.fColor;
+      ctx.font='bold 11px sans-serif';
+      ctx.fillStyle='rgba(0,0,0,0.8)';
+      ctx.fillRect(rx,ry-20,ctx.measureText(a.fName).width+12,22);
+      ctx.fillStyle='#fff';
+      ctx.fillText(a.fName,rx+6,ry-4);
+    }
+  }
+  if(dragR&&dragV===v&&p===parseInt(ca.dataset.p)){
+    ctx.fillStyle='rgba(233,69,96,0.2)';
+    ctx.strokeStyle='#e94560'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.rect(dragR.x,dragR.y,dragR.w,dragR.h); ctx.fill(); ctx.stroke();
+  }
+}
+
+function rA(){document.querySelectorAll('.ac').forEach(c=>drawAn(c))}
+
+function setAn(ca){
+  ca.onmousedown=function(e){
+    if(!feats.find(x=>x.id===selFeat)) return;
+    let r=ca.getBoundingClientRect();
+    let sx=ca.width/r.width, sy=ca.height/r.height;
+    drag={x:(e.clientX-r.left)*sx, y:(e.clientY-r.top)*sy};
+    dragV=parseInt(ca.dataset.v); dragR=null;
+  };
+  ca.onmousemove=function(e){
+    if(!drag) return;
+    let r=ca.getBoundingClientRect();
+    let sx=ca.width/r.width, sy=ca.height/r.height;
+    let cx=(e.clientX-r.left)*sx, cy=(e.clientY-r.top)*sy;
+    if(!dragR) dragR={x:0,y:0,w:0,h:0};
+    dragR={x:Math.min(drag.x,cx),y:Math.min(drag.y,cy),w:Math.abs(cx-drag.x),h:Math.abs(cy-drag.y)};
+    drawAn(ca);
+  };
+  ca.onmouseup=function(e){
+    if(!drag){return}
+    if(dragR&&(dragR.w>3||dragR.h>3)){
+      let p=parseInt(ca.dataset.p);
+      let fe=feats.find(x=>x.id===selFeat);
+      if(fe){
+        fe.annotations.push({variant:parseInt(ca.dataset.v),page:p,x:dragR.x/ca.width,y:dragR.y/ca.height,w:dragR.w/ca.width,h:dragR.h/ca.height});
+        renderF();
+      }
+    }
+    drag=null;dragR=null;
+  };
+}
+
+// ─── TEXT EXTRACTION & DIFF ──────────────────────────────────────────
+
+async function getPageText(v, pn){
+  if(textCache[v][pn]) return textCache[v][pn];
+  let pdf=docs[v]; if(!pdf) return null;
+  try{
+    let pg=await pdf.getPage(pn);
+    let tc=await pg.getTextContent();
+    textCache[v][pn]=tc;
+    return tc;
+  }catch(e){return null}
+}
+
+function extractRegionText(tc, ann){
+  // tc: PDF.js text content, ann: {x,y,w,h} in normalized coords (0-1, top-left)
+  // Use page viewport at scale 1 to map coordinates
+  let items=tc.items;
+  // We don't have viewport here, but we know PDF default user space is 72 DPI
+  // Normalized coords: ann.x * pageWidth, etc.
+  // Page dimensions from first item in a pinch, or we use tc
+  // Actually, tc doesn't contain page dimensions. Let's store a viewport reference.
+  return items; // Placeholder - we need viewport
+}
+
+// Store viewport info when extracting
+const vpCache = [{},{},{}];
+
+async function getPageViewport(v, pn){
+  if(vpCache[v][pn]) return vpCache[v][pn];
+  let pdf=docs[v]; if(!pdf) return null;
+  try{
+    let pg=await pdf.getPage(pn);
+    let vp=pg.getViewport({scale:1});
+    vpCache[v][pn]=vp;
+    return vp;
+  }catch(e){return null}
+}
+
+async function extractText(v, pn, ann){
+  let tc=await getPageText(v, pn);
+  let vp=await getPageViewport(v, pn);
+  if(!tc||!vp) return '';
+
+  // Try the annotation rect, expanding if no text found
+  let attempts=[
+    {x:ann.x, y:ann.y, w:ann.w, h:ann.h},
+    {x:0, y:Math.max(0,ann.y-0.1), w:1, h:ann.h+0.2},
+    {x:0, y:0, w:1, h:0.5},
+    {x:0, y:0, w:1, h:1},
+  ];
+
+  for(let attempt of attempts){
+    let x1=attempt.x*vp.width, y1=attempt.y*vp.height;
+    let x2=(attempt.x+attempt.w)*vp.width, y2=(attempt.y+attempt.h)*vp.height;
+    let inBounds=[];
+    for(let item of tc.items){
+      let ix=item.transform[4];
+      let iy=vp.height-item.transform[5];
+      if(ix>=x1&&ix<=x2&&iy>=y1&&iy<=y2){
+        inBounds.push(item);
+      }
+    }
+    if(inBounds.length<3) continue; // not enough text, try wider
+
+    // Group into lines by Y position
+    let lineGroups={};
+    for(let item of inBounds){
+      let iy=vp.height-item.transform[5];
+      let bucket=Math.round(iy/14)*14;
+      if(!lineGroups[bucket]) lineGroups[bucket]=[];
+      lineGroups[bucket].push(item);
+    }
+    let lines=Object.entries(lineGroups)
+      .sort((a,b)=>parseFloat(a[0])-parseFloat(b[0]))
+      .map(([,items])=>{
+        items.sort((a,b)=>a.transform[4]-b.transform[4]);
+        return items.map(i=>i.str).join('');
+      });
+    return lines.join('\n').replace(/\s+\n/g,'\n').trim();
+  }
+  return '';
+}
+
+// Line-based LCS diff
+function lineDiff(aText, bText){
+  let a=aText.split('\n'), b=bText.split('\n');
+  let m=a.length, n=b.length;
+  // Build DP table
+  let dp=Array.from({length:m+1},()=>new Array(n+1).fill(0));
+  for(let i=1;i<=m;i++)
+    for(let j=1;j<=n;j++)
+      dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]+1:Math.max(dp[i-1][j],dp[i][j-1]);
+  // Backtrack
+  let result=[];
+  let i=m,j=n;
+  while(i>0||j>0){
+    if(i>0&&j>0&&a[i-1]===b[j-1]){
+      result.unshift({t:'s',text:a[i-1],na:i,nb:j});
+      i--;j--;
+    }else if(j>0&&(i===0||dp[i][j-1]>=dp[i-1][j])){
+      result.unshift({t:'a',text:b[j-1],nb:j});
+      j--;
+    }else{
+      result.unshift({t:'d',text:a[i-1],na:i});
+      i--;
+    }
+  }
+  return result;
+}
+
+function renderDiff(diff, nameA, nameB){
+  let html='';
+  html+='<div class="dh">--- V'+(nameA+1)+' ('+VNAMES[nameA]+')</div>';
+  html+='<div class="dh">+++ V'+(nameB+1)+' ('+VNAMES[nameB]+')</div>';
+  html+='<div class="dh" style="color:var(--text2);font-weight:400;font-size:9px">@@ diff @@</div>';
+
+  let na=0,nb=0;
+  for(let d of diff){
+    if(d.t==='s'){
+      na++;nb++;
+      html+='<div class="ds same"><span class="ln">'+na+'</span><span class="ln">'+nb+'</span><span class="dc">'+escHtml(d.text)+'</span></div>';
+    }else if(d.t==='d'){
+      na++;
+      html+='<div class="ds del"><span class="ln dd">'+na+'</span><span class="ln"></span><span class="dc">'+escHtml(d.text)+'</span></div>';
+    }else if(d.t==='a'){
+      nb++;
+      html+='<div class="ds add"><span class="ln"></span><span class="ln da">'+nb+'</span><span class="dc">'+escHtml(d.text)+'</span></div>';
+    }
+  }
+  if(!diff.length) html+='<div class="empty">(identical text)</div>';
+  return html;
+}
+
+function escHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+async function showDiff(f){
+  let panel=document.getElementById('diffPanel');
+  panel.innerHTML='<div class="loading">Extracting text from PDFs...</div>';
+  panel.classList.add('show');
+
+  // Group annotations by variant
+  let byV={};
+  for(let a of f.annotations){
+    if(!byV[a.variant]) byV[a.variant]=[];
+    byV[a.variant].push(a);
+  }
+
+  let variantTexts={};
+  for(let v=0;v<3;v++){
+    let anns=byV[v];
+    if(!anns||!anns.length) continue;
+    // Extract text from first annotation for this variant
+    let text=await extractText(v, anns[0].page, anns[0]);
+    if(text) variantTexts[v]=text;
+  }
+
+  let vList=Object.keys(variantTexts).map(Number).sort();
+
+  // Generate pairwise diffs
+  let html='';
+  let seen=new Set();
+  for(let vi=0;vi<3;vi++){
+    for(let vj=0;vj<3;vj++){
+      if(vi===vj) continue;
+      let key=Math.min(vi,vj)+'-'+Math.max(vi,vj);
+      if(seen.has(key)) continue; seen.add(key);
+      let hasI=variantTexts[vi]!==undefined;
+      let hasJ=variantTexts[vj]!==undefined;
+      if(!hasI&&!hasJ) continue;
+      // Place variant WITH content second (as +++ addition)
+      let a,b,ai,aj;
+      if(hasI&&!hasJ){ a=''; ai=vj; b=variantTexts[vi]; aj=vi; }
+      else if(!hasI&&hasJ){ a=''; ai=vi; b=variantTexts[vj]; aj=vj; }
+      else{ a=variantTexts[vi]; ai=vi; b=variantTexts[vj]; aj=vj; }
+      if(html) html+='<div class="ds sep">&mdash; &mdash; &mdash;</div>';
+      let diff=lineDiff(a,b);
+      if(!hasI||!hasJ){
+        let emptyV=!hasI?vi:vj, contentV=hasI?vi:vj;
+        html+='<div class="dh" style="color:var(--text2)">--- V'+(emptyV+1)+' (empty &mdash; not in this variant)</div>';
+        html+='<div class="dh">+++ V'+(contentV+1)+' ('+VNAMES[contentV]+')</div>';
+      }else{
+        html+='<div class="dh">--- V'+(vi+1)+' ('+VNAMES[vi]+')</div>';
+        html+='<div class="dh">+++ V'+(vj+1)+' ('+VNAMES[vj]+')</div>';
+      }
+      html+='<div class="dh" style="color:var(--text2);font-weight:400;font-size:9px">@@ diff @@</div>';
+      let na=0,nb=0;
+      for(let d of diff){
+        if(d.t==='s'){na++;nb++;
+          html+='<div class="ds same"><span class="ln">'+na+'</span><span class="ln">'+nb+'</span><span class="dc">'+escHtml(d.text)+'</span></div>';
+        }else if(d.t==='d'){na++;
+          html+='<div class="ds del"><span class="ln dd">'+na+'</span><span class="ln"></span><span class="dc">'+escHtml(d.text)+'</span></div>';
+        }else if(d.t==='a'){nb++;
+          html+='<div class="ds add"><span class="ln"></span><span class="ln da">'+nb+'</span><span class="dc">'+escHtml(d.text)+'</span></div>';
+        }
+      }
+    }
+  }
+  if(!html) html='<div class="empty">No text could be extracted for this feature.</div>';
+  panel.innerHTML=html;
+}
+
+// ─── NAVIGATION ──────────────────────────────────────────────────────
+
+async function navF(id){
+  selFeat=id; renderF();
+  let f=feats.find(x=>x.id===id);
+  if(!f){
+    document.getElementById('diffPanel').classList.remove('show');
+    return;
+  }
+
+  // Show diff panel
+  let panel=document.getElementById('diffPanel');
+  if(f.annotations.length===0){
+    panel.innerHTML='<div class="empty">No annotations yet. Click+drag on a PDF to mark where this feature appears.</div>';
+    panel.classList.add('show');
+    return;
+  }
+
+  // Navigate to first annotation's page
+  let targetPg=f.annotations[0].page;
+  if(targetPg!==curPg) await setPg(targetPg);
+
+  // Scroll to annotations on current page
+  for(let v=0;v<3;v++){
+    let a=f.annotations.find(a=>a.variant===v&&a.page===curPg);
+    if(!a) continue;
+    let pw=document.getElementById('pw'+v); if(!pw) continue;
+    let cs=document.getElementById('cs'+v); if(!cs) continue;
+    let ac=cs.querySelector('.ac'); if(!ac) continue;
+    pw.scrollTop=Math.max(0, a.y*ac.height - pw.clientHeight/3);
+    pw.scrollLeft=Math.max(0, a.x*ac.width - pw.clientWidth/4);
+  }
+
+  // Flash annotations
+  for(let v=0;v<3;v++){
+    let a=f.annotations.find(a=>a.variant===v&&a.page===curPg);
+    if(!a) continue;
+    let cs=document.getElementById('cs'+v); if(!cs) continue;
+    let ac=cs.querySelector('.ac'); if(!ac) continue;
+    let ctx=ac.getContext('2d');
+    let rx=a.x*ac.width, ry=a.y*ac.height, rw=a.w*ac.width, rh=a.h*ac.height;
+    let n=4;
+    function pls(){
+      drawAn(ac);
+      if(n>=0){
+        ctx.strokeStyle='rgba(255,255,255,'+(0.2+n*0.15)+')';
+        ctx.lineWidth=3+n;
+        ctx.beginPath(); ctx.rect(rx-4,ry-4,rw+8,rh+8); ctx.stroke();
+      }
+      n--; if(n>=0) setTimeout(pls,100);
+    }
+    pls();
+  }
+
+  // Show diff
+  showDiff(f);
+}
+
+function renderF(){
+  let fl=document.getElementById('fl'); fl.innerHTML='';
+  let cnt=0;
+  for(let f of feats){
+    let d=document.createElement('div');
+    d.className='fi'+(f.id===selFeat?' sel':'');
+    let vmap={};
+    for(let a of f.annotations){
+      if(!vmap[a.variant]) vmap[a.variant]=new Set();
+      vmap[a.variant].add(a.page);
+    }
+    let tags='';
+    for(let v=0;v<3;v++){
+      if(vmap[v]){
+        let pgs=[...vmap[v]].sort((a,b)=>a-b).join(',');
+        tags+='<span class="tag" style="background:'+VCOLS[v]+'22;color:'+VCOLS[v]+'">V'+(v+1)+' p'+pgs+'</span>';
+        cnt++;
+      }
+    }
+    d.innerHTML='<div class="fn"><span class="dot" style="background:'+f.color+'"></span>'+f.name+'</div><div class="fd">'+tags+'</div>';
+    d.onclick=()=>navF(f.id);
+    fl.appendChild(d);
+  }
+  document.getElementById('fcount').textContent=feats.length+' feat';
+}
+
+// ─── EVENT BINDINGS ──────────────────────────────────────────────────
+
+document.getElementById('pp').onclick=()=>setPg(curPg-1);
+document.getElementById('np').onclick=()=>setPg(curPg+1);
+document.getElementById('zi').onclick=()=>chZ(.15);
+document.getElementById('zo').onclick=()=>chZ(-.15);
+document.getElementById('gp').onchange=function(){
+  let n=parseInt(this.value); if(!isNaN(n)&&n>0) setPg(n);
+};
+document.getElementById('afb').onclick=()=>{
+  let n=document.getElementById('fn').value.trim();
+  if(n) addF(n,document.getElementById('fc').value);
+  document.getElementById('fn').value=''; document.getElementById('fn').focus();
+};
+document.getElementById('fn').onkeydown=e=>{if(e.key==='Enter')document.getElementById('afb').click()};
+document.getElementById('ts').onclick=()=>document.getElementById('side').classList.toggle('hide');
+document.getElementById('exp').onclick=()=>{
+  let d=JSON.stringify({features:feats.map(f=>({...f})),version:3},null,2);
+  let b=new Blob([d],{type:'application/json'});
+  let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='paper-diffs.json';a.click();
+  log('Exported');
+};
+document.getElementById('imp').onclick=()=>document.getElementById('impf').click();
+document.getElementById('impf').onchange=function(e){
+  let f=e.target.files[0];if(!f)return;
+  let r=new FileReader();
+  r.onload=ev=>{
+    try{
+      let d=JSON.parse(ev.target.result);
+      if(!d.features) throw Error('Bad format');
+      for(let x of d.features){if(!x.id)x.id=gid();if(x.visible===undefined)x.visible=true}
+      feats=feats.concat(d.features);
+      selFeat=feats.length?feats[0].id:null;
+      renderF();rA();
+      if(selFeat) navF(selFeat);
+      log('Imported');
+    }catch(e){log('Import error',1)}
+  };
+  r.readAsText(f);this.value='';
+};
+
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT') return;
+  if(e.key==='ArrowRight'||e.key==='j') setPg(curPg+1);
+  if(e.key==='ArrowLeft'||e.key==='k') setPg(curPg-1);
+  if(e.key==='+'||e.key==='=') chZ(.15);
+  if(e.key==='-') chZ(-.15);
+});
+
+let rz;window.addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>rndAll(curPg),300)});
+
+// ─── INIT ────────────────────────────────────────────────────────────
+
+(async function(){
+  log('Loading PDFs...');
+  await Promise.all([ld(0),ld(1),ld(2)]);
+  log('Rendering...');
+  const P = [
+    {n:'Title change',c:'#ff9f43',a:[{variant:0,page:1,x:.02,y:.01,w:.96,h:.04},{variant:1,page:1,x:.02,y:.01,w:.96,h:.04},{variant:2,page:1,x:.02,y:.01,w:.96,h:.04}]},
+    {n:'Abstract rewritten',c:'#f368e0',a:[{variant:0,page:1,x:.02,y:.06,w:.96,h:.14},{variant:1,page:1,x:.02,y:.06,w:.96,h:.14},{variant:2,page:1,x:.02,y:.06,w:.96,h:.14}]},
+    {n:'Introduction restructured',c:'#ff9f43',a:[{variant:0,page:1,x:.02,y:.20,w:.96,h:.20},{variant:1,page:1,x:.02,y:.20,w:.96,h:.20},{variant:2,page:1,x:.02,y:.20,w:.96,h:.20}]},
+    {n:'Contributions reformulated',c:'#54a0ff',a:[{variant:0,page:1,x:.02,y:.84,w:.96,h:.12},{variant:1,page:1,x:.02,y:.84,w:.96,h:.12},{variant:2,page:1,x:.02,y:.84,w:.96,h:.12}]},
+    {n:'Running example retained',c:'#00d2d3',a:[{variant:0,page:1,x:.02,y:.38,w:.96,h:.22},{variant:1,page:1,x:.02,y:.38,w:.96,h:.22},{variant:2,page:1,x:.02,y:.38,w:.96,h:.22}]},
+    {n:'V1-ONLY: Construct-validity framing',c:'#ff9f43',a:[{variant:0,page:1,x:.02,y:.60,w:.96,h:.08}]},
+    {n:'V1-ONLY: Master results Table II',c:'#ff6348',a:[{variant:0,page:5,x:.02,y:.12,w:.96,h:.30}]},
+    {n:'V1-ONLY: 538/1666 at RQ2 start',c:'#e94560',a:[{variant:0,page:6,x:.02,y:.50,w:.96,h:.08}]},
+    {n:'V1-ONLY: Normalization defined',c:'#1dd1a1',a:[{variant:0,page:3,x:.02,y:.50,w:.96,h:.06}]},
+    {n:'V1-ONLY: Artifact paragraph',c:'#10ac84',a:[{variant:0,page:4,x:.02,y:.88,w:.96,h:.06}]},
+    {n:'V1-ONLY: Deployable vs diagnostic',c:'#feca57',a:[{variant:0,page:4,x:.02,y:.44,w:.96,h:.06}]},
+    {n:'V1-ONLY: Linux cost clarification',c:'#fd79a8',a:[{variant:0,page:3,x:.02,y:.22,w:.96,h:.06}]},
+    {n:'V1-ONLY: Discussion compressed',c:'#a29bfe',a:[{variant:0,page:8,x:.02,y:.02,w:.96,h:.20}]},
+    {n:'V1-ONLY: Related work compressed',c:'#a29bfe',a:[{variant:0,page:9,x:.02,y:.02,w:.96,h:.50}]},
+    {n:'V1-ONLY: Conclusion shortened',c:'#a29bfe',a:[{variant:0,page:10,x:.02,y:.02,w:.96,h:.25}]},
+    {n:'V1-ONLY: 10-page compliance',c:'#00b894',a:[{variant:0,page:10,x:.02,y:.80,w:.96,h:.16}]},
+    {n:'V2-ONLY: Audit framework centerpiece',c:'#54a0ff',a:[{variant:1,page:1,x:.02,y:.62,w:.96,h:.08}]},
+    {n:'V2-ONLY: Decision-impact intro',c:'#54a0ff',a:[{variant:1,page:1,x:.02,y:.70,w:.96,h:.08}]},
+    {n:'V2-ONLY: Shorter compressed sections',c:'#54a0ff',a:[{variant:1,page:2,x:.02,y:.02,w:.96,h:.40}]},
+    {n:'V2-ONLY: Prescriptive conclusion',c:'#54a0ff',a:[{variant:1,page:8,x:.02,y:.02,w:.96,h:.30}]},
+    {n:'V3-ONLY: Methodology/framework title',c:'#5f27cd',a:[{variant:2,page:1,x:.02,y:.01,w:.96,h:.04}]},
+    {n:'V3-ONLY: Three validity regimes',c:'#5f27cd',a:[{variant:2,page:7,x:.02,y:.50,w:.96,h:.25}]},
+    {n:'V3-ONLY: Diagnostic thresholds',c:'#5f27cd',a:[{variant:2,page:5,x:.02,y:.02,w:.96,h:.25}]},
+    {n:'V3-ONLY: Formal cost-validity framework',c:'#5f27cd',a:[{variant:2,page:2,x:.02,y:.35,w:.96,h:.12}]},
+  ];
+  for(let p of P) addF(p.n,p.c,p.a,false);
+  selFeat=feats.length?feats[0].id:null;
+  renderF();
+  await rndAll(1);
+  log('Ready. Click a feature to see the textual diff.');
+})();
+</script>
+</body>
+</html>

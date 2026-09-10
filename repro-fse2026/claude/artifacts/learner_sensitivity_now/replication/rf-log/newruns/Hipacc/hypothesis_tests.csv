@@ -1,0 +1,9 @@
+hypothesis,scope,scope_value,statistic,statistic_value,p_value,effect,effect_value,effect_label,verdict,notes,system,cost_property,target_property,scenario
+H1a,system,Hipacc,cv_cost,0.43530402149165487,nan,p90_over_p10,2.58975386300199,large,supports,"CV=0.435; p90/p10=2.59; CV 95% CI [0.429,0.441]",Hipacc,performance,performance,cost_performance__target_performance
+H1b,system,Hipacc,kruskal_wallis_min_p,0.001094902063217017,0.001094902063217017,eta_squared_max,0.8171428571428576,large,supports,K-W per level: 3/3 levels with p<0.05; min p=0.00109; max eta^2=0.817,Hipacc,performance,performance,cost_performance__target_performance
+H2a,system,Hipacc,spearman_rho,0.9428520736241425,2.5058038928227498e-30,rho,0.9428520736241425,strong positive,supports,Spearman rho=0.943 on n=62 (records-level),Hipacc,performance,performance,cost_performance__target_performance
+H2b,system,Hipacc,median_ratio,1.0643352082618627,nan,abs_deviation_from_1,0.06433520826186268,mild miscalibration,supports,"median ratio=1.06; 95% CI [1.02,1.09]; |median-1|=0.0643",Hipacc,performance,performance,cost_performance__target_performance
+H2c,system,Hipacc,kruskal_wallis_p,5.148967283019166e-07,5.148967283019166e-07,eta_squared,0.5400410579037203,large,supports,K-W p=5.15e-07; eta^2=0.54; k=5 strategies,Hipacc,performance,performance,cost_performance__target_performance
+H3a,system,Hipacc,top1_flips,0.0,nan,flip_fraction,0.0,no flips,refutes,top-1 flips 0/7; mean Kendall tau=0.934,Hipacc,performance,performance,cost_performance__target_performance
+H4a,system,Hipacc,exclusive_pairs,0.0,nan,pareto_jaccard,1.0,identical,refutes,|count|=2; |empirical|=2; only_count=0; only_empirical=0; Jaccard=1,Hipacc,performance,performance,cost_performance__target_performance
+H4b,system,Hipacc,pareto_jaccard,1.0,nan,frontier_size_diff,0.0,frontiers coincide,refutes,|count|=2; |empirical|=2; Jaccard=1,Hipacc,performance,performance,cost_performance__target_performance

@@ -1,0 +1,37 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+Sampling cost matters. For configurable-system performance prediction, the
+number of measured configurations is a useful summary but not a resource budget
+unless checked against measured cost: across the systems we studied,
+$n$ almost always orders measured cost, yet it can misstate the budget, hide
+strategy-specific bias, and change which strategy or strategy--budget combination
+is recommended.
+
+We quantify this with the replication studies' own test. Rerunning their
+Kruskal--Wallis best-sampler comparison at a fixed measured budget rather than a
+fixed sample size changes the set of statistically tied-best samplers in
+$38$--$55\%$ of comparisons across the five non-Linux families (and $100\%$ on
+\StudyLinux), most reproducibly on the replications and Linux. The measured-cost
+Pareto-efficient choice set, the stabler decision-level evidence, robustly differs
+in $73$--$100\%$ of scenarios. This is a validity warning, not a systematic rejection: count-based
+effort is defensible for homogeneous systems and cost-unaware samplers (we identify
+several), and unsafe under heavy-tailed costs, target--cost asymmetry,
+workload-sensitive distributions, dataset shifts, and diversity or
+active-learning strategies that drift toward costly regions.
+%: conditions common,
+%measurable, and severe enough to change winners and fronts.
+
+The stronger lesson is effectiveness: a sampler can look effective by being
+accurate at a small \emph{count} budget while silently spending a large
+\emph{measured} one, or look unattractive while actually costing less. Sample
+count alone therefore cannot establish which strategy is cost-effective. It also
+reveals an opportunity: samplers that deliberately target cheap-to-measure
+configurations, and measuring cost is the first step toward designing them.
+
+\smallskip\noindent\textbf{Open science.} Data, configurations, seeds, costs, and
+reproduction scripts are in the anonymized artifact~\cite{artifact}.
+
+\smallskip\noindent\textbf{Use of AI Assistants.} Claude Code was carefully used to assist with code
+implementation and paraphrasing during paper writing. All scientific content,
+experimental design, analysis, and claims are entirely the authors' own.

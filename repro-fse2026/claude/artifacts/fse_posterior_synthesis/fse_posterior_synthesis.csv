@@ -1,0 +1,7 @@
+corpus,corpus_key,status,scopes,risk_differs_count,risk_differs_rate,top_changed_count,top_changed_rate,srs_best_count,srs_best_rate,frontier_changed_count,frontier_changed_rate,srs_lt_random_count,srs_lt_random_rate,srs_cost_diff_count,srs_cost_diff_rate,srs_on_front_count,srs_on_front_rate
+FSE artifact (REPLICATION-FSE26),fse,direct replication,7,7,1.0,2,0.2857142857142857,3,0.42857142857142855,6,0.8571428571428571,6,0.8571428571428571,7,1.0,6,0.8571428571428571
+x264 (REPLICATION-ICPE20),x264,published-study replication,34,34,1.0,2,0.058823529411764705,26,0.7647058823529411,30,0.8823529411764706,34,1.0,32,0.9411764705882353,29,0.8529411764705882
+ENERGY (Twins),energy,"generated protocol, energy cost",220,212,0.9636363636363636,31,0.1409090909090909,9,0.04090909090909091,220,1.0,52,0.23636363636363636,94,0.42727272727272725,77,0.35
+WORKLOAD (ICSE'23),workload,"generated protocol, workload contexts",359,341,0.9498607242339833,61,0.16991643454038996,31,0.08635097493036212,346,0.9637883008356546,84,0.233983286908078,149,0.415041782729805,139,0.3871866295264624
+Linux (TuxKConfig pools),linux,"external validity, pool-relative",21,21,1.0,13,0.6190476190476191,0,0.0,21,1.0,5,0.23809523809523808,21,1.0,19,0.9047619047619048
+LCBench (HPO pools),lcbench,"external validity, pool-relative",210,154,0.7333333333333333,120,0.5714285714285714,0,0.0,207,0.9857142857142858,0,0.0,10,0.047619047619047616,21,0.1

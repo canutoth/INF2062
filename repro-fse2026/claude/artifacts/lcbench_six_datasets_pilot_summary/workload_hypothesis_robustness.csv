@@ -1,0 +1,9 @@
+system,hypothesis,n_workloads,supports,refutes,inconclusive,support_rate,majority_verdict,unanimous,workload_changes_verdict,robustness
+lcbench,H1a,6,6,0,0,1.0,supports,yes,no,fully robust
+lcbench,H1b,6,6,0,0,1.0,supports,yes,no,fully robust
+lcbench,H2a,6,6,0,0,1.0,supports,yes,no,fully robust
+lcbench,H2b,6,5,1,0,0.8333333333333334,supports,no,yes,mostly robust
+lcbench,H2c,6,6,0,0,1.0,supports,yes,no,fully robust
+lcbench,H3a,6,6,0,0,1.0,supports,yes,no,fully robust
+lcbench,H4a,6,6,0,0,1.0,supports,yes,no,fully robust
+lcbench,H4b,6,6,0,0,1.0,supports,yes,no,fully robust

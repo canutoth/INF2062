@@ -1,0 +1,9 @@
+hypothesis,scope,scope_value,statistic,statistic_value,p_value,effect,effect_value,effect_label,verdict,notes,release,family,learner,feature_set
+H1a,system,v5.04,cv_cost,1.0757414099987403,nan,p90_over_p10,5.210640113806431,very large,supports,CV=1.08; p90/p10=5.21,504,LINUX,sk-hgbt-log,all_features
+H1b,system,v5.04,kruskal_wallis_min_p,0.01944845046813763,0.01944845046813763,eta_squared_max,0.7733333333333328,large,supports,K-W per level: 2/3 levels with p<0.05; min p=0.0194; max eta^2=0.773,504,LINUX,sk-hgbt-log,all_features
+H2a,system,v5.04,spearman_rho,0.8486872774389635,2.5763177933791315e-14,rho,0.8486872774389635,strong positive,supports,Spearman rho=0.849 on n=48 (records-level),504,LINUX,sk-hgbt-log,all_features
+H2b,system,v5.04,median_ratio,0.9908934379060481,nan,abs_deviation_from_1,0.009106562093951887,calibrated,refutes,"median ratio=0.991; 95% CI [0.965,1.01]; |median-1|=0.00911",504,LINUX,sk-hgbt-log,all_features
+H2c,system,v5.04,kruskal_wallis_p,4.463915350714703e-06,4.463915350714703e-06,eta_squared,0.708010335917313,large,supports,K-W p=4.46e-06; eta^2=0.708; k=5 strategies,504,LINUX,sk-hgbt-log,all_features
+H3a,system,v5.04,top1_flips,5.0,nan,flip_fraction,0.7142857142857143,frequent flips,supports,top-1 flips 5/7; mean Kendall tau=0.6,504,LINUX,sk-hgbt-log,all_features
+H4a,system,v5.04,exclusive_pairs,5.0,nan,pareto_jaccard,0.375,different,supports,|count|=3; |empirical|=8; only_count=0; only_empirical=5; Jaccard=0.375,504,LINUX,sk-hgbt-log,all_features
+H4b,system,v5.04,pareto_jaccard,0.375,nan,frontier_size_diff,5.0,frontiers differ,supports,|count|=3; |empirical|=8; Jaccard=0.375,504,LINUX,sk-hgbt-log,all_features

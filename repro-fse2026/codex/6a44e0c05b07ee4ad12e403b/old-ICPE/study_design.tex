@@ -1,0 +1,134 @@
+\vspace*{-2mm}
+\section{Design Study} \label{sec:study_design}
+
+In this section, we introduce our research questions, the considered subject system, and the experiment setup.
+
+\subsection{Research Questions} \label{research_questions}
+
+We conducted a series of experiments to evaluate six sampling strategies and to compare our results to the original results in~\cite{kaltenecker2019}. We aim at answering the following two research questions:  
+
+\begin{itemize}
+    \item \textbf{(RQ1)} What is the influence of using different sampling strategies on the accuracy of performance predictions over different inputs and non-functional properties?
+    
+    %\item \textbf{(RQ2)} What is the influence of the chosen learning algorithm, parameter tuning and resampling strategies on prediction accuracy?
+    %\ju{For the best sampling size from RQ1 describe the tuned parameters and present the accuracy for each algorithm and resampling design.}
+    %Compare results in Table \ref{tab:RQ2_1} and \ref{tab:RQ2_2} (with parameter tuning) with Table \ref{tab:RQ1_1} and \ref{tab:RQ1_2} (without parameter tuning).
+    
+    \item \textbf{(RQ2)} What is the influence of randomness of using different sampling strategies on the robustness of prediction accuracy?
+\end{itemize}
+
+%\ju{How we attempt to answer the research questions?}
+
+It is not new the claim that the prediction accuracy of machine learning extensively depends on the sampling strategy.
+%To what extent are performance prediction models sensitive to inputs of a configurable system?
+The originality of the research question is to what extent are performance prediction models of the \emph{same} configurable system (here: x264) sensitive to other factors, such as different inputs and non-functional properties.
+To address \textit{RQ1}, we analyze the sensitivity of the prediction accuracy of sampling strategies to these factors.
+%Depending on \eg training set size, the resulting model may produce more or less errors when predicting the performance of unseen configurations.
+Since most of the considered sampling strategies use randomness, which may considerably affect the prediction accuracy, 
+%we performed 100 runs per experiment.
+\textit{RQ2} quantitatively compares whether the variances (over 100 runs) on prediction accuracy between different sampling strategies and sample sizes differ significantly. 
+%We investigate whether using different inputs and non-functional properties there is a dominant sample strategy.
+We show that the sampling prediction accuracy and robustness hardly depends on the definition of performance (\ie encoding time or encoding size).
+As in Kaltenecker et al.~\cite{kaltenecker2019}, we have excluded t-wise sampling from \textit{RQ2}, as it is also deterministic in our setting and does not lead to variations.
+
+\subsection{Subject System} \label{system}
+
+We conduct an in-depth study of x264, a popular and highly configurable video encoder implemented in C.
+%We focus on x264 to deep analyze the effect of using different inputs and predicting different non-functional properties.
+We choose x264 instead of the other case studies documented in Kaltenecker et al.~\cite{kaltenecker2019} because x264 demonstrated more promising accuracy results to the newest proposed sampling approach (\ie diversified distance-based sampling).
+With this study, we aim at investigating, for instance, whether diversified distance-based sampling also dominates across different variations of x264 (\ie inputs, performance properties). 
+As benchmark, we encoded 17 different input videos from raw YUV to the H.264 codec %compressed format
+and measured two quantitative properties (encoding time and encoding size). %of 1,152 configurations of x264.
+
+\begin{itemize}
+    \item Encoding time (in short \textbf{time}): how many seconds x264 takes to encode a video.
+    \item Encoding size of the output video (in short \textbf{size}): compression size (in bytes) of an output video in the H.264 format.
+\end{itemize}
+
+All measurements have been performed over the same version of x264 and on a grid computing infrastructure called IGRIDA\footnote{\url{http://igrida.gforge.inria.fr/}}. 
+Importantly, we used the same hardware characteristics for all performance measurements.
+%In Section~\ref{discussion}, we will compare our results to the results obtained in~\cite{kaltenecker2019} over a different version of x264 and a different hardware.
+%\ma{we have to say that we use the same version and the same hardware later we will compare it to~\cite{kaltenecker2019}.}
+In Table~\ref{tab:input_videos}, we provide an overview of the encoded input videos.
+This number of inputs allows us to draw conclusions about the practicality of sampling strategies for diversified conditions of x264.
+
+To control measurement bias while measuring execution time, we have repeated the measurements several times.
+We report in Table~\ref{tab:input_videos} how many times we have repeated the time measurements of all \nbconfigurations\xspace configurations for each video input. the number of repetitions has been increased to reach a standard deviation of less than 10\%. 
+Since measurements are costly, we set the repetition to up 30 times given 1-hour restriction from where we got the $\#times$ in Table~\ref{tab:input_videos}. 
+We repeated the measurements at least three times and at most 23 times and retained the average execution time for each configuration. 
+The \textit{stability} column reports whether the configuration measurements for a given input video are stable (Relative Standard Deviation - RSD).
+%It allows us to control that measurements are indeed stable.
+For example, measurements have been repeated 5 times for video 0 (bridge\_far\_cif.y4m) and the measurements present low RSD of $\approx{1\%}$.
+%5 measurements are highly correlated. 
+%Video 3 (claire\_qcif.y4m) can be considered as an outlier (it may be due to the randomness of x264 given this specific input)
+%(with no specific technical reason), 
+%because the relative standard deviation measure is higher. 
+Although the RSD measure for Video 3 (claire\_qcif.y4m) is higher compared to the others, the deviation still remains lower than 10\% (\ie RSD $\approx{8.7\%}$).
+We provide the variability model and the measurements of each video input for encoding time and encoding size on our supplementary website.
+%\footnote{github.com/jualvespereira/ICPE2020}.
+
+\begin{table}
+\begin{tabular}{lllr}
+\toprule
+{} &                         video & \#times &  stability \\
+\midrule
+$x264_0$ &            bridge\_far\_cif.y4m &      5 &     0.010127 \\ 
+$x264_1$ &                   ice\_cif.y4m &      5 &     0.044476 \\ 
+$x264_2$ &                flower\_sif.y4m &      5 &     0.036826 \\ 
+$x264_3$ &               claire\_qcif.y4m &      5 &     0.086958 \\ 
+$x264_4$ &  sintel\_trailer\_2k\_480p24.y4m &      9 &     0.009481 \\ 
+$x264_5$ &              football\_cif.y4m &      5 &     0.029640 \\ 
+$x264_6$ &         crowd\_run\_1080p50.y4m &      3 &     0.005503 \\ 
+$x264_7$ &          blue\_sky\_1080p25.y4m &      8 &     0.010468 \\ 
+$x264_8$ &    FourPeople\_1280x720\_60.y4m &     11 &     0.011258 \\ 
+$x264_9$ &         sunflower\_1080p25.y4m &      4 &     0.006066 \\ 
+$x264_{10}$ &              deadline\_cif.y4m &     23 &     0.014536 \\ 
+$x264_{11}$ &          bridge\_close\_cif.y4m &      5 &     0.009892 \\ 
+$x264_{12}$ &                 husky\_cif.y4m &      5 &     0.028564 \\ 
+$x264_{13}$ &                tennis\_sif.y4m &      5 &     0.044731 \\ 
+$x264_{14}$ &          riverbed\_1080p25.y4m &      3 &     0.007625 \\ 
+$x264_{15}$ &        720p50\_parkrun\_ter.y4m &      8 &     0.010531 \\ 
+$x264_{16}$ &               soccer\_4cif.y4m &     16 &     0.011847 \\ 
+\bottomrule
+\end{tabular}
+\caption{Overview of encoded input videos including the number of times we measured the encoding time in order to ensure we have a stable set of measurements (according to RSD results), independent of the machine.}
+\vspace*{-4mm}
+\label{tab:input_videos}
+\end{table}
+
+\subsection{Experiment Setup} \label{sec:experiment}
+
+\input{table_RQ1_MER_time.tex}
+\input{table_RQ1_U_test_time.tex}
+
+In our experiments, the independent variables are the choice of the input videos, the predicted non-functional-property, the sample strategies and the sample sizes.
+
+For comparison, we used the same experiment design than in Kaltenecker et al.~\cite{kaltenecker2019}.
+To evaluate the accuracy of different sampling strategies over different inputs and non-functional-properties, we conducted experiments using three different sample sizes. %as the training set to build a prediction model.
+To be able to use the same sample sizes for all sampling strategies, we consider the sizes from t-wise sampling with $t$=1, $t$=2, and $t$=3.
+As described in Section~\ref{sampling}, $t$-wise sampling covers all combinations of $t$ configuration options being selected.
+We learn a performance model based on the sample sets along with the corresponding performance measurements defined by the different sampling strategies.
+Although several machine-learning techniques have been proposed in the literature with this purpose~\cite{julianasurvey}, such as linear regression~\cite{jamshidi2017b,kolesnikov2018,weckesser2018,kolesnikov2017,kaltenecker2019,jamshidi2019,siegmund2008,siegmund2015FSE,murwantara2014,samreen2016, chen2005, lillacka2013}, classification and regression trees (CART)~\cite{guo2017,jamshidi2017b,murwantara2014,nair2017,nair2018a,sarkar2015,temple2016,temple2017a,valov2015,valov2017,westermann2012,acher2018,nair2018c,yilmaz2006,krismayer2017,porter2007,zheng2007, zhang2016, song2013}, and random forest~\cite{valov2015, amand2019, queiroz2016, bao2018, thornton2013}.
+In this paper, we use step-wise multiple linear regression~\cite{siegmund2015FSE} as in Kaltenecker et al.~\cite{kaltenecker2019}. According to Kaltenecker et al.~\cite{kaltenecker2019}, multiple linear regression is often as accurate as CART and random forests.
+
+%We partition the input sample into two data sets: the training set $t$ used to build a prediction model, and the validation set $C$, $t \subset C$ used to evaluate the prediction model.
+To calculate the prediction error rate, we use the resulting performance models to predict the performance of the entire dataset of valid configurations $C$. % , $t \subset C$. %as the testing set $T$ .
+%Given a sample $t$, we used the entire dataset of valid configurations $C$ as the testing set to calculate the prediction error rate.
+We calculate the error rate of a prediction model in terms of the \textit{mean relative error} (MRE - Equation~\ref{eq:mre}).
+MRE is used to estimate the accuracy between the exact measurements and the predicted one.
+\begin{equation}
+    MRE = \frac{1}{|C|} \sum_{c \in C} \frac{|measured_{c} - predicted_{c}|}{measured_{c}}
+    \label{eq:mre}
+\end{equation}
+Where $C$ is the set of all valid configurations used as the validation set, and $measured_{c}$ and $predicted_{c}$ indicate the measured and predicted values of performance for configuration $c$ with $c \in C$, respectively.
+The exact value of $measured_{c}$ is measured at runtime while running the configuration $c$, and the predicted values of $predicted_{c}$ is computed based on the model built with a sample of configurations $t$ (see Section~\ref{sampling}).
+To address \textit{RQ1}, we computed the mean error rate for each input video and sample size. A lower error rate indicates a higher accuracy.
+Then, we use a Kruskal-Wallis test~\cite{kruskal1952} and pair-wise one-sided Mann-Whitney $U$ tests~\cite{mann1947} to identify whether the error rate of two sampling strategies differs significantly ($p < 0.05$)~\cite{arcuri2011}.
+In addition, we compute the effect size $\hat{A}_{12}$~\cite{vargha2000} (small(>0.56), medium(>0.64), and large(>0.71)) to easily compare the error rates of two sampling strategies.
+
+To address \textit{RQ2}, we compute the variance across the error rates over 100 runs.
+A lower variance indicates higher robustness.
+First, we use Levene’s test~\cite{levene1961} to identify whether the variances of two sampling strategies differ significantly from each other. Then, for these sampling strategies, we perform a one-sided F-tests~\cite{snedecor1989} to compare pair-wisely the variance between sampling strategies. %with the lower variance.
+
+All sampling and learning experiments have been performed on the same machine with Intel Core i7 CPU 2,2 GHz and 4GB RAM. 
+To reduce fluctuations in the values of dependent variables caused by randomness (\eg the random generation of input samples), we evaluated each combination of the independent variables 100 times. That is, for each input video, non-functional property, sampling strategy and sampling size, we instantiated our experimental settings and measured the values of all dependent variables 100 times with random seeds from 1 to 100.

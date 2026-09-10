@@ -1,0 +1,2 @@
+context,target_context,cost_context,n_configurations,full_cost,min_cost,q1_cost,median_cost,mean_cost,q3_cost,max_cost,std_cost,cv_cost,p90_over_p10,system,cost_property,target_property,scenario
+7z,7z,7z,68640,779510930.0,1560.0,3000.0,6320.0,11356.511217948719,17740.0,69020.0,13494.58244864362,1.1882683149483202,10.131313131313131,7z,performance,performance,cost_performance__target_performance

@@ -1,0 +1,2 @@
+context,target_context,cost_context,n_configurations,full_cost,min_cost,q1_cost,median_cost,mean_cost,q3_cost,max_cost,std_cost,cv_cost,p90_over_p10
+linux500_vmlinux,linux500_vmlinux,linux500_vmlinux,19952,2035995448800.0,11557536.0,45509568.0,67833692.0,102044679.6712109,111411420.0,1960344864.0,114549579.42475979,1.1225433779971656,5.700868769953218

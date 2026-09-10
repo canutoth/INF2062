@@ -1,0 +1,15 @@
+analysis_context,cost_property,strategy,n_records,median_ratio,ci_low,ci_high,deviation,verdict
+twins_brotli_1_0_7_generated,energy,balanced,140,0.9940061205998945,0.9731993193701425,1.0182326151801293,0.0059938794001055395,calibrated
+twins_brotli_1_0_7_generated,energy,cheapOracle,7,nan,nan,nan,nan,inconclusive
+twins_brotli_1_0_7_generated,energy,diversity,7,nan,nan,nan,nan,inconclusive
+twins_brotli_1_0_7_generated,energy,expensiveOracle,7,nan,nan,nan,nan,inconclusive
+twins_brotli_1_0_7_generated,energy,pairwise,7,nan,nan,nan,nan,inconclusive
+twins_brotli_1_0_7_generated,energy,pilotCost,140,1.095815478063626,1.0323330568949207,1.1492290905903695,0.095815478063626,miscalibrated
+twins_brotli_1_0_7_generated,energy,random,140,0.9505181108227044,0.8848328943876196,1.0257676739303319,0.04948188917729557,calibrated
+twins_brotli_1_0_7_generated,performance,balanced,140,0.9915566465012209,0.970774176971079,1.020913137865005,0.008443353498779116,calibrated
+twins_brotli_1_0_7_generated,performance,cheapOracle,7,nan,nan,nan,nan,inconclusive
+twins_brotli_1_0_7_generated,performance,diversity,7,nan,nan,nan,nan,inconclusive
+twins_brotli_1_0_7_generated,performance,expensiveOracle,7,nan,nan,nan,nan,inconclusive
+twins_brotli_1_0_7_generated,performance,pairwise,7,nan,nan,nan,nan,inconclusive
+twins_brotli_1_0_7_generated,performance,pilotCost,140,1.0942879097817997,1.0142282709479675,1.1494530996768626,0.09428790978179968,miscalibrated
+twins_brotli_1_0_7_generated,performance,random,140,0.9463531201661415,0.8742173140764373,1.025309858732927,0.05364687983385852,inconclusive

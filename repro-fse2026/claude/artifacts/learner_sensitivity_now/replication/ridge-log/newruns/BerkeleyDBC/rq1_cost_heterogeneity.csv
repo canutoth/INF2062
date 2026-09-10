@@ -1,0 +1,2 @@
+context,target_context,cost_context,n_configurations,full_cost,min_cost,q1_cost,median_cost,mean_cost,q3_cost,max_cost,std_cost,cv_cost,p90_over_p10,system,cost_property,target_property,scenario
+BerkeleyDBC,BerkeleyDBC,BerkeleyDBC,2235,18803.909557368035,0.353611435897436,0.5783449615384615,2.1049706,8.413382352289949,10.90132281721195,39.0850482432432,11.820667714620537,1.4049840147111816,79.05004032532267,BerkeleyDBC,performance,performance,cost_performance__target_performance

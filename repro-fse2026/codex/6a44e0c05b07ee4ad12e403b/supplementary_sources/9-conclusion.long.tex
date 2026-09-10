@@ -1,0 +1,172 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+Sampling-based performance prediction of configurable systems is routinely
+evaluated under a cost term equal to the number of measured
+configurations. That count-based abstraction is convenient and ubiquitous,
+but it has not been empirically validated against actual measurement
+time. This paper asks whether sample size $n$ is a calibrated proxy for
+empirical training measurement cost, and whether replacing the cost term
+changes the scientific conclusions previously drawn about sampling
+strategies.
+
+We formalize an empirical training cost $\TrainCost$ that excludes
+validation measurements (which the strategy does not control), define the
+count-based baseline cleanly, and instantiate composite and Pareto
+formulations under both cost models. We empirically test the validity of
+$n$ as a proxy across ten configurable systems, including a deeper x264
+study over $17$ inputs and two non-functional properties.
+
+The data does not support a single answer. Across seven non-x264
+configurable systems, sample size $n$ is a strongly correlated proxy for
+$\TrainCost$ ($\rho\geq 0.88$) but is not always calibrated: median
+$\mathit{TrainCostPct}/\mathit{SizePct}$ drifts to $0.80$ on
+BerkeleyDBC and $0.86$ on lrzip, and per-strategy IQRs reach
+$[0.19,\,1.09]$. Decision-level consequences split sharply: on Dune,
+HIPAcc, LLVM, Polly the size-as-cost abstraction is essentially safe
+($0/7$ rank flips, Kendall $\tau\geq 0.94$); on lrzip it is clearly
+unsafe ($5/7$ flips, Pareto Jaccard $0.6$). On x264, the cost-target
+scenario alone moves top-$1$ rank agreement from $0.95$ to $0.82$ and
+median Pareto Jaccard from $0.43$ to $0.38$ when cost stays as time but
+the prediction target switches from time to size. The size-as-cost
+abstraction is therefore neither uniformly safe nor uniformly broken; it
+is conditionally valid, and the conditions can be diagnosed with a
+small pilot. We recommend that configurable-systems sampling studies
+report both $\SizeCost$ and $\TrainCost$ alongside accuracy, so the
+cost-model choice is visible rather than hidden.
+
+The twelve pre-stated hypotheses summarized in
+\Cref{tab:hypothesis-verdicts} make this conditional validity precise:
+H1a, H1b, H2a, H2c are supported on every scope where $\TrainCost$ is
+non-trivial; H2b is supported only when the calibration drift clears a
+$5\%$ practical floor; H3a, H4a, H4b are supported existentially as
+soon as any system or x264 context flips, which is common; and the
+cross-system H3b correlation between cost CV and rank-flip count
+($\rho=0.90$, $p=6.3\!\times\!10^{-3}$) ties the heterogeneity story
+of H1 directly to the decision-level instability of H3 and H4.
+
+The Linux cross-version replication
+(\StudyLinux family in \Cref{sec:results}) sharpens two points across four
+releases (v4.13, v4.15, v4.20, v5.0, v5.04, v5.07, v5.08), and the right way to read it
+is strategy-conditional rather than system-wide: \emph{on Linux,
+calibration is a property of the strategy, not the system}. First,
+the aggregate H2b verdict on Linux \emph{refutes} the literal
+hypothesis on every release because the per-strategy ratios average
+to $\sim\!\!1.00$, but the per-strategy decomposition shows
+\texttt{diversity} miscalibrated at $\sim\!\!2\times$ on all seven
+releases (medians $2.28, 2.23, 2.27, 2.06, 2.09, 2.00, 2.02$ (window $[2.00, 2.28]$) --- seven independent
+randconfig pools, magnitudes within $\pm 15\%$ of one another, the
+most robust positive finding in the paper) while
+\texttt{random}/\texttt{balanced}/\texttt{coverage} are calibrated
+within $\\pm 0.7\\%$ of $1$ on every release;
+\texttt{uncertainty} drifts in pool-dependent direction with
+absolute $n$ (cheap at small $n$, expensive at large $n$ on every
+release; cross-over $n$ varies with pool geometry). The operational
+rule on Linux is therefore not ``always use empirical cost'' nor
+``$n$ is a fine proxy'' but ``report empirical $\TrainCost$
+whenever the strategy panel includes AL or diversity-aware samplers,
+or whenever the level grid lands on tied absolute $n$ values where
+MRE is sub-threshold; for cost-blind random/balanced/coverage at
+percentage levels that separate cleanly, $n$ remains a usable
+proxy.'' Second, the H3b cross-system correlation observed on
+\StudyReplication ($\rho\!=\!+0.90$ between cost CV and rank-flip count) does
+not extend to the Linux pool. Three of the seven releases share the
+same $2/7$ flip count across a $5\times$ range of pool sizes
+($19{,}952$ to $92{,}562$) and a $1.27\times$ range of cost CVs
+($1.12$ to $1.43$); v5.08 alone flips $6/7$, and the cause is its
+specific level grid landing on tied absolute $n$'s where MRE
+differences are sub-threshold, not pool size or heterogeneity. The Linux quartet therefore replicates the structure of
+the H1--H4 verdicts while exhibiting a regime that the
+synthesis-based panel cannot produce. The \StudyEnergy generated-sampling
+study (\StudyEnergy family in \Cref{sec:results}) sharpens the same conclusion in
+the opposite direction: top-$1$ rank flips reach $7/7$ on three of
+brotli's four cost-target scenarios and Pareto fronts differ in
+$28/28$ scenarios, while PostgreSQL\,11.2 ($\mathrm{CV}\!=\!0.06$)
+keeps both fronts almost identical. The size-as-cost abstraction
+spans the full failure-to-safety range within a single protocol.
+
+\paragraph*{Implications for practitioners.}
+A practitioner running a sampling-based performance-prediction study should
+\emph{stop reporting sample size $n$ as the only effort axis}. Instead:
+\begin{itemize}
+    \item Audit per-configuration cost heterogeneity on a uniform-random
+    pilot of $\sim\!\!2$--$5\%$ of $|C|$. If $\mathrm{CV}\!>\!0.5$ or
+    $p_{90}/p_{10}\!>\!4$, the size-as-cost abstraction is unsafe on
+    that system.
+    \item Compute the calibration ratio
+    $\mathit{TrainCostPct}/\mathit{SizePct}$ \emph{per strategy} on the
+    pilot, not just an aggregate median. Strategy-specific bias
+    survives even when aggregate medians look calibrated.
+    \item Be especially careful with diversity-aware and active-learning
+    samplers. On Linux, \texttt{diversity} pays $\sim\!\!2\times$ its
+    count budget on every release; \texttt{uncertainty} drifts in a
+    pool-size-dependent direction. On x264, $t$-wise pays
+    $\sim\!\!1.10\times$ random's cost and Henard $\sim\!\!0.75\times$.
+    Cost-blind samplers (\texttt{random}, \texttt{balanced},
+    \texttt{coverage}) are usually fine.
+    \item Distinguish the cost dimension from the prediction target. The
+    asymmetric case (target $\neq$ cost, \eg predict size while paying
+    time-based cost) is the case where the abstraction breaks most
+    often: x264's worst scenario at top-$1$ agreement $0.82$ is exactly
+    that one. If wall-clock is the binding constraint, cost is time;
+    if storage is the binding constraint, cost is size; treat them as
+    independent choices.
+    \item Report both $\SizeCost$ and $\TrainCost$ alongside any accuracy
+    metric. The cost-model choice is then visible to future readers
+    rather than hidden inside an unspoken convention.
+\end{itemize}
+
+\paragraph*{Implications for researchers.}
+The configurable-systems performance-prediction literature has used
+count-based effort as the default for over a decade. The data here is
+neither a wholesale refutation nor a wholesale endorsement of that
+convention; it is a diagnosis of where it fails and where it does
+not. Concretely:
+\begin{itemize}
+    \item Past sampling-cost results should be re-examined when the
+    system has high cost CV, when the prediction target differs from
+    the acquisition cost dimension, or when the strategy panel
+    includes diversity-aware or active-learning samplers. On
+    LLVM, Polly, Dune, HIPAcc, and PostgreSQL the size-as-cost
+    abstraction stands; on lrzip, BerkeleyDBC, jump3r, brotli, and
+    Linux's \texttt{diversity}/\texttt{uncertainty} paths, it does
+    not, and previously published rankings deserve restatement under
+    $\TrainCost$.
+    \item Aggregating sampling-cost results across protocols
+    (synthesis-based, pool-based, generated-sampling) is unsafe.
+    Each protocol exposes a different strategy panel and a different
+    heterogeneity regime, and our cross-system H3b correlation
+    ($\rho\!=\!0.90$ between cost CV and rank-flip count on \StudyReplication)
+    holds within a fixed protocol but does not transfer to Linux. The
+    discipline should report per-protocol verdicts and resist the
+    urge to summarize across them.
+    \item ML active learning has known for nearly two decades that
+    fewer labeled instances do not necessarily imply lower total
+    cost when instance costs vary
+    (Settles--Craven--Friedland)~\red{[bib]}. The configurable-systems
+    sampling literature has not absorbed this. Adopting the
+    heterogeneous-cost framing in our community is overdue, and the
+    pilot-based diagnostic above is the lightweight step in that
+    direction.
+    \item Open perspectives. (a) Replicating the findings under cost
+    dimensions beyond time, size, and energy --- bandwidth, carbon,
+    monetary cloud cost --- is a clean follow-up; the formulation
+    accommodates them unchanged. (b) Cross-domain replication on
+    real-runtime ML/HPO benchmarks (LCBench, NAS-Bench-201) would
+    test whether the configurable-systems story generalizes; we
+    deprioritized those here to keep the empirical claim anchored,
+    but they are a natural next step. (c) Closing the loop with
+    cost-aware samplers that read the calibration ratio at small
+    pilot $n$ and adapt their selection accordingly is the
+    \emph{designer-side} version of the diagnostic; the diagnostic
+    plus the empirical calibration table in
+    \Cref{tab:systems-and-cost} provides the prior such a sampler
+    would need.
+    \item Most importantly, the discipline should treat the cost axis
+    as a first-class methodological variable, not a convention. Two
+    studies disagree on which strategy is best because they used
+    different cost axes is a result, not a bug; it should be reported
+    that way.
+\end{itemize}
+
+The artifact is available at \red{anonymized URL}.

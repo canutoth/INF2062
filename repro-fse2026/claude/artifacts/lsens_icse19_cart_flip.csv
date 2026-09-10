@@ -1,0 +1,14 @@
+system,lam,kind,cw,mw,p_reproduce,dMRE_pct,dCost_pct,agg
+Dune,0.5,strategy,divDistBased@t2,random@t2,0.243,-0.3305844096064331,1.8599523038136574,mean
+Dune,1.0,strategy,divDistBased@t2,random@t2,0.421,-0.3305844096064331,1.8599523038136574,mean
+Dune,1.0,strategy,divDistBased@t2,random@t2,0.305,-0.6406878243621733,1.6114131912937404,median
+lrzip,0.1,strategy,random@t3,divDistBased@t3,0.749,-3.3495952816524612,9.5855648513954,mean
+lrzip,0.25,strategy,random@t2,solverBased@t2,0.889,-7.573922874941949,147.6285626956696,mean
+lrzip,0.5,strategy,random@t2,solverBased@t2,0.621,-7.573922874941949,147.6285626956696,mean
+lrzip,1.0,budget,solverBased@t1,solverBased@t2,0.861,135.4180901207762,-86.21737945206006,mean
+lrzip,0.5,budget,solverBased@t1,solverBased@t2,0.987,85.3195943032988,-85.898247020402,median
+lrzip,1.0,budget,solverBased@t1,solverBased@t2,0.98,85.3195943032988,-85.898247020402,median
+7z,2.0,budget,random@t1,random@t2,0.212,463.27155796486454,-93.69323978695337,median
+7z,10.0,strategy,random@t1,solverBased@t1,0.66,-13.85421097308165,235.26311649492646,median
+BerkeleyDBC,4.0,strategy,solverBased@t1,henard@t1,0.549,-3.3230388762152128,18.353269964947724,median
+BerkeleyDBC,10.0,strategy,solverBased@t1,henard@t1,0.563,-3.3230388762152128,18.353269964947724,median

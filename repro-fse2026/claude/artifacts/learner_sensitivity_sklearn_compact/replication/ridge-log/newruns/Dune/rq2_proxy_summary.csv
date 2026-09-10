@@ -1,0 +1,7 @@
+target_context,cost_context,strategy,records,spearman_n_train_cost,median_calibration_ratio,q1_calibration_ratio,q3_calibration_ratio,median_bias,system,cost_property,target_property,scenario
+Dune,Dune,ALL,300,0.9428153270385286,1.015495092882479,0.9826150271623008,1.0798860096770126,0.015495092882479078,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,random,60,0.9429400145689538,0.9929590123177715,0.9736044341821912,1.0054139490660479,-0.0070409876822284945,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,solverBased,60,0.9429531148699409,1.001315229819186,0.9475446231148198,1.0659050755789932,0.0013152298191860812,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,henard,60,0.9429400145689538,1.1015125026598727,0.9862972610363835,1.383227262920716,0.10151250265987266,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,distBased,60,0.9429531148699409,1.028253735618161,0.9729028499723769,1.0708962667906765,0.028253735618160913,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,divDistBased,60,0.9429662157169524,1.027048233668057,1.0083756037668665,1.0719682795180143,0.027048233668057087,Dune,performance,performance,cost_performance__target_performance

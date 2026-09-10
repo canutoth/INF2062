@@ -1,0 +1,8 @@
+target_context,cost_context,lambda,top1_size,top1_time,top1_agreement,top3_overlap,kendall_tau,mean_abs_rank_difference,system,cost_property,target_property,scenario
+Polly,Polly,0.1,random_t3,random_t3,1,1.0,1.0,0.0,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,0.25,random_t2,random_t2,1,1.0,1.0,0.0,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,0.5,random_t2,random_t2,1,1.0,1.0,0.0,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,1.0,random_t2,random_t2,1,1.0,1.0,0.2222222222222222,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,2.0,solverBased_t1,solverBased_t1,1,1.0,1.0,0.0,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,4.0,solverBased_t1,solverBased_t1,1,1.0,1.0,0.0,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,10.0,solverBased_t1,solverBased_t1,1,1.0,1.0,0.0,Polly,performance,performance,cost_performance__target_performance

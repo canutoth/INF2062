@@ -1,0 +1,43 @@
+hypothesis,question,supports,refutes,inconclusive,total,context
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,1,0,0,1,7z
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,0,0,1,7z
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,1,0,1,7z
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,1,0,0,1,7z
+FSE5,SRS has lower posterior risk than random sampling.,1,0,0,1,7z
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,0,0,1,7z
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,1,0,0,1,BerkeleyDBC
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,0,0,1,BerkeleyDBC
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,1,0,1,BerkeleyDBC
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,1,0,0,1,BerkeleyDBC
+FSE5,SRS has lower posterior risk than random sampling.,1,0,0,1,BerkeleyDBC
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,0,0,1,BerkeleyDBC
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,1,0,0,1,Dune
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,1,0,1,Dune
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,1,0,0,1,Dune
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,1,0,0,1,Dune
+FSE5,SRS has lower posterior risk than random sampling.,1,0,0,1,Dune
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,0,0,1,Dune
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,1,0,0,1,Hipacc
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,1,0,1,Hipacc
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,1,0,1,Hipacc
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,1,0,0,1,Hipacc
+FSE5,SRS has lower posterior risk than random sampling.,1,0,0,1,Hipacc
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,0,0,1,Hipacc
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,1,0,0,1,JavaGC
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,1,0,1,JavaGC
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,1,0,0,1,JavaGC
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,1,0,0,1,JavaGC
+FSE5,SRS has lower posterior risk than random sampling.,1,0,0,1,JavaGC
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,0,0,1,JavaGC
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,1,0,0,1,LLVM
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,1,0,1,LLVM
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,1,0,1,LLVM
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,0,1,0,1,LLVM
+FSE5,SRS has lower posterior risk than random sampling.,1,0,0,1,LLVM
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,0,0,1,LLVM
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,1,0,0,1,Polly
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,1,0,1,Polly
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,1,0,0,1,Polly
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,1,0,0,1,Polly
+FSE5,SRS has lower posterior risk than random sampling.,0,0,1,1,Polly
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,0,0,1,Polly

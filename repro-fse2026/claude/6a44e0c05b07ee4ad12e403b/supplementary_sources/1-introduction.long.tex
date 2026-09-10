@@ -1,0 +1,313 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Configurable software systems---compilers, video encoders, databases, garbage
+collectors, archivers---expose tens to hundreds of configuration options whose
+joint effect on non-functional properties is rarely
+linear~\cite{kaltenecker2019,julianasurvey,siegmund2015FSE}. Predicting the
+performance of an arbitrary configuration without measuring it is therefore a
+long-standing problem, typically approached by \emph{sampling, measuring,
+learning}: a sampling strategy selects a subset of configurations, those
+configurations are executed and measured, a regression model is trained on the
+resulting (configuration, performance) pairs, and the model is then evaluated
+on the rest of the configuration space~\cite{guo2013ASE,sarkar2015,kaltenecker2019,siegmund2015FSE,nair2018c}.
+Because measuring all configurations is usually
+infeasible~\cite{siegmund2015FSE,julianasurvey}, sampling strategies are
+commonly compared along two axes: prediction accuracy and \emph{measurement
+effort}.
+
+\paragraph*{The hidden abstraction.}
+A close reading of this literature reveals an abstraction that is so widespread
+that it rarely surfaces explicitly: measurement effort is operationalized as
+\emph{the number of measured configurations}. Sarkar
+\etal~\cite{sarkar2015} introduce a composite cost combining training
+measurement cost, testing measurement cost, model-building cost, and prediction
+error, then collapse acquisition effort to $2n$, treating each measured
+configuration as having unit cost under a balanced train/test
+split. Guo \etal~\cite{guo2013ASE} train predictors from samples of size $N$,
+$2N$, $3N$, $M$ and discuss feasibility in terms of sample
+cardinality. Westermann \etal~\cite{westermann2012} formulate efficiency as the
+\emph{required number of measurement points} for a target error. Siegmund
+\etal~\cite{siegmund2015FSE} report Pareto trade-offs between accuracy and
+\emph{number of measurements}. Kaltenecker
+\etal~\cite{kaltenecker2019} compare six sampling strategies at common sample
+sizes. Pereira \etal{}'s systematic review~\cite{julianasurvey} confirms the
+pattern: when ``cost'' is mentioned at all, it usually means cardinality of
+measured samples.
+
+This is the size-as-cost abstraction. It is convenient---sample size is
+deterministic, comparable across systems, and easy to budget---but it bakes
+in a strong assumption: that two sampling strategies selecting the same
+number of configurations incur the same acquisition cost, or, in other
+words, that configurations are equally expensive to measure. In practice,
+configuration options can change per-configuration cost by orders of
+magnitude. In x264, enabling slow analysis options or higher \texttt{ref}
+frame counts dramatically inflates encoding time; in LLVM, certain
+optimization passes turn a one-second compilation into a many-second one;
+in archivers, compression level interacts non-linearly with input data and
+with parallelism options. The same point holds for cost dimensions other
+than time: when storage is the operational constraint, the cumulative
+output size of measured configurations varies just as dramatically across
+options. Strategies that preferentially explore some regions of the option
+space (\eg solver-driven, distance-based, or coverage-based strategies)
+may therefore systematically select cheaper or costlier configurations
+than uniform random.
+
+\paragraph*{A running example.}
+A small synthetic configurable system makes the issue concrete.
+\Cref{tab:running-example} shows a system with three binary options
+$O_1, O_2, O_3$ and the eight configurations they induce. Each row
+reports the elapsed time it takes to measure that configuration on a
+fixed input. Concretely, $O_3$ is an option that activates expensive
+analysis (think x264 high-quality motion estimation, or LLVM aggressive
+optimization passes), so configurations with $O_3=1$ cost an order of
+magnitude more to measure than configurations with $O_3=0$.
+
+\begin{table}[t]
+\centering
+\caption{A synthetic configurable system with eight valid configurations,
+three binary options, and per-configuration acquisition cost (here
+instantiated as wall-clock measurement time, but the same logic applies
+to any quantitative resource). Deliberately at toy scale to fit a single
+page---the empirical study (\Cref{sec:experiment}) covers systems with
+up to $\sim\!\!200{,}000$ valid configurations, $54$ options, and
+training fractions from $1\%$ to $30\%$ of $|C|$, where the same effects
+are amplified, not dampened. Two sampling strategies select the same
+number of configurations ($n=3$), yet their empirical training costs
+differ by an order of magnitude. After sampling, a regressor (random
+forest, gradient-boosted trees, stepwise linear regression, etc.) is
+trained on the selected (configuration, label) pairs and evaluated on
+the remaining $5$ configurations; the resulting MRE is shown in the
+bottom row.}
+\label{tab:running-example}
+\footnotesize
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{c c c c r c c}
+\toprule
+\multirow{2}{*}{Conf.} & \multicolumn{3}{c}{Options} & \multirow{2}{*}{$t$ (s)} & Strategy & Strategy \\
+                       & $O_1$ & $O_2$ & $O_3$ &        & A   & B   \\
+\midrule
+$c_1$ & 0 & 0 & 0 & 1.0  & \checkmark &            \\
+$c_2$ & 1 & 0 & 0 & 1.8  & \checkmark &            \\
+$c_3$ & 0 & 1 & 0 & 2.2  & \checkmark &            \\
+$c_4$ & 1 & 1 & 0 & 4.1  &            &            \\
+$c_5$ & 0 & 0 & 1 & 6.5  &            & \checkmark \\
+$c_6$ & 1 & 0 & 1 & 12.3 &            & \checkmark \\
+$c_7$ & 0 & 1 & 1 & 14.0 &            & \checkmark \\
+$c_8$ & 1 & 1 & 1 & 27.5 &            &            \\
+\midrule
+\multicolumn{4}{r}{$\SizeCost$ ($n$)}                       &      & \textbf{3}   & \textbf{3}    \\
+\multicolumn{4}{r}{$\TrainCost$ (sum of $t$, in s)}         &      & \textbf{5.0} & \textbf{32.8} \\
+\multicolumn{4}{r}{Predictor MRE on remaining $5$ configs}  &      & \textbf{20\%} & \textbf{10\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+Suppose a practitioner has a budget of $n=3$ training configurations.
+Strategy~A draws cheap configurations ($\{c_1,c_2,c_3\}$, all with
+$O_3=0$); Strategy~B draws costly ones ($\{c_5,c_6,c_7\}$, all with
+$O_3=1$). The conventional cost abstraction cannot distinguish them:
+$\SizeCost=3$ either way. Empirically, Strategy~B costs more than six
+times as much as Strategy~A.
+
+A complete sampling+learning experiment does not stop at acquisition: it
+trains a regressor on the $3$ measured configurations and evaluates its
+MRE on the remaining five. Strategy~B's training set spans the expensive
+$O_3=1$ regime that drives most of the cost mass, so its predictions
+generalize better; Strategy~A's training set misses that regime
+entirely. Bottom row of \Cref{tab:running-example}: an illustrative MRE
+of $20\%$ for A and $10\%$ for B. Now the picture has two axes
+simultaneously, and the cost-axis choice matters in a way that count
+alone hides:
+\begin{itemize}
+    \item In the $(\SizeCost, \MRE)$ plane both strategies sit at $n=3$,
+    with B at $10\%$ and A at $20\%$. \textbf{B dominates A under
+    count-based cost}: same effort, lower error.
+    \item In the $(\TrainCost, \MRE)$ plane A sits at $(5.0\,\mathrm{s},\,
+    20\%)$ and B at $(32.8\,\mathrm{s},\, 10\%)$. \textbf{Neither
+    dominates the other under empirical cost}: A pays $6.6\times$ less
+    time to give up $10$ percentage points of MRE. A practitioner with a
+    tight time budget might rationally pick A; one with a tight error
+    budget might rationally pick B.
+\end{itemize}
+The Pareto status of A flipped---dominated under the size-as-cost
+abstraction, Pareto-efficient under empirical cost---and the strategy you
+would recommend depends on how heavily you weight time against accuracy
+(RQ3) as well as on which $(s,n)$ pairs are on the frontier (RQ4).
+Crucially, none of these conclusions could be drawn from sample size
+alone. \Cref{app:running-example-figure} sketches the same comparison
+visually, with sample sizes spanning $\{8,\ldots,128\}$ and Pareto fronts
+under both cost models.
+
+\Cref{tab:running-example} is deliberately small: three options, eight
+configurations, $n=3$. That scale was chosen for readability, not for
+realism. The phenomenon scales \emph{up}, not down. Real configurable
+systems have between $11$ and $54$ binary options and between hundreds
+and hundreds of thousands of valid configurations---LLVM at $1{,}024$,
+LRZIP at $432$, x264 at $1{,}152$, BDB-C at $2{,}560$, HIPAcc at
+$13{,}485$, 7Z at $68{,}640$, JavaGC at $\sim\!\!200{,}000$. With more
+options, the cost-heterogeneity surface has more dimensions; with larger
+configuration spaces, sampling strategies have more room to drift into
+cost-biased subregions; and at the realistic training fractions used in
+the literature (typically $1\%$ to $30\%$ of $|C|$, often $32$--$256$
+configurations), small per-strategy biases compound across many
+selections. Single options in real systems are known to multiply
+per-configuration cost by orders of magnitude.
+
+\begin{table}[t]
+\centering
+\caption{Order-of-magnitude scale check at x264 size: $|C|=1{,}152$
+configurations over $16$ binary options, training fraction $n/|C|\approx
+11\%$. The numbers are illustrative orders of magnitude derived from
+plausible per-configuration encoding-time spreads, not measurements
+(\Cref{sec:results} reports actual measured values). The qualitative
+pattern of \Cref{tab:running-example} survives at scale: $\SizeCost$
+tied across strategies while $\TrainCost$ differs by an order of
+magnitude, and the Pareto status of the cheaper strategy still depends
+on the cost dimension.}
+\label{tab:running-example-scale}
+\footnotesize
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{l r r}
+\toprule
+                                          & Strategy A    & Strategy B    \\
+\midrule
+$|C|$                                     & $1{,}152$     & $1{,}152$     \\
+$n$ (training size)                       & $128$         & $128$         \\
+sample fraction $\mathit{SizePct}=n/|C|$  & $\approx\!\!11\%$ & $\approx\!\!11\%$ \\
+\midrule
+$\TrainCost$                              & $\approx\!\!4$\,min  & $\approx\!\!40$\,min \\
+$\mathit{TrainCostPct}=\TrainCost/\FullCost$ & $\approx\!\!3\%$  & $\approx\!\!33\%$ \\
+calibration ratio $\Ratio$                & $\approx\!\!0.27$    & $\approx\!\!3.0$  \\
+\midrule
+predictor MRE                             & $\approx\!\!8\%$     & $\approx\!\!5\%$  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\Cref{tab:running-example-scale} sketches the same comparison at x264
+size. Replacing $|C|=8$ with $|C|=1{,}152$ changes the absolute numbers
+but not the shape: a strategy can spend $\approx\!\!11\%$ of the
+configuration budget while consuming $\approx\!\!33\%$ of the
+measurement-time budget, a calibration ratio of $\approx\!\!3$ that the
+size-as-cost abstraction makes invisible. The size and direction of that
+gap is exactly what RQ1--RQ4 quantify in real systems.
+
+The questions this paper asks (\Cref{sec:study_design}) are simply the
+empirical version of what \Cref{tab:running-example} hints at: how
+heterogeneous are real per-configuration costs (RQ1), does $n$ predict
+$\TrainCost$ (RQ2), do strategy rankings change when $\TrainCost$
+replaces $\SizeCost$ in the accuracy--cost trade-off (RQ3), do
+Pareto-efficient $(s,n)$ pairs change under empirical cost (RQ4), and
+does any of this depend on the system, the input, and the property being
+predicted (RQ5)?
+
+\paragraph*{What this paper does.}
+We \emph{do not} claim that cost-aware sampling is novel. Sarkar
+\etal~\cite{sarkar2015} already studied cost-efficient sampling. We claim
+something narrower and, we believe, more defensible: \emph{the size-as-cost
+abstraction itself has not been empirically validated}. We do not know, system
+by system, whether $n$ is correlated with empirical measurement cost. We do not
+know whether it is calibrated, \ie whether reducing $n$ by $x\%$ reduces
+acquisition time by roughly $x\%$. We do not know whether different strategies
+incur substantially different costs at fixed $n$. And we do not know whether
+the cost-aware conclusions of prior work change when the cost term is replaced
+by an empirical one.
+
+The central question of this paper is therefore:
+\begin{quote}
+\emph{When is sample size a valid proxy for empirical measurement cost, when is
+it miscalibrated, and does replacing count-based cost with empirical
+measurement cost change the scientific conclusions previously drawn about
+sampling strategies?}
+\end{quote}
+This framing is robust by design: if empirical cost closely tracks $n$ for the
+systems and conditions we study, the abstraction is empirically justified
+in those contexts and previous conclusions transfer; if it does not, the
+abstraction hides strategy- and context-dependent effects that have to be
+revisited.
+This is not a blanket criticism of prior work. In configurable-systems
+research, using sample size or number of measurements as an effort axis is a
+practical and widespread convention in sampling, tuning, and transfer studies
+\cite{kaltenecker2019,pereira2020,chen2021multiobj,chen2023aspirations,gong2024sempl}.
+Some papers already take the stronger step of calibrating count budgets from
+measured wall-clock time \cite{chen2021multiobj,chen2023aspirations}. Our claim
+is narrower: to the best of our knowledge, prior work has not directly tested
+whether sample size is itself a calibrated proxy for measured acquisition cost,
+nor whether replacing count-based cost with measured cost changes rankings or
+Pareto-efficient choices. We therefore position this paper as a validity study
+of a common methodological assumption, not as a rejection of prior predictive
+or optimization contributions.
+
+\paragraph*{Approach.}
+For each sampling strategy $s$, run $r$, training size $n$, system, input and
+performance property, we compute an empirical \emph{training} measurement
+cost
+\[
+\TrainCost(r,s,n)\;=\;\sum_{c\in S_{r,s,n}} \mathit{cost}(c)
+\]
+where $S_{r,s,n}$ is the training sample selected by the strategy. Crucially,
+we restrict the cost term to training: validation/test measurements belong to
+the experimental protocol, not to the strategy. We then compare
+$\TrainCost$ to the count-based baseline $\SizeCost(s,n)=n$ along five axes:
+heterogeneity at fixed $n$, correlation and calibration, ranking change under
+combined accuracy--cost objectives, Pareto efficiency in the MRE--cost plane,
+and stability across context. Datasets reuse benchmarks already used in prior
+sampling studies---ten systems with measured per-configuration times,
+plus the x264 case study with seventeen input videos and two performance
+properties (encoding time and output size).
+
+\paragraph*{Why this matters.}
+Two practical consequences follow. First, if size is a poor proxy in even a few
+of the systems and conditions we study, then the cost-aware claims that
+underpin recommendations for practitioners (``strategy $X$ is cheaper than
+strategy $Y$'', ``$n=2t$ is sufficient'') need to be re-stated in terms of
+empirical time, and the conditions of validity need to be made explicit. Second,
+if size is a good proxy under reasonably broad conditions, that is itself a
+useful empirical finding: it tells the community that an abstraction it has
+been using by default is not just convenient but actually justified for those
+conditions. Either way, the size-as-cost question deserves to be answered with
+data rather than assumed.
+
+\paragraph*{Contributions.}
+\begin{itemize}
+    \item We define an empirical \emph{training} measurement cost,
+    $\TrainCost(r,s,n)$, that captures the acquisition effort actually induced
+    by a sampling strategy on a given system, input and property, and we
+    distinguish it cleanly from validation/test cost so that the cost term
+    reflects what a strategy controls.
+    \item We empirically test, on ten configurable systems, whether sample size
+    $n$ is (i) correlated with $\TrainCost$, (ii) calibrated as a budget proxy
+    via the ratio $(\TrainCost/\FullCost)/(n/|C|)$, and (iii) free of
+    strategy-specific bias.
+    \item We compare strategy rankings under count-based and empirical-cost
+    composite objectives across a sweep of trade-off parameters $\lambda$, and
+    compute Pareto frontiers in the MRE--cost plane under both cost models.
+    \item Using x264 with seventeen input videos and two performance properties
+    (encoding time, output size) we characterize when the validity of the
+    size-as-cost abstraction depends on context, including the asymmetric case
+    in which the predicted property differs from the property that constitutes
+    measurement cost.
+    \item We pre-state twelve hypotheses (H1a--H5c) and report formal
+    verdicts under explicit tests and thresholds (Kruskal--Wallis with tie
+    correction and $\eta^2$ effect size, Spearman with Student-$t$
+    $p$-values, percentile bootstrap CIs of the calibration ratio,
+    Vargha--Delaney $\hat A_{12}$), giving a per-system and per-context
+    picture of which claims are supported, refuted, or inconclusive
+    (\Cref{tab:hypothesis-verdicts}).
+    \item We release the experimental pipeline, raw measurements, and analysis
+    artifacts at \red{anonymized URL}.
+\end{itemize}
+
+\paragraph*{Roadmap.}
+\Cref{sec:background} discusses configurable systems, sampling strategies, and
+prior cost models. \Cref{sec:cost_model} formalizes the empirical training
+cost, the count-based baseline, the composite objectives, and the Pareto
+formulation. \Cref{sec:study_design} states the five research questions, the
+hypotheses, and the statistical analysis. \Cref{sec:experiment} details
+datasets, strategies, learners, sample sizes, and evaluation
+protocol. \Cref{sec:results}--\Cref{sec:discussion} report and discuss the
+results. \Cref{sec:threats} addresses threats to
+validity. \Cref{sec:related_work} positions our work in the broader literature,
+and \Cref{sec:conclusion} concludes.

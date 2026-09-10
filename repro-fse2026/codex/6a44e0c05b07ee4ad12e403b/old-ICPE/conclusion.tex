@@ -1,0 +1,18 @@
+\section{Conclusion} \label{sec:conclusion}
+
+
+Finding a small sample that represents the important characteristics of the set of all valid configurations of a configurable system is a challenging task.
+Numerous sampling strategies have been proposed~\cite{julianasurvey} and a recent study~\cite{kaltenecker2019} have designed an experiment to compare six sampling strategies.
+However, this study did not investigate whether the strategies developed so far generalize across different inputs and performance properties of the same configurable system. 
+To this end, we replicated this study to investigate the individual effects of 17 input videos on the prediction accuracy of two performance properties.
+Our results demonstrated that uniform random sampling dominates for most input videos and both performance properties, time and size. There are some cases for which random sampling can be beaten with specific sampling.
+However, for the other sampling strategies, the prediction accuracy (\ie the ranking of sampling strategies) can dramatically change based on the input video and sampling size. It has practical implications since users of configurable systems feed different inputs and deal with different definitions of performance. Thus, we warn researchers about the sensitivity of a sampling strategy over workloads and performance properties of a configurable system.
+% There is not a dominant sampling strategy (except by random) across the performance distributions.
+%leads to significantly lower error rates than state-of-the-art strategies.
+ This work provides a new view of random sampling based on its effective dominance across different inputs and performance properties. Distance-based sampling strategies are other relevant alternatives.   
+% We question the migration to other state-of-the-art non-accurate sampling strategies. 
+ Our replication of the original experiment design is a promising starting point for future studies of other configurable systems, consideration of other influential factors (versions, hardware), and the use of specific (\eg white-box) sampling strategies. 
+%As future work, we plan to extend our experiments to other systems 
+
+%As future work, we plan to discuss some strategies to alleviate the problem and challenge researchers to take the impacts of predicting different properties into account.
+

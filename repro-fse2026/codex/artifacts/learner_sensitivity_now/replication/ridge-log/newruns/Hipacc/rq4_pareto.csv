@@ -1,0 +1,15 @@
+target_context,cost_context,strategy,level,n,pct_n,median_pct_cost,median_train_cost,median_mre,pareto_count,pareto_empirical,system,cost_property,target_property,scenario
+Hipacc,Hipacc,random,t1,50,0.003711401425178147,0.003518640433415082,1692.136,0.17377373164705848,1,1,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,solverBased,t1,50,0.003711401425178147,0.005968621323659376,2870.347,0.6154229170472583,0,0,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,henard,t1,50,0.003711401425178147,0.004751084515026008,2284.826,0.412442223072339,0,0,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,distBased,t1,50,0.003711401425178147,0.0040399936619656815,1942.8580000000002,0.19867141864657356,0,0,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,divDistBased,t1,50,0.003711401425178147,0.004457102029460215,2143.448,0.20725783097983239,0,0,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,random,t2,843,0.06257422802850356,0.061924491720006934,29779.871999999996,0.12962474455242917,1,1,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,solverBased,t2,843,0.06257422802850356,0.06928397055392507,33319.091,0.13863173035797624,0,0,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,henard,t2,843,0.06257422802850356,0.06646687233393955,31964.331,0.14207264657846397,0,0,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,distBased,t2,843,0.06257422802850356,0.06380635974333458,30684.874000000003,0.1476690448241105,0,0,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,divDistBased,t2,843,0.06257422802850356,0.0695779218483771,33460.454000000005,0.13683303719485387,0,0,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,random,t3,4601,0.3415231591448931,0.3416585188546124,164305.69999999998,0.12768544710455243,1,1,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,solverBased,t3,4601,0.3415231591448931,0.3480490769301789,167378.95899999997,0.12798852013362902,0,0,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,distBased,t3,4601,0.3415231591448931,0.3507302068469902,168668.331,0.14165758300617282,0,0,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,divDistBased,t3,4601,0.3415231591448931,0.3798811576976966,182687.204,0.13885097744934224,0,0,Hipacc,performance,performance,cost_performance__target_performance

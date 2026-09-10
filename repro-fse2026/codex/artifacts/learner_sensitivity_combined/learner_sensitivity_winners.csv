@@ -1,0 +1,13 @@
+family,label,best_mre_learner,best_mre,rank_stability_learner,rank_top1_agreement,pareto_stability_learner,pareto_jaccard
+ENERGY,twins,ridge-log,0.18933329860952952,gbt-log,0.42857142857142855,rf-log,0.5
+LCBENCH,data_2k_lw,rf-raw,0.1343539271998182,gbt-raw,0.2857142857142857,rf-raw,0.5
+LINUX,413,ridge-log,0.23826362793967812,ridge-log,1.0,gbt-log,0.5
+LINUX,415,ridge-log,0.34258935894588244,ridge-log,1.0,gbt-log,0.42857142857142855
+LINUX,420,ridge-log,0.34112238018530505,ridge-log,1.0,gbt-log,0.6
+LINUX,500,ridge-log,0.32329476012061253,gbt-log,1.0,gbt-log,0.6
+LINUX,504,ridge-log,0.34379075537707837,gbt-log,1.0,rf-log,0.6
+LINUX,507,gbt-log,0.3664239425734728,gbt-log,0.0,gbt-log,0.5
+LINUX,508,ridge-log,0.31377016510291256,gbt-log,0.0,gbt-log,0.5
+REPLICATION,newruns,ridge-log,0.2956570339489103,NA,nan,gbt-log,0.75
+REPLICATION,x264_matrix,ridge-log,0.0752459418636786,NA,nan,gbt-log,0.4875
+WORKLOAD,workload-impact,gbt-log,0.31884979430456395,gbt-log,0.42857142857142855,gbt-log,0.4

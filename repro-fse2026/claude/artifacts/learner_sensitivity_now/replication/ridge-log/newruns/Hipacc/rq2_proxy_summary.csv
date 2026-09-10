@@ -1,0 +1,7 @@
+target_context,cost_context,strategy,records,spearman_n_train_cost,median_calibration_ratio,q1_calibration_ratio,q3_calibration_ratio,median_bias,system,cost_property,target_property,scenario
+Hipacc,Hipacc,ALL,62,0.9428520736241425,1.0643352082618627,1.002117970914194,1.1143939899067956,0.06433520826186268,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,random,15,0.9449111825230679,0.9896165509512853,0.9783010073473721,0.998876385186663,-0.010383449048714688,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,solverBased,15,0.9457559848219178,1.0810198936484374,1.0283929472423896,1.162940476640169,0.08101989364843742,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,henard,2,0.9999999999999999,1.1711703194365657,1.116689373290545,1.2256512655825866,0.1711703194365657,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,distBased,15,0.9449111825230679,1.0546042646248017,1.0162772731693095,1.083943873628579,0.054604264624801724,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,divDistBased,15,0.9449111825230679,1.1150871574108019,1.107285301876896,1.1251000500204826,0.11508715741080189,Hipacc,performance,performance,cost_performance__target_performance

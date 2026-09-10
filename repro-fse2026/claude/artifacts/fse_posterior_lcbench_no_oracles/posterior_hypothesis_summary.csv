@@ -1,0 +1,211 @@
+hypothesis,question,supports,refutes,inconclusive,total,system,workload,target_property,cost_property
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,2,3,1,6,lcbench,APSFailure,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,3,3,0,6,lcbench,APSFailure,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,APSFailure,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,APSFailure,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,6,0,6,lcbench,APSFailure,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,4,2,6,lcbench,APSFailure,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,5,1,0,6,lcbench,Amazon_employee_access,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,5,1,0,6,lcbench,Amazon_employee_access,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,Amazon_employee_access,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,Amazon_employee_access,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,6,0,6,lcbench,Amazon_employee_access,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,3,3,6,lcbench,Amazon_employee_access,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,3,1,2,6,lcbench,Australian,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,5,1,0,6,lcbench,Australian,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,Australian,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,Australian,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,Australian,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,3,3,6,lcbench,Australian,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,1,1,6,lcbench,Fashion-MNIST,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,2,4,0,6,lcbench,Fashion-MNIST,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,Fashion-MNIST,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,Fashion-MNIST,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,6,0,6,lcbench,Fashion-MNIST,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,3,3,6,lcbench,Fashion-MNIST,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,6,0,0,6,lcbench,KDDCup09_appetency,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,4,2,0,6,lcbench,KDDCup09_appetency,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,KDDCup09_appetency,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,KDDCup09_appetency,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,6,0,6,lcbench,KDDCup09_appetency,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,3,3,0,6,lcbench,KDDCup09_appetency,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,1,1,6,lcbench,MiniBooNE,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,5,0,6,lcbench,MiniBooNE,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,MiniBooNE,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,MiniBooNE,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,MiniBooNE,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,MiniBooNE,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,1,1,6,lcbench,adult,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,3,3,0,6,lcbench,adult,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,adult,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,adult,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,adult,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,adult,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,2,0,6,lcbench,airlines,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,2,4,0,6,lcbench,airlines,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,airlines,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,airlines,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,airlines,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,airlines,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,3,1,2,6,lcbench,albert,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,5,0,6,lcbench,albert,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,albert,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,albert,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,albert,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,albert,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,6,0,0,6,lcbench,bank-marketing,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,4,2,0,6,lcbench,bank-marketing,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,bank-marketing,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,bank-marketing,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,bank-marketing,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,4,2,6,lcbench,bank-marketing,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,6,0,0,6,lcbench,blood-transfusion-service-center,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,5,1,0,6,lcbench,blood-transfusion-service-center,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,blood-transfusion-service-center,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,blood-transfusion-service-center,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,3,3,6,lcbench,blood-transfusion-service-center,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,4,2,6,lcbench,blood-transfusion-service-center,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,6,0,0,6,lcbench,car,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,5,0,6,lcbench,car,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,car,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,car,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,6,0,6,lcbench,car,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,car,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,6,0,0,6,lcbench,christine,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,6,0,0,6,lcbench,christine,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,christine,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,christine,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,christine,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,4,2,6,lcbench,christine,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,5,1,0,6,lcbench,cnae-9,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,6,0,0,6,lcbench,cnae-9,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,cnae-9,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,cnae-9,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,cnae-9,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,3,2,6,lcbench,cnae-9,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,5,1,0,6,lcbench,connect-4,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,4,2,0,6,lcbench,connect-4,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,connect-4,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,connect-4,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,6,0,6,lcbench,connect-4,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,3,1,6,lcbench,connect-4,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,5,0,1,6,lcbench,covertype,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,4,2,0,6,lcbench,covertype,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,covertype,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,covertype,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,6,0,6,lcbench,covertype,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,4,2,6,lcbench,covertype,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,1,4,1,6,lcbench,credit-g,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,3,3,0,6,lcbench,credit-g,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,credit-g,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,credit-g,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,6,0,6,lcbench,credit-g,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,6,0,6,lcbench,credit-g,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,3,1,2,6,lcbench,dionis,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,6,0,0,6,lcbench,dionis,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,dionis,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,dionis,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,dionis,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,3,1,6,lcbench,dionis,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,6,0,0,6,lcbench,fabert,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,6,0,0,6,lcbench,fabert,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,fabert,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,fabert,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,4,2,6,lcbench,fabert,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,6,0,6,lcbench,fabert,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,5,0,1,6,lcbench,helena,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,4,2,0,6,lcbench,helena,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,helena,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,helena,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,6,0,6,lcbench,helena,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,4,1,6,lcbench,helena,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,3,0,3,6,lcbench,higgs,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,3,3,0,6,lcbench,higgs,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,higgs,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,higgs,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,higgs,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,4,1,6,lcbench,higgs,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,2,6,lcbench,jannis,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,6,0,6,lcbench,jannis,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,jannis,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,jannis,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,jannis,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,jannis,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,6,0,0,6,lcbench,jasmine,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,5,1,0,6,lcbench,jasmine,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,jasmine,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,5,1,0,6,lcbench,jasmine,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,4,2,6,lcbench,jasmine,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,4,1,6,lcbench,jasmine,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,1,1,6,lcbench,jungle_chess_2pcs_raw_endgame_complete,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,5,0,6,lcbench,jungle_chess_2pcs_raw_endgame_complete,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,jungle_chess_2pcs_raw_endgame_complete,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,jungle_chess_2pcs_raw_endgame_complete,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,6,0,6,lcbench,jungle_chess_2pcs_raw_endgame_complete,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,jungle_chess_2pcs_raw_endgame_complete,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,6,0,0,6,lcbench,kc1,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,5,0,6,lcbench,kc1,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,kc1,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,kc1,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,4,2,6,lcbench,kc1,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,kc1,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,1,1,6,lcbench,kr-vs-kp,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,5,1,0,6,lcbench,kr-vs-kp,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,kr-vs-kp,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,kr-vs-kp,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,4,2,6,lcbench,kr-vs-kp,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,kr-vs-kp,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,6,0,0,6,lcbench,mfeat-factors,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,6,0,0,6,lcbench,mfeat-factors,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,mfeat-factors,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,mfeat-factors,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,4,2,6,lcbench,mfeat-factors,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,4,2,6,lcbench,mfeat-factors,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,5,1,0,6,lcbench,nomao,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,5,0,6,lcbench,nomao,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,nomao,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,nomao,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,nomao,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,nomao,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,2,4,0,6,lcbench,numerai28.6,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,2,4,0,6,lcbench,numerai28.6,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,numerai28.6,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,numerai28.6,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,numerai28.6,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,4,2,6,lcbench,numerai28.6,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,6,0,0,6,lcbench,phoneme,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,4,2,0,6,lcbench,phoneme,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,phoneme,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,phoneme,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,4,2,6,lcbench,phoneme,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,phoneme,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,1,2,3,6,lcbench,segment,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,2,4,0,6,lcbench,segment,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,segment,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,segment,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,4,2,6,lcbench,segment,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,4,2,6,lcbench,segment,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,2,6,lcbench,shuttle,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,4,2,0,6,lcbench,shuttle,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,shuttle,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,shuttle,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,shuttle,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,shuttle,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,6,0,0,6,lcbench,sylvine,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,5,1,0,6,lcbench,sylvine,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,sylvine,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,sylvine,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,sylvine,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,sylvine,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,6,0,0,6,lcbench,vehicle,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,4,2,0,6,lcbench,vehicle,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,vehicle,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,2,0,6,lcbench,vehicle,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,6,0,6,lcbench,vehicle,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,4,1,6,lcbench,vehicle,final_val_accuracy,time_total
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,3,1,2,6,lcbench,volkert,final_val_accuracy,time_total
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,5,0,6,lcbench,volkert,final_val_accuracy,time_total
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,6,0,6,lcbench,volkert,final_val_accuracy,time_total
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,6,0,0,6,lcbench,volkert,final_val_accuracy,time_total
+FSE5,SRS has lower posterior risk than random sampling.,0,5,1,6,lcbench,volkert,final_val_accuracy,time_total
+FSE6,SRS and random sampling have different empirical acquisition costs.,0,5,1,6,lcbench,volkert,final_val_accuracy,time_total

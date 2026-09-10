@@ -1,0 +1,239 @@
+family,label,learner,analysis_unit,target_context,cost_context,count_front_n,empirical_front_n,count_only_n,empirical_only_n,pareto_jaccard
+REPLICATION-ICSE19,Kaltenecker/NewRuns,original/literature regression,artifacts/newruns_systems,7z,7z,3,7,0,4,0.42857142857142855
+REPLICATION-ICSE19,Kaltenecker/NewRuns,original/literature regression,artifacts/newruns_systems,BerkeleyDBC,BerkeleyDBC,3,5,0,2,0.6
+REPLICATION-ICSE19,Kaltenecker/NewRuns,original/literature regression,artifacts/newruns_systems,Dune,Dune,3,3,0,0,1.0
+REPLICATION-ICSE19,Kaltenecker/NewRuns,original/literature regression,artifacts/newruns_systems,Hipacc,Hipacc,3,3,0,0,1.0
+REPLICATION-ICSE19,Kaltenecker/NewRuns,original/literature regression,artifacts/newruns_systems,LLVM,LLVM,3,9,0,6,0.3333333333333333
+REPLICATION-ICSE19,Kaltenecker/NewRuns,original/literature regression,artifacts/newruns_systems,Polly,Polly,3,6,0,3,0.5
+REPLICATION-ICSE19,Kaltenecker/NewRuns,original/literature regression,artifacts/newruns_systems,lrzip,lrzip,3,5,0,2,0.6
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_0,x264_time_0,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_1,x264_time_1,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_2,x264_time_2,3,6,0,3,0.5
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_3,x264_time_3,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_4,x264_time_4,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_5,x264_time_5,3,6,0,3,0.5
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_6,x264_time_6,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_7,x264_time_7,3,6,0,3,0.5
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_8,x264_time_8,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_9,x264_time_9,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_10,x264_time_10,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_11,x264_time_11,3,5,0,2,0.6
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_12,x264_time_12,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_13,x264_time_13,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_14,x264_time_14,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_15,x264_time_15,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_16,x264_time_16,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_0,x264_time_0,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_1,x264_time_1,3,6,0,3,0.5
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_2,x264_time_2,3,9,0,6,0.3333333333333333
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_3,x264_time_3,3,9,0,6,0.3333333333333333
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_4,x264_time_4,3,11,0,8,0.2727272727272727
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_5,x264_time_5,3,10,0,7,0.3
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_6,x264_time_6,3,10,0,7,0.3
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_7,x264_time_7,3,9,0,6,0.3333333333333333
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_8,x264_time_8,3,9,0,6,0.3333333333333333
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_9,x264_time_9,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_10,x264_time_10,3,6,0,3,0.5
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_11,x264_time_11,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_12,x264_time_12,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_13,x264_time_13,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_14,x264_time_14,3,5,0,2,0.6
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_15,x264_time_15,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_16,x264_time_16,3,11,0,8,0.2727272727272727
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_0,x264_size_0,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_1,x264_size_1,3,9,0,6,0.3333333333333333
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_2,x264_size_2,3,4,0,1,0.75
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_3,x264_size_3,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_4,x264_size_4,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_5,x264_size_5,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_6,x264_size_6,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_7,x264_size_7,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_8,x264_size_8,3,6,0,3,0.5
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_9,x264_size_9,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_10,x264_size_10,3,5,0,2,0.6
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_11,x264_size_11,3,9,0,6,0.3333333333333333
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_12,x264_size_12,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_13,x264_size_13,3,5,0,2,0.6
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_14,x264_size_14,3,9,0,6,0.3333333333333333
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_15,x264_size_15,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_time_16,x264_size_16,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_0,x264_size_0,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_1,x264_size_1,3,7,0,4,0.42857142857142855
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_2,x264_size_2,3,3,0,0,1.0
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_3,x264_size_3,3,11,0,8,0.2727272727272727
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_4,x264_size_4,3,9,0,6,0.3333333333333333
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_5,x264_size_5,3,4,0,1,0.75
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_6,x264_size_6,3,3,0,0,1.0
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_7,x264_size_7,3,6,0,3,0.5
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_8,x264_size_8,3,11,0,8,0.2727272727272727
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_9,x264_size_9,3,9,0,6,0.3333333333333333
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_10,x264_size_10,3,10,0,7,0.3
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_11,x264_size_11,3,8,0,5,0.375
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_12,x264_size_12,3,4,0,1,0.75
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_13,x264_size_13,3,4,0,1,0.75
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_14,x264_size_14,3,5,0,2,0.6
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_15,x264_size_15,3,3,0,0,1.0
+REPLICATION-ICPE20,x264 matrix,original/literature regression,artifacts/x264_matrix,x264_size_16,x264_size_16,3,4,0,1,0.75
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/HSQLDB,HSQLDB__cost_performance__target_performance,HSQLDB::performance,11,18,0,7,0.6111111111111112
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/HSQLDB,HSQLDB__cost_performance__target_energy,HSQLDB::performance,11,16,0,5,0.6875
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/HSQLDB,HSQLDB__cost_energy__target_performance,HSQLDB::energy,11,18,0,7,0.6111111111111112
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/HSQLDB,HSQLDB__cost_energy__target_energy,HSQLDB::energy,11,16,0,5,0.6875
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/MongoDB,MongoDB__cost_performance__target_performance,MongoDB::performance,7,12,0,5,0.5833333333333334
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/MongoDB,MongoDB__cost_performance__target_energy,MongoDB::performance,8,15,0,7,0.5333333333333333
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/MongoDB,MongoDB__cost_energy__target_performance,MongoDB::energy,7,12,0,5,0.5833333333333334
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/MongoDB,MongoDB__cost_energy__target_energy,MongoDB::energy,8,15,0,7,0.5333333333333333
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/PostgreSQL_11_2,PostgreSQL__cost_performance__target_performance,PostgreSQL::performance,11,16,0,5,0.6875
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/PostgreSQL_11_2,PostgreSQL__cost_performance__target_energy,PostgreSQL::performance,11,18,0,7,0.6111111111111112
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/PostgreSQL_11_2,PostgreSQL__cost_energy__target_performance,PostgreSQL::energy,11,17,0,6,0.6470588235294118
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/PostgreSQL_11_2,PostgreSQL__cost_energy__target_energy,PostgreSQL::energy,11,18,0,7,0.6111111111111112
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/brotli_1_0_7,brotli__cost_performance__target_performance,brotli::performance,4,6,2,4,0.25
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/brotli_1_0_7,brotli__cost_performance__target_energy,brotli::performance,3,6,1,4,0.2857142857142857
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/brotli_1_0_7,brotli__cost_energy__target_performance,brotli::energy,5,8,1,4,0.4444444444444444
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/brotli_1_0_7,brotli__cost_energy__target_energy,brotli::energy,3,6,1,4,0.2857142857142857
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/jump3r,jump3r__cost_performance__target_performance,jump3r::performance,7,14,0,7,0.5
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/jump3r,jump3r__cost_performance__target_energy,jump3r::performance,6,8,0,2,0.75
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/jump3r,jump3r__cost_energy__target_performance,jump3r::energy,7,10,0,3,0.7
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/jump3r,jump3r__cost_energy__target_energy,jump3r::energy,6,8,0,2,0.75
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/lrzip,lrzip__cost_performance__target_performance,lrzip::performance,7,13,3,9,0.25
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/lrzip,lrzip__cost_performance__target_energy,lrzip::performance,7,17,0,10,0.4117647058823529
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/lrzip,lrzip__cost_energy__target_performance,lrzip::energy,7,18,1,12,0.3157894736842105
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/lrzip,lrzip__cost_energy__target_energy,lrzip::energy,7,18,0,11,0.3888888888888889
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/x264,x264__cost_performance__target_performance,x264::performance,9,16,0,7,0.5625
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/x264,x264__cost_performance__target_energy,x264::performance,9,17,0,8,0.5294117647058824
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/x264,x264__cost_energy__target_performance,x264::energy,9,18,0,9,0.5
+ENERGY,Twins/green configuration,ridge-log,artifacts/twins_generated_representative_100s/x264,x264__cost_energy__target_energy,x264::energy,9,18,0,9,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/batik,batik__workload_corona__cost_time__target_time,batik__workload_corona::time,3,5,0,2,0.6
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/batik,batik__workload_cranium__cost_time__target_time,batik__workload_cranium::time,3,5,0,2,0.6
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/batik,batik__workload_cubus__cost_time__target_time,batik__workload_cubus::time,3,7,0,4,0.42857142857142855
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/batik,batik__workload_flame__cost_time__target_time,batik__workload_flame::time,5,9,0,4,0.5555555555555556
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/batik,batik__workload_france__cost_time__target_time,batik__workload_france::time,4,5,0,1,0.8
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/batik,batik__workload_frisco__cost_time__target_time,batik__workload_frisco::time,3,5,0,2,0.6
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/batik,batik__workload_jelly__cost_time__target_time,batik__workload_jelly::time,2,5,0,3,0.4
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/batik,batik__workload_karte__cost_time__target_time,batik__workload_karte::time,4,7,0,3,0.5714285714285714
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/batik,batik__workload_mandelbrot__cost_time__target_time,batik__workload_mandelbrot::time,4,7,0,3,0.5714285714285714
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/batik,batik__workload_strawberry__cost_time__target_time,batik__workload_strawberry::time,2,5,0,3,0.4
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/batik,batik__workload_village__cost_time__target_time,batik__workload_village::time,4,5,0,1,0.8
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/dconvert,dconvert__workload_jpeg_large__cost_time__target_time,dconvert__workload_jpeg_large::time,4,8,0,4,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/dconvert,dconvert__workload_jpeg_medium__cost_time__target_time,dconvert__workload_jpeg_medium::time,4,7,0,3,0.5714285714285714
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/dconvert,dconvert__workload_jpeg_small__cost_time__target_time,dconvert__workload_jpeg_small::time,2,7,0,5,0.2857142857142857
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/dconvert,dconvert__workload_png_large__cost_time__target_time,dconvert__workload_png_large::time,4,7,0,3,0.5714285714285714
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/dconvert,dconvert__workload_png_medium__cost_time__target_time,dconvert__workload_png_medium::time,2,6,0,4,0.3333333333333333
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/dconvert,dconvert__workload_png_small__cost_time__target_time,dconvert__workload_png_small::time,4,9,0,5,0.4444444444444444
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/dconvert,dconvert__workload_psd_large__cost_time__target_time,dconvert__workload_psd_large::time,2,4,0,2,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/dconvert,dconvert__workload_psd_medium__cost_time__target_time,dconvert__workload_psd_medium::time,3,6,0,3,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/dconvert,dconvert__workload_psd_small__cost_time__target_time,dconvert__workload_psd_small::time,3,6,0,3,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/dconvert,dconvert__workload_svg_large__cost_time__target_time,dconvert__workload_svg_large::time,1,2,0,1,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/dconvert,dconvert__workload_svg_medium__cost_time__target_time,dconvert__workload_svg_medium::time,3,6,0,3,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/dconvert,dconvert__workload_svg_small__cost_time__target_time,dconvert__workload_svg_small::time,2,7,0,5,0.2857142857142857
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/h2,h2__workload_smallbank_1__cost_throughput__target_throughput,h2__workload_smallbank_1::throughput,4,14,0,10,0.2857142857142857
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/h2,h2__workload_smallbank_10__cost_throughput__target_throughput,h2__workload_smallbank_10::throughput,6,16,0,10,0.375
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/h2,h2__workload_tpcc_2__cost_throughput__target_throughput,h2__workload_tpcc_2::throughput,4,14,0,10,0.2857142857142857
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/h2,h2__workload_tpcc_8__cost_throughput__target_throughput,h2__workload_tpcc_8::throughput,2,6,0,4,0.3333333333333333
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/h2,h2__workload_voter_16__cost_throughput__target_throughput,h2__workload_voter_16::throughput,4,12,0,8,0.3333333333333333
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/h2,h2__workload_voter_2__cost_throughput__target_throughput,h2__workload_voter_2::throughput,4,13,0,9,0.3076923076923077
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/h2,h2__workload_ycsb_2400__cost_throughput__target_throughput,h2__workload_ycsb_2400::throughput,3,9,0,6,0.3333333333333333
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/h2,h2__workload_ycsb_600__cost_throughput__target_throughput,h2__workload_ycsb_600::throughput,4,13,0,9,0.3076923076923077
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/jump3r,jump3r__workload_beethoven_wav__cost_time__target_time,jump3r__workload_beethoven_wav::time,4,7,1,4,0.375
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/jump3r,jump3r__workload_dual_channel_wav__cost_time__target_time,jump3r__workload_dual_channel_wav::time,4,7,1,4,0.375
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/jump3r,jump3r__workload_helix_wav__cost_time__target_time,jump3r__workload_helix_wav::time,4,7,1,4,0.375
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/jump3r,jump3r__workload_single_channel_wav__cost_time__target_time,jump3r__workload_single_channel_wav::time,5,8,1,4,0.4444444444444444
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/jump3r,jump3r__workload_speech_wav__cost_time__target_time,jump3r__workload_speech_wav::time,3,4,1,2,0.4
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/jump3r,jump3r__workload_sweep_wav__cost_time__target_time,jump3r__workload_sweep_wav::time,4,7,0,3,0.5714285714285714
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/kanzi,kanzi__workload_ambivert__cost_time__target_time,kanzi__workload_ambivert::time,5,6,0,1,0.8333333333333334
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/kanzi,kanzi__workload_artificl__cost_time__target_time,kanzi__workload_artificl::time,3,6,0,3,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/kanzi,kanzi__workload_deepfield__cost_time__target_time,kanzi__workload_deepfield::time,1,1,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/kanzi,kanzi__workload_enwik8__cost_time__target_time,kanzi__workload_enwik8::time,5,5,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/kanzi,kanzi__workload_fannie_mae_500k__cost_time__target_time,kanzi__workload_fannie_mae_500k::time,5,5,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/kanzi,kanzi__workload_large__cost_time__target_time,kanzi__workload_large::time,3,7,1,5,0.25
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/kanzi,kanzi__workload_misc__cost_time__target_time,kanzi__workload_misc::time,4,8,0,4,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/kanzi,kanzi__workload_silesia__cost_time__target_time,kanzi__workload_silesia::time,5,5,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/kanzi,kanzi__workload_vmlinux__cost_time__target_time,kanzi__workload_vmlinux::time,5,5,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/lrzip,lrzip__workload_ambivert_wav_tar__cost_time__target_time,lrzip__workload_ambivert_wav_tar::time,1,3,0,2,0.3333333333333333
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/lrzip,lrzip__workload_artificl_tar__cost_time__target_time,lrzip__workload_artificl_tar::time,1,1,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/lrzip,lrzip__workload_deepfield_tar__cost_time__target_time,lrzip__workload_deepfield_tar::time,1,1,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/lrzip,lrzip__workload_enwik8_tar__cost_time__target_time,lrzip__workload_enwik8_tar::time,2,2,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/lrzip,lrzip__workload_fannie_mae_500k_tar__cost_time__target_time,lrzip__workload_fannie_mae_500k_tar::time,2,4,0,2,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/lrzip,lrzip__workload_large_tar__cost_time__target_time,lrzip__workload_large_tar::time,1,1,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/lrzip,lrzip__workload_misc_tar__cost_time__target_time,lrzip__workload_misc_tar::time,1,1,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/lrzip,lrzip__workload_silesia_tar__cost_time__target_time,lrzip__workload_silesia_tar::time,1,1,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/lrzip,lrzip__workload_uiq_32_bin__cost_time__target_time,lrzip__workload_uiq_32_bin::time,2,2,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/lrzip,lrzip__workload_uiq2_16_bin__cost_time__target_time,lrzip__workload_uiq2_16_bin::time,3,3,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/lrzip,lrzip__workload_uiq2_4_bin__cost_time__target_time,lrzip__workload_uiq2_4_bin::time,1,1,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/lrzip,lrzip__workload_uiq2_8_bin__cost_time__target_time,lrzip__workload_uiq2_8_bin::time,1,1,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/lrzip,lrzip__workload_vmlinux_5_10_tar__cost_time__target_time,lrzip__workload_vmlinux_5_10_tar::time,2,2,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/x264,x264__workload_Johnny_1280x720_60_short_y4m__cost_time__target_time,x264__workload_Johnny_1280x720_60_short_y4m::time,3,8,0,5,0.375
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/x264,x264__workload_Netflix_Crosswalk_4096x2160_60fps_10bit_420_short_y4m__cost_time__target_time,x264__workload_Netflix_Crosswalk_4096x2160_60fps_10bit_420_short_y4m::time,5,11,1,7,0.3333333333333333
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/x264,x264__workload_blue_sky_1080p25_short_y4m__cost_time__target_time,x264__workload_blue_sky_1080p25_short_y4m::time,2,8,0,6,0.25
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/x264,x264__workload_pedestrian_area_1080p25_short_y4m__cost_time__target_time,x264__workload_pedestrian_area_1080p25_short_y4m::time,4,9,0,5,0.4444444444444444
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/x264,x264__workload_riverbed_1080p25_short_y4m__cost_time__target_time,x264__workload_riverbed_1080p25_short_y4m::time,4,8,0,4,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/x264,x264__workload_sd_bridge_close_cif_short_y4m__cost_time__target_time,x264__workload_sd_bridge_close_cif_short_y4m::time,3,6,1,4,0.2857142857142857
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/x264,x264__workload_sd_city_4cif_short_y4m__cost_time__target_time,x264__workload_sd_city_4cif_short_y4m::time,5,7,1,3,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/x264,x264__workload_sd_crew_cif_short_y4m__cost_time__target_time,x264__workload_sd_crew_cif_short_y4m::time,3,5,0,2,0.6
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/x264,x264__workload_sintel_trailer_2k_720p24_short_y4m__cost_time__target_time,x264__workload_sintel_trailer_2k_720p24_short_y4m::time,4,6,0,2,0.6666666666666666
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/xz,xz__workload_ambivert_wav_tar__cost_time__target_time,xz__workload_ambivert_wav_tar::time,6,8,0,2,0.75
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/xz,xz__workload_artificl_tar__cost_time__target_time,xz__workload_artificl_tar::time,3,5,0,2,0.6
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/xz,xz__workload_deepfield_tar__cost_time__target_time,xz__workload_deepfield_tar::time,5,7,0,2,0.7142857142857143
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/xz,xz__workload_enwik8_tar__cost_time__target_time,xz__workload_enwik8_tar::time,4,8,0,4,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/xz,xz__workload_fannie_mae_500k_tar__cost_time__target_time,xz__workload_fannie_mae_500k_tar::time,3,6,0,3,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/xz,xz__workload_large_tar__cost_time__target_time,xz__workload_large_tar::time,4,8,0,4,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/xz,xz__workload_misc_tar__cost_time__target_time,xz__workload_misc_tar::time,3,4,0,1,0.75
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/xz,xz__workload_silesia_tar__cost_time__target_time,xz__workload_silesia_tar::time,4,6,0,2,0.6666666666666666
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/xz,xz__workload_uiq_32_bin__cost_time__target_time,xz__workload_uiq_32_bin::time,4,7,0,3,0.5714285714285714
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/xz,xz__workload_uiq2_16_bin__cost_time__target_time,xz__workload_uiq2_16_bin::time,4,8,0,4,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/xz,xz__workload_uiq2_4_bin__cost_time__target_time,xz__workload_uiq2_4_bin::time,4,7,1,4,0.375
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/xz,xz__workload_uiq2_8_bin__cost_time__target_time,xz__workload_uiq2_8_bin::time,5,9,0,4,0.5555555555555556
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/xz,xz__workload_vmlinux_5_10_tar__cost_time__target_time,xz__workload_vmlinux_5_10_tar::time,5,8,0,3,0.625
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/z3,z3__workload_AUFNIRA_z3_637557_smt2__cost_time__target_time,z3__workload_AUFNIRA_z3_637557_smt2::time,1,1,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/z3,z3__workload_LRA_formula_277_smt2__cost_time__target_time,z3__workload_LRA_formula_277_smt2::time,3,6,0,3,0.5
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/z3,z3__workload_QF_AUFBV_891_sqlite3_smt2__cost_time__target_time,z3__workload_QF_AUFBV_891_sqlite3_smt2::time,3,3,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/z3,z3__workload_QF_AUFLIA_swap_t1_pp_nf_ai_00010_002_cvc_smt2__cost_time__target_time,z3__workload_QF_AUFLIA_swap_t1_pp_nf_ai_00010_002_cvc_smt2::time,6,10,0,4,0.6
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/z3,z3__workload_QF_BV_bench_3176_smt2__cost_time__target_time,z3__workload_QF_BV_bench_3176_smt2::time,1,1,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/z3,z3__workload_QF_BV_bench_935_smt2__cost_time__target_time,z3__workload_QF_BV_bench_935_smt2::time,1,1,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/z3,z3__workload_QF_LIA_tightrhombus__cost_time__target_time,z3__workload_QF_LIA_tightrhombus::time,3,4,0,1,0.75
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/z3,z3__workload_QF_LRA_clocksynchro_7clocks_worst_case_skew_induct_smt2__cost_time__target_time,z3__workload_QF_LRA_clocksynchro_7clocks_worst_case_skew_induct_smt2::time,3,7,0,4,0.42857142857142855
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/z3,z3__workload_QF_NRA_hong_9_smt2__cost_time__target_time,z3__workload_QF_NRA_hong_9_smt2::time,2,2,0,0,1.0
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/z3,z3__workload_QF_RDL_orb08_888_smt2__cost_time__target_time,z3__workload_QF_RDL_orb08_888_smt2::time,4,6,0,2,0.6666666666666666
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/z3,z3__workload_QF_UFLIA_xs_23_43_smt2__cost_time__target_time,z3__workload_QF_UFLIA_xs_23_43_smt2::time,2,6,0,4,0.3333333333333333
+WORKLOAD,ICSE 2023 workload-impact,sk-hgbt-log,artifacts/strong_learner_overnight/workload/sk-hgbt-log/z3,z3__workload_QF_UF_PEQ018_size6_smt2__cost_time__target_time,z3__workload_QF_UF_PEQ018_size6_smt2::time,2,3,0,1,0.6666666666666666
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_APSFailure__cost_time_total__target_final_val_accuracy,lcbench__workload_APSFailure::time_total,5,9,1,5,0.4
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_Amazon_employee_access__cost_time_total__target_final_val_accuracy,lcbench__workload_Amazon_employee_access::time_total,5,11,0,6,0.45454545454545453
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_Australian__cost_time_total__target_final_val_accuracy,lcbench__workload_Australian::time_total,4,4,1,1,0.6
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_Fashion_MNIST__cost_time_total__target_final_val_accuracy,lcbench__workload_Fashion_MNIST::time_total,4,9,0,5,0.4444444444444444
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_KDDCup09_appetency__cost_time_total__target_final_val_accuracy,lcbench__workload_KDDCup09_appetency::time_total,5,11,0,6,0.45454545454545453
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_MiniBooNE__cost_time_total__target_final_val_accuracy,lcbench__workload_MiniBooNE::time_total,3,3,1,1,0.5
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_adult__cost_time_total__target_final_val_accuracy,lcbench__workload_adult::time_total,5,9,1,5,0.4
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_airlines__cost_time_total__target_final_val_accuracy,lcbench__workload_airlines::time_total,2,5,0,3,0.4
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_albert__cost_time_total__target_final_val_accuracy,lcbench__workload_albert::time_total,5,9,0,4,0.5555555555555556
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_bank_marketing__cost_time_total__target_final_val_accuracy,lcbench__workload_bank_marketing::time_total,1,3,0,2,0.3333333333333333
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_blood_transfusion_service_center__cost_time_total__target_final_val_accuracy,lcbench__workload_blood_transfusion_service_center::time_total,3,3,0,0,1.0
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_car__cost_time_total__target_final_val_accuracy,lcbench__workload_car::time_total,4,4,0,0,1.0
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_christine__cost_time_total__target_final_val_accuracy,lcbench__workload_christine::time_total,3,8,0,5,0.375
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_cnae_9__cost_time_total__target_final_val_accuracy,lcbench__workload_cnae_9::time_total,4,9,1,6,0.3
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_connect_4__cost_time_total__target_final_val_accuracy,lcbench__workload_connect_4::time_total,6,8,0,2,0.75
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_covertype__cost_time_total__target_final_val_accuracy,lcbench__workload_covertype::time_total,6,8,0,2,0.75
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_credit_g__cost_time_total__target_final_val_accuracy,lcbench__workload_credit_g::time_total,4,5,0,1,0.8
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_dionis__cost_time_total__target_final_val_accuracy,lcbench__workload_dionis::time_total,3,13,0,10,0.23076923076923078
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_fabert__cost_time_total__target_final_val_accuracy,lcbench__workload_fabert::time_total,5,6,0,1,0.8333333333333334
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_helena__cost_time_total__target_final_val_accuracy,lcbench__workload_helena::time_total,3,10,1,8,0.18181818181818182
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_higgs__cost_time_total__target_final_val_accuracy,lcbench__workload_higgs::time_total,4,10,0,6,0.4
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_jannis__cost_time_total__target_final_val_accuracy,lcbench__workload_jannis::time_total,3,6,0,3,0.5
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_jasmine__cost_time_total__target_final_val_accuracy,lcbench__workload_jasmine::time_total,5,15,1,11,0.25
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_jungle_chess_2pcs_raw_endgame_complete__cost_time_total__target_final_val_accuracy,lcbench__workload_jungle_chess_2pcs_raw_endgame_complete::time_total,4,7,0,3,0.5714285714285714
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_kc1__cost_time_total__target_final_val_accuracy,lcbench__workload_kc1::time_total,1,3,0,2,0.3333333333333333
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_kr_vs_kp__cost_time_total__target_final_val_accuracy,lcbench__workload_kr_vs_kp::time_total,4,12,0,8,0.3333333333333333
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_mfeat_factors__cost_time_total__target_final_val_accuracy,lcbench__workload_mfeat_factors::time_total,4,9,1,6,0.3
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_nomao__cost_time_total__target_final_val_accuracy,lcbench__workload_nomao::time_total,4,7,0,3,0.5714285714285714
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_numerai28_6__cost_time_total__target_final_val_accuracy,lcbench__workload_numerai28_6::time_total,3,6,0,3,0.5
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_phoneme__cost_time_total__target_final_val_accuracy,lcbench__workload_phoneme::time_total,3,5,1,3,0.3333333333333333
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_segment__cost_time_total__target_final_val_accuracy,lcbench__workload_segment::time_total,6,8,1,3,0.5555555555555556
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_shuttle__cost_time_total__target_final_val_accuracy,lcbench__workload_shuttle::time_total,4,4,0,0,1.0
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_sylvine__cost_time_total__target_final_val_accuracy,lcbench__workload_sylvine::time_total,6,12,0,6,0.5
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_vehicle__cost_time_total__target_final_val_accuracy,lcbench__workload_vehicle::time_total,5,9,0,4,0.5555555555555556
+LCBENCH,LCBench lightweight archive,ridge-raw,artifacts/lcbench_data_2k_lw,lcbench__workload_volkert__cost_time_total__target_final_val_accuracy,lcbench__workload_volkert::time_total,4,6,0,2,0.6666666666666666
+LINUX,TuxKConfig cross-version,sk-hgbt-log,artifacts/linux_hgbt_full_strategy/linux413_vmlinux,linux413_vmlinux,linux413_vmlinux,3,8,0,5,0.375
+LINUX,TuxKConfig cross-version,sk-hgbt-log,artifacts/linux_hgbt_full_strategy/linux415_vmlinux,linux415_vmlinux,linux415_vmlinux,3,11,0,8,0.2727272727272727
+LINUX,TuxKConfig cross-version,sk-hgbt-log,artifacts/linux_hgbt_full_strategy/linux420_vmlinux,linux420_vmlinux,linux420_vmlinux,3,12,0,9,0.25
+LINUX,TuxKConfig cross-version,sk-hgbt-log,artifacts/linux_hgbt_full_strategy/linux500_vmlinux,linux500_vmlinux,linux500_vmlinux,3,11,0,8,0.2727272727272727
+LINUX,TuxKConfig cross-version,sk-hgbt-log,artifacts/linux_hgbt_full_strategy/linux504_vmlinux,linux504_vmlinux,linux504_vmlinux,3,8,0,5,0.375
+LINUX,TuxKConfig cross-version,sk-hgbt-log,artifacts/linux_hgbt_full_strategy/linux507_vmlinux,linux507_vmlinux,linux507_vmlinux,3,10,0,7,0.3
+LINUX,TuxKConfig cross-version,sk-hgbt-log,artifacts/linux_hgbt_full_strategy/linux508_vmlinux,linux508_vmlinux,linux508_vmlinux,3,10,0,7,0.3

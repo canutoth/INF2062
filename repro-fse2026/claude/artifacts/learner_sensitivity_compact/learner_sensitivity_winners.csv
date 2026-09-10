@@ -1,0 +1,6 @@
+family,label,best_mre_learner,best_mre,rank_stability_learner,rank_top1_agreement,pareto_stability_learner,pareto_jaccard
+ENERGY,twins,ridge-log,0.18933329860952952,gbt-log,0.42857142857142855,rf-log,0.5
+LCBENCH,data_2k_lw,rf-raw,0.1343539271998182,gbt-raw,0.2857142857142857,rf-raw,0.5
+REPLICATION,newruns,ridge-log,0.2956570339489103,NA,nan,gbt-log,0.75
+REPLICATION,x264_matrix,ridge-log,0.0752459418636786,NA,nan,gbt-log,0.4875
+WORKLOAD,workload-impact,gbt-log,0.31884979430456395,gbt-log,0.42857142857142855,gbt-log,0.4

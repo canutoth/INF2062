@@ -1,0 +1,2 @@
+hypothesis,scope,scope_value,statistic,statistic_value,p_value,effect,effect_value,effect_label,verdict,notes
+H5a,scenario,h2|cost=throughput|target=throughput,kruskal_wallis_p,0.9449667358331515,0.9449667358331515,ratio_spread,0.03355026716497511,negligible,refutes,K-W on 8 inputs: p=0.945; eta^2=0; ratio spread=0.0336

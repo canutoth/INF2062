@@ -1,0 +1,57 @@
+
+
+\subsection{Results RQ2—Robustness} \label{RQ2}
+
+We repeated each experiment 100 times for each sampling strategy and sample size, from which we obtained the distribution of mean error rates. %(see Tables~\ref{tab:RQ1_TIME_MRE} and~\ref{tab:RQ1_SIZE_MRE}).
+%Then, we compute their variances and 
+We use the Levene’s test to check whether there are significantly different variances between sampling strategies. In cases where we found significant variances, we performed pair-wisely one-sided F-tests. We show the results in Tables~\ref{tab:RQ2_TIME} and~\ref{tab:RQ2_SIZE}.
+Notice that we excluded t-wise sampling as it is a deterministic sampling and does not lead to any variations.
+
+
+\subsubsection{Encoding Time}
+
+In the second and third rows of Table~\ref{tab:RQ2_TIME}, we can see that randomized solver-based sampling and distance-based sampling have a significantly lower variance than solver-based sampling for t=1 and t=2; the same also applies for random with t=1.
+In the two last rows, we observe that diversified distance-based and random have a lower variance than solver-based for t=1; both sampling have also lower variance than randomized solver-based and distance-based, for t=2 and t=3.
+Diversified distance-based has a significantly lower variance than random sampling for all sample sizes.
+Finally, random has a lower variance than t-wise for t=1; and randomized solver-based and distance-based for t=2 and t=3.
+
+\begin{tcolorbox}
+For the property encoding time, diversified distance-based sampling is more robust than the other sampling strategies.
+\end{tcolorbox}
+
+
+\begin{table*}
+\centering 
+\scriptsize
+\begin{adjustbox}{angle=0}
+	\begin{tabular}{eabdabdabdabdabdabd}
+	\toprule
+		Video & \multicolumn{3}{c}{Coverage-based}& \multicolumn{3}{c}{Solver-based}& \multicolumn{3}{c}{Randomized solver-based}& \multicolumn{3}{c}{Distance-based}& \multicolumn{3}{c}{Diversified distance-based}& \multicolumn{3}{c}{Random}\\
+		\cmidrule(lr){1-1} \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13} \cmidrule(lr){14-16} \cmidrule(lr){17-19} 
+		& $t=1$& $t=2$& $t=3$& $t=1$& $t=2$& $t=3$& $t=1$& $t=2$& $t=3$& $t=1$& $t=2$& $t=3$& $t=1$& $t=2$& $t=3$& $t=1$& $t=2$& $t=3$\\[0.1cm] 
+		& & & & & & & & & & & & & & & & & & \\[-0.2cm]
+		sintel\_trailer (x264_4)&21.8\percent &12.3\percent &14.4\percent &23.9\percent &21.2\percent &22.0\percent &18.3\percent &21.1\percent &22.5\percent &14.2\percent &11.7\percent &9.7\percent &13.9\percent &10.1\percent &8.9\percent &13.9\percent &\textbf{9.4\percent } &\textbf{8.8\percent } \\
+		& & & & & & & & & & & & & & & & & & \\[-0.25cm]
+		sintel\_trailer (x264\cite{kaltenecker2019}) & 20.9\percent & 11.9\percent & 10.9\percent & 26.2\percent & 40.4\percent & 42.2\percent & 18.5\percent & 22.2\percent & 33.2\percent & 14.7\percent & 10.0\percent & 9.4\percent & \textbf{12.6\percent} & \textbf{8.8\percent} &\textbf{9.0\percent} & 13.5\percent & 9.2\percent & 9.1\percent \\
+		\bottomrule
+	\end{tabular}
+\end{adjustbox}
+ \caption{Error rates of t-wise, (randomized) solver-based, (diversified) distance-based, and random sampling for the prediction of \underline{encoding time} for the Sintel trailer input video (734 MB).
+ %plus the accuracy obtained in~\cite{kaltenecker2019} (cells in white).
+ The best results are highlighted in bold if the Mann-Whitney $U$ test reported a significant difference ($p < 0.05$).}
+ \label{tab:SintelVideo_TIME_MRE}
+\end{table*}
+
+
+\subsubsection{Encoding Size} 
+
+In the first row of Table~\ref{tab:RQ2_SIZE}, we can see that solver-based sampling has a significantly lower variance than distan-ce-based for t=2.
+In the second row, we can see that randomized solver-based sampling has a significantly lower variance than solver-based sampling on all sample sizes.
+Randomized solver-based sampling has also a significantly lower variance than distance-based sampling for t=2 and t=3; and diversified distance-based sampling for t=2.
+When it comes to the diversified distance-based sampling, it leads to a significantly lower variance than the other sampling strategies, except for randomized solver-based (t=2) and random.
+In the last row, we observe that random has the lowest variance. %than all other sampling strategies for all sample sizes.
+
+\begin{tcolorbox}
+For the property encoding size, uniform random sampling is more robust than the other sampling strategies.
+\end{tcolorbox}
+

@@ -1,0 +1,5 @@
+target_context,cost_context,strategy,records,spearman_n_train_cost,median_calibration_ratio,q1_calibration_ratio,q3_calibration_ratio,median_bias,system,cost_property,target_property,scenario
+Polly,Polly,ALL,392,0.942809810483638,0.9961963608114612,0.9668699185580852,1.0099745031666008,-0.0038036391885387655,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,random,150,0.9428299935925014,0.9992985154773062,0.9922915851319445,1.0086442523916501,-0.0007014845226938071,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,solverBased,150,0.9428299935925014,0.9936818124328792,0.9544211372840617,1.0139431852017808,-0.00631818756712077,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,divDistBased,92,0.9428231182961591,0.973497808143325,0.9305914038292035,1.0026590461791902,-0.026502191856675017,Polly,performance,performance,cost_performance__target_performance

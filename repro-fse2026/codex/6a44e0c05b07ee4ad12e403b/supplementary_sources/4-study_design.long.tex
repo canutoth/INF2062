@@ -1,0 +1,619 @@
+\section{Research Questions and Study Design}
+\label{sec:study_design}
+
+This section states the five research questions, the hypotheses they are
+designed to test, the variables involved, and the statistical analysis plan.
+The corresponding experimental setup---datasets, strategies, learners, sample
+sizes, and protocol---is detailed in \Cref{sec:experiment}.
+
+The overarching research goal of the study is:
+\begin{quote}
+\emph{To empirically characterize when training sample size $n$ is a valid
+proxy for empirical acquisition cost, when it is miscalibrated, and whether
+replacing count-based cost with empirical cost changes conclusions about
+sampling strategies.}
+\end{quote}
+We decompose this goal into five questions, RQ1--RQ5, which together cover
+heterogeneity, correlation/calibration, ranking robustness, Pareto efficiency,
+and context sensitivity.
+
+\subsection{RQ1 -- Empirical Cost Heterogeneity}
+\label{subsec:rq1}
+
+\textbf{RQ1.} \emph{At fixed training sample size $n$, how much does
+empirical acquisition cost vary across configurations and across sampling
+strategies?}
+
+\paragraph*{Motivation.}
+Prior work assumes, implicitly or explicitly, that all configurations have
+equal acquisition cost (\Cref{subsec:cost-models}). RQ1 tests this by
+holding $n$ fixed and comparing $\TrainCost(r,s,n)$ across strategies. If
+at fixed $n$ some strategies systematically incur more (or less)
+acquisition cost than others, the size-based cost abstraction hides a
+strategy-induced bias.
+
+\paragraph*{Hypotheses.}
+\begin{itemize}
+    \item \textbf{H1a.} Per-configuration acquisition cost
+    $\mathit{cost}(c)$ is heterogeneous within a system, \ie its
+    coefficient of variation is non-negligible.
+    \item \textbf{H1b.} At fixed $n$, the distribution of $\TrainCost$ differs
+    across sampling strategies.
+    \item \textbf{Null.} At fixed $n$, sampling strategy has no significant
+    effect on $\TrainCost$.
+\end{itemize}
+
+\paragraph*{Variables.}
+Independent: system, input/workload (where applicable), property $p$, strategy
+$s$, training size $n$, run $r$. Dependent: $\TrainCost(r,s,n)$. Secondary
+descriptors: per-configuration cost distribution, coefficient of variation,
+overhead relative to random.
+
+\paragraph*{Analysis.}
+For each (system, input, property, $n$), we
+\begin{enumerate}
+    \item report the median and IQR of $\TrainCost$ per strategy across runs;
+    \item compare strategies using the Kruskal--Wallis
+    test~\cite{kruskal1952};
+    \item perform pairwise Mann--Whitney $U$ tests~\cite{mann1947} of each
+    strategy against random;
+    \item report Vargha--Delaney $\hat A_{12}$ effect sizes~\cite{vargha2000}
+    with the usual thresholds (small$>0.56$, medium$>0.64$, large$>0.71$);
+    \item report a practical \emph{overhead} relative to random,
+    $\mathit{Overhead}(s,n)=\mathrm{median}\,\TrainCost(s,n)/\mathrm{median}\,\TrainCost(\mathrm{Random},n)$,
+    classified as negligible ($<5\%$), small ($5$--$15\%$), moderate
+    ($15$--$30\%$), or substantial ($>30\%$).
+\end{enumerate}
+
+\paragraph*{Interpretation.}
+If strategies differ significantly at fixed $n$, then ``cost = sample size''
+hides a strategy-induced cost bias. If they do not, $n$ dominates cost in that
+regime.
+
+\subsection{RQ2 -- Validity of Sample Size as a Cost Proxy}
+\label{subsec:rq2}
+
+\textbf{RQ2.} \emph{To what extent is $n$ a valid proxy for $\TrainCost$, in
+terms of correlation, calibration, and strategy-specific bias?}
+
+\paragraph*{Motivation.}
+Even if cost grows with $n$, the relationship may not be calibrated: a
+strategy spending $20\%$ of $n$ might consume $10\%$, $20\%$, or $40\%$ of
+the full acquisition cost. RQ2 distinguishes between rank correlation and
+budget calibration.
+
+\paragraph*{Hypotheses.}
+\begin{itemize}
+    \item \textbf{H2a.} $n$ is positively rank-correlated with $\TrainCost$.
+    \item \textbf{H2b.} The calibration ratio
+    $\Ratio = \mathit{TrainCostPct}/\mathit{SizePct}$ is not centered at $1$.
+    \item \textbf{H2c.} Calibration depends on system, strategy, input and
+    property.
+\end{itemize}
+
+\paragraph*{Metrics.}
+Spearman correlation $\rho(n,\TrainCost)$ per (system, input, property,
+strategy); the calibration ratio of \Cref{eq:ratio}; the strategy-specific bias
+$\Bias(s)$ of \Cref{eq:bias}; and the slope/intercept of an OLS regression of
+$\mathit{TrainCostPct}$ on $\mathit{SizePct}$.
+
+\paragraph*{Analysis.}
+We report the joint distribution of $(\mathit{SizePct},\mathit{TrainCostPct})$
+as scatter plots with the $y=x$ identity line, fit a linear/log-linear
+regression, and report median and IQR of the calibration ratio per
+strategy. Pairwise $\Bias$ comparisons across strategies use Mann--Whitney $U$.
+
+\paragraph*{Interpretation.}
+We expect four qualitative outcomes:
+\begin{enumerate}
+    \item high correlation and ratio close to $1$: $n$ is a good proxy;
+    \item high correlation but ratio far from $1$: $n$ ranks costs but
+    miscalibrates budgets;
+    \item low/moderate correlation: $n$ is unreliable as a cost proxy;
+    \item strategy-specific bias: some strategies systematically select cheaper
+    or costlier configurations.
+\end{enumerate}
+
+\subsection{RQ3 -- Robustness of Conclusions to the Cost Model}
+\label{subsec:rq3}
+
+\textbf{RQ3.} \emph{Do strategy rankings under accuracy--cost trade-offs change
+when empirical training cost replaces count-based cost?}
+
+\paragraph*{Motivation.}
+Even if $n$ is correlated and approximately calibrated with $\TrainCost$ in
+aggregate, conclusions may still flip when strategies are ranked by
+$J^{\text{size}}_\lambda$ vs.\ $J^{\text{time}}_\lambda$, because the ranking
+depends on relative ordering rather than on aggregate calibration. RQ3 directly
+tests the scientific consequence of the size-as-cost abstraction: does it
+ever change which strategy you would choose?
+
+\paragraph*{Hypotheses.}
+\begin{itemize}
+    \item \textbf{H3a.} Rankings under count-based and empirical-cost
+    objectives sometimes diverge.
+    \item \textbf{H3b.} Divergence is stronger when per-configuration cost
+    heterogeneity is high or when strategies select cost-biased regions of the
+    configuration space.
+    \item \textbf{Null.} Rankings remain stable across the two cost models.
+\end{itemize}
+
+\paragraph*{Analysis.}
+For each (system, input, property), and for each $\lambda$ in the sweep
+$\{0.1,0.25,0.5,1,2,4,10\}$, we
+\begin{enumerate}
+    \item rank strategies (or strategy/$n$ pairs) by $J^{\text{size}}_\lambda$
+    and by $J^{\text{time}}_\lambda$;
+    \item compute Kendall's $\tau$ between the two rankings;
+    \item compute top-$1$ and top-$3$ agreement;
+    \item compute the mean rank difference and identify rank flips.
+\end{enumerate}
+
+\paragraph*{Interpretation.}
+A small mean rank difference and high $\tau$ across $\lambda$ values mean
+size-based conclusions are robust in that context. Rank flips, especially at
+the top, are evidence that the cost-model choice matters for the
+recommendation.
+
+\subsection{RQ4 -- Pareto Efficiency under Empirical Cost}
+\label{subsec:rq4}
+
+\textbf{RQ4.} \emph{Which $(\text{strategy},n)$ pairs are Pareto-efficient under
+empirical training cost, and how different is the empirical-cost frontier from
+the count-based one?}
+
+\paragraph*{Motivation.}
+Composite objectives require choosing $\lambda$. A complementary,
+parameter-free way to ask whether the cost model matters is to compare
+Pareto frontiers in the MRE--cost plane.
+
+\paragraph*{Hypotheses.}
+\begin{itemize}
+    \item \textbf{H4a.} Some $(s,n)$ pairs are Pareto-efficient under
+    count-based cost but dominated under empirical cost (or vice versa).
+    \item \textbf{H4b.} The empirical-cost frontier differs from the
+    count-based frontier in at least some systems/contexts.
+    \item \textbf{Null.} The two frontiers coincide or differ only marginally.
+\end{itemize}
+
+\paragraph*{Analysis.}
+For each (system, input, property) we compute and compare two frontiers:
+$\{(n,\MRE)\}$ and $\{(\TrainCost,\MRE)\}$. We report the number of
+Pareto-efficient pairs on each frontier, the membership overlap, the pairs that
+appear only on one frontier, and the resulting frontier expansion or
+contraction under measured cost. Following Li \etal's guidance that Pareto
+evaluation in SBSE should match the concrete decision question, we do not lead
+with generic approximation indicators here: the task is to determine whether
+the same finite set of $(s,n)$ candidates remains non-dominated when the cost
+axis changes \cite{li2020pareto}. This is the most decision-oriented of our
+analyses: it tells practitioners which $(s,n)$ choices are not obviously
+wasteful, regardless of $\lambda$.
+
+\subsection{RQ5 -- Context Sensitivity of Cost-Model Validity}
+\label{subsec:rq5}
+
+\textbf{RQ5.} \emph{When do the effects characterized in RQ1--RQ4 appear or
+disappear across systems, inputs and non-functional properties?}
+
+\paragraph*{Motivation.}
+Context sensitivity of sampling-based performance prediction is itself
+established prior art (\Cref{subsec:context-sensitivity}). The novel angle is
+the context sensitivity of \emph{cost-model validity}. The x264 case study is
+ideal here: x264 is the most-used benchmark in this literature, has $1{,}152$
+valid configurations and $16$ binary options, and admits a natural design over
+$17$ input videos and two performance properties (encoding time and output
+size). The asymmetric case (predicting size but paying time-based cost) is
+particularly informative because the predicted property and the cost property
+are not the same quantity.
+
+\paragraph*{Hypotheses.}
+\begin{itemize}
+    \item \textbf{H5a.} The validity of $n$ as a cost proxy depends on the
+    input/workload.
+    \item \textbf{H5b.} The size-as-cost gap differs between predicting time
+    and predicting size on x264.
+    \item \textbf{H5c.} Strategy rankings and Pareto frontiers are less stable
+    under empirical cost than under count-based cost.
+\end{itemize}
+
+\paragraph*{Analysis.}
+For each input and property we repeat RQ1--RQ4. We summarize cross-context
+stability via Kendall's $W$ over rankings, the average Kendall's $\tau$ across
+context pairs, and the frontier overlap across contexts. We then cluster
+contexts into ones where size-based cost is safe and ones where it is not, and
+discuss what distinguishes them (\eg cost coefficient of variation per input,
+correlation between option activation and cost).
+
+\subsection{Expected Result Patterns}
+
+To guide the interpretation in \Cref{sec:results,sec:discussion}, we
+list the qualitative patterns we expect and how each would be read.
+\begin{itemize}
+    \item \emph{Pattern A.} $n$ valid everywhere: high correlation, ratios near
+    $1$, no rank flips, identical frontiers. The size-as-cost abstraction is
+    empirically justified for these systems. This is still a contribution
+    because the abstraction had not been tested.
+    \item \emph{Pattern B.} Correlated but miscalibrated: $\rho$ high but
+    ratios away from $1$. Size ranks cost approximately but misestimates
+    budgets.
+    \item \emph{Pattern C.} Strategy-induced bias: at fixed $n$, strategies
+    differ significantly in $\TrainCost$. Which configurations are selected
+    matters, not only how many.
+    \item \emph{Pattern D.} Rankings or frontiers change: empirical cost alters
+    the best strategy or the Pareto-efficient set. Size-based conclusions are
+    sensitive to the cost abstraction.
+    \item \emph{Pattern E.} Effects appear only for some x264 inputs or
+    properties. Cost-model validity is context-dependent and x264 should not
+    be treated as a single universal benchmark point.
+\end{itemize}
+None of these patterns is incompatible with the others; the results may show
+mixtures across systems, inputs and properties, and that mixture is itself
+part of the answer.
+
+\section{Experimental Setup}
+\label{sec:experiment}
+
+This section details how RQ1--RQ5 are operationalized: datasets
+(\Cref{subsec:datasets}), strategies and baselines (\Cref{subsec:strategies}),
+sample sizes (\Cref{subsec:sizes}), learners (\Cref{subsec:learners}), and the
+evaluation protocol (\Cref{subsec:protocol}).
+
+\subsection{Datasets}
+\label{subsec:datasets}
+
+A central design constraint of this study is that empirical
+$\TrainCost$ requires per-configuration acquisition costs with a
+documented measurement protocol (warm-up, repetition, aggregation). In
+this paper we instantiate $\mathit{cost}(c)$ as wall-clock measurement
+time, the most commonly constrained resource in practice; the
+formulation supports other quantitative resources (\Cref{subsec:empirical-cost}).
+We prioritize datasets that satisfy this constraint and structure them in
+three tiers.
+
+\paragraph*{Tier 1A: x264 with $17$ inputs and $2$ properties (ICPE 2020 artifact).}
+x264 is the canonical benchmark of this literature and the most-used case
+study in the systematic review of Pereira \etal~\cite{julianasurvey}. We
+adopt the configuration table of Kaltenecker
+\etal~\cite{kaltenecker2019}: $1{,}152$ valid configurations over $16$
+binary options. Following Pereira \etal~\cite{pereira2020}, we measure each
+configuration on $17$ input videos covering a range of resolutions,
+motion content and durations (the full list of inputs and their
+measurement-stability values is in \Cref{app:input-videos}). We consider
+two non-functional properties: \emph{encoding time} (in seconds) and
+\emph{output size} (in bytes of the H.264 output). For each (configuration,
+input, property), we record the property value as well as the elapsed
+encoding time used as $\mathit{cost}(c)$. When the predicted
+property is \emph{time}, the target and the cost are the same physical
+quantity. When the predicted property is \emph{size}, the target and the
+cost are different quantities, because measuring output size still requires
+running the encoder---this is the asymmetric case discussed in
+\Cref{sec:cost_model} and \Cref{subsec:rq5}.
+
+\paragraph*{Tier 1B: x264 on the YouTube UGC corpus.}
+To stress-test input sensitivity at a much larger scale, we additionally
+use the public x264-on-YouTube-UGC dataset
+\red{[cite Lesoil et al., Zenodo 3928253; bib entry needed]}: $201$
+configurations measured on $1{,}397$ user-generated videos. If sample count
+fails as a cost proxy anywhere, this is where it should fail most
+visibly. We use this corpus for RQ5 only and report it separately from
+Tier-1A so that detailed comparisons remain reproducible against
+ICPE\,2020.
+
+\paragraph*{Tier 2A: nine additional configurable systems (Kaltenecker corpus).}
+We extend the analysis to nine other configurable systems used in
+Kaltenecker \etal~\cite{kaltenecker2019} and originating from
+Siegmund \etal{} and others~\cite{siegmund2015FSE,julianasurvey} for which
+both a feature model and per-configuration measured times are publicly
+available. Seven of these systems are reported in our cross-system
+results (\Cref{tab:systems-and-cost}, \Cref{sec:results}), spanning
+$|C|\in[432,\;68{,}640]$ valid configurations and $|O|\in[11,\;54]$
+options. JavaGC and VP9 are not yet included in this batch.
+
+\paragraph*{Tier 2B: \dsWLI ICSE 2023 package.}
+For workload sensitivity, we additionally use the \dsWLI dataset
+of \red{[cite Mühlbauer et al., ICSE 2023; bib entry needed]}, which
+provides $25{,}258$ measurements across nine configurable systems
+(jump3r, kanzi, dconvert, h2, batik, xz, lrzip, x264, z3) on $6$--$13$
+workloads each. Crucially, the package documents a five-run median
+protocol. The H2 case is throughput-based, so we keep it in the study but
+interpret the measured property carefully: when throughput is the
+prediction target, we predict raw throughput; when throughput is the cost
+axis, we orient it as an inverse cost so that lower values still mean
+cheaper acquisition. When raw repetition logs are not exposed, we
+approximate acquisition cost from the published median measurement and
+explicitly label the result as an approximation in our reporting (see
+\Cref{sec:threats}).
+
+\paragraph*{Tier 2C: input-aware performance models.}
+The input-aware performance models repository
+\red{[cite Lesoil et al., JSS 2023/2024; bib entry needed]} provides
+$1{,}941{,}075$ configuration measurements across eight systems (gcc,
+ImageMagick, lingeling, nodeJS, poppler, SQLite, x264, xz) with multiple
+input/workload variants per system and several measured properties
+(compile time, execution time, binary size, query times, encoding
+time/fps/bitrate/size). It is the largest configurable-systems collection
+we use and is well-suited to RQ5 analyses that span both workload and
+target property. Where a property is not time-like (e.g., binary size,
+bitrate), we use the published elapsed-time column as
+$\mathit{cost}(c)$ and keep workload identity attached, so that
+$\TrainCost$ is computed as $\sum_{c\in S}\mathrm{time}(c, \mathrm{input})$
+rather than $\sum_{c\in S}\mathrm{time}(c)$.
+
+\paragraph*{Tier 3: robustness add-ons.}
+We use two additional datasets to test the robustness of our conclusions.
+\emph{Performance Evolution}
+\red{[cite Kaltenecker et al., performance-evolution; bib entry needed]}
+provides per-release measurements across $190$ releases of $12$ systems
+(brotli, Fast Downward, HSQLDB, lrzip, MariaDB, MySQL, OpenVPN, Opus,
+PostgreSQL, VP8, VP9, z3): if our conclusions hold across software
+versions, that is evidence that they are not artefacts of a single
+release. \emph{Green Configuration / the performance--energy corpus}
+\red{[cite Weber et al.; bib entry needed]} provides $14$ systems with
+runtime and energy measurements, repeated three times and averaged after
+bias pre-experiments; this dataset is particularly useful for showing that
+a global runtime--energy correlation can break locally, by analogy to our
+size-as-cost validity question.
+
+\subsubsection{Linux kernel cross-version study (separate protocol)}
+\label{subsubsec:linux-protocol}
+
+We additionally run a Linux kernel study on two \dsTux releases.
+This study is reported \emph{separately} from \StudyReplication
+throughout the paper because its protocol is structurally different
+from the synthesis-based protocol of Sections~\ref{subsec:strategies}
+and~\ref{subsec:learners}. Aggregating the two would conflate two
+different sampling mechanisms.
+
+\paragraph*{Pool and cost.}
+We use the \dsTux artifacts published by Borges \etal\ at
+EASE\,2025 \red{[bib entry needed]}: \emph{Linux v4.13} (OpenML
+\texttt{46759}, $92{,}562$ valid configurations) and \emph{Linux v5.08}
+(OpenML \texttt{46744}, $21{,}923$ valid configurations). Both pools
+are drawn with \texttt{make randconfig} on their respective kernel
+trees; the smaller v5.08 pool is a property of the published artifact,
+not of the kernel itself. The cost construct here is
+storage-bound: $\mathit{cost}(c)$ is the uncompressed kernel binary
+size (\texttt{vmlinux}, in bytes), and the prediction target is the
+same quantity. This is the only place in the paper where target $=$
+cost \emph{and} both are non-time-valued; the published artifact does
+not ship build time, so a time-based instance of $\mathit{cost}(c)$
+on Linux is out of reach for this paper.
+
+\paragraph*{Pool-based sampling, not synthesis-based.}
+The crucial protocol difference is that Linux strategies are
+\emph{pool-based subsamplers}: each strategy selects $n$ rows from a
+fixed randconfig-induced pool. They do not synthesize configurations
+from a feature model. The seven strategies are five deployable
+samplers and two diagnostic oracles:
+\begin{itemize}
+    \item \texttt{random}: uniform pool subsampling (reference baseline).
+    \item \texttt{balanced}: stratified subsampling on
+    active-options decile.
+    \item \texttt{coverage}: greedy option-frequency matching.
+    \item \texttt{uncertainty}: residual-driven active learning
+    (ridge model fit on a seed of $\max(50, \lceil n/4\rceil)$ rows,
+    then top-$k$ residual selection).
+    \item \texttt{diversity}: farthest-first in Hamming distance,
+    capped at $n\le 1{,}851$ because the $O(n^{2})$ cost becomes
+    prohibitive at larger sizes (we report only the $n$ levels where
+    \texttt{diversity} runs).
+    \item \texttt{cheapOracle}, \texttt{expensiveOracle}: lower- and
+    upper-bound diagnostics that read the cost signal.
+\end{itemize}
+None of the synthesis-based strategies of
+\Cref{subsec:strategies} (Henard, t-wise, distance-based,
+solver-based, diversified distance-based) is evaluable on this design
+because there is no formal model handle to drive them; conversely,
+\texttt{uncertainty} and \texttt{diversity} have no analogues in the
+\StudyReplication protocol. We therefore never combine the two.
+
+\paragraph*{Sample sizes, learner, evaluation.}
+Five training fractions $\{1\%, 2\%, 5\%, 10\%, 20\%\}$ of pool size,
+giving $n\in\{926, 1851, 4628, 9256, 18512\}$ on v4.13 and
+$n\in\{219, 438, 1096, 2192, 4385\}$ on v5.08. Stochastic strategies
+are repeated $100$ times (\texttt{random}, \texttt{balanced}) or $20$
+times (\texttt{uncertainty}, \texttt{diversity}, \texttt{coverage}).
+The learner is the same lightweight ridge log-linear model with
+$\alpha=1$ used for \StudyReplication; MRE is computed on the
+complement of the training sample within the pool, with chunked
+predictions ($4{,}096$ rows per chunk).
+
+\paragraph*{Forbidden columns.}
+$21$ columns are excluded from the design matrix: the target
+\texttt{vmlinux}; eighteen compressed-image variants
+($\{\texttt{GZIP},\texttt{BZIP2},\texttt{LZMA},\texttt{XZ},\texttt{LZO},\texttt{LZ4}\}\times\{\texttt{bzImage},\texttt{vmlinux},\texttt{raw}\}$)
+which are tightly correlated with the target; \texttt{active\_options},
+the count of enabled options (exactly derivable from the option
+vector); and the row identifier \texttt{cid}. After near-constant
+pruning (minor-class $\geq 50$) and a top-$K=512$ marginal-effect
+filter, $495$ kernel options enter the v4.13 design matrix and $494$
+enter v5.08.
+
+\paragraph*{Why two releases.}
+We use two releases (v4.13--v5.08; seven releases) to test whether the
+calibration findings replicate across pool sizes and across kernel
+generations, and whether any seams are visible across pools that
+would not surface from a single release. Both questions admit
+non-trivial answers (\Cref{sec:results}).
+
+\subsubsection{the performance--energy corpus generated-sampling study (separate protocol)}
+\label{subsubsec:twins-protocol}
+
+We additionally run a study on the Green Configuration /
+\emph{the performance--energy corpus} dataset \red{[bib entry needed:
+Weber et al., ICSE 2023; Zenodo \texttt{7544891}]}. As with Linux, this
+study is reported \emph{separately} throughout the paper because its
+protocol differs from the synthesis-based protocol of \StudyReplication. Aggregating the three protocols would conflate three
+fundamentally different sampling mechanisms.
+
+\paragraph*{Generated-sampling protocol.}
+The the performance--energy corpus artifact ships measured configuration tables
+but no precomputed sampling traces. We therefore use a
+\emph{generated-sampling} protocol: we draw samples from the measured
+configuration universe using a common strategy panel and a budget
+grid, then compute empirical $\TrainCost$ as the sum of the selected
+configurations' measured property values. The protocol differs from
+\StudyReplication (which reuse precomputed strategy traces from
+Kaltenecker \etal) and from Linux (pool-based subsampling of
+randconfig pools); the strategy set, in particular, is incompatible
+with both.
+
+\paragraph*{Selected systems.}
+The full \StudyEnergy corpus covers $14$ systems; we report the
+representative pass over $7$ systems chosen to span the cost-CV
+range: \texttt{HSQLDB}, \texttt{brotli} (revision $1.0.7$),
+\texttt{jump3r}, \texttt{lrzip}, \texttt{MongoDB}, \texttt{PostgreSQL}
+(revision $11.2$), and \texttt{x264}. Pool sizes range from $180$
+configurations (\texttt{brotli} 1.0.7) to $6{,}840$
+(\texttt{MongoDB}), with no row caps applied. Note that the \StudyEnergy
+\texttt{lrzip} and \texttt{x264} are \emph{not} the same artifacts as
+the \StudyReplication \texttt{lrzip} or x264-matrix x264; we treat them as
+separate observations under a separate protocol.
+
+\paragraph*{Two cost properties, four scenarios per system.}
+the performance--energy corpus measures both \emph{performance} and
+\emph{energy} for each configuration. We use both as cost axes and
+both as prediction targets, giving four scenarios per system:
+$(\text{cost},\text{target})\in
+\{\text{performance},\text{energy}\}^{2}$. RQ1 and RQ2 group by cost
+property (they only ask about the cost axis); RQ3 and RQ4 are
+reported per cost-target scenario.
+
+\paragraph*{Strategies.}
+Five deployable strategies plus two diagnostic oracles, all
+pool-generated:
+\begin{itemize}
+    \item \texttt{random}: uniform random baseline.
+    \item \texttt{balanced}: feature-balanced random sampling.
+    \item \texttt{diversity}: cost-oblivious diversity in feature
+    space.
+    \item \texttt{pairwise}: greedy pairwise option-value coverage.
+    \item \texttt{pilotCost}: pilot-based cost-aware diversity (uses
+    a small pilot to estimate per-configuration cost, then samples
+    diversely while accounting for cost).
+    \item \texttt{cheapOracle}, \texttt{expensiveOracle}: lower- and
+    upper-bound diagnostics that read the true cost signal.
+\end{itemize}
+None of the synthesis-based Kaltenecker strategies (Henard, t-wise,
+distance-based, solver-based, diversified distance-based) is
+evaluable here because there is no formal model handle, and only
+\texttt{diversity} overlaps in name (but not in implementation) with
+the Linux strategy of the same name. We therefore never combine.
+
+\paragraph*{Sample sizes, learner, evaluation.}
+A budget grid up to $n_{\max}=256$ with system-dependent
+percentage anchors plus absolute anchors. Stochastic strategies are
+repeated with $100$ seeds. The learner is ridge log-linear (same
+family as \StudyReplication, Linux); MRE is computed on the complement
+of the training sample within the measured universe.
+We deliberately restrict the study to datasets in which
+$\mathit{cost}(c)$ is a clean, well-defined wall-clock cost of running
+configuration $c$ to obtain its label. Full-stack systems whose
+acquisition cost is dominated by orchestration overhead (build, idle,
+warm-up, monitoring) are out of scope of this paper because the cost
+construct becomes the system's deployment workflow rather than the
+sampling strategy's choice of configurations. ML and HPO benchmarks with
+real runtime metadata (\eg LCBench, NAS-Bench-201) are an interesting
+secondary direction but are deprioritized for this paper to keep the
+empirical claim anchored in configurable software systems; we revisit
+them in \Cref{sec:discussion} as future work. Surrogate-based ML
+benchmarks (JAHS-Bench-201, YAHPO Gym, surrogate sub-benchmarks of
+HPOBench) would weaken any empirical cost claim and are excluded.
+
+\subsection{Sampling Strategies and Baselines}
+\label{subsec:strategies}
+
+We evaluate the six literature strategies introduced in
+\Cref{subsec:sampling-strategies}: \emph{random},
+\emph{solver-based}, \emph{randomized solver-based}, \emph{$t$-wise}
+(coverage-based), \emph{distance-based}, and \emph{diversified
+distance-based}. We use the implementations of Kaltenecker
+\etal~\cite{kaltenecker2019}.
+
+We also include the diagnostic baselines introduced in
+\Cref{subsec:sampling-strategies}: a \emph{cheap-first oracle} and an
+\emph{expensive-first oracle}, both selecting configurations in cost order
+using known per-configuration times. These oracles are not deployable in
+practice---they require pre-existing measurements---but they are
+indispensable for diagnosing the cost-heterogeneity space: if cheap-first and
+expensive-first behave very differently from random at the same $n$, there is
+real cost heterogeneity to be exploited or stumbled into.
+
+\subsection{Sample Sizes}
+\label{subsec:sizes}
+
+We evaluate strategies at a range of training sizes rather than at the natural
+sizes of $t$-wise alone. For each system, we use percentage-based sizes
+$\{1\%,2\%,5\%,10\%,20\%,30\%\}$ of $|C|$ where applicable, capped for very
+small systems, and absolute sizes
+$\{8,16,32,64,128,256\}$ as additional checkpoints. For $t$-wise we use
+$t\in\{1,2,3\}$, record the resulting $n$, and include the corresponding
+$(\text{strategy},n)$ pairs in the analysis. When all strategies can be
+evaluated at a common $n$, we do so to enable direct comparison; otherwise we
+analyze native strategy sizes separately.
+
+\subsection{Learners}
+\label{subsec:learners}
+
+The primary learner is stepwise multiple linear regression, as in
+Kaltenecker \etal~\cite{kaltenecker2019} and Pereira
+\etal~\cite{pereira2020}. We use only configuration options as features---all
+measured-property columns are excluded from features to prevent label
+leakage. As a robustness check, we also report results with CART (consistent
+with Sarkar \etal~\cite{sarkar2015}) and with a random-forest learner. The
+primary results in \Cref{sec:results} use the literature-aligned learner; the
+sensitivity to learner choice is reported in an appendix-style robustness
+study so that the main story does not depend on a particular ML choice.
+
+\subsection{Evaluation Protocol}
+\label{subsec:protocol}
+
+For each $(\text{system},\text{input},\text{property},\text{strategy},n,r)$
+tuple, we
+\begin{enumerate}
+    \item generate the training sample $S_{r,s,n}$;
+    \item compute $\TrainCost(r,s,n)$ from \Cref{eq:traincost};
+    \item train the model on $S_{r,s,n}$ using configuration options as
+    features only (all measured columns excluded; see below);
+    \item evaluate on a fixed validation set $C_{\text{test}}$ or, when
+    feasible, on $C\setminus S_{r,s,n}$;
+    \item compute $\MRE$ and the count-based cost $\SizeCost=n$.
+\end{enumerate}
+We do \emph{not} include $C_{\text{test}}$ acquisition in the cost term: the
+validation measurements are part of the experimental protocol and are the
+same across strategies. They are not part of what the strategy controls.
+
+\paragraph*{Forbidden columns.}
+Strict feature hygiene is required because the cost we want to predict and the
+cost we use to define $\TrainCost$ may overlap with the prediction target. For
+each property under study, we exclude all measured-performance columns from
+the feature set. For x264, when the target is \emph{time}, we exclude
+\texttt{time}, \texttt{size}, and any related runtime/throughput columns; when
+the target is \emph{size}, we exclude \texttt{size}, \texttt{usertime},
+\texttt{systemtime}, \texttt{elapsedtime}, \texttt{cpu}, \texttt{frames},
+\texttt{fps}, \texttt{kbs}, \texttt{etime}. Only configuration options enter
+the features.
+
+\paragraph*{Number of runs.}
+For stochastic strategies (random, randomized solver-based, distance-based,
+diversified distance-based), we use $100$ independent runs per
+$(\text{system},\text{input},\text{property},\text{strategy},n)$ tuple,
+matching the design of Kaltenecker \etal~\cite{kaltenecker2019} and
+Pereira \etal~\cite{pereira2020}. Deterministic strategies (solver-based,
+$t$-wise) are repeated only when seed or tie-breaking choices apply.
+
+\paragraph*{Output schema.}
+Each row of the raw results file records
+\[
+(\text{system},\text{input},\text{property},\text{strategy},n,r,
+\TrainCost,\mathit{TrainCostPct},\mathit{SizePct},\MRE,\Ratio).
+\]
+Aggregations (medians, IQRs, statistical tests, correlations, $\lambda$-sweep
+rankings, Pareto fronts) are computed from this raw table.
+
+\paragraph*{Reproducibility.}
+All code, raw measurement data, sampling implementations, and analysis
+scripts will be made available on \red{anonymized URL}. We document seeds,
+software versions, and the exact column-exclusion lists per system, so that
+the analysis is end-to-end reproducible from raw measurements to plots and
+tables.

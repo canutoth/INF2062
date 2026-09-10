@@ -1,0 +1,33 @@
+\section{Threats to Validity} \label{threats}
+
+We describe below some \textit{internal} and \textit{external} threats to the validity of this study.
+
+\paragraph{Internal Validity.}
+A threat to the internal validity of this study is the selection of the learning algorithm and its parameter settings, which may affect the performance of the sampling strategy.
+We used the state-of-the-art step-wise multiple linear regression algorithm from~\cite{siegmund2015FSE} which has shown promising results in this field~\cite{kaltenecker2019,julianasurvey,pereira2020}.
+However, we acknowledge that the use of another algorithm may lead to different results.
+Still, conducting experiments with other algorithms and 
+evaluating their influence on sampling cost is an important next step.
+
+As another internal threat to validity, our results can be subject to sampling bias.
+To mitigate this threat and reduce fluctuations in the values of sampling cost caused by randomness (\eg the random generation of input samples), we evaluated each system, sample strategy, sample size, and any other variation (\eg input video and non-functional property) 100 times and used the average in our experiments.
+Also, we use consolidated measurement datasets from the literature.
+These datasets control external factors like the hardware and workload of the machine by using a cluster infrastructure. They took care of using the same hardware and mitigate network-related factors. To additionally quantify the influence of measurement bias, they also prove these are a stable set of measurements.
+
+\ju{To add: We simplified and we did not consider time to sample (the computational cost of sampling out of a feature model) because it can be somehow improved with some algorithm optimizations that are hard to control and depend on the quality of the implementations, while it can be pre-computed in an offline phase once and for all (hence the cost is zero). Overall we can consider that the cost of each sampling algorithm is quite the same. My point also is that it's not fundamental to what we want to investigate: what we are interested in is the underlying computational cost of measuring as induced by the way you sample. Hence I propose to remove time\_sampling: in such a way, we can focus on the essence of a sampling strategy: picking configurations that are both informative for the learning and hopefully non-costly to measure.}
+
+To assess the effect of sampling cost, 
+we used ...
+
+
+\paragraph{External Validity.}
+A threat to external validity is related to the used case studies and the discussion of the results.
+Our results may be subject to these systems and properties. 
+%A generalization of the results requires additional experiments. 
+However, we rely on most used case-studies from the literature~\cite{julianasurvey} .
+We conducted a discussion with all authors of the paper to avoid any confusing interpretation or misunderstanding of the results.
+%Once we are able to demonstrate evidences to x264, we can then perform such an analysis also over other systems and properties to generalize our findings. 
+
+% We set our dataset to up seventeen input videos and two properties due to budget restrictions.
+% As with all studies, there is an inherent risk to not generalize our findings for other input videos and performance properties (\eg energy consumption).
+% While the seventeen videos cover a wide range of different input particularities and provided consistent results across the experiments, this is a preliminary study in this direction and future work should consider additional inputs based on an in-depth qualitative study of video characteristics.

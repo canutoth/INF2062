@@ -1,0 +1,10 @@
+hypothesis,scopes,supports,refutes,inconclusive,global_verdict
+H1a,9,9,0,0,supported (9/9)
+H2a,9,9,0,0,supported (9/9)
+H2b,9,6,0,3,supported (6/9)
+H3a,9,9,0,0,supported (9/9)
+H3b,1,0,0,1,"mixed (sup=0, ref=0, inc=1 of 1)"
+H4a,9,9,0,0,supported (9/9)
+H4b,9,9,0,0,supported (9/9)
+H5a,9,5,2,2,supported (5/9)
+H5c,9,9,0,0,supported (9/9)

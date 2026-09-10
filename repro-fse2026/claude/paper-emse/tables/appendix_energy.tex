@@ -1,0 +1,30 @@
+\begin{table}[t]
+  \centering\small
+  \caption{Per-system rollup of the ENERGY family (each system contributes
+  up to 16 scopes: \{energy, runtime\} cost $\times$ \{energy, runtime\}
+  target $\times$ budgets $n8$--$n64$, protocol-capped). H1 / \srs{} best /
+  \srs{} front.\ / top chg.\ / frontier chg.: scopes where the outcome
+  holds; winner: most frequent best cost-normalized strategy (scopes won).}
+  \label{tab:appendix-energy}
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}lrrrrrrrl@{}}
+    \toprule
+    System & $|\mathcal{V}|$ & Scopes & H1 & \srs{} best & \srs{} front. & Top chg. & Front.\ chg. & Winner \\
+    \midrule
+    7z & 68,640 & 16 & 16 & 0 & 4 & 1 & 16 & \textsf{pairwise} (9) \\
+    Apache & 13,440 & 16 & 16 & 0 & 0 & 0 & 16 & \textsf{diversity} (12) \\
+    brotli & 180 & 12 & 4 & 0 & 2 & 4 & 12 & \textsf{diversity} (8) \\
+    exastencils & 86,058 & 16 & 16 & 0 & 8 & 0 & 16 & \textsf{pairwise} (10) \\
+    HSQLDB & 864 & 16 & 16 & 0 & 2 & 0 & 16 & \textsf{diversity} (14) \\
+    jump3r & 4,296 & 16 & 16 & 1 & 10 & 12 & 16 & \textsf{pairwise} (5) \\
+    kanzi & 3,202 & 16 & 16 & 0 & 10 & 4 & 16 & \textsf{pairwise} (12) \\
+    LLVM & 65,536 & 16 & 16 & 4 & 6 & 0 & 16 & \textsf{pairwise} (10) \\
+    lrzip & 5,184 & 16 & 16 & 0 & 7 & 2 & 16 & \textsf{diversity} (14) \\
+    MongoDB & 6,840 & 16 & 16 & 4 & 6 & 0 & 16 & \textsf{pairwise} (6) \\
+    nginx & 4,416 & 16 & 16 & 0 & 7 & 6 & 16 & \textsf{diversity} (8) \\
+    PostgreSQL & 864 & 16 & 16 & 0 & 5 & 0 & 16 & \textsf{pairwise} (8) \\
+    VP8 & 41,040 & 16 & 16 & 0 & 6 & 0 & 16 & \textsf{diversity} (16) \\
+    x264 & 4,608 & 16 & 16 & 0 & 4 & 2 & 16 & \textsf{diversity} (12) \\
+    \bottomrule
+  \end{tabular}
+\end{table}

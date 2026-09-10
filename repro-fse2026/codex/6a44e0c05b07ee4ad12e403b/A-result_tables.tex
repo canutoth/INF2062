@@ -1,0 +1,269 @@
+\appendices
+
+\section{Detailed Result Tables}
+\label{app:detailed-results}
+
+The main text reports the conclusions as RQ-oriented dashboards. This appendix
+keeps the detailed numerical tables for auditability. Read the tables from left
+to right as follows: RQ1 metrics (CV and $p_{90}/p_{10}$) diagnose cost spread;
+RQ2 metrics ($\rho$ and $\Ratio$) diagnose budget calibration; RQ3 metrics
+(top-$1$ flips and agreement) diagnose whether the recommended
+strategy--budget combination changes;
+and RQ4 metrics (frontier size and Jaccard) diagnose whether the set of
+reasonable trade-offs changes.
+
+\Cref{tab:app-test-evidence} records which hypotheses have classical
+$p$-values and which are deterministic decision comparisons. In all cases the
+main interpretation uses the accompanying effect size because the practical
+question is not only whether an effect exists, but whether it changes a budget,
+ranking, or feasible choice set.
+
+\begin{table*}[t]
+\centering
+\caption{Statistical evidence and effect sizes behind the hypothesis verdicts.
+The CSV artifacts retain the per-scope statistic, $p$-value when applicable,
+effect name, effect value, and verdict.}
+\label{tab:app-test-evidence}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{0.08\linewidth} p{0.14\linewidth} p{0.32\linewidth} p{0.36\linewidth}}
+\toprule
+Hyp. & RQ & Statistical evidence & Effect size and practical reading \\
+\midrule
+H1a & RQ1 & Descriptive heterogeneity; no null-hypothesis $p$-value. &
+CV and $p_{90}/p_{10}$. CV is relative standard deviation; $p_{90}/p_{10}$
+is robust tail spread. \\
+H1b & RQ1 & Kruskal--Wallis tests of $\TrainCost$ across strategies at fixed
+$n$; report minimum $p$ across levels. &
+Maximum $\eta^2$ across levels. Small effects begin at $\eta^2\ge0.01$;
+larger values indicate stronger strategy-dependent acquisition cost. \\
+H2a & RQ2 & Spearman rank-correlation test between $n$ and $\TrainCost$;
+report $\rho$ and $p$. &
+Spearman $\rho$. High positive $\rho$ means sample size orders measured cost
+well, even if the absolute budget can still be miscalibrated. \\
+H2b & RQ2 & $95\%$ bootstrap confidence interval for the median $\Ratio$;
+reported as interval evidence rather than a single $p$-value. &
+$|\widetilde{\Ratio}-1|$. Values above $0.05$ mean the median sample spends at
+least $5\%$ more or less measured budget than implied by sample count. \\
+H2c & RQ2 & Kruskal--Wallis test of $\Ratio$ across strategies; report $p$. &
+$\eta^2$. This separates global calibration from strategy-specific budget
+bias. \\
+H3a & RQ3 & Decision comparison across the cost-weight sweep; no population
+$p$-value. &
+Top-$1$ flip count or fraction, plus agreement/Kendall $\tau$. Any flip means
+the recommended strategy--budget combination changes; the fraction gives severity. \\
+H3b & RQ3 & Spearman test when enough systems or contexts are available. &
+Correlation between cost spread and ranking instability. Positive values mean
+heterogeneous costs tend to produce less stable rankings. \\
+H4a/H4b & RQ4 & Pareto-front set comparison; no population $p$-value. &
+Front-only combination counts and Jaccard overlap. Jaccard $=1$ means identical
+fronts; $1-$Jaccard is the changed-frontier share. \\
+H5a--H5c & RQ5 & Context tests use Kruskal--Wallis or Spearman evidence when
+the context design supports it; otherwise they aggregate decision effects. &
+H5a reports $\eta^2$ and ratio spread; H5b/H5c use flip-rate differences,
+Kendall $\tau$, and Jaccard spread to measure how much the RQ2--RQ4
+conclusions move across inputs, workloads, targets, releases, or datasets. \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Detailed family-by-RQ evidence. Ranges are within-family. A CV near
+$1$ means that the standard deviation of per-configuration cost is about as
+large as the mean, so same-size samples can have materially different
+acquisition cost.}
+\label{tab:app-result-summary}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{p{0.12\linewidth} p{0.15\linewidth} p{0.16\linewidth} p{0.16\linewidth} p{0.17\linewidth} p{0.16\linewidth}}
+\toprule
+Family & RQ1: cost spread & RQ2: budget agreement & RQ3: ranking impact & RQ4: Pareto impact & RQ5: context \\
+\midrule
+\StudyReplicationICSE &
+Seven non-x264 systems span CV $0.072$--$1.981$; $p_{90}/p_{10}$ reaches
+$47.9$ on BerkeleyDBC and $47.0$ on lrzip. &
+$n$ is strongly correlated with measured cost ($\rho=0.879$--$0.943$), but
+median $\Ratio$ ranges $0.797$--$1.056$. &
+Stable on LLVM, Polly, Dune, HIPAcc ($0/7$ flips); unstable on lrzip ($5/7$
+flips). CV predicts flips across these seven systems ($\rho=0.90$). &
+Frontiers change on $5/7$ systems; Jaccard ranges $0.33$--$1.00$
+(\Cref{tab:app-replication-systems}). &
+Three regimes: validated, warning, changed assessment.\\
+\midrule
+\StudyReplicationICPE &
+Time-cost CV is moderate across $17$ inputs ($0.21$--$0.39$); size-cost is
+usually lower. &
+Aggregate ratios are close to $1$, but strategy bias remains: Henard tends to
+be cheap, $t$-wise costlier. &
+Top-$1$ flips range from $6/119$ in time/time to $21/119$ when predicting size
+while paying time. &
+The asymmetric time-cost/size-target case has the lowest top-$1$ agreement
+($0.824$) and low median Pareto Jaccard ($0.375$). &
+Random and distance-based choices remain strong in some inputs, but the
+robust-baseline conclusion is not invariant to measured cost.\\
+\midrule
+\StudyEnergy &
+CV spans $0.058$ (PostgreSQL energy) to $7.104$ (jump3r performance), the
+widest spread in the paper. &
+$n$ remains correlated ($\rho=0.710$--$0.996$), but median $\Ratio$ spans
+$0.168$--$1.035$. &
+Top-$1$ rankings differ in $24/28$ cost--target scenarios; brotli flips at
+every cost weight in three scenarios. &
+Count and measured-cost Pareto fronts differ in all $28/28$ scenarios. &
+Target/cost asymmetry repeats outside x264 and outside runtime cost.\\
+\midrule
+\StudyWorkload &
+Across $93$ workload contexts, CV ranges $0.026$--$2.367$; within one system,
+workload can move CV by an order of magnitude. &
+Rank correlation is the most robust result (pooled support $0.95$), while
+budget agreement is workload-sensitive (median $\Ratio$ $0.661$--$1.059$). &
+Rank divergence has pooled support $0.80$; workload explains about $55\%$ of
+within-system variance in top-$1$ agreement. &
+Pareto-front change has pooled support $0.81$; $71/93$ contexts have Jaccard
+$<1$. &
+The same system can move between safe and unsafe regimes across workloads.\\
+\midrule
+\StudyLCBench &
+Across $35$ non-pure software-system datasets, CV ranges $0.595$--$2.247$;
+the worst case is MiniBooNE. &
+$n$ stays positively correlated with runtime cost ($\rho=0.543$--$0.918$),
+but median $\Ratio$ spans $0.669$--$1.012$. &
+Top strategy--budget combinations change on $33/35$ datasets; median agreement is
+$0.286$ and two datasets flip at all $7$ cost weights. &
+Frontiers differ on $32/35$ datasets; Jaccard ranges $0.182$--$1.00$. &
+Cross-dataset context sensitivity is strong: H5a supports with
+$p=4.49\times 10^{-71}$.\\
+\midrule
+\StudyLinux &
+Seven releases have storage-cost CV $0.99$--$1.43$ and $p_{90}/p_{10}$
+$4.02$--$6.04$. &
+Random, balanced, and coverage have near-$1$ budget ratios; diversity costs
+$1.24$--$1.52\times$ its count budget at evaluated small-budget levels;
+uncertainty is often cheaper but $n$-dependent. &
+Top-$1$ flips range $4/7$--$6/7$ depending on release and level grid. &
+Measured-cost Pareto fronts are larger on every release; diversity is dominated
+under both cost models. &
+Strategy behavior replicates, but active learning changes direction with
+sample size and release.\\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Detailed hypothesis counts. Support counts follow
+\Cref{subsec:hypotheses}; they are not pooled across families because the
+protocols and cost dimensions differ.}
+\label{tab:app-hypothesis-results}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{0.15\linewidth} p{0.43\linewidth} p{0.34\linewidth}}
+\toprule
+Layer & Supported scopes (\StudyReplicationICSE; \StudyReplicationICPE;
+\StudyEnergy; \StudyWorkload; \StudyLCBench; \StudyLinux) & Reading and severity \\
+\midrule
+H1: cost spread &
+Cost spread: $6/7$; $22/34$; $11/14$; $81/93$; $35/35$; $7/7$.
+Fixed-$n$ strategy bias: $7/7$; $34/34$; $14/14$; $85/93$; $35/35$; $7/7$. &
+Budget warning: same-size samples can spend different measured budgets. Not
+yet a changed top combination. Extremes: lrzip $p_{90}/p_{10}=47.04$, jump3r
+CV $7.104$, MiniBooNE CV $2.247$. \\
+\midrule
+H2: budget agreement &
+H2a holds everywhere. Aggregate off-$1$ budget ratio is mixed:
+$3/7$; $0/34$; $4/14$; $34/93$; $31/35$; $0/7$. Strategy-specific ratio holds:
+$7/7$; $34/34$; $14/14$; $87/93$; $35/35$; $6/7$. &
+Budget warning becomes severe when strategy-biased: Linux diversity costs
+$1.24$--$1.52\times$ its count budget in the strong-learner run; LCBench drops
+to $\Ratio=0.669$ on Australian. \\
+\midrule
+H3: recommendation &
+Top strategy--budget combinations change on $3/7$; $25/68$ input--scenario scopes
+($48/476$ input--weight decisions); $24/28$; $72/93$; $33/35$; $7/7$. &
+Recommendation-changing. Most severe cases: lrzip $5/7$ cost weights, x264
+time-cost/size-target $21/119$, APSFailure and MiniBooNE $7/7$, Linux v4.20
+and v5.07 $6/7$. \\
+\midrule
+H4: choice set &
+Frontiers differ on $5/7$; $65/68$; $28/28$; $71/93$; $32/35$; $7/7$. &
+Choice-set-changing. Examples: LLVM $3\to9$ Pareto combinations despite no top flip;
+Linux v4.20 Jaccard $0.25$; x264 time/size median Jaccard $0.375$; LCBench
+helena Jaccard $0.182$. \\
+\midrule
+H5: context &
+Input/workload dependence: x264 $2/4$ scenario-level tests and workload
+$5/9$ systems, LCBench $1/1$ study-level test. Context-sensitive
+rankings/fronts: x264 supported, workload $9/9$ systems, LCBench $1/1$. &
+Generalization warning: validity depends on input, workload, target, cost
+dimension, release, dataset family, and strategy panel. \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{\StudyReplicationICSE system-level evidence by RQ. All rows predict the
+published performance-like target and use the same measured value as
+acquisition cost. The Pareto column answers RQ4 directly: even when rankings
+are stable, the efficient choice set can still change.}
+\label{tab:app-replication-systems}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l r r r r r r p{0.23\linewidth}}
+\toprule
+System & $|C|$ & CV & $p_{90}/p_{10}$ & med.\ $\Ratio$ & flips/$7$ & Pareto $|F|$ count$\to$emp. & Reading \\
+\midrule
+LLVM & $1{,}024$ & $0.072$ & $1.21$ & $0.996$ & $0$ & $3\to9$ ($J=.33$) & Ranking validated; frontier expands because several same-$n$ choices have distinguishable costs. \\
+Polly & $59{,}897$ & $0.239$ & $2.08$ & $0.997$ & $0$ & $3\to6$ ($J=.50$) & Ranking stable; measured cost adds extra efficient combinations. \\
+Dune & $2{,}304$ & $0.344$ & $1.83$ & $1.011$ & $0$ & $3\to3$ ($J=1$) & Count-cost conclusions transfer cleanly. \\
+HIPAcc & $13{,}485$ & $0.435$ & $2.59$ & $1.056$ & $0$ & $3\to3$ ($J=1$) & Budget ratio slightly above $1$, but decisions unchanged. \\
+7Z & $68{,}640$ & $1.188$ & $10.13$ & $0.955$ & $1$ & $3\to7$ ($J=.43$) & Warning case: the winner is mostly stable but the frontier changes. \\
+BerkeleyDBC & $2{,}560$ & $1.420$ & $47.90$ & $0.797$ & $1$ & $3\to5$ ($J=.60$) & Count budget overstates the measured budget spent by sampled configurations. \\
+lrzip & $432$ & $1.981$ & $47.04$ & $0.856$ & $5$ & $3\to5$ ($J=.60$) & Changed assessment: high cost spread, weak budget agreement, and most top choices flip. \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table}[t]
+\centering
+\caption{x264 rank and Pareto sensitivity across cost--target scenarios
+($17$ inputs $\times$ $7$ cost weights = $119$ ranking cases per row).}
+\label{tab:app-x264-matrix-summary}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l l r r r}
+\toprule
+Cost & Target & Flips/$119$ & Top-$1$ agree & Pareto Jaccard \\
+\midrule
+time & time & $6$ & $0.950$ & $0.429$ \\
+time & size & $21$ & $0.824$ & $0.375$ \\
+size & time & $13$ & $0.891$ & $0.429$ \\
+size & size & $8$ & $0.933$ & $0.500$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table*}[t]
+\centering
+\caption{\StudyLinux release-level evidence. Budget agreement is
+strategy-specific: random remains near $1$, diversity is consistently costlier
+than its count budget at evaluated small-budget levels, and uncertainty changes
+with the pool and sample-size grid.}
+\label{tab:app-linux-releases}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l r r r r r r r}
+\toprule
+Release & $|C|$ & CV & random $\Ratio$ & diversity $\Ratio$ & uncertainty $\Ratio$ & flips/$7$ & measured $|F|$ \\
+\midrule
+v4.13 & $92{,}562$ & $1.43$ & $0.989$ & $1.524$ & $0.749$ & $4$ & $8$ \\
+v4.15 & $39{,}391$ & $1.16$ & $0.994$ & $1.360$ & $0.616$ & $5$ & $11$ \\
+v4.20 & $23{,}489$ & $1.16$ & $0.988$ & $1.432$ & $0.602$ & $6$ & $12$ \\
+v5.0 & $19{,}952$ & $1.12$ & $0.992$ & $1.281$ & $0.586$ & $5$ & $11$ \\
+v5.04 & $25{,}847$ & $1.08$ & $0.992$ & $1.256$ & $0.558$ & $5$ & $8$ \\
+v5.07 & $20{,}159$ & $0.99$ & $1.012$ & $1.286$ & $0.561$ & $6$ & $10$ \\
+v5.08 & $21{,}923$ & $1.01$ & $0.995$ & $1.318$ & $0.572$ & $5$ & $10$ \\
+\bottomrule
+\end{tabular}
+\end{table*}

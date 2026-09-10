@@ -1,0 +1,41 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Sampling and performance learning of configurable systems.}
+A large body of work learns performance models from sampled
+configurations
+\citep{guo2013variability,siegmund2015performance,guo2018dataefficient,ha2019deepperf,dorn2023mastering},
+surveyed by \citet{pereira2021learning}. Strategy comparisons in this
+line---distance-based sampling \citep{kaltenecker2019distance}, its
+interplay with learners \citep{kaltenecker2020interplay}, sampling
+effects on prediction \citep{pereira2020sampling}, comparisons of
+constraint-aware samplers \citep{medeiros2016comparison}, uniform
+SAT-sampling \citep{plazar2019uniform,heradio2022uniform}, and coverage
+oriented generators \citep{baranov2024baital,hess2024unwise}---almost
+universally budget by sample size. Cost-awareness appears as a strategy
+\emph{design} goal \citep{sarkar2015cost,nair2017bad,nair2020flash}
+rather than as an \emph{evaluation} axis; the present paper makes the
+evaluation-axis argument, for the outcome---guarantees---where it can be
+tested without a learner in the loop.
+
+\paragraph{Guarantees for sampled configurations.} Scenario theory
+\citep{calafiore2006scenario,campi2008exact} underpins probabilistic
+guarantees for sampled decision problems and has been applied to testing
+self-adaptive systems \citep{mandrioli2020testing} and to near-optimal
+configuration search with statistical guarantees
+\citep{oh2017srs,oh2023colossal}. \citet{weis2026risk} bring this lens to
+strategy \emph{comparison} via posterior risk and confidence; ours is, to
+our knowledge, the first independent replication of that study and the
+first evaluation of any guarantee framework under measured acquisition
+cost.
+
+\paragraph{Replication in empirical software engineering.} Replications
+remain rare relative to their epistemic value
+\citep{shull2008role,gomez2014understanding}. Our design follows the
+recommended pattern of combining a close replication (original artifact,
+exact data reuse, independent analysis) with conceptual replications that
+vary populations and one construct at a time, so that agreement and
+divergence are both interpretable. Transfer studies across environments
+and workloads \citep{jamshidi2017transfer,muehlbauer2023workload} play a
+complementary role: they vary the measurement context, whereas we vary
+the budget construct.

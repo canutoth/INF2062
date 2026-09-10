@@ -1,0 +1,83 @@
+\subsection{Results RQ1—Prediction Accuracy} \label{RQ1}
+
+In Tables~\ref{tab:RQ1_TIME_MRE} and \ref{tab:RQ1_SIZE_MRE}, we show the MRE for the different sampling strategies and sample sizes for both encoding time and encoding size, respectively.
+In the bottom row, we provide the MRE mean over all input videos.
+As in Kaltenecker et al.~\cite{kaltenecker2019}, for each input video and sample-set size we highlight the lowest, statistically significant MRE in bold.
+%Notice that in Table~\ref{tab:RQ1_TIME_MRE}, we additionally included the accuracy results from Kaltenecker et al.~\cite{kaltenecker2019} for the same case study (see row x264\cite{kaltenecker2019}, cells in white), which will be further discussed in Section~\ref{discussion}.
+
+
+\input{table_RQ1_MER_size.tex}
+\input{table_cost_time.tex}
+%\input{table_RQ1_U_test_size.tex}
+
+\subsubsection{Input Sensitivity: Encoding Time}
+
+Random sampling performs best to all other sampling strategies or similar to the best one for t=1, t=2 and t=3 (except for a few input videos -- $x264_1$, $x264_3$, $x264_7$, $x264_{8}$, $x264_{9}$, $x264_{10}$, $x264_{11}$ for t=1).
+We observe that for t=1 diversified distance-based sampling outperforms random sampling for seven input videos ($x264_0$, $x264_3$, $x264_7$, $x264_{8}$, $x264_{9}$, $x264_{10}$, $x264_{11}$).
+Overall, diversified distance-based sampling produces partially good results (close to random sampling).
+%The error rates of diversified distance-based sampling are very similar to the the error rates of random sampling.
+Diversified distance-based sampling outperforms the pure distance based sampling, however their error rates are very similar for t=1.
+
+Solver-based sampling results in inaccurate performance models for all input videos and sample-set sizes.
+t-wise sampling performs overall better than solver-based sampling; randomized solver-based sampling performs best when only a very limited number of samples are considered (\ie t=1).
+
+Table~\ref{tab:RQ1_TIME_U_test} reports the \textit{p} value ($\hat{A}_{12}$) of the Mann-Whitney U test.
+This table shows whether the sampling strategy of the row has a significantly lower error rate than the sampling strategy of the column.
+%To easily compare pairs of sampling strategies, 
+To this end, we first performed Kruskal-Wallis tests for all sample sizes (t=1, t=2, and t=3).
+Then, whether we identified $p$ values less than 0.05, indicating that, at least, two strategies differ significantly for each sample size~\cite{kaltenecker2019}, we performed one-sided Mann-Whitney $U$ tests pair-wisely and, if significant ($p < 0.05$), we report the effect sizes in Table~\ref{tab:RQ1_TIME_U_test}. 
+ 
+The first row shows that $t$-wise sampling has significantly lower error rates than solver-based sampling and randomized solver-based sampling for $t$=2 and $t$=3, with large effect sizes.
+In the second and third rows, we observe that solver-based sampling performs significantly better than randomized solver-based sampling for t=3 with medium effect sizes; and randomized solver-based leads to lower error rates than t-wise sampling for t=1, with a large effect size.
+%Randomized solver-based sampling performs significantly better than solver-based sampling for t=1.
+In the last three rows, we see that (diversified) distance-based sampling and random sampling lead to lower error rates than $t$-wise sampling, solver-based sampling, and randomized solver-based sampling for $t$=1, $t$=2 and $t$=3, with large effect sizes.
+%does not have a significantly lower error rates than the other sampling strategies.
+
+The pure distance-based sampling leads to higher error rates than diversified distance-based sampling and random sampling, for all sample sizes.
+However, comparing diversified distance-based sampling to random sampling, we see in the last row that random sampling has significantly lower error rates with small effect sizes for all sample sizes.
+The small effect sizes indicate that diversified distance-based sampling can reach nearly the same error rates as random sampling. % with lower cost.
+%\ju{This result indicates that we can reach nearly the same low error rates using distance-based sampling as the computationally intractable random sampling.}
+
+
+
+
+\begin{tcolorbox}
+For the property encoding time, uniform random sampling yields the most accurate performance models. %(\ie mainly for t=2 and t=3). 
+Diversified distance-based sampling produces good results when a very limited number of samples are considered (\ie t=1) and almost reaches the accuracy of random when the sample sizes increase. %, without relying on all valid configurations. 
+\end{tcolorbox}
+\vspace*{-2mm}
+
+%Random is a strong baseline
+%Uniform random sampling requires the enumeration of all valid configurations and does not scale to large configurable software systems.
+%\input{table_RQ2.tex}
+
+\subsubsection{Input Sensitivity: Encoding Size}
+
+Random sampling and randomized solver-based sampling perform best to all other sampling strategies or similar to the best sampling for all input videos for sample sizes t=2 and t=3 (except for $x264_{14}$).
+For these sample sizes, most of the error rates of solver-based and diversified distance-based come close to random and randomized solver-based (\eg $x264_{1}$ and $x264_{6}$).
+For t=1, solver-based sampling leads to lower error rates for most of the inputs.
+%Contrary to the previous results, here 
+
+It is important to notice that the results in Table~\ref{tab:RQ1_SIZE_MRE} are quite unstable compared to the results in Table~\ref{tab:RQ1_TIME_MRE}.
+For example, random is the best sampling strategy for the input video $x264_{12}$, while a randomized solver-based sampling win for the input video $x264_1$, and t-wise sampling win for the input video $x264_{15}$.
+Also, the accuracy heavily depends on the sampling size.
+For example, for the input video $x264_{14}$, for $t$=1 randomized solver-based sampling yields the most accurate performance models; while for $t$=2 and $t$=3 solver-based outperforms the other sampling strategies.
+
+In Table~\ref{tab:RQ1_SIZE_U_test}, we apply one-sided Mann-Whitney U tests pair-wisely to compare pairs of sampling strategies. 
+The first row shows that t-wise sampling has a significantly lower error rate than distance-based sampling for $t$=1, $t$=2, and $t$=3 with small, large and medium effect sizes, respectively;
+t-wise sampling has also significantly lower error rates than diversified distance-based for $t$=1.
+
+
+
+In the second row, we see that solver-based sampling leads to lower error rates than all other sampling strategies for $t$=1 with medium and large effect sizes.
+Solver-based, randomized solver-based, and diversified distance-based lead to lower error rates than t-wise for $t$=2 and $t$=3; and distance-based for $t$=1, $t$=2 and $t$=3.
+Overall, distance-based sampling leads to higher or similar error rates than other sampling strategies.
+Finally, we can notice that on average random leads to significantly lower error rates than all other strategies (except for solver-based sampling for $t$=1).
+
+\begin{tcolorbox}
+For the property encoding size, random sampling and randomized solver-based sampling outperform all other sampling strategies for most of the input videos with sample sizes t=2 and t=3; and solver-based sampling outperforms for sample sizes t=1.
+Overall, random, randomized solver-based, solver-based, and diversified distance-based present good and similar accuracy for t=2 and t=3.
+Differently from our previous results (for time), there is not a clear winner. %, the accuracy rely on the video input and sample size. 
+\end{tcolorbox}
+
+

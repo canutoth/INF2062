@@ -1,0 +1,98 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Configurable software systems offer a multitude of configuration options that can be combined to tailor the systems’ functional behavior and performance (\eg execution time, memory consumption).
+%Performance (\eg encoding time or encoding size) is one of the most important non-functional properties.
+ % Mastering the effects of 
+  Options often have a significant influence on performance properties that are hard to know and model \emph{a priori}. There are numerous possible options values, logical constraints between options, and subtle interactions among options~\cite{julianasurvey,guo2013ASE,sarkar2015,siegmund2015FSE,kaltenecker2019} that can have an effect while quantitative properties such as execution time are themselves challenging to comprehend. 
+
+% For instance, finding a configuration to meet a specific performance goal is challenging due to the cost of measuring all possible variants.
+Measuring all configurations of a configurable system is the most obvious path to \eg find a well-suited configuration, but is too costly or infeasible in practice. 
+%To overcome this problem, machine-learning techniques have been widely used in the software product line literature.
+Machine-learning techniques address this issue by measuring only a subset of configurations (known as sample) and then using these configurations' measurements to build a performance model capable of predicting the performance of other configurations (\ie configurations not measured before).
+%making use of a small measured \textit{sample} of configurations.
+%Machine-learning techniques are used over a given sample of measured configurations to predict the performance of unmeasured configurations.
+%The pattern \emph{"sampling, measuring, learning"} has emerged as a solution nowadays.
+Several works thus follow a "sampling, measuring, learning" process~\cite{julianasurvey,jamshidi2018,jamshidi2017a,jamshidi2017b,jamshidi2019,sarkar2015,valov2015,valov2017,jehooh2017,temple2016,amand2019,guo2013ASE,nair2017,nair2018a,kolesnikov2018,siegmund2015FSE}. 
+ A crucial step is the way the sampling is realized, since it can drastically affect the performance model accuracy~\cite{julianasurvey,kaltenecker2019}. Ideally, the sample should be small to reduce the cost of measurements and representative of the configuration space to reduce prediction errors. 
+%Learning software configuration spaces is, however, not a pure machine learning problem and there are a number of specific challenges to address at the intersection of software engineering and artificial intelligence. For instance, 
+ The sampling phase involves a number of difficult activities: \textit{(1)} picking configurations that are valid and conform to constraints among options -- one needs to resolve a satisfiability problem; \textit{(2)} instrumenting the executions and observations of software for a variety of configurations -- it might have a high computational cost especially when measuring performance aspects of software; \textit{(3)} guaranteeing a coverage of the configuration space to obtain a representative sample set.
+An ideal coverage includes all influential configuration options by covering different kinds of interactions relevant to performance.
+%meanwhile, we expect that the sample is representative to the whole population of valid configurations covering different kinds of interaction among configuration options 
+Otherwise, the learning may hardly generalize to the whole configuration space. 
+%To build an accurate performance model, we must satisfy these three activities. 
+
+With the promise to select a small and representative sample set of valid configurations, several sampling strategies have been devised in the last years~\cite{julianasurvey}.
+%to balance measurement effort and prediction accuracy
+ For example, random sampling aims to cover the configuration
+space uniformly while coverage-oriented sampling selects the sample set according to a coverage criterion (\eg $t$-wise sampling to cover all combinations of $t$ selected options).
+% \ju{give examples of sampling strategies and describe their advantages and disadvantages. (random, t-wise)}
+% A recent study~\cite{kaltenecker2019} has investigated a set of six sampling strategies. 
+%in order to find the one which decreases the cost of labelling software configurations while minimizing the prediction errors.
+ Recently, Kaltenecker \etal~\cite{kaltenecker2019} analyzed 10 popular real-world software systems and found that their novel proposed sampling strategy, called diversified distance-based sampling, dominates five other sampling strategies by decreasing the cost of labelling software configurations while minimizing the prediction errors.
+
+In this paper, we conduct a replication of this preliminary study by exclusively considering the x264 case, a configurable video encoder. Though we only consider one particular configurable system, we make vary its workloads (with the use of 17 input videos) and measured two performance properties (encoding time and encoding size) over \nbconfigurations\xspace configurations.  
+Interestingly, Kaltenecker \etal~\cite{kaltenecker2019} also analyzed the same \nbconfigurations\xspace configurations of x264, but a fixed input video was used and only the time was considered. The goal of our experiments is to determine whether sampling strategies considered in~\cite{kaltenecker2019} over different subject systems are as effective on the \emph{same} configurable system, but with different factors possibly influencing the distribution of the configuration space. 
+% \ma{a simple comment to make in Section "results": distribution changes accuracy! (some video/NFP are harder to learn given the same sampling algo)}
+ A hypothesis is that practitioners of a configurable system can rely on a one-size-fits-all sampling strategy that is cost-effective whatever the factors influencing the distribution of its configuration space.  
+On the contrary, another hypothesis is that practitioners should change their sampling strategy each time an input (here: videos) or a performance property are targeted.  
+
+% the configuration space remains stable 
+We investigate to what extent sampling strategies are sensitive to different workloads of the x264 configurable system and different performance properties: What are the most effective sampling strategies? Is random sampling a strong baseline? Is there a dominant sampling strategy that practitioners can always rely on?   
+To this end, we systematically report the influence of sampling strategies on the accuracy of performance predictions and on the robustness of prediction accuracy. 
+
+% x264 is a command-line tool to encode video streams into the H.264/MPEG-4 AVC format. 
+% Although Kaltenecker et al.~\cite{kaltenecker2019} also analyzed the same 1,152 configurations of x264, the infrastructure used for measurement and the used inputs differs from the one take into account in this paper. In addition, beyond the non-functional property encoding time, we also consider the non-functional property encoding size.
+% Overall, it differs from Kaltenecker et al.~\cite{kaltenecker2019} study in that 
+%\textit{(3)} chosen learning algorithm; \textit{(4)} parameter tuning; and \textit{(5)} resampling design.
+
+%\ju{update the key results}
+Our contributions are as follows:
+\vspace*{-2mm}
+\begin{itemize}
+    %\item The use of different learning algorithms, parameter tuning and resampling strategies are not explored in \cite{kaltenecker2019}. These strategies may have a strong influence on prediction accuracy. In this paper, we quantify its influence. 
+    %most of the proposed approaches set these parameters manually based on the knowledge of a domain expert or even use default parameters.
+    
+    \item We rank six sampling strategies based on a unified benchmark over seventeen different inputs and two non-functional properties.
+    %Specifically for the property encoding time, we find that uniform random sampling yields most accurate results, although diversified distance-based sampling is more robust.
+    %For encoding size, we find that beyond uniform random sampling, solver-based and randomized solver-based achieve good results in terms of performance distribution and prediction accuracy, although here random sampling is more robust.
+%We find that uniform random sampling dominates all the others sampling strategies \wrt prediction accuracy for a majority of cases;
+    % However, for the other sampling strategies, the ranking is quite unstable.
+    %The other strategies lead to significant variations relying on the input video and non-functional property.
+    We show that the ranking of non-random sampling strategies is quite unstable, being heavily sensitive to input video and targeted performance property. We gather preliminary insights about the effectiveness of some sampling strategies on some videos and performances;
+    %We \ma{deeply} investigate the accuracy of the other sampling strategies \ma{(beyond random)} on our benchmark and 
+    %It shows that these strategies determine an accurate prediction model based on a small sample.
+    
+    \item We compare our results to the previous study of x264~\cite{kaltenecker2019}, that was based on the use of a single input video and measurements of encoding time. Through our experimental results, we find that for the non-functional property encoding time
+    uniform random sampling dominates all the others sampling strategies \wrt prediction accuracy for a majority of cases, 
+    %random sampling is ``dominant" 
+    as in Kaltenecker et al.~\cite{kaltenecker2019};
+    
+    \item We have made all the artifacts from our replication study publicly available at \url{https://github.com/jualvespereira/ICPE2020}.
+    %All experiment and replication data are available on the supplementary website.
+    
+    %\item a file constaining a description of the infrastructure we used to measure all configurations of the systems and the used workload - we used a different infrastructure - gathering the measured performance values of the configuration took several months of CPU time, in the first place. Additionally, some of the identified perfomance characteristrics might be affected by hardware-speficic characteristics, which overall requires to perform the measurements on the same hardware using the same operating system and so on.
+\end{itemize}
+
+
+\emph{With respect to the categorized research methods by Stol et al.~\cite{Stol:2018:ASE:3276753.3241743},} our paper mainly contributes to a knowledge-seeking study. Specifically, we perform a field experiment of x264, a highly-configurable system and mature project. We gain insights about performance' properties using a large corpus of configurations and input videos. 
+% Our contribution is also a solution-seeking study since we develop techniques for configuration measurements, feature engineering and machine learning to predict size in an accurate yet interpretable way. 
+
+\emph{Audience.} Researchers and practitioners in configurable systems and performance engineering shall benefit from our sampling experiments and insights. We discuss impacts of our results for practitioners (How to choose a sampling strategy?) and for the research community (\eg on the design and assessment of \mbox{sampling strategies).} 
+% We also provide evidence that machine learning is applicable for very large space of software configurations. 
+ 
+% \begin{table}
+%     \centering
+%     \begin{tabular}[t]{l|rrrr|rrrr}
+%         \toprule
+%         System & \multicolumn{4}{c}{Diversified distance-based} &  \multicolumn{4}{c}{Random} \\
+%         \midrule
+%          & ME & HO & CV & BT & ME & HO & CV & BT  \\
+%         \bottomrule
+%     \end{tabular}
+%     \caption{Accuracy of t-wise and diversified distance-based and different resampling strategies for the prediction of encoding time for 16 input videos of x264. Resampling strategies: textit{ME}: merge; \textit{HO}: hold-out; \textit{CV}: cross-validation; \textit{BT}: bootstrapping. 
+%     Notice that we present the results for the best sampling strategy and training size reported in Table \ref{tab:RQ1_1}.}
+%     \label{tab:RQ2_1}
+% \end{table}
+
+%representative sample set = influential configuration options and interactions among options relevant to performance

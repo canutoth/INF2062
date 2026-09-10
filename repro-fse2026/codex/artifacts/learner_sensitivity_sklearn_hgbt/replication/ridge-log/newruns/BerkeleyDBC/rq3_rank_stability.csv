@@ -1,0 +1,8 @@
+target_context,cost_context,lambda,top1_size,top1_time,top1_agreement,top3_overlap,kendall_tau,mean_abs_rank_difference,system,cost_property,target_property,scenario
+BerkeleyDBC,BerkeleyDBC,0.1,random_t2,random_t2,1,1.0,0.8666666666666667,0.8,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,0.25,random_t2,random_t2,1,1.0,0.7333333333333333,1.4666666666666666,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,0.5,random_t2,random_t2,1,0.6666666666666666,0.5619047619047619,2.2666666666666666,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,1.0,henard_t1,henard_t1,1,0.3333333333333333,0.4807692307692308,2.8,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,2.0,henard_t1,henard_t1,1,0.3333333333333333,0.4666666666666667,2.8,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,4.0,henard_t1,henard_t1,1,0.6666666666666666,0.5238095238095238,2.8,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,10.0,henard_t1,henard_t1,1,0.6666666666666666,0.5428571428571428,2.8,BerkeleyDBC,performance,performance,cost_performance__target_performance

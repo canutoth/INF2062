@@ -1,0 +1,3 @@
+system,target_column,cost_column,cost_orientation,note,returncode,elapsed_seconds,output_dir,log_path
+xz,time,time,lower,runtime,0,13.23,/Users/mathieuacher/SANDBOX/cost-sampling-matters/artifacts/workload_batch_smoke/xz,/Users/mathieuacher/SANDBOX/cost-sampling-matters/artifacts/workload_batch_smoke/xz/run.log
+h2,throughput,throughput,inverse,throughput oriented to cost=1/throughput,0,4.514,/Users/mathieuacher/SANDBOX/cost-sampling-matters/artifacts/workload_batch_smoke/h2,/Users/mathieuacher/SANDBOX/cost-sampling-matters/artifacts/workload_batch_smoke/h2/run.log

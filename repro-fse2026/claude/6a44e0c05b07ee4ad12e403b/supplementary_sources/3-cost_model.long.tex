@@ -1,0 +1,166 @@
+\section{Cost Model}
+\label{sec:cost_model}
+
+This section states our cost model directly, then motivates it with respect
+to prior work.
+
+\subsection{Empirical Training Acquisition Cost}
+\label{subsec:empirical-cost}
+
+A sampling+learning experiment is parametrized by a configurable system, an
+input/workload, a non-functional property $p$, a sampling strategy $s$, a
+training size $n$, and a run identifier $r$ (used for stochastic
+strategies). Given these, the strategy returns a training sample
+$S_{r,s,n}\subseteq C$ with $|S_{r,s,n}|=n$.
+
+The \emph{empirical training acquisition cost} of run $r$ is the sum of
+per-configuration acquisition costs over the configurations the strategy
+selects:
+\begin{equation}
+\TrainCost(r,s,n)\;=\;\sum_{c\in S_{r,s,n}} \mathit{cost}(c).
+\label{eq:traincost}
+\end{equation}
+$\mathit{cost}(c)$ is a non-negative scalar that quantifies the resource
+consumed when measuring configuration $c$. Returning to the running
+example with $\mathit{cost}=$ encoding time: at $n=32$ on x264, $\TrainCost$
+is the sum of the $32$ encoding times the strategy decided to pay for, and
+Strategy~A and Strategy~B can have very different $\TrainCost$ even though
+both have $\SizeCost=32$.
+
+\paragraph*{What can $\mathit{cost}(c)$ be?}
+The most common operational instance is wall-clock measurement time --
+encoding time for x264, compilation time for LLVM, solving time for DUNE,
+runtime for HIPAcc -- and that is the instance we use throughout this
+study, because it is the resource that practitioners most often report as
+constrained. The model itself is more general, however. Any quantitative
+non-negative resource that is consumed by measuring $c$ qualifies as
+$\mathit{cost}(c)$:
+\begin{itemize}
+    \item wall-clock measurement time (the canonical case);
+    \item storage, when the operational constraint is accumulated output
+    \eg the cumulative size of encoded videos in a transcoding service or
+    of compiled binaries in a build farm;
+    \item energy or power-integrated consumption, on energy-constrained
+    hardware;
+    \item bandwidth or I/O volume, on data-centre runs where measurement
+    traffic is the bottleneck.
+\end{itemize}
+The mathematical content of $\TrainCost$ does not change with this choice;
+only its operational interpretation does. A reader whose constraint is
+storage should read every ``time'' below as ``size'', and the calibration
+question and the Pareto question still apply unchanged.
+
+\paragraph*{Target $\neq$ cost.}
+The performance property being predicted and the cost dimension are
+independent choices. For x264 we predict either encoding time or output
+size, and we use encoding time as $\mathit{cost}(c)$ throughout. Predicting
+output size while paying time-based cost is one such asymmetric case; an
+operator with a storage budget could equally well predict encoding time
+while paying size-based cost, and the calibration of $\SizeCost$ against
+that $\TrainCost$ would be a different empirical question. We test the
+canonical (time-based) instance and discuss generalization in
+\Cref{sec:discussion}.
+
+\subsection{Count-Based Baseline}
+\label{subsec:count-baseline}
+
+The baseline we compare against is the count of measured configurations:
+\begin{equation}
+\SizeCost(s,n)\;=\;n.
+\label{eq:sizecost}
+\end{equation}
+This is the cost most often used in the literature
+(\Cref{subsec:cost-models}). It is deterministic in $n$, and it is exactly
+the abstraction we want to test against $\TrainCost$.
+
+\subsection{Normalized Costs and Calibration Ratio}
+\label{subsec:normalized-costs}
+
+Absolute costs vary by orders of magnitude across systems. To compare
+across systems we normalize by the cost of measuring the entire valid
+configuration space. Define
+\begin{equation}
+\FullCost\;=\;\sum_{c\in C} \mathit{cost}(c),
+\label{eq:fullcost}
+\end{equation}
+\begin{equation}
+\mathit{TrainCostPct}(r,s,n)\;=\;\frac{\TrainCost(r,s,n)}{\FullCost},\quad
+\mathit{SizePct}(s,n)\;=\;\frac{n}{|C|}.
+\label{eq:pct}
+\end{equation}
+
+The size-as-cost abstraction is exact when
+$\mathit{TrainCostPct}=\mathit{SizePct}$. We measure how far we are from
+that exactness with the calibration ratio
+\begin{equation}
+\Ratio(r,s,n)\;=\;\frac{\mathit{TrainCostPct}(r,s,n)}{\mathit{SizePct}(s,n)}.
+\label{eq:ratio}
+\end{equation}
+A value of $1$ means the strategy spends a share of the full cost budget
+that matches its share of configurations: spending $20\%$ of $|C|$ buys
+$20\%$ of $\FullCost$. Values $>1$ mean the strategy is systematically
+biased toward expensive configurations; values $<1$ toward cheap ones. We
+summarize a strategy by
+\begin{equation}
+\Bias(s)\;=\;\mathrm{median}_{r,n}\,\Ratio(r,s,n) - 1.
+\label{eq:bias}
+\end{equation}
+
+\subsection{Composite Objectives}
+\label{subsec:composite}
+
+To compare strategies on a single scalar that combines accuracy and cost, we
+use a normalized linear combination, instantiated under each cost model:
+\begin{align}
+J^{\text{size}}_{\lambda}(s,n) &= \widetilde{\MRE}(s,n) + \lambda\cdot\widetilde{\SizeCost}(s,n), \label{eq:Jsize}\\
+J^{\text{time}}_{\lambda}(s,n) &= \widetilde{\MRE}(s,n) + \lambda\cdot\widetilde{\TrainCost}(s,n). \label{eq:Jtime}
+\end{align}
+The tilde denotes min--max normalization within a system/input/property to
+prevent scale effects. Rather than committing to a single $\lambda$, we
+sweep $\lambda\in\{0.1,0.25,0.5,1,2,4,10\}$, so that the comparison reflects
+the full range from accuracy-dominated to cost-dominated trade-offs.
+
+\subsection{Pareto Formulation}
+\label{subsec:pareto}
+
+Composite objectives require choosing $\lambda$. To complement the scalar
+view with a parameter-free one we also study the two-dimensional MRE--cost
+plane. A pair $(s,n)$ is Pareto-efficient under empirical cost if there is
+no other pair $(s',n')$ such that
+\begin{align*}
+\MRE(s',n') &\le \MRE(s,n) \quad\text{and}\\
+\TrainCost(s',n') &\le \TrainCost(s,n)
+\end{align*}
+with at least one strict inequality. The same definition under count-based
+cost substitutes $\SizeCost$ for $\TrainCost$. We compare both frontiers in
+terms of membership overlap (which $(s,n)$ pairs gain or lose Pareto status
+when the cost model changes), the number of Pareto-efficient pairs, and the
+front-exclusive pairs under each cost model.
+
+\subsection{Scope}
+\label{subsec:scope}
+
+The model above embeds three scope decisions worth stating explicitly,
+because they shape what the rest of the paper measures.
+
+\paragraph*{The cost term covers training only.}
+A sampling strategy is responsible for the configurations it selects to
+train on. The validation set $C_{\text{test}}$ is part of the experimental
+protocol; it is the same across strategies and is used only to compute MRE.
+We do not include it in $\TrainCost$, so the cost term reflects what the
+strategy controls.
+
+\paragraph*{Cost is measured, not assumed.}
+$\TrainCost$ is the actual sum of per-configuration costs of the
+configurations a strategy selects. We do not assume a per-configuration
+unit cost or any closed-form relationship between $n$ and acquisition
+cost; we read it off the data.
+
+\paragraph*{Model-building time is reported separately.}
+For the learners we use (stepwise linear regression, CART, random forest),
+fitting time is orders of magnitude smaller than measurement time when
+$\mathit{cost}(c)$ is wall-clock time. We
+report it as a separate diagnostic rather than folding it into
+$\TrainCost$, so that cost differences across strategies reflect
+acquisition effort. \Cref{sec:threats} discusses when this simplification
+might be inappropriate.

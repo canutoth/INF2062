@@ -1,0 +1,170 @@
+% EMSE submission, Springer svjour3 class (smallcondensed).
+% svjour3.cls v3.2 + svglov3.clo obtained from Springer's svjour3
+% distribution. Bibliography: Springer's spbasic.bst is not freely
+% redistributable; abbrvnat (author-year, visually close) is used here --
+% swap \bibliographystyle{abbrvnat} for {spbasic} on Overleaf/at submission.
+\documentclass[smallcondensed]{svjour3}
+\journalname{Empirical Software Engineering}
+
+\smartqed
+
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xspace}
+\usepackage[round,authoryear]{natbib}
+\usepackage{enumitem}
+\setlist{topsep=2pt,itemsep=1pt,leftmargin=1.4em}
+\usepackage{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+
+\newtcolorbox{findingbox}{colback=black!4!white, colframe=black!60!white,
+  boxrule=0.5pt, arc=1.5pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  before skip=8pt, after skip=8pt}
+
+\newcommand{\srs}{SRS\xspace}
+\newcommand{\pilotcost}{\textsf{pilotCost}\xspace}
+\newcommand{\diShe}{\textsf{diversity}\xspace}
+\newcommand{\randomS}{\textsf{random}\xspace}
+\newcommand{\pairwise}{\textsf{pairwise}\xspace}
+\newcommand{\balanced}{\textsf{balanced}\xspace}
+\newcommand{\finding}[1]{\begin{findingbox}\small\textbf{#1}\end{findingbox}}
+\newcommand{\rqone}{RQ\textsubscript{1}\xspace}
+\newcommand{\rqtwo}{RQ\textsubscript{2}\xspace}
+
+\begin{document}
+
+\title{Replicating Posterior Guarantees of Configuration Sampling
+Strategies under Measured Acquisition Cost}
+\titlerunning{Posterior Guarantees under Measured Acquisition Cost}
+
+\author{Mathieu Acher \and Juliana Alves Pereira \and Th\'eo Matricon}
+\authorrunning{M. Acher et al.}
+
+\institute{M. Acher \and T. Matricon \at
+  Univ Rennes, Inria, CNRS, IRISA, Rennes, France\\
+  \email{mathieu.acher@irisa.fr}, \email{theo.matricon@irisa.fr}%% TODO: verify T. Matricon affiliation/email
+  \and
+  J. Alves Pereira \at
+  Pontifical Catholic University of Rio de Janeiro (PUC-Rio), Rio de
+  Janeiro, Brazil\\
+  \email{juliana@inf.puc-rio.br}%% TODO: verify
+}
+
+\date{Received: date / Accepted: date}
+
+\maketitle
+
+\begin{abstract}
+Practitioners of configurable software systems rely on budgeted sampling
+strategies to estimate worst-case (or best-case) performance bounds. A
+recent FSE~2026 study introduced \emph{posterior risk} and
+\emph{posterior confidence} as learner-free, scenario-theoretic
+guarantees for such sampled bounds, and found that Statistical Recursive
+Search (\srs) consistently yields tighter guarantees than alternative
+strategies at the same sample size. We replicate this study on its
+original artifact and extend it to five further dataset families---851
+decision scopes across six corpora---and then re-index every decision by
+\emph{measured acquisition cost} instead of sample size. The guarantee
+framework replicates everywhere: posterior-risk distributions
+discriminate strategies in about 95\% of scopes, robust to
+false-discovery-rate correction. The strategy recommendation, however, is
+population-relative: \srs{} dominates on the original systems and on an
+x264 corpus, but is never the best cost-normalized choice on Linux kernel
+or hyperparameter-optimization pools. Under measured cost, the
+guarantee/cost Pareto frontier differs from the sample-size frontier in
+97.5\% of scopes. Two equal-spend experiments explain these boundaries:
+cost-aware sampling helps exactly when acquisition cost is decoupled from
+the bounded target (its verdict flips from $6.6\times$ worse to better
+than random as the coupling weakens), and \srs's advantage requires
+budget to amortize. Posterior guarantees are thus a sound and portable
+evaluation framework, but strategy recommendations---including which
+strategy is ``cost-effective''---depend on the outcome, the budget scale,
+and the cost--target coupling, none of which sample size can express.
+\keywords{Configurable systems \and Sampling strategies \and Performance
+bounds \and Scenario theory \and Replication \and Measurement cost}
+\end{abstract}
+
+\input{sections/01-intro}
+\input{sections/02-background}
+\input{sections/03-design}
+\input{sections/04-rq1}
+\input{sections/05-rq2}
+\input{sections/06-discussion}
+\input{sections/07-threats}
+\input{sections/08-related}
+\input{sections/09-conclusion}
+
+\begin{appendix}
+\section{Per-Release and Per-System Breakdowns}
+\label{app:breakdowns}
+
+Tables~\ref{tab:appendix-linux} and~\ref{tab:appendix-energy} unfold two
+corpora that the main text reports only in aggregate. Both tables are
+generated directly from the released result CSVs by a script shipped in
+the replication package.
+
+The Linux breakdown (Table~\ref{tab:appendix-linux}) shows that the
+corpus-level story is not driven by particular releases: strategy
+distributions differ everywhere, \srs{} sits on the empirical frontier in
+19 of 21 scopes without ever winning the cost-normalized comparison, and
+the frontier itself changes at every scope (all Jaccard overlaps
+$\le 0.20$). \diShe{} wins 19 of 21 scopes; both exceptions
+(\textsf{uncertainty} on release 4.13, \balanced{} on 4.15) occur at the
+5\% level, the largest sample regime.
+
+The ENERGY rollup (Table~\ref{tab:appendix-energy}) shows the same
+homogeneity across systems: no system is ``safe'' for the sample-size
+abstraction---the frontier changes in every scope of all 14 systems---and
+the most frequent cost-normalized winner is a space-filling strategy
+(\diShe{} or \pairwise) on all of them. Strategy distributions differ in
+every scope except on brotli (4 of 12), the smallest table (180
+configurations after revision pinning). \srs{} is best cost-normalized
+only on LLVM, MongoDB, and jump3r scopes, all at the two largest budgets,
+consistent with the amortization gradient of Section~\ref{sec:rq25}.
+
+\input{tables/appendix_linux}
+\input{tables/appendix_energy}
+\end{appendix}
+
+\begin{acknowledgements}
+%% TODO: funding acknowledgements (e.g., ANR, Inria).
+\end{acknowledgements}
+
+\section*{Declarations}
+
+\paragraph{Funding.}
+%% TODO: complete.
+Not applicable.
+
+\paragraph{Conflict of interest.}
+The authors declare that they have no conflict of interest.
+
+\paragraph{Ethics approval and consent to participate.}
+Not applicable.
+
+\paragraph{Data availability.}
+All datasets used in this study are publicly archived: the original
+FSE~2026 artifact \citep{weis2026artifact}, the distance-based sampling
+and x264 corpora \citep{kaltenecker2019distance,pereira2020sampling}, the
+energy corpus \citep{weber2023twins}, the workload corpus
+\citep{muehlbauer2023workload}, the TuxKConfig pools
+\citep{martin2022transfer}, and LCBench \citep{zimmer2021autopytorch}.
+
+\paragraph{Code availability.}
+All experiment code, per-corpus result tables, hypothesis tests, figures,
+and a command-level run manifest (including data provenance and
+checksums) are available in our replication package.
+%% TODO: archive URL/DOI upon acceptance.
+
+\paragraph{Author contributions.}
+%% TODO: complete per CRediT before submission.
+
+\bibliographystyle{abbrvnat}% TODO: swap for spbasic at submission
+\bibliography{references}
+
+\end{document}

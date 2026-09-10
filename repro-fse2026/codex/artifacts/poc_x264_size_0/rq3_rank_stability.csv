@@ -1,0 +1,8 @@
+target_context,cost_context,lambda,top1_size,top1_time,top1_agreement,top3_overlap,kendall_tau,mean_abs_rank_difference
+x264_size_0,x264_time_0,0.1,random_t2,random_t2,1,1.0,0.9869281045751634,0.1111111111111111
+x264_size_0,x264_time_0,0.25,random_t2,random_t2,1,1.0,0.9738562091503268,0.2222222222222222
+x264_size_0,x264_time_0,0.5,random_t2,random_t2,1,1.0,0.8823529411764706,0.8888888888888888
+x264_size_0,x264_time_0,1.0,random_t2,random_t2,1,0.6666666666666666,0.8157894736842105,1.1111111111111112
+x264_size_0,x264_time_0,2.0,solverBased_t1,solverBased_t1,1,0.6666666666666666,0.8823529411764706,0.8888888888888888
+x264_size_0,x264_time_0,4.0,solverBased_t1,solverBased_t1,1,1.0,0.869281045751634,1.0
+x264_size_0,x264_time_0,10.0,solverBased_t1,solverBased_t1,1,0.6666666666666666,0.869281045751634,1.1111111111111112

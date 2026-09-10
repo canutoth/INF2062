@@ -1,0 +1,8 @@
+target_context,cost_context,lambda,top1_size,top1_time,top1_agreement,top3_overlap,kendall_tau,mean_abs_rank_difference,system,cost_property,target_property,scenario
+Hipacc,Hipacc,0.1,random_t2,random_t2,1,1.0,0.978021978021978,0.14285714285714285,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,0.25,random_t2,random_t2,1,1.0,0.9560439560439561,0.2857142857142857,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,0.5,random_t2,random_t2,1,1.0,0.9560439560439561,0.2857142857142857,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,1.0,random_t1,random_t1,1,1.0,0.8444444444444444,1.1428571428571428,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,2.0,random_t1,random_t1,1,1.0,0.9120879120879121,0.5714285714285714,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,4.0,random_t1,random_t1,1,1.0,0.9120879120879121,0.5714285714285714,Hipacc,performance,performance,cost_performance__target_performance
+Hipacc,Hipacc,10.0,random_t1,random_t1,1,1.0,0.8901098901098901,0.5714285714285714,Hipacc,performance,performance,cost_performance__target_performance

@@ -1,0 +1,7 @@
+target_context,cost_context,strategy,records,spearman_n_train_cost,median_calibration_ratio,q1_calibration_ratio,q3_calibration_ratio,median_bias,system,cost_property,target_property,scenario
+7z,7z,ALL,235,0.9428111665549697,0.948836466493343,0.7214724849227732,1.0420158283703242,-0.05116353350665703,7z,performance,performance,cost_performance__target_performance
+7z,7z,random,60,0.9429400145689538,0.9986895262027435,0.9652835270860862,1.0355872878090067,-0.0013104737972564617,7z,performance,performance,cost_performance__target_performance
+7z,7z,solverBased,60,0.9429400145689538,0.7639214467773295,0.3304852443052972,1.039746422503085,-0.23607855322267046,7z,performance,performance,cost_performance__target_performance
+7z,7z,henard,6,0.956182887467515,0.3959863612752453,0.3168927508170301,0.5368814282859424,-0.6040136387247548,7z,performance,performance,cost_performance__target_performance
+7z,7z,distBased,60,0.9429400145689538,0.8264123326752804,0.6721248441513749,0.9142369788943928,-0.17358766732471964,7z,performance,performance,cost_performance__target_performance
+7z,7z,divDistBased,49,0.9428571428571428,1.0557668816984782,0.9632183346096352,1.182240460766065,0.05576688169847821,7z,performance,performance,cost_performance__target_performance

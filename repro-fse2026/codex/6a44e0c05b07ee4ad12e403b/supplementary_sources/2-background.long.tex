@@ -1,0 +1,157 @@
+\section{Background}
+\label{sec:background}
+
+This section sets up the vocabulary and the prior art on which our work
+builds. We focus on the three concepts that structure the rest of the paper:
+sampling strategies for configurable systems
+(\Cref{subsec:sampling-strategies}), the cost models that have been associated
+with them (\Cref{subsec:cost-models}), and what is and is not known about
+context sensitivity of sampling-based conclusions
+(\Cref{subsec:context-sensitivity}). \Cref{sec:related_work} returns to the
+literature once we have introduced our own formulation.
+
+\subsection{Configurable Systems and Performance Prediction}
+\label{subsec:configurable-systems}
+
+A configurable system exposes a set of options whose joint configuration affects
+non-functional properties such as runtime, memory consumption, or output
+size. Let $C$ be the set of \emph{valid} configurations, \ie those satisfying
+constraints among options. For a fixed input $i$ and property $p$, every
+$c\in C$ has a measured value $y_{c}\in\mathbb{R}$ obtained by executing the
+system on $i$ and observing $p$. Performance prediction approximates the
+function $y:C\to\mathbb{R}$ with a regression model $\hat y$ trained on a
+sample $S\subset C$ of measured configurations~\cite{guo2013ASE,siegmund2015FSE,kaltenecker2019,julianasurvey}.
+Prediction quality is reported on the remaining configurations or on a
+designated validation set, typically using the mean relative error
+$\MRE = \frac{1}{|C|}\sum_{c\in C}|y_{c}-\hat y_{c}|/y_{c}$~\cite{kaltenecker2019,pereira2020,julianasurvey}.
+
+The dominant axis of comparison between approaches is the trade-off between
+prediction accuracy and the effort spent acquiring $S$. The exact
+operationalization of this effort is the topic of
+\Cref{subsec:cost-models}. The pattern we want to highlight here is that
+the strategy chooses what to measure, but the cost term in the literature is
+almost always reported as a count, not as the time it actually took.
+
+\subsection{Sampling Strategies}
+\label{subsec:sampling-strategies}
+
+We describe the six strategies considered in our experiments. They are the same
+six used by Kaltenecker \etal~\cite{kaltenecker2019} and have the practical
+advantage of being domain-agnostic, requiring no prior measurements or
+knowledge of the system being sampled.
+
+\paragraph*{Random.}
+Uniform random sampling draws configurations uniformly at random from $C$. When
+$|C|$ is small enough to enumerate, this is straightforward; for larger spaces,
+hashing-based samplers such as
+\textsc{UniGen}-style approaches~\cite{chakraborty2013scalable} approximate uniformity
+under SAT constraints, though Plazar \etal~\cite{plazar2019} have shown that
+state-of-the-art uniform samplers face scalability issues. For most systems we
+study, $|C|$ is tractable enough that enumeration-based random sampling is the
+intended baseline.
+
+\paragraph*{Solver-based.}
+Off-the-shelf SAT/SMT solvers (Sat4j~\cite{sat4j}, Z3~\cite{Z3}) generate
+configurations by solving the feature model. Internal heuristics make the
+exploration order non-uniform but
+deterministic~\cite{DBLP:journals/tse/HenardPPKHT14}, so successive calls tend
+to produce locally clustered samples.
+
+\paragraph*{Randomized solver-based.}
+Henard \etal~\cite{DBLP:journals/tse/HenardPPKHT14} permute variable order and
+constraint order on each call, increasing diversity at the cost of any
+uniformity guarantee. We use this strategy as in
+Kaltenecker \etal~\cite{kaltenecker2019}.
+
+\paragraph*{$t$-wise (coverage-based).}
+$t$-wise sampling~\cite{Kuhn2004,Cohen2008,Johansen2012} selects configurations
+to cover all combinations of $t$ selected options. We use $t\in\{1,2,3\}$
+following Siegmund \etal~\cite{siegmund2012a}, the implementation also used by
+Kaltenecker \etal~\cite{kaltenecker2019}. The natural sample size of $t$-wise is
+not a free parameter; we record it and include the resulting
+$(\text{strategy},n)$ pairs alongside other strategies at common $n$.
+
+\paragraph*{Distance-based.}
+Kaltenecker \etal~\cite{kaltenecker2019} propose distance-based sampling, which
+selects configurations according to a target distribution over Hamming distance
+between configurations. The intent is to approximate the diversity of uniform
+random sampling without enumerating $C$.
+
+\paragraph*{Diversified distance-based.}
+A variant of distance-based sampling~\cite{kaltenecker2019} that iteratively
+adds configurations containing the least frequently selected options, in order
+to avoid systematically excluding rare options.
+
+\paragraph*{Diagnostic baselines.}
+Beyond these six strategies, we also include simple baselines whose role is
+diagnostic rather than competitive: a \emph{cheap-first oracle} that selects
+configurations in increasing order of measured cost, and an
+\emph{expensive-first oracle} that selects in decreasing order. Neither is
+deployable without prior measurements, but together they bound the effect that
+cost-awareness could have if a strategy were perfectly cost-informed (cheap
+side) or perfectly adversarial (expensive side). They tell us how much
+cost-heterogeneity there is to be exploited or stumbled into.
+
+\subsection{Prior Cost Models}
+\label{subsec:cost-models}
+
+The closest prior cost model to ours is Sarkar \etal's~\cite{sarkar2015}, which
+defines a total cost
+\[
+\mathit{TotalCost}\;=\;C_{\text{train}} + C_{\text{test}} + C_{\text{model}} + C_{\text{error}},
+\]
+where $C_{\text{train}}$ and $C_{\text{test}}$ are training and testing
+acquisition costs, $C_{\text{model}}$ is model-building cost, and
+$C_{\text{error}}$ scales with prediction error. Two simplifications follow.
+First, model-building cost is dropped on the grounds that CART training is
+inexpensive compared with measurement. Second, $C_{\text{train}}$ and
+$C_{\text{test}}$ are collapsed under a $50/50$ train/test split into $2n$,
+\emph{treating each measured configuration as having unit cost}. The resulting
+formula, $\mathit{TotalCost}(n)=2n+\varepsilon_{n}\cdot|S|\cdot R$, is the
+canonical configurable-systems cost model: it is count-based and folds train
+and test acquisition together.
+
+Other works adopt similar count-based abstractions, even when they do not
+formalize a cost equation. Guo \etal~\cite{guo2013ASE} measure ``feasibility''
+in terms of sample size $N,2N,3N,M$. Westermann \etal~\cite{westermann2012}
+formulate efficiency as ``required number of measurement points'' to reach a
+target error. Siegmund \etal~\cite{siegmund2015FSE} report Pareto trade-offs
+between accuracy and ``number of measurements''. Kaltenecker
+\etal~\cite{kaltenecker2019} compare strategies at common sample sizes. The
+systematic review of Pereira \etal~\cite{julianasurvey} confirms that, when
+``cost'' is mentioned in this literature, it almost always means cardinality.
+
+The one configurable-systems paper we are aware of that reports
+\emph{empirical} acquisition time is Siegmund \etal~\cite{siegmund2012a}, which
+gives both the number of measurements and the time in hours required by each
+heuristic. However, that empirical effort is reported \emph{descriptively}; it
+is not used to test whether $n$ is a valid proxy, nor to compare strategies at
+fixed $n$, nor to study how rankings would change under a time-based
+cost. To the best of our knowledge, no prior configurable-systems paper has
+done so.
+
+We make two design choices that distinguish our cost formulation from
+Sarkar \etal's. First, we restrict the cost term to training: a sampling
+strategy controls the configurations it asks to measure, but the validation
+set is part of the protocol and would be the same under any strategy. Folding
+both into a $2n$ term obscures what the strategy is actually responsible
+for. Second, we do not collapse train/test acquisition into a single linear
+function of $n$; we compute training cost as the sum of measured
+per-configuration times over the configurations the strategy
+selects. \Cref{sec:cost_model} formalizes both choices.
+
+\subsection{Context Sensitivity of Performance Prediction}
+\label{subsec:context-sensitivity}
+
+A separate strand of work has shown that conclusions about performance
+prediction can depend on the input or workload. Pereira
+\etal~\cite{pereira2020} showed on x264 that the ranking of sampling
+strategies varies markedly across $17$ input videos and two performance
+properties. \red{Lesoil et al. (JSS 2023, JSS 2024) and Mühlbauer et al. (ICSE
+2023) extend this point to broader collections of configurable systems and to
+input-aware models~\cite{}.} Our use of multiple inputs and properties is not
+intended to (re)establish that ``context matters''---it is established---but to
+ask the narrower question whether the validity of the size-as-cost abstraction
+itself is context-dependent: in some inputs $n$ may be a fine proxy and in
+others not, and asymmetric cases (predicting output size while measurement
+cost is encoding time) are particularly informative.

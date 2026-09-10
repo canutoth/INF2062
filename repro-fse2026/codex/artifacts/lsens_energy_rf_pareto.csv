@@ -1,0 +1,15 @@
+context,n_combos,n_count_eff,n_meas_eff,jaccard,n_missed,p_differ
+7z/energy,30,6,11,0.3077,7,1.0
+Apache/energy,35,7,10,0.7,3,1.0
+brotli/energy,35,6,10,0.6,4,1.0
+exastencils/energy,30,6,11,0.5455,5,1.0
+HSQLDB/energy,55,11,17,0.6471,6,1.0
+jump3r/energy,45,5,5,0.6667,1,0.98
+kanzi/energy,45,9,7,0.7778,0,0.986
+LLVM/energy,30,6,8,0.75,2,1.0
+lrzip/energy,40,8,16,0.4118,9,1.0
+MongoDB/energy,40,8,15,0.5333,7,1.0
+nginx/energy,45,9,15,0.3333,9,1.0
+PostgreSQL/energy,55,11,20,0.55,9,1.0
+VP8/energy,30,5,8,0.625,3,0.994
+x264/energy,45,9,15,0.6,6,1.0

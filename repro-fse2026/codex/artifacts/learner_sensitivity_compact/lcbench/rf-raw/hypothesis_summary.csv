@@ -1,0 +1,11 @@
+hypothesis,scopes,supports,refutes,inconclusive,global_verdict
+H1a,35,35,0,0,supported (35/35)
+H1b,35,0,0,35,"mixed (sup=0, ref=0, inc=35 of 35)"
+H2a,35,32,0,3,supported (32/35)
+H2b,35,0,8,27,"mixed (sup=0, ref=8, inc=27 of 35)"
+H2c,35,11,0,24,"mixed (sup=11, ref=0, inc=24 of 35)"
+H3a,35,33,2,0,supported (33/35)
+H4a,35,30,5,0,supported (30/35)
+H4b,35,30,5,0,supported (30/35)
+H5a,1,0,1,0,refuted (1/1)
+H5c,1,1,0,0,supported (1/1)

@@ -1,0 +1,8 @@
+context,n_combos,n_count_eff,n_meas_eff,jaccard,n_missed,p_differ
+LLVM,15,3,8,0.375,5,1.0
+Polly,9,4,5,0.8,1,0.999
+Dune,15,4,4,0.6,1,1.0
+Hipacc,14,4,3,0.75,0,1.0
+lrzip,15,3,6,0.5,3,0.886
+7z,15,3,7,0.4286,4,1.0
+BerkeleyDBC,15,3,6,0.5,3,1.0

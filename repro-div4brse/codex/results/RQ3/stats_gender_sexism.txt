@@ -1,0 +1,3 @@
+Gender x Sexism: recurrence of perceived sexism
+χ²(1) = 11.22, p < .001, 95% CI [1.96, 36.20], OR ≈ 8.43
+Fisher exact p < .001

@@ -1,0 +1,7 @@
+hypothesis,question,supports,refutes,inconclusive,total,input_index,target_property,cost_property
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,3,0,0,3,1,time,time
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,3,0,3,1,time,time
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,2,1,0,3,1,time,time
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,3,0,0,3,1,time,time
+FSE5,SRS has lower posterior risk than random sampling.,2,1,0,3,1,time,time
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,0,1,3,1,time,time

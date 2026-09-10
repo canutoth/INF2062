@@ -1,0 +1,94 @@
+\section{Cost Model}
+\label{sec:cost_model}
+
+For a run $r$ of strategy $s$ at training size $n$, let
+$S_{r,s,n}\subseteq C$ be the selected sample. The usual cost model is the
+count of measured configurations:
+\begin{equation}
+\SizeCost(s,n)=n.
+\label{eq:sizecost}
+\end{equation}
+We compare it with the measured cost:
+\begin{equation}
+\TrainCost(r,s,n)=\sum_{c\in S_{r,s,n}}\mathit{cost}(c).
+\label{eq:traincost}
+\end{equation}
+Here $\mathit{cost}(c)$ is the measured resource consumed for configuration $c$:
+wall-clock measurement time in most of our study, energy in the
+performance--energy family, and the uncompressed \texttt{vmlinux} size in the
+Linux family. The first two are label-acquisition costs. Image size is instead a
+resource budget (the shippable footprint that constrains embedded and
+over-the-air deployment), so we rest the acquisition-cost claim on the five
+families where cost is acquisition cost and treat Linux as a resource-budget
+stress test that isolates strategy-induced selection bias alone: there the
+prediction target and the paid resource coincide, leaving no target--cost
+asymmetry to exploit (\Cref{subsec:results-rq3}). The model does not require the
+cost dimension to equal the prediction target: one may predict output size while
+paying time, or runtime while paying energy.
+
+To compare systems with different absolute costs, we normalize by the cost of
+measuring the whole available configuration space:
+\begin{align}
+\FullCost &= \sum_{c\in C}\mathit{cost}(c),\\
+\mathit{TrainCostPct} &= \frac{\TrainCost}{\FullCost},&
+\mathit{SizePct} &= \frac{n}{|C|}.
+\label{eq:pct}
+\end{align}
+$\FullCost$ is a retrospective normalizer for cross-system reporting only: the
+$\Ratio$ and percentage views use it, whereas the strategy rankings and Pareto
+fronts compare raw measured $\TrainCost$. A deployable sampler therefore never
+needs $\FullCost$ in advance.
+The count proxy has good \emph{budget agreement} when the fraction of
+configurations measured matches the fraction of measured cost spent. We also
+call this \emph{cost-proxy calibration}: the sample-size proxy is calibrated
+when a $10\%$ sample spends about $10\%$ of the measured budget. This is not
+statistical calibration of a prediction model. It is only a check that the cost
+proxy is on the same scale as the measured resource. We summarize it with a
+budget ratio:
+\begin{equation}
+\Ratio(r,s,n)=
+\frac{\mathit{TrainCostPct}(r,s,n)}{\mathit{SizePct}(s,n)}.
+\label{eq:ratio}
+\end{equation}
+$\Ratio=1$ means that a $10\%$ sample consumes about $10\%$ of the full
+measurement cost. $\Ratio>1$ means the strategy selected costlier-than-average
+configurations, whereas $\Ratio<1$ means it selected cheaper-than-average ones. This is
+a per-run ratio, so one-number summaries report the median ratio unless stated
+otherwise. The practical question is whether a same-size sample takes more or
+less of the real budget than the count suggests.
+
+For decision-level comparisons, we use two standard views. First, we rank
+strategy--budget combinations, where each combination is one sampling strategy
+at one budget level, with a normalized objective
+\begin{align}
+J^{\text{size}}_{\lambda} &= \widetilde{\MRE}+\lambda\widetilde{\SizeCost},\\
+J^{\text{meas}}_{\lambda} &= \widetilde{\MRE}+\lambda\widetilde{\TrainCost},
+\end{align}
+where the cost weight $\lambda\in\{0.1,0.25,0.5,1,2,4,10\}$ spans
+accuracy-heavy to cost-heavy choices. Second, we compare Pareto fronts in the
+MRE--cost plane: a combination is efficient if no other combination has both
+lower error and lower cost. The main threat we test is whether the recommended
+strategy or the efficient set changes when $\SizeCost$ is replaced by
+$\TrainCost$.
+
+Here $\widetilde{\MRE}$ and the tilded cost term are each min-max scaled to
+$[0,1]$ within a context, so error and cost are comparable, and $\lambda$ trades
+one against the other: small $\lambda$ is accuracy-heavy, large $\lambda$
+cost-heavy. We explore a range of $\lambda$, since no single accuracy-versus-cost
+weight fits every setting.
+
+This formulation clarifies how the conventional fixed-$n$ protocol fits our
+analysis: when strategies are compared at the same sample size with sample count
+as the cost axis, the cost term is constant and the ranking collapses to
+MRE: the standard pure-accuracy reading, valid for that question. The extra
+assumption appears when that fixed-$n$ comparison is read as a fixed-\emph{budget}
+one. A resulting ``flip'' is then either a genuine trade-off (the count winner is
+more accurate but more expensive under measured cost) or a \emph{domination} (a
+different combination is no less accurate and no more expensive). Pareto fronts
+expose the second case without choosing a $\lambda$: when the measured-cost front
+contains combinations missing from the count-cost front, a size-only analysis has
+hidden choices a practitioner might legitimately prefer.
+
+We count only training acquisition. Validation measurements are part of the
+experimental protocol and are the same across strategies. A sampling strategy
+controls which training configurations is measured.

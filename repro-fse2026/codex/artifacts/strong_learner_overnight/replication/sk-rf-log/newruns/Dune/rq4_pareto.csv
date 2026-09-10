@@ -1,0 +1,16 @@
+target_context,cost_context,strategy,level,n,pct_n,median_pct_cost,median_train_cost,median_mre,pareto_count,pareto_empirical,system,cost_property,target_property,scenario
+Dune,Dune,random,t1,25,0.010850694444444444,0.010732966972792185,264514.2364285714,0.14964510193105135,1,1,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,solverBased,t1,25,0.010850694444444444,0.011219992257285977,276516.98660714284,0.21994214232018938,0,0,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,henard,t1,25,0.010850694444444444,0.015505336934744922,382129.41214285715,0.4364325149884959,0,0,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,distBased,t1,25,0.010850694444444444,0.011438916268868074,281912.37428571435,0.22577628099161812,0,0,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,divDistBased,t1,25,0.010850694444444444,0.01172838931409475,289046.44464285707,0.19483481147132714,0,0,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,random,t2,265,0.1150173611111111,0.11526613001449179,2840736.6242857142,0.10175858586995482,1,1,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,solverBased,t2,265,0.1150173611111111,0.1147379268012798,2827719.043035714,0.1356769967244282,0,0,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,henard,t2,265,0.1150173611111111,0.12689591313241233,3127352.9167857138,0.20083536083840461,0,0,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,distBased,t2,265,0.1150173611111111,0.1140278645988588,2810219.5425,0.13536331145102448,0,1,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,divDistBased,t2,265,0.1150173611111111,0.11724416845396757,2889485.430535714,0.10521978536343697,0,0,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,random,t3,1071,0.46484375,0.4661943720685888,11489371.826785713,0.07976684163982706,1,1,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,solverBased,t3,1071,0.46484375,0.45990365633408925,11334336.981964286,0.10229534559255712,0,0,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,henard,t3,1071,0.46484375,0.456788446586753,11257562.560714286,0.08244210949331841,0,1,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,distBased,t3,1071,0.46484375,0.46404545402923053,11436411.688571429,0.09940473090023558,0,0,Dune,performance,performance,cost_performance__target_performance
+Dune,Dune,divDistBased,t3,1071,0.46484375,0.47045003174844147,11594252.664821427,0.08297393460758498,0,0,Dune,performance,performance,cost_performance__target_performance

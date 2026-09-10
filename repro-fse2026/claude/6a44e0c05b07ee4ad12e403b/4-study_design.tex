@@ -1,0 +1,171 @@
+\section{Research Questions and Study Design}
+\label{sec:study_design}
+\label{sec:experiment}
+
+The study asks one question: when is sample size a good enough proxy for
+measured cost, and when does that shortcut change the substantive
+conclusion? We organize the evaluation around three research questions.
+
+%\begin{itemize}
+    %\item 
+    \textbf{RQ1. To what extent does sample size reflect measured
+    acquisition cost?} We test whether same-size samples spend comparable
+    measured budgets, whether larger samples reliably cost more, and whether a
+    fixed fraction of configurations corresponds to the same fraction of
+    measured cost.
+    
+    % \item 
+    \textbf{RQ2. Does replacing sample size by measured cost
+    change sampling-strategy conclusions?} We compare the top accuracy--cost
+    choices and the Pareto-efficient choice sets under count-based cost and
+    measured cost.
+    
+    % \item 
+    \textbf{RQ3. Under which conditions is sample size a safe or unsafe
+    cost proxy?} We analyze how the answer depends on cost heterogeneity,
+    strategy bias, target--cost asymmetry, workload/input, release, and dataset
+    family.
+% \end{itemize}
+
+\paragraph*{Operational tests.}
+RQ1 first checks \emph{cost heterogeneity}. We use the coefficient of variation
+(CV), the standard deviation divided by the mean, because it is unit-free: a
+CV of $0.20$ means the standard deviation is $20\%$ of the mean whether the
+resource is seconds, joules, or bytes, while a CV near $1$ means the spread is as
+large as the average cost. CV is sensitive to broad dispersion, so we pair it
+with $p_{90}/p_{10}$, the ratio between the $90$th and $10$th percentile costs.
+This second statistic is robust and readable: $p_{90}/p_{10}=1.5$ means a
+costly but non-extreme configuration costs $50\%$ more than a cheap but
+non-extreme one, while a value near $47$ means the upper tail is about $47\times$
+costlier. Fixed-$n$ strategy-effect tests then ask the operational question:
+when two strategies both choose, say, $64$ configurations, do they nevertheless
+visit systematically cheaper or costlier regions?
+
+RQ1 also checks \emph{budget calibration}. Spearman $\rho$ between $n$ and
+$\TrainCost$ asks only whether larger samples tend to cost more. The ratio
+$\Ratio$ from \Cref{eq:ratio} asks the stricter budget question. If a system has
+$1{,}000$ configurations and a sample measures $100$, then $\mathit{SizePct}=0.10$.
+If those $100$ configurations spend $8\%$ of the full measured campaign, then
+$\Ratio=0.08/0.10=0.8$: the sample is cheaper than its count suggests. If it
+spends $15\%$, then $\Ratio=1.5$: the sample is costlier than its count
+suggests.
+
+RQ2 compares sampling conclusions under count and measured cost through three
+complementary lenses, in decreasing order of how much they drive our claims.
+\emph{(i)~Cost-controlled sampler comparison (primary).} The replication studies
+we revisit pick the best sampler with a Kruskal--Wallis (KW) omnibus over each
+sampler's per-seed error distribution and a Dunn post-hoc (Holm-adjusted, as in
+the source studies) that reports the \emph{top group} of samplers not
+significantly worse than the best
+\cite{kruskal1952,kaltenecker2019,pereira2020}. We rerun that exact test and
+change one thing: we hold the measured cost fixed instead of the
+sample size. For each context we form a budget grid from the measured costs of
+the predefined sample sizes. At a budget $b$ every sampler enters at the
+\emph{largest predefined sample size whose median measured cost is at most~$b$},
+the most data it can afford. This operating point is chosen without consulting
+error, so no point is selected by test accuracy. We use it as a retrospective,
+cost-indexed evaluation device, relying on observed or pilot-estimated sampler
+costs rather than on test error. A sampler with no affordable size at~$b$ is excluded from
+that comparison. We report whether the KW top group (the set of statistically
+recommendable samplers) changes between the size- and cost-controlled views, and
+how often the source study's own recommended sampler is \emph{evicted} from it.
+Selecting instead the cheapest-error affordable size (a retrospective upper
+envelope applied symmetrically to all samplers) leaves the conclusion unchanged
+and is reported as a sensitivity check.
+\emph{(ii)~Pareto choice set.} A combination is efficient if no other has both
+lower error and lower measured cost. We test whether the measured-cost efficient
+set differs from the count-cost one (Jaccard $<1$) and, since a single
+observation could be noise, whether that difference reproduces under a
+test-set-and-run bootstrap ($p_{\text{differ}}\ge0.95$). \emph{(iii)~Top-$1$
+flip.} The single best strategy--budget combination under the objective $J$ may
+change between count and measured cost. Because this lens considers only the
+top-ranked combination, it is sensitive to small margins between near-tied
+combinations, so we report it with a bootstrap robustness check and treat it as
+secondary evidence. RQ3 interprets the same
+statistics across contexts. We report $p$-values where they are meaningful, but
+always pair them with practical thresholds: CV$\ge0.20$ or
+$p_{90}/p_{10}\ge1.5$ for visible cost spread,
+$|\widetilde{\Ratio}-1|\ge0.05$ for budget mismatch, and Jaccard $<1$ for a
+changed efficient choice set. These thresholds are a-priori reporting
+conventions fixed before analysis rather than tuned cutoffs. They only flag
+where a difference is large enough to be worth reporting, and no conclusion
+depends on the exact value. Full per-scope tests, $p$-values, and effect
+sizes are in the supplementary artifact.
+
+\subsection{Evidence Families}
+\label{subsec:families}
+
+We keep six evidence families separate because they stress different validity
+conditions. Pooling them would give a larger number but a weaker explanation of
+when the sample-size proxy is reliable. The two replication families keep the
+link with published configurable-system sampling studies: one revisits seven
+Kaltenecker-style systems, and the other revisits x264 over $17$ inputs and two
+measured properties. The four extension families then change one condition at a
+time: the cost dimension (performance versus energy), the workload or input, an
+external hyperparameter-optimization corpus, and a large Linux storage-cost
+setting.
+
+The \StudyReplicationICSE family is the most conservative test. It reuses the
+published strategy panel on seven Kaltenecker \etal\ systems
+\cite{kaltenecker2019} ($432$--$68{,}640$ valid configurations and $11$--$54$
+options each, one performance-like target also charged as cost): random,
+solver-based, randomized solver-based, $t$-wise, distance-based, and diversified
+distance-based sampling. It changes only the cost axis from sample count to
+measured performance cost. If a count-based conclusion changes there, the change
+is not caused by inventing a new sampler or a new benchmark. The
+\StudyReplicationICPE family uses the same logic on x264 \cite{pereira2020}, but
+adds context: the same $1{,}152$ configurations ($16$ binary options) are
+observed on $17$ videos and two properties (encoding time and output size, in
+four cost--target scenarios), so we can ask whether the cost proxy is safer when
+target and acquisition cost are the same than when they differ.
+
+The extension families deliberately broaden the construct, and the first two
+reuse published ICSE 2023 measurement datasets rather than a sampling protocol.
+We draw our own samples on their measured configurations, so any cost effect is a
+property of the data and not of a re-run. \StudyEnergy asks whether the issue is
+only about runtime or also appears when performance and energy can each be target
+or cost (the Twins-or-False-Friends corpus \cite{weber2023twins}, fourteen systems,
+$180$--$86{,}058$ configurations each, four scenarios per system). \StudyWorkload
+keeps systems fixed but changes workloads, testing whether a cost-proxy conclusion
+is a property of the system or of the system--workload pair (the M\"uhlbauer
+\etal\ corpus \cite{muhlbauer2023workload}, nine systems, $191$--$6{,}764$
+configurations, $93$ system--workload contexts, $25{,}258$ measurements, with cost
+measured as wall time, or oriented throughput for H2). \StudyLCBench moves outside
+configurable-software performance tables, drawing on the LCBench learning-curve
+benchmark \cite{zimmer2021autopytorch}, and checks whether real runtime learning
+curves in hyperparameter optimization show the same count-versus-cost gap ($35$
+OpenML datasets, $2{,}000$ configurations and $7$ hyperparameters each, accuracy
+as target and runtime as cost). \StudyLinux stresses scale and strategy behavior
+on the TuxKConfig kernel-size datasets \cite{martin2022linux,borges2025linux}:
+random, balanced, coverage, uncertainty, and diversity sample from large
+randconfig pools ($19{,}952$--$92{,}562$ configurations, $494$--$497$ options
+across six releases v4.15--v5.08), and the cost is the uncompressed
+\texttt{vmlinux} image size, a resource-budget proxy rather than measurement time.
+\subsection{Protocol}
+\label{subsec:protocol}
+
+For each available tuple of system, workload/input, target, strategy, training
+size, and run, we replay or generate the training sample, compute
+$\TrainCost$, train the predictor on configuration options only, and evaluate
+MRE on held-out configurations. Stochastic strategies are repeated over
+seeds, about $100$ runs per cell for the replication archives and $30$ for the
+generated families. We exclude measured performance, energy, size, and runtime
+columns from the feature matrix to avoid label leakage, especially when the
+target and acquisition cost are different measured quantities.
+
+\paragraph*{Strategy panels and diagnostic bounds.}
+For the two replication families we reuse the published strategy panels and their
+measured sampling traces directly: the same strategies and the same measured
+configurations as Kaltenecker \etal\ \cite{kaltenecker2019} and Pereira \etal\
+\cite{pereira2020}, changing only the cost axis. The generated families also add \texttt{pilotCost}, a deliberately simple
+cost-aware sampler, as an existence proof rather than a tuned method. It measures
+a random pilot ($20\%$ of the target size, at least four configurations, whose cost
+is charged in $\TrainCost$), fits a ridge model of log cost on the configuration
+options, and predicts every other configuration's cost. It then fills the sample
+from the configurations predicted cheapest, by diversity sampling, so the result
+stays inexpensive while spreading across the option space. Because the pilot is
+charged and it uses no cost information the other samplers lack, its advantage is
+a fair one. Two diagnostic bounds, \texttt{cheapOracle} and \texttt{expensiveOracle},
+instead look at the true costs to pick the cheapest and the most expensive
+configurations, bracketing what perfect cost-awareness could achieve. They are not
+deployable and are never reported as recommendations.

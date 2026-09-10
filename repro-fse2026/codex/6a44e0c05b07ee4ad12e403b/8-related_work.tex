@@ -1,0 +1,57 @@
+% NOTE: merged into Section II "Background and Related Work" (\input'd right after
+% 2-background.tex). The section header and the "Sampling configurable systems"
+% paragraph were folded into the merged "How prior work counts effort" paragraph
+% there. The remaining paragraphs continue Section II.
+\paragraph*{Counting effort versus measuring acquisition cost.}
+Beyond the configurable-systems predecessors revisited in \Cref{sec:background},
+the same count-as-effort convention recurs across tuning, transfer, and
+prediction: ``effort,'' ``efficiency,'' and ``speedup'' are often expressed as
+counts, that is, measurements, evaluations, queries, or target-environment
+samples, because counts are simple to compare and reuse
+\cite{nair2020flash,chen2021mmo,chen2024admmo,ye2025dlisa,gong2023dal,gong2024sempl}.
+Counts sound like budgets only if one count unit stands for a comparable amount
+of acquisition cost. Otherwise, a cost-effective result can be an accuracy
+result wearing a cost label. Even work explicitly framed around cost, such as
+cost-efficient sampling \cite{sarkar2015}, still prices each configuration as one
+unit, whereas we audit its \emph{measured} cost. This does not invalidate prior accuracy results: a
+fixed-$n$ comparison answers a legitimate accuracy question, and only the added
+efficiency or budget reading needs measured-cost calibration. Some tuning work
+already grounds counts in measured wall-clock budgets
+\cite{chen2021multiobj,chen2023aspirations}, while our results show why
+per-configuration and per-strategy calibration is still needed.
+
+\paragraph*{Surrogate and heterogeneous costs.}
+Replacing a real resource with an easy-to-count surrogate is a recurring
+validity concern. In mutation testing, for example, the number of mutants can
+mislead relative to execution time \cite{harmanMutationFSE2020}. We ask the
+analogous question for configuration sampling, but the mechanism and the
+contribution differ from that precedent in three ways. First, the driver is
+\emph{strategy bias}: sampling strategies systematically steer toward cheap or
+costly regions, so equal-size samples from different strategies spend unequal
+measured budgets. There is no analogue of a sampling strategy in mutant
+counting. Second, the acquisition cost and the prediction target can be
+\emph{different} measured quantities (predicting output size while paying
+encoding time), an asymmetry with no mutation-testing counterpart. Third, we do
+not merely flag the threat: we quantify its decision impact by re-running the
+original studies' own Kruskal--Wallis test under measured cost, and we identify
+the conditions (cost heterogeneity, strategy bias, and target--cost
+asymmetry) under which the proxy breaks. The surface observation that
+configurations have heterogeneous cost is not the contribution. The contribution
+is that this changes the set of statistically recommendable samplers and the
+efficient sets.
+
+\paragraph*{Context, learners, and optimization.}
+Prior work shows that sampling conclusions can vary across inputs, workloads,
+and target properties \cite{pereira2020,ye2026domland}, and we use these dimensions
+to test cost-proxy validity. Learner choice is a separate modeling issue: we
+keep literature-aligned learners for replications and use stronger sklearn
+baselines as robustness checks or primary learners for newly framed families
+\cite{breiman2001random,valov2015,amand2019,bao2018,sklearn_api}. Active
+learning and multi-objective optimization offer candidate solutions, but they
+inherit the same proxy question through their cost term
+\cite{sarkar2015,siegmund2015FSE,li2020pareto}. We therefore treat measured
+cost as a prerequisite for accuracy--cost claims, not as a new optimizer. A
+complementary strand instead measures model-building or adaptation cost rather
+than label acquisition: training time \cite{gong2022encoding}, online-drift
+overhead \cite{xiang2026dhda}, and deep-learning costs \cite{gong2024dcpl}.
+Extending our audit to those axes is future work.

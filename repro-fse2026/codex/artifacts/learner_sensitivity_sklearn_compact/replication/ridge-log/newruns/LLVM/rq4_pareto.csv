@@ -1,0 +1,16 @@
+target_context,cost_context,strategy,level,n,pct_n,median_pct_cost,median_train_cost,median_mre,pareto_count,pareto_empirical,system,cost_property,target_property,scenario
+LLVM,LLVM,random,t1,11,0.0107421875,0.010715004283283695,2599.231666666667,0.042970788498966295,1,1,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,solverBased,t1,11,0.0107421875,0.009808528658041212,2379.34,0.09322478795846711,0,1,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,henard,t1,11,0.0107421875,0.01022723815554777,2480.9100000000008,0.0526548351185552,0,1,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,distBased,t1,11,0.0107421875,0.010988180247657367,2665.498333333333,0.04759114511692501,0,0,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,divDistBased,t1,11,0.0107421875,0.010989533760358113,2665.826666666666,0.04616788480189153,0,0,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,random,t2,56,0.0546875,0.05472965706825081,13276.248333333335,0.026629088360749665,1,1,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,solverBased,t2,56,0.0546875,0.05345532142518812,12967.121666666666,0.03172322919476547,0,1,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,henard,t2,56,0.0546875,0.05303219411719134,12864.480000000003,0.03925021913524407,0,1,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,distBased,t2,56,0.0546875,0.05526167000711768,13405.303333333333,0.03173570432800253,0,0,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,divDistBased,t2,56,0.0546875,0.054802025338692155,13293.803333333333,0.029214360166905776,0,0,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,random,t3,175,0.1708984375,0.17112307173565094,41510.81,0.025022601319710295,0,1,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,solverBased,t3,175,0.1708984375,0.16784598388597097,40715.85833333334,0.02559553438158077,0,1,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,henard,t3,175,0.1708984375,0.16407592197643742,39801.32166666667,0.04845044583366543,0,0,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,distBased,t3,175,0.1708984375,0.17262432343946235,41874.98166666667,0.027093198835601632,0,0,LLVM,performance,performance,cost_performance__target_performance
+LLVM,LLVM,divDistBased,t3,175,0.1708984375,0.1711556522291887,41518.71333333333,0.02483260938630463,1,1,LLVM,performance,performance,cost_performance__target_performance

@@ -1,0 +1,24 @@
+hypothesis,scope,scope_value,statistic,statistic_value,p_value,effect,effect_value,effect_label,verdict,notes
+H1a,system,twins_HSQLDB_generated|cost=energy,cv_cost,0.3584342031726361,nan,p90_over_p10,2.259886348729324,moderate,supports,CV=0.358; p90/p10=2.26
+H1b,system,twins_HSQLDB_generated|cost=energy,kruskal_wallis_min_p,2.7272852825671006e-08,2.7272852825671006e-08,eta_squared_max,0.6485865200636,large,supports,K-W per level: 9/11 levels with p<0.05; min p=2.73e-08; max eta^2=0.649
+H2a,system,twins_HSQLDB_generated|cost=energy,spearman_rho,0.9913948722310417,0.0,rho,0.9913948722310417,strong positive,supports,Spearman rho=0.991 on n=682 (records-level)
+H2b,system,twins_HSQLDB_generated|cost=energy,median_ratio,0.9935995822922641,nan,abs_deviation_from_1,0.006400417707735917,calibrated,inconclusive,"median ratio=0.994; 95% CI [0.988,0.998]; |median-1|=0.0064"
+H2c,system,twins_HSQLDB_generated|cost=energy,kruskal_wallis_p,1.037266081802791e-49,1.037266081802791e-49,eta_squared,0.3414048656407175,large,supports,K-W p=1.04e-49; eta^2=0.341; k=5 strategies
+H1a,system,twins_HSQLDB_generated|cost=performance,cv_cost,0.3189722736474824,nan,p90_over_p10,2.0448,moderate,supports,CV=0.319; p90/p10=2.04
+H1b,system,twins_HSQLDB_generated|cost=performance,kruskal_wallis_min_p,1.270430198622467e-08,1.270430198622467e-08,eta_squared_max,0.6766754454445566,large,supports,K-W per level: 11/11 levels with p<0.05; min p=1.27e-08; max eta^2=0.677
+H2a,system,twins_HSQLDB_generated|cost=performance,spearman_rho,0.9916327913381009,0.0,rho,0.9916327913381009,strong positive,supports,Spearman rho=0.992 on n=682 (records-level)
+H2b,system,twins_HSQLDB_generated|cost=performance,median_ratio,0.9953654113793151,nan,abs_deviation_from_1,0.004634588620684887,calibrated,inconclusive,"median ratio=0.995; 95% CI [0.992,0.999]; |median-1|=0.00463"
+H2c,system,twins_HSQLDB_generated|cost=performance,kruskal_wallis_p,1.0205502746572473e-53,1.0205502746572473e-53,eta_squared,0.36888526976233893,large,supports,K-W p=1.02e-53; eta^2=0.369; k=5 strategies
+H3a,system,twins_HSQLDB_generated|cost=energy|target=energy,top1_flips,4.0,nan,flip_fraction,0.5714285714285714,frequent flips,supports,top-1 flips 4/7; mean Kendall tau=0.893
+H4a,system,twins_HSQLDB_generated|cost=energy|target=energy,exclusive_pairs,8.0,nan,pareto_jaccard,0.5555555555555556,different,supports,|count|=10; |empirical|=18; only_count=0; only_empirical=8; Jaccard=0.556
+H4b,system,twins_HSQLDB_generated|cost=energy|target=energy,pareto_jaccard,0.5555555555555556,nan,frontier_size_diff,8.0,frontiers differ,supports,|count|=10; |empirical|=18; Jaccard=0.556
+H3a,system,twins_HSQLDB_generated|cost=energy|target=performance,top1_flips,4.0,nan,flip_fraction,0.5714285714285714,frequent flips,supports,top-1 flips 4/7; mean Kendall tau=0.88
+H4a,system,twins_HSQLDB_generated|cost=energy|target=performance,exclusive_pairs,8.0,nan,pareto_jaccard,0.5789473684210527,different,supports,|count|=11; |empirical|=19; only_count=0; only_empirical=8; Jaccard=0.579
+H4b,system,twins_HSQLDB_generated|cost=energy|target=performance,pareto_jaccard,0.5789473684210527,nan,frontier_size_diff,8.0,frontiers differ,supports,|count|=11; |empirical|=19; Jaccard=0.579
+H3a,system,twins_HSQLDB_generated|cost=performance|target=energy,top1_flips,3.0,nan,flip_fraction,0.42857142857142855,occasional flips,supports,top-1 flips 3/7; mean Kendall tau=0.895
+H4a,system,twins_HSQLDB_generated|cost=performance|target=energy,exclusive_pairs,10.0,nan,pareto_jaccard,0.5,different,supports,|count|=10; |empirical|=20; only_count=0; only_empirical=10; Jaccard=0.5
+H4b,system,twins_HSQLDB_generated|cost=performance|target=energy,pareto_jaccard,0.5,nan,frontier_size_diff,10.0,frontiers differ,supports,|count|=10; |empirical|=20; Jaccard=0.5
+H3a,system,twins_HSQLDB_generated|cost=performance|target=performance,top1_flips,4.0,nan,flip_fraction,0.5714285714285714,frequent flips,supports,top-1 flips 4/7; mean Kendall tau=0.89
+H4a,system,twins_HSQLDB_generated|cost=performance|target=performance,exclusive_pairs,9.0,nan,pareto_jaccard,0.55,different,supports,|count|=11; |empirical|=20; only_count=0; only_empirical=9; Jaccard=0.55
+H4b,system,twins_HSQLDB_generated|cost=performance|target=performance,pareto_jaccard,0.55,nan,frontier_size_diff,9.0,frontiers differ,supports,|count|=11; |empirical|=20; Jaccard=0.55
+H3b,global,all_twins_cost_target_scenarios,spearman_rho_cv_flips,0.5773502691896257,0.4226497308103746,rho,0.5773502691896257,single-system descriptive,inconclusive,"Spearman(CV, top1 flips) rho=0.577 across n=4 cost-target scenarios; single-system scope is too small for the cross-system H3b claim"

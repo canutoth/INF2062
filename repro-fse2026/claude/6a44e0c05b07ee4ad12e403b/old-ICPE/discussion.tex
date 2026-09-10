@@ -1,0 +1,135 @@
+\section{Discussion} \label{discussion}
+
+%In this section, we further discuss the questions: \textit{What are the most effective sampling strategies? Is random sampling a strong baseline? Is there a ``dominant" sampling strategy when the system is subject to variation of inputs and the prediction of different quantitative properties?} 
+
+
+%\textbf{What are the most effective sampling strategies?}
+
+%\paragraph{Dominant approach: accuracy}
+%For the property encoding time, the accuracy of random and diversified distance-based dominate for all 17 input videos.
+%In \ju{Figure from distributions?}, we compare the performance distributions of the six sampling strategies with the performance distribution of the set of all valid configurations.
+%shows the encoding time distribution of all sampling strategies over different . 
+%To obtain accurate performance predictions, a representative sample set of configurations is required.
+%We observe a smaller distance for both random and diversified distance-based.
+%A smaller distance indicates a representative sample set of configurations, which may explain their dominance.
+%that represents the set of all valid configurations 
+
+\textbf{The surprising effectiveness of coverage-based sampling.}
+Why is $t$-wise sampling more effective for the input video $x264_{15}$? 
+For $x264_{15}$, the performance distribution is rather unique compared to the others (see Figure~\ref{subfig:park}, page~\pageref{subfig:park}). 
+To investigate why $t$-wise is more effective on this distribution, we analyzed the set of selected features by $t$-wise. We aim at understanding which features are frequently included in the sampling and how its frequencies differ from random. 
+We recall that $t$-wise sampling is not subject to randomness and is the same for any video and for encoding time or size.
+%The t-wise strategy cluster some options.
+We observed that the t-wise sampling prioritizes the feature \hoption{no\_mbtree} to false, \ie \hoption{no\_mbtree} is most of the time deactivated (it is not the case in random that has a good balance). 
+To better understand the importance of \hoption{no\_mbtree} for $x264_{15}$, we use (1) a random forest for computing so-called feature importance~\cite{breiman2001random, ftimportancerf,molnar2019,allmodelwrong2018} and (2) polynomial regressions for computing coefficients of options and pair-wise interactions among options~\cite{samreen2016, westermann2012, grebhahn2017}. 
+We found that \hoption{no\_mbtree} has a feature importance of 0.97 (out of 1) for encoding size (see our supplementary website). We also found that the feature \hoption{no\_mbtree} has a strong negative effect on video $x264_{15}$.
+%The same cannot be observed for the prediction of the property time (as expected).
+ As for solver-based sampling, $t$-wise sampling relies on clustered zones (see Section~\ref{sampling}) that luckily cover the most influential options.
+The clustering zones must contain features with high significance on performance which may explain high accuracy results.
+Specifically, the sample-set of $t$-wise is locally clustered around the configurations with \hoption{no\_mbtree} to false, which is a very effective strategy for $x264_{15}$. However, for other input videos, the coverage criterion is not well-suited. 
+
+
+
+\textbf{The surprising effectiveness of solver-based sampling.}
+For the property encoding size, we observe good accuracy predictions for three sampling strategies: random, randomized solver-based, and solver-based.
+% We were expecting such good results for random sampling, otherwise it was not expected. 
+ Why solver-based sampling strategies are sometimes more effective than random for size?
+We further analyzed the set of frequently selected features by these strategies for both experiments of time and size.
+We observe that the randomized solver-based and solver-based strategies were very effective to capture ``clustered" effects of important options for size. 
+In particular, randomized solver-based tend to follow a similar strategy as $t$-wise: \hoption{no\_mbtree} option is most of the time false in the sample set. 
+For $t$=1, \hoption{no\_mbtree} option is even always set to false. 
+%sample set is locally clustered around the configurations with the most relevant features with a higher influence on size.
+%The same cannot be observed for the prediction of the property time (as expected).
+ The employed solver-based sampling strategy relies on a random seed which defines clustering zones (see Section~\ref{sampling}) that luckily cover the most influential options. We did observe strong deviations of options' frequencies in the samples of solver-based sampling strategy compared to random (see our supplementary website). For the prediction of encoding time, the clustering mostly contain features with low significance which may explain the worst accuracy results. 
+ % As future work, we aim to systematically explain this phenomenon through the confrontation of influential options and the frequencies of options. 
+ % for solver-based strategies.
+%We deeper analyze the selected features from the sampling technique and their relevance in performance.
+%\ju{Figure} presents the feature frequency ranking for the solver-based sampling strategy we used in this paper (for t=1), and the feature rankings based on the relevance of each feature over each performance property (\ie time and size).
+
+There are several solvers available and each solver has its owns particularities, \ie the way they pick and thus cluster configurations can drastically change. 
+%Consequently, the accuracy of a solver-based sampling strategy is not always stable.
+The assumption that a certain sampling is the best one by comparing it to a solver-based sampling is not reliable since solver-based strategies may cluster by accident the (un-)important options to a specific performance property.
+Our study calls to propose sampling strategies with predictable and documented properties of the frequencies of options in the sample (\eg uniform random sampling or distance-based sampling).
+
+% new white-box approaches that also make use of domain knowledge.%should be devised.
+
+
+\textbf{Is there a ``dominant" sampling strategy when the system performance is measured over the variation of hardware and the version of the target system?}
+%\ma{Write it as a recommendation for researchers? it's an open issue raised by our work}
+We compare our results with the results obtained in Kaltenecker et al.~\cite{kaltenecker2019} to encode the \textit{same} ($x264_4$) input video Sintel trailer (734 MB).
+Their measurements were performed on different hardware (Intel Core Q6600 with 4 GB RAM (Ubuntu 14.04)) and over a different version of x264.  
+Diversity distance-based sampling yields the best performance in their settings. In our case, random sampling outperforms diversity distance-based sampling (see Table~\ref{tab:SintelVideo_TIME_MRE}).
+Thus, we can hypothesize that \textit{sampling strategies are also sensitive to different hardware characteristics and software versions (in addition to targeted performance properties and input videos).} 
+Further experiments on different hardware and versions are needed though to confirm this hypothesis.
+There are several questions that arise from this:
+To what extent are sampling strategies sensitive to different hardware characteristics and software versions? Are the interactions and influence of configuration options on performance consistent across different software versions? Do we experience the same for different performance properties? 
+ 
+
+
+
+% We also notice that t-wise is not a good strategy for other videos because \hoption{no\_mbtree} is less important there.
+
+
+\textbf{Answering RQ1 (accuracy)} Is there a ``dominant" sampling strategy for the x264 configurable system whatever inputs and targeted quantitative properties?
+For the property encoding time, there is a dominant sampling strategy (\ie uniform random sampling) as shown in Kaltenecker et al.~\cite{kaltenecker2019}, and thus the sampling can be reused whatever the input video is.
+For the property encoding size, although the results are similar around some sampling strategies, they differ in a noticeable way from encoding time and suggest a higher input sensitivity.
+Overall, random is the state-of-the-art sampling strategy but is not a dominant sampling strategy in all cases, \ie the ranking of dominance changes significantly given different inputs, properties and sample sizes.
+A possible hypothesis is that individual options and their interactions can be more or less influential depending on input videos, thus explaining the variations' effect of sampling over the accuracy. Our results pose a new challenge for researchers: Identifying what sampling strategy is the best given the possible factors influencing the configurations' performances of a system.
+
+
+%\textbf{Is random sampling a strong baseline?} Yes,
+% We show that random sampling presents very good results, \wrt accuracy, whatever the input video and sample size.
+%for the prediction of both performance properties, time and size.
+% Random works well and very close (if not the best) to the best sample strategy.
+% Consequently, 
+
+\textbf{Answering RQ2 (robustness).} We have quantitatively analyzed the effect of a sampling strategy over the prediction variance. 
+Overall, random (for size) and diversified distance-based (for time and size) have higher robustness. 
+We make the observation that uniform random sampling is not necessarily the best choice when robustness should be considered (but it is for accuracy). 
+In practical terms, practitioners may have to find the right balance between the two objectives. As a sweet-spot between accuracy and robustness, diversified distance-based sampling (for time), and either random or randomized solver-based sampling (for size) are the best candidates. 
+We miss however an actionable metric that could take both accuracy and robustness into account. 
+% devise a metric that takes both goals (\ie accuracy and robustness) into account at once.
+
+
+% Diversified distance-based and randomized solver-based depend on statistics to have diversified and representative configurations,
+%concentrate in relevant zones with a small distance distribution to the whole population of valid configurations \ju{(see figure).}
+% while the pure distance-based sampling and solver-based sampling use a solver with a certain distance (or seeds) leading to a cluster of configurations.
+%``possible" non-representative features and high variation of the error rate~\cite{kaltenecker2019}.
+
+%As a sweet-spot between accuracy and robustness, diversified distance-based sampling (for time), and either random or randomized solver-based sampling (for size).
+% \end{itemize}
+
+% In the future, we challenge researchers to:
+% \begin{itemize}
+    %\item devise a metric that takes both goals (\ie accuracy and robustness) into account at once.
+% \end{itemize}
+
+% \ju{For solver-based sampling and randomized solver-based sampling, for the property encoding time, the error rate is increasing as much data we have for training, which is not intuitive.
+% We try to explain this phenomenon by having a close look at the variances of the data difference between individual increases on sample sizes.
+% The additional data take into account over individual increases show that ...}                                                     
+%which disturbed and decreased the accuracy of these sampling strategies.
+
+
+
+\textbf{Our recommendations for practitioners} are as follows:
+\begin{itemize}
+    \item uniform random sampling is a very strong baseline whatever the inputs and performance properties. In the absence of specific-knowledge, practitioners should rely on this dominant strategy for reaching high accuracy; %we recommend practitioners of a configurable system to rely on this dominant strategy %that is cost-effective whatever the factors influencing the distribution of its configuration space. 
+    \item in case uniform random sampling is computationally infeasible, distance-based sampling strategies are interesting alternatives;
+    \item the use of other sampling strategies does not pay off in terms of prediction accuracy. When robustness is considered as important, uniform random sampling is not the best choice and here we recommend diversified distance-based sampling.
+    %However, for the other sampling strategies, it is still hard for us to advise practitioners about which sampling to use given such a non-dominant scenario.
+\end{itemize}
+%computational resources
+%, but at the price of higher computational effort to enumerate all valid configurations. 
+%Although the effort of random is high 
+%the enumeration of all valid configurations
+
+\textbf{The impacts of our results on configuration and performance engineering research} are as follows:
+\begin{itemize}
+    \item as uniform random sampling is effective for learning performance prediction models, additional research effort is worth doing to make it scalable for large instances. Recent results~\cite{DBLP:conf/splc/MunozOPFB19,DBLP:conf/splc/OhGB19,DBLP:conf/icse/HeradioFME19,plazar2019} show some improvements, but the question is still open for very large systems (\eg Linux~\cite{acher:hal-02314830});
+    \item some sampling strategies are surprisingly effective for specific inputs and performance properties. Our insights suggest the existence of specific sampling strategies that could prioritize specific important (interactions between) options. An open issue is to discover them for any input or performance property; 
+   \item performance measurements with similar distributions may be grouped together to enable the search for dominants sampling strategies; %% I like the idea, but it's more a solution proposal
+    \item beating random is possible but highly challenging in all situations; 
+    \item it is unclear how factors such as the version or the hardware influence the sensitivity of the sampling effectiveness (and how such influence differs from inputs and performance properties); 
+    \item we warn researchers that the effectiveness of sampling strategies for a given configurable system can be biased by the workload and the performance property used. 
+\end{itemize}
+

@@ -1,0 +1,8 @@
+target_context,cost_context,lambda,top1_size,top1_time,top1_agreement,top3_overlap,kendall_tau,mean_abs_rank_difference
+linux413_vmlinux,linux413_vmlinux,0.1,balanced_n00926,balanced_n00926,1,1.0,0.8526315789473684,1.0
+linux413_vmlinux,linux413_vmlinux,0.25,balanced_n00926,balanced_n00926,1,1.0,0.9052631578947369,0.8
+linux413_vmlinux,linux413_vmlinux,0.5,balanced_n00926,balanced_n00926,1,0.6666666666666666,0.8210526315789474,1.5
+linux413_vmlinux,linux413_vmlinux,1.0,balanced_n00926,random_n00926,0,1.0,0.7248677248677249,2.4
+linux413_vmlinux,linux413_vmlinux,2.0,balanced_n00926,cheapOracle_n00926,0,1.0,0.6105263157894737,2.8
+linux413_vmlinux,linux413_vmlinux,4.0,balanced_n00926,cheapOracle_n00926,0,0.6666666666666666,0.5578947368421052,3.3
+linux413_vmlinux,linux413_vmlinux,10.0,balanced_n00926,cheapOracle_n00926,0,0.6666666666666666,0.5263157894736842,3.3

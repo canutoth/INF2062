@@ -1,0 +1,16 @@
+target_context,cost_context,strategy,level,n,pct_n,median_pct_cost,median_train_cost,median_mre,pareto_count,pareto_empirical,system,cost_property,target_property,scenario
+7z,7z,random,t1,39,0.000568521407017595,0.0005670840591715355,441805.0,0.571734821744234,0,0,7z,performance,performance,cost_performance__target_performance
+7z,7z,solverBased,t1,39,0.000568521407017595,0.00016157477024595214,125880.0,0.5142690079540093,1,1,7z,performance,performance,cost_performance__target_performance
+7z,7z,henard,t1,39,0.000568521407017595,0.00022389169982524174,174430.0,0.6525590742927215,0,0,7z,performance,performance,cost_performance__target_performance
+7z,7z,distBased,t1,39,0.000568521407017595,0.0004546312023138308,354195.0,0.6189023252581127,0,0,7z,performance,performance,cost_performance__target_performance
+7z,7z,divDistBased,t1,39,0.000568521407017595,0.0006833041701654959,532350.0,0.7031180034218991,0,0,7z,performance,performance,cost_performance__target_performance
+7z,7z,random,t2,600,0.008746483184886076,0.008647863434868341,6737395.0,0.17355773306216063,1,1,7z,performance,performance,cost_performance__target_performance
+7z,7z,solverBased,t2,600,0.008746483184886076,0.007118095125361832,5545580.0,0.3911528274352402,0,1,7z,performance,performance,cost_performance__target_performance
+7z,7z,henard,t2,600,0.008746483184886076,0.0027210228427422467,2119900.0,0.4036057100784488,0,1,7z,performance,performance,cost_performance__target_performance
+7z,7z,distBased,t2,600,0.008746483184886076,0.0072255805977196,5629320.0,0.3512812615600059,0,1,7z,performance,performance,cost_performance__target_performance
+7z,7z,divDistBased,t2,600,0.008746483184886076,0.00893285909829033,6959430.0,0.21331740567977397,0,0,7z,performance,performance,cost_performance__target_performance
+7z,7z,random,t3,4091,0.05963643784894824,0.05934948210780834,46238115.0,0.0894138079477857,1,1,7z,performance,performance,cost_performance__target_performance
+7z,7z,solverBased,t3,4091,0.05963643784894824,0.0503449938384537,39222880.0,0.18378079936704053,0,0,7z,performance,performance,cost_performance__target_performance
+7z,7z,henard,t3,4091,0.05963643784894824,0.033265226256084995,25916340.0,0.19952604325848114,0,0,7z,performance,performance,cost_performance__target_performance
+7z,7z,distBased,t3,4091,0.05963643784894824,0.05690299389911484,44332100.0,0.16966409201367255,0,1,7z,performance,performance,cost_performance__target_performance
+7z,7z,divDistBased,t3,4091,0.05963643784894824,0.06169370894102127,48064460.0,0.1441706746035995,0,0,7z,performance,performance,cost_performance__target_performance

@@ -1,0 +1,107 @@
+\section{Background and Replicated Claims}
+\label{sec:background}
+
+\subsection{Sampling configuration spaces}
+
+A configurable system with $k$ options spans a configuration space whose
+valid members $\mathcal{V}$ are constrained by a variability model
+\citep{apel2013feature}. A \emph{sampling strategy} selects a subset
+$S \subseteq \mathcal{V}$, $|S| = n$, whose measurements serve a
+downstream purpose: training a performance model
+\citep{guo2013variability,siegmund2015performance,ha2019deepperf},
+finding a near-optimal configuration \citep{oh2017srs,nair2020flash}, or,
+in our setting, bounding worst-case (or best-case) performance. Strategy
+families include uniform random sampling (in practice often
+solver-mediated \citep{plazar2019uniform,heradio2022uniform}), coverage
+oriented $t$-wise sampling \citep{medeiros2016comparison,baranov2024baital,hess2024unwise},
+distance- and diversity-based sampling \citep{kaltenecker2019distance},
+and adaptive strategies that use intermediate measurements to steer
+selection \citep{sarkar2015cost,nair2017bad}.
+
+\emph{Statistical Recursive Search} (\srs) \citep{oh2017srs}, the
+strategy recommended by \citet{weis2026risk}, is adaptive: it repeatedly
+draws a small random batch (25 configurations), identifies option
+decisions shared by the two best configurations of the batch, keeps the
+decisions whose enabled/disabled performance difference is significant
+under Welch's $t$-test ($p<0.05$), restricts the space accordingly, and
+recurses; if recursion stops before the budget is exhausted, the
+remainder is filled with random configurations.
+
+\subsection{Posterior risk and posterior confidence}
+\label{sec:posterior}
+
+Let $y(c)$ be the measured target of configuration $c \in \mathcal{V}$
+and let $S$ be a sample. For a worst-case (maximum) bound, the sampled
+bound is $\hat{b} = \max_{c \in S} y(c)$, and the \emph{posterior risk}
+is the fraction of the reference universe that violates it:
+\begin{equation}
+  R(S) \;=\; \frac{\big|\{\,c \in \mathcal{V} : y(c) > \hat{b}\,\}\big|}{|\mathcal{V}|}.
+  \label{eq:risk}
+\end{equation}
+Repeating the sampling $r$ times yields an empirical distribution of
+risks; the \emph{posterior confidence} at tolerance $\varepsilon$ is the
+fraction of repetitions with $R \le \varepsilon$, i.e., the empirical CDF
+of risk. Integrating this CDF over $\varepsilon \in [0,1]$ gives the
+\emph{integrated posterior confidence} $A_{\mathrm{post}} = 1 -
+\overline{R}$, a scalar summary (higher is better). Scenario theory
+provides a strategy-agnostic \emph{prior} baseline: for uniform random
+samples of size $N$, confidence at tolerance $\varepsilon$ is
+$1-(1-\varepsilon)^{N+1}$ (we follow the artifact's exponent convention
+and report a sensitivity with exponent $N$). The \emph{integrated
+confidence discrepancy} $\omega = A_{\mathrm{post}} - A_{\mathrm{prior}}$
+measures how much better (or worse) a strategy's guarantees are than the
+random-sampling prior at the same size. All quantities are computed from
+measurements only; no learner is involved.
+
+\citet{weis2026risk} evaluate five strategies (uniform random,
+solver-based, diversified distance-based, $t$-wise, \srs) on seven
+systems with exhaustively measured configuration spaces (7z, BerkeleyDB-C,
+Dune, Hipacc, JavaGC, LLVM, Polly), at a per-system budget $t2$ matching
+the size of a pairwise-coverage sample (56--843 configurations), with 100
+repetitions. We refer to their headline results as four claims:
+
+\begin{description}
+\item[C1 (discriminative power).] Posterior risk and confidence
+  distinguish sampling strategies at the same budget, enabling rigorous
+  comparison beyond observed performance values.
+\item[C2 (\srs{} superiority).] \srs{} yields consistently tighter
+  guarantees---lower posterior risk, higher posterior confidence---than
+  the alternatives at the same budget.
+\item[C3 (solver unreliability).] Plain solver-based sampling is the
+  least reliable strategy for probabilistic guarantees.
+\item[C4 (budget scaling).] Guarantees improve as the sample size grows.
+\end{description}
+
+\subsection{Sample size versus sampling cost}
+\label{sec:costargument}
+
+The budget in C1--C4 is a \emph{count}. The construct-validity concern is
+that counts are not effort: measuring configuration $c$ costs some
+$\kappa(c) > 0$ (seconds of wall-clock, joules, dollars), and strategies
+select different configurations. We quantify the gap with the \emph{cost
+share}
+$\%cost(S) = \sum_{c\in S}\kappa(c) / \sum_{c\in\mathcal{V}}\kappa(c)$,
+the \emph{size share} $\%n(S) = |S|/|\mathcal{V}|$, and their ratio, the
+\emph{calibration ratio} $\%cost/\%n$ (1.0 iff the sample is
+cost-representative). Cost-indexing the prior baseline is then immediate:
+a strategy that spent cost share $\%cost$ has an \emph{effective
+cost-equivalent size} $N_{\mathrm{eff}} = \%cost \cdot |\mathcal{V}|$,
+and $\omega_{\mathrm{cost}} = A_{\mathrm{post}} -
+A_{\mathrm{prior}}(N_{\mathrm{eff}})$ asks whether its guarantees beat
+what uniform random sampling would be expected to deliver \emph{for the
+same spend}. Analogously, Pareto frontiers over (confidence, budget) can
+use either $n$ or measured cost as the budget axis; comparing the two
+frontiers (by membership and Jaccard overlap) quantifies how much the
+choice of cost construct changes the decision surface. Throughout,
+$\kappa$ is itself a measured property of the corpus (runtime or energy),
+not a model.
+
+\subsection{Replication terminology}
+
+Following \citet{shull2008role} and \citet{gomez2014understanding}, \rqone{}
+is a \emph{close} replication on the original artifact (same data, same
+strategy samples, independently reimplemented analysis) and a
+\emph{conceptual} replication on five further corpora (same constructs
+and hypotheses, different populations, partially different strategy
+sets). \rqtwo{} is an \emph{extension}: it changes one construct---the
+budget axis---while holding everything else fixed.

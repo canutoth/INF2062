@@ -1,0 +1,52 @@
+\section{Threats to Validity}
+\label{sec:threats}
+
+\paragraph{Construct validity.} Our cost construct $\kappa$ is the
+measured value of a cost-like property shipped with each corpus (runtime,
+energy, training time). It captures the dominant marginal cost of
+acquiring one configuration's measurement but omits fixed costs (build
+and deployment machinery, engineer time) and possible parallelism. On
+Linux, cost and target coincide (kernel size proxies build effort), which
+makes the coupling maximal by construction; we therefore base no
+coupling-mechanism claim on Linux and derive the mechanism from the
+ENERGY/LCBench contrast, where cost and target are measured
+independently. Conversely, the equal-spend budgets ($B = n_{\mathrm{ref}}
+\cdot \bar\kappa$) inherit random sampling's expected spend as the
+reference; other anchors would shift absolute win rates but not the
+ENERGY-versus-LCBench contrast.
+
+\paragraph{Internal validity.} All pipelines are seeded and were verified
+to be deterministic end to end (an interrupted Linux sweep reproduced its
+completed part bit-identically when rerun). Significance-based results
+are FDR-controlled per (corpus, hypothesis) family; the headline H1
+counts move only on LCBench (154 $\to$ 144 of 210). Stochastic strategies
+use 30--100 seeds; deterministic strategies contribute single runs, so
+their per-scope comparisons rest on decision rules rather than tests.
+Our \srs{} reimplementation was audited against the artifact
+(Section~\ref{sec:srsaudit}); the FSE-artifact corpus itself uses the
+authors' shipped samples, insulating the close replication from
+reimplementation bias. The artifact's duplicate-containing \srs{} fills
+mean its nominal sample sizes are occasionally 1--5 configurations
+optimistic; this slightly favors \srs{} in size-indexed comparisons and
+is therefore conservative with respect to our cost-indexed conclusions.
+
+\paragraph{External validity.} Linux and LCBench are large measured
+pools, not exhaustive configuration spaces; every posterior-risk
+statement for them is pool-relative, and pool-construction bias (e.g.,
+how TuxKConfig configurations were generated) bounds what the guarantees
+mean. LCBench is deliberately outside configurable software; we use it to
+probe the framework's domain sensitivity, not to make claims about
+hyperparameter optimization practice. Our budget grids emphasize small
+samples on the generated families ($n \le 64$, $\le$30\% of pools), the
+regime where practitioners with expensive measurements operate but also
+the regime least favorable to \srs; the x264 and FSE-artifact corpora
+cover the original $t$-wise-scale regime, and the equal-spend gradient
+connects the two. We study worst-case (maximum) bounds only; best-case
+bounds and the original study's measurement-noise and
+restricted-ground-truth robustness experiments are not replicated here.
+
+\paragraph{Conclusion validity.} Counts aggregate scopes, and scopes
+within a corpus share systems and pools; we therefore never pool scopes
+across corpora for significance testing and report per-corpus counts
+throughout. Where we summarize across corpora (e.g., 830/851), the figure
+is descriptive, not inferential.

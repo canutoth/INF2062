@@ -1,0 +1,39 @@
+\begin{table}[t]
+  \centering\small
+  \caption{Per-release breakdown of the full Linux protocol (pool-relative;
+  levels 1\%/2\%/5\% of each release's measured pool). $n$: sample size at
+  the level; H1: posterior-risk distributions differ (Kruskal--Wallis,
+  $\alpha{=}.05$); winner: best cost-normalized strategy
+  ($\omega_{\mathrm{cost}}$); \srs{} front.: \srs{} on the empirical
+  cost/confidence Pareto frontier; top chg.: top recommendation changes
+  under the cost axis; $J$: Jaccard overlap of the two frontiers.}
+  \label{tab:appendix-linux}
+  \setlength{\tabcolsep}{4.5pt}
+  \begin{tabular}{@{}llrlcccr@{}}
+    \toprule
+    Release & Level & $n$ & Winner & H1 & \srs{} front. & Top chg. & $J$ \\
+    \midrule
+    413 & 1\% & 926 & \textsf{diversity} & \checkmark & \checkmark & \checkmark & 0.14 \\
+    413 & 2\% & 1,851 & \textsf{diversity} & \checkmark & \checkmark & -- & 0.14 \\
+    413 & 5\% & 4,628 & \textsf{uncertainty} & \checkmark & \checkmark & \checkmark & 0.17 \\
+    415 & 1\% & 394 & \textsf{diversity} & \checkmark & \checkmark & \checkmark & 0.14 \\
+    415 & 2\% & 788 & \textsf{diversity} & \checkmark & \checkmark & \checkmark & 0.17 \\
+    415 & 5\% & 1,970 & \textsf{balanced} & \checkmark & -- & \checkmark & 0.20 \\
+    420 & 1\% & 235 & \textsf{diversity} & \checkmark & \checkmark & \checkmark & 0.12 \\
+    420 & 2\% & 470 & \textsf{diversity} & \checkmark & \checkmark & -- & 0.17 \\
+    420 & 5\% & 1,174 & \textsf{diversity} & \checkmark & \checkmark & -- & 0.17 \\
+    500 & 1\% & 200 & \textsf{diversity} & \checkmark & \checkmark & \checkmark & 0.14 \\
+    500 & 2\% & 399 & \textsf{diversity} & \checkmark & \checkmark & -- & 0.14 \\
+    500 & 5\% & 998 & \textsf{diversity} & \checkmark & \checkmark & -- & 0.12 \\
+    504 & 1\% & 258 & \textsf{diversity} & \checkmark & \checkmark & \checkmark & 0.17 \\
+    504 & 2\% & 517 & \textsf{diversity} & \checkmark & \checkmark & -- & 0.12 \\
+    504 & 5\% & 1,292 & \textsf{diversity} & \checkmark & \checkmark & -- & 0.14 \\
+    507 & 1\% & 202 & \textsf{diversity} & \checkmark & \checkmark & \checkmark & 0.14 \\
+    507 & 2\% & 403 & \textsf{diversity} & \checkmark & -- & \checkmark & 0.17 \\
+    507 & 5\% & 1,008 & \textsf{diversity} & \checkmark & \checkmark & \checkmark & 0.14 \\
+    508 & 1\% & 219 & \textsf{diversity} & \checkmark & \checkmark & \checkmark & 0.12 \\
+    508 & 2\% & 438 & \textsf{diversity} & \checkmark & \checkmark & \checkmark & 0.14 \\
+    508 & 5\% & 1,096 & \textsf{diversity} & \checkmark & \checkmark & -- & 0.17 \\
+    \bottomrule
+  \end{tabular}
+\end{table}

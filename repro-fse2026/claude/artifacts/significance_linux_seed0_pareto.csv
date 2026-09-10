@@ -1,0 +1,8 @@
+context,n_combos,n_count_eff,n_meas_eff,jaccard,n_missed,p_differ
+linux413,22,5,10,0.5,5,0.999
+linux415,22,5,6,0.8333,1,0.736
+linux420,23,5,5,1.0,0,0.323
+linux500,23,4,4,1.0,0,0.396
+linux504,23,5,6,0.8333,1,0.782
+linux507,23,4,11,0.3636,7,1.0
+linux508,23,5,8,0.625,3,0.985

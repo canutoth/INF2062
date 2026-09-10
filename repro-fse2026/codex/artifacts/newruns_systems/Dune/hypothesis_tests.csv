@@ -1,0 +1,9 @@
+hypothesis,scope,scope_value,statistic,statistic_value,p_value,effect,effect_value,effect_label,verdict,notes,system,cost_property,target_property,scenario
+H1a,system,Dune,cv_cost,0.3438290881111203,nan,p90_over_p10,1.82652644911889,moderate,supports,"CV=0.344; p90/p10=1.83; CV 95% CI [0.303,0.385]",Dune,performance,performance,cost_performance__target_performance
+H1b,system,Dune,kruskal_wallis_min_p,3.813013869268644e-44,3.813013869268644e-44,eta_squared_max,0.48185594802575005,large,supports,K-W per level: 3/3 levels with p<0.05; min p=3.81e-44; max eta^2=0.482,Dune,performance,performance,cost_performance__target_performance
+H2a,system,Dune,spearman_rho,0.9428240708433914,0.0,rho,0.9428240708433914,strong positive,supports,Spearman rho=0.943 on n=1291 (records-level),Dune,performance,performance,cost_performance__target_performance
+H2b,system,Dune,median_ratio,1.0111132241558165,nan,abs_deviation_from_1,0.011113224155816503,calibrated,inconclusive,"median ratio=1.01; 95% CI [1.01,1.02]; |median-1|=0.0111",Dune,performance,performance,cost_performance__target_performance
+H2c,system,Dune,kruskal_wallis_p,1.1254972359471837e-33,1.1254972359471837e-33,eta_squared,0.12171818981833113,medium,supports,K-W p=1.13e-33; eta^2=0.122; k=5 strategies,Dune,performance,performance,cost_performance__target_performance
+H3a,system,Dune,top1_flips,0.0,nan,flip_fraction,0.0,no flips,refutes,top-1 flips 0/7; mean Kendall tau=0.967,Dune,performance,performance,cost_performance__target_performance
+H4a,system,Dune,exclusive_pairs,0.0,nan,pareto_jaccard,1.0,identical,refutes,|count|=3; |empirical|=3; only_count=0; only_empirical=0; Jaccard=1,Dune,performance,performance,cost_performance__target_performance
+H4b,system,Dune,pareto_jaccard,1.0,nan,frontier_size_diff,0.0,frontiers coincide,refutes,|count|=3; |empirical|=3; Jaccard=1,Dune,performance,performance,cost_performance__target_performance

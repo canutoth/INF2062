@@ -1,0 +1,46 @@
+\section{Discussion and Threats to Validity}
+\label{sec:discussion}
+
+\paragraph*{Implications for the state of the art.}
+Most configurable-system sampling work pursues \emph{cost-effectiveness}, a useful
+accuracy at an affordable measurement effort, rather than the lowest possible
+error. Cost-efficient, distance-based, $t$-wise, and active-learning strategies are
+justified by spending less for comparable accuracy, yet that effort is almost
+always reported as a sample count, and RQ1 shows the count is not the budget that
+is spent. A cost-effectiveness claim stated in counts is therefore unverified, and
+it can be wrong: in RQ2, at a fixed measured budget the set of statistically best
+samplers changes in $38$--$55\%$ of the replicated comparisons and on every Linux
+release, and the sampler the literature credits is often not the cost-effective
+one. Solver-based $t$-wise sampling, recommended on x264, selects expensive
+configurations and loses once time is charged, while \texttt{random}, treated as a
+weak baseline, is the most over-credited by count. This is not a footnote: part of
+the state of the art recommends samplers that are not as cost-effective as claimed,
+so a cost or efficiency claim should henceforth be established against measured
+cost rather than assumed from $n$.
+
+\paragraph*{Navigating the cost--accuracy trade-off.}
+Once cost is measured, the choice is a front, not a point. Strategy--budget
+combinations form a Pareto set in the accuracy--cost plane, and the RQ2
+measured-cost front differs from the count-based one in $73$--$100\%$ of scenarios. The practical
+decision is to pick the operating point that reaches the accuracy a study needs at
+the least measured cost, rather than fixing $n$ and reporting whatever accuracy
+follows. A few choices strictly dominate, being cheaper \emph{and} more accurate,
+and are unambiguous wins. The rest are genuine trade-offs, and the value of
+measuring cost is that the practitioner can see and navigate them instead of
+having them collapsed behind a common count.
+
+\paragraph*{Guidance for researchers and practitioners.}
+The reporting change is lightweight. State the cost dimension, report both sample
+size $n$ and measured cost $\TrainCost$, and show whether the two budgets agree
+through the RQ1 diagnostics, cost spread and per-strategy $\Ratio$, since a global
+average hides a consistently cheap or expensive strategy. If costs are homogeneous
+and ratios stay near $1$, count is a defensible proxy, the validated regime of
+RQ3. Otherwise, recompute the
+accuracy--cost ranking and Pareto front under measured cost and label which
+conclusions are count-based and which are measured-cost based. The opportunity is
+concrete and now quantified: count-based sampling leaves measurable
+cost-effectiveness on the table, and \texttt{pilotCost} already recovers part of
+it, reaching better accuracy at equal measured budget on several systems. It can
+fail where cheap regions are uninformative, but the gap we measure, largest under
+heavy-tailed costs, is a clear motivation and a sizable target for the cost-aware
+samplers that future work can design.

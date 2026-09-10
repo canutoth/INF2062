@@ -1,0 +1,141 @@
+\section{Threats to Validity}
+\label{sec:threats}
+
+\paragraph*{Construct validity.}
+Our central construct is empirical training measurement cost,
+$\TrainCost$. We approximate it by the sum of measured per-configuration
+times in pre-existing benchmarks. This is a deliberate simplification:
+real measurement cost in production includes warm-up, repetition for noise
+control, configuration-derivation cost from the feature model, and
+operating-system overhead, not all of which are captured by the artifacts
+we use. We mitigate this by reusing benchmark data prepared by prior work
+(Kaltenecker \etal~\cite{kaltenecker2019}, Pereira
+\etal~\cite{pereira2020}) where hardware, workload, and noise control are
+documented. We also set model-building cost aside as second-order for the
+learners we use; if it had to be added, it would be additive across
+strategies and would not change the cost-difference comparisons.
+
+\paragraph*{Aggregated labels vs.\ true acquisition effort.}
+Many published datasets expose a single aggregated label per configuration
+(\eg the median over $5$ runs in the \dsWLI ICSE 2023 package, or
+the average over $3$ runs in the performance--energy corpus), without raw
+repetition-level traces. When that is the case, we approximate true
+acquisition effort as $k\times\text{median or mean}$ where $k$ is the
+documented number of repetitions, and we report results so labelled. This
+is an approximation: it ignores warm-up overhead, retries, and any setup
+phase not reflected in the per-run aggregate. We are explicit in
+\Cref{sec:results} about which datasets contributed raw traces and which
+contributed aggregates with $k\times$ correction.
+
+\paragraph*{Target and cost are independent choices.}
+The cost dimension and the prediction target are independent
+(\Cref{subsec:empirical-cost}). In this paper we instantiate
+$\mathit{cost}(c)$ as wall-clock execution time throughout, because it is
+the resource most commonly reported as constrained in this literature.
+That choice is operational, not fundamental: a different operator could
+legitimately use cumulative output size as $\mathit{cost}(c)$ when storage
+is the binding constraint (\eg an x264 transcoding service with a disk
+budget), or energy on power-bound hardware. The mathematical content of
+$\TrainCost$, the calibration ratio, and the Pareto comparison is
+unchanged under such substitutions; only the operational interpretation
+changes. We make two specific choices for this study. First, even when
+the predicted property is non-time-valued (\eg x264 output size), we use
+the elapsed execution time of the run that produces the label as
+$\mathit{cost}(c)$: obtaining the size still requires running the
+encoder, and our operational constraint is time. Second, for throughput
+datasets such as H2, throughput remains a valid prediction target and can
+also serve as a cost axis after orientation, for example by using inverse
+throughput so that lower values correspond to cheaper acquisition. We
+therefore report these cases as throughput-based cost analyses rather than
+silently mixing them with elapsed-time costs. Replicating the study under
+additional non-time cost dimensions is plausible and is discussed in
+\Cref{sec:discussion}.
+
+\paragraph*{Setup overhead in full-stack systems.}
+For systems where per-configuration acquisition cost is dominated by
+orchestration overhead (build, warm-up, idle monitoring, deployment) rather
+than by the measurement itself, the cost construct becomes the system's
+deployment workflow rather than the sampling strategy's choice of
+configurations. We exclude such datasets from this study (see
+\Cref{subsec:datasets}). Generalizing $\TrainCost$ to those settings is
+plausible but is a separate paper.
+
+\paragraph*{Choice of cost-property mapping.}
+For non-time properties (\eg x264 output size), the empirical cost is taken
+from elapsed encoding time rather than from the predicted property
+itself. This is the realistic choice---measuring size still requires running
+the encoder---but it makes the cost term and the prediction target different
+quantities, which complicates interpretation. We address this by reporting
+the asymmetric case (size as target, time as cost) explicitly in RQ5 and by
+comparing it to the symmetric case (time as target, time as cost).
+
+\paragraph*{Sampling bias and noise.}
+Our results can be subject to randomness in stochastic strategies and to
+measurement noise in the underlying benchmarks. We mitigate the first by
+running each stochastic strategy $100$ times per
+$(\text{system},\text{input},\text{property},n)$ tuple and reporting medians
+and IQRs; we mitigate the second by reusing benchmarks whose authors
+documented stability via repeated measurements (\Cref{tab:input_videos}).
+
+\paragraph*{Choice of learner.}
+We pick stepwise multiple linear regression as the primary learner because it
+is the choice in Kaltenecker \etal~\cite{kaltenecker2019} and Pereira
+\etal~\cite{pereira2020}, and we add CART and random forest as robustness
+checks. Different learners may yield different MRE, but the cost-side of our
+analysis (RQ1, RQ2) is independent of the learner. The learner only enters
+RQ3--RQ5 via $\MRE$. We acknowledge that different learner choices may shift
+specific Pareto frontier pairs.
+
+\paragraph*{Internal validity of feature exclusion.}
+For each predicted property, we exclude every measured-performance column
+from the feature set so that the model cannot trivially learn the target. We
+list the exclusions explicitly in \Cref{subsec:protocol} (\eg \texttt{time},
+\texttt{size}, \texttt{usertime}, \texttt{systemtime}, \texttt{elapsedtime},
+\texttt{cpu}, \texttt{frames}, \texttt{fps}, \texttt{kbs}, \texttt{etime} for
+x264 size prediction). Errors in this list would invalidate the experiment,
+so the exclusion list is part of the released artifact.
+
+\paragraph*{Generalizability across systems and contexts.}
+External validity is limited to the systems and inputs we use. We mitigate
+this by combining ten configurable systems already used in prior work (Tier
+2) with a deeper x264 design over $17$ inputs and $2$ properties (Tier 1),
+and by leaving room for Tier-3 datasets when artifacts permit. We are
+explicit that any RQ4/RQ5 conclusion is a conclusion about the systems and
+contexts we measured, not about configurable systems in general.
+
+\paragraph*{Generalizability across strategies.}
+We use the six literature strategies of Kaltenecker
+\etal~\cite{kaltenecker2019}, plus diagnostic cheap-first/expensive-first
+oracles. We do not claim these exhaust the design space of cost-aware
+sampling. The diagnostic oracles are intended to bound the effect that
+cost-awareness could have, not to recommend a deployable strategy.
+
+\paragraph*{Static benchmark bias.}
+The benchmarks we reuse already measured all configurations, so we work from
+a complete table rather than running new measurements. This is a strength for
+reproducibility but a weakness for cost realism: the cost values reflect the
+hardware and workload of the original experiments. Cost heterogeneity
+patterns may differ on different hardware. We address this in
+\Cref{sec:discussion} by recommending a pilot procedure for practitioners to
+check the cost coefficient of variation on their own machine.
+
+\paragraph*{Statistical multiple comparisons.}
+We perform many statistical tests across systems, inputs, properties, and
+strategies. We will use Holm--Bonferroni correction within each RQ family of
+tests and report effect sizes (Vargha--Delaney $\hat A_{12}$,
+Kendall's $\tau$) alongside $p$-values to keep the conclusions tied to
+practical significance and not only to statistical significance.
+
+\paragraph*{Pre-registered thresholds for hypothesis verdicts.}
+The verdicts in \Cref{tab:hypothesis-verdicts} combine a statistical
+test with an effect-size or practical-magnitude threshold (e.g., $5\%$
+absolute deviation from $1$ for the median calibration ratio in H2b,
+$\eta^2\geq 0.01$ for H1b/H2c, $\mathrm{CV}\geq 0.20$ \emph{or}
+$p_{90}/p_{10}\geq 1.5$ for H1a). Different but defensible thresholds
+would shift some borderline verdicts (notably H2b on $7$Z, Dune, LLVM,
+Polly, where the $95\%$ bootstrap CI excludes $1$ but the median
+deviation is $<\!\!5\%$, and H5b at $4.2$ percentage points). To
+keep the choice auditable, the per-scope statistic, $p$-value, effect
+size, and verdict are all written to \texttt{hypothesis\_tests.csv} in
+each artifact folder, so a reviewer can recompute verdicts under
+alternative thresholds without rerunning any experiments.

@@ -1,0 +1,44 @@
+\section{Learner Sensitivity}
+\label{app:learner-sensitivity}
+
+\begin{table*}[t]
+\centering
+\caption{Learner-sensitivity reading. Replication families keep the
+literature-aligned learner as the primary result; generated and newly framed
+families use the strongest completed learner as the primary result and keep
+other learners as robustness checks.}
+\label{tab:learner-sensitivity}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{0.18\linewidth} p{0.22\linewidth} p{0.50\linewidth}}
+\toprule
+Family & Learner comparison & Reading \\
+\midrule
+\StudyReplicationICSE & original regression vs sklearn RF/HGBT &
+H1/H2 verdicts are unchanged. H3a remains globally refuted
+($3/7$ supports with the original learner, $3/7$ with RF, $2/7$ with HGBT);
+H4 support strengthens from $5/7$ to $6/7$ under RF/HGBT. \\
+\StudyReplicationICPE & original regression vs bounded HGBT slice &
+The full x264 result remains the original-learner revisit. The HGBT slice is
+supplementary only, because it covers three inputs rather than all $17$. \\
+\StudyWorkload & ridge/log-linear vs sklearn HGBT &
+System-level H1/H2/H3/H4/H5 verdicts are unchanged; H3b changes from
+inconclusive to supported. HGBT changes some best combinations but not the
+cross-system conclusion. \\
+\StudyEnergy & ridge/log-linear generated-sampling learner &
+The completed energy artifact is the primary result for this family. RQ1/RQ2
+are learner-independent; stronger sklearn reruns are therefore relevant only to
+RQ3/RQ4 sensitivity and are kept out of the primary claim until complete. \\
+\StudyLCBench & ridge/raw generated-sampling learner; sklearn HGBT revisit in progress &
+The completed LCBench artifact is the primary external-validation result in this
+revision. Because LCBench is not a configurable-software artifact, the stronger
+learner pass is treated as a revisit/sensitivity extension rather than as a
+replication baseline. \\
+\StudyLinux & all-feature sklearn HGBT full strategy panel &
+The stronger learner reduces best MRE to $0.064$--$0.107$ across releases, yet
+H3a/H4a/H4b still support on $7/7$ releases. H2b is refuted because aggregate
+calibration is close to $1$, while H2c supports on $6/7$ releases because
+calibration remains strategy-specific. \\
+\bottomrule
+\end{tabular}
+\end{table*}

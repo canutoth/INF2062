@@ -1,0 +1,1574 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paper Decision Questionnaire</title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --ink: #202636;
+    --muted: #667085;
+    --line: #d9dee7;
+    --soft: #eef2f7;
+    --dark: #151a24;
+    --blue: #2563eb;
+    --green: #047857;
+    --amber: #b45309;
+    --violet: #7c3aed;
+    --red: #b42318;
+    --focus: #c7d7fe;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  button, input, textarea, select {
+    font: inherit;
+  }
+
+  button {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+
+  button:hover { background: #f1f4f8; }
+  button.primary {
+    background: var(--dark);
+    color: #fff;
+    border-color: var(--dark);
+  }
+  button.danger { color: var(--red); }
+  button.small { padding: 4px 8px; font-size: 12px; }
+  button.icon { width: 32px; height: 32px; padding: 0; }
+
+  input[type="text"], textarea, select {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    padding: 8px 9px;
+  }
+
+  textarea {
+    min-height: 84px;
+    resize: vertical;
+  }
+
+  input:focus, textarea:focus, select:focus, button:focus {
+    outline: 3px solid var(--focus);
+    outline-offset: 1px;
+  }
+
+  .app {
+    display: grid;
+    grid-template-columns: 310px minmax(0, 1fr) 330px;
+    min-height: 100vh;
+  }
+
+  aside, .summary {
+    background: var(--panel);
+    border-color: var(--line);
+    border-style: solid;
+  }
+
+  aside {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: auto;
+    border-width: 0 1px 0 0;
+    padding: 16px;
+  }
+
+  .summary {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: auto;
+    border-width: 0 0 0 1px;
+    padding: 16px;
+  }
+
+  .brand {
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 19px;
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+
+  .meta {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .nav {
+    display: grid;
+    gap: 5px;
+    margin: 18px 0;
+  }
+
+  .nav a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 8px;
+    border-radius: 8px;
+    color: #344054;
+    text-decoration: none;
+  }
+
+  .nav a:hover { background: #f2f5f9; }
+  .nav .num {
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: #e8edf5;
+    color: #475467;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .side-block {
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    margin-top: 14px;
+  }
+
+  .side-title {
+    margin: 0 0 8px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .55px;
+    text-transform: uppercase;
+  }
+
+  .actions {
+    display: grid;
+    gap: 7px;
+  }
+
+  .actions.row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .snapshot-list {
+    display: grid;
+    gap: 7px;
+    margin-top: 9px;
+  }
+
+  .snapshot {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px;
+    background: #fbfcfe;
+  }
+
+  .snapshot strong {
+    display: block;
+    font-size: 12px;
+  }
+
+  .snapshot span {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    margin: 2px 0 7px;
+  }
+
+  .snapshot .snapshot-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  main {
+    min-width: 0;
+    padding: 18px;
+  }
+
+  section {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    padding: 13px 15px;
+    background: #fbfcfe;
+    border-bottom: 1px solid var(--line);
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .section-sub {
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .section-body {
+    padding: 15px;
+  }
+
+  .grid {
+    display: grid;
+    gap: 13px;
+  }
+
+  .two {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  label.field {
+    display: grid;
+    gap: 5px;
+  }
+
+  .field-name {
+    color: #344054;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .choice-grid {
+    display: grid;
+    gap: 8px;
+  }
+
+  .choice-grid.two-col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .choice {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    min-height: 42px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px;
+    background: #fff;
+  }
+
+  .choice input {
+    margin-top: 3px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .choice span {
+    font-size: 13px;
+    color: #2f3747;
+  }
+
+  .choice em {
+    display: block;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-style: normal;
+    margin-top: 1px;
+  }
+
+  .concern-row {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) 180px 46px;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--line);
+    padding: 9px 0;
+  }
+
+  .concern-row:last-child { border-bottom: 0; }
+  .concern-label strong { display: block; font-size: 13px; }
+  .concern-label span { color: var(--muted); font-size: 11.5px; }
+
+  input[type="range"] {
+    width: 100%;
+    accent-color: var(--blue);
+  }
+
+  .score {
+    justify-self: end;
+    display: inline-grid;
+    place-items: center;
+    min-width: 34px;
+    height: 26px;
+    border-radius: 999px;
+    background: #edf2ff;
+    color: #1d4ed8;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .detail-toolbar {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .detail-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .detail-row {
+    display: grid;
+    grid-template-columns: minmax(180px, 1.1fr) 150px 150px minmax(220px, 1fr) 78px;
+    gap: 9px;
+    align-items: start;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 10px;
+    background: #fff;
+  }
+
+  .mini-label {
+    display: block;
+    color: var(--muted);
+    font-size: 10.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .45px;
+    margin-bottom: 4px;
+  }
+
+  .detail-row textarea {
+    min-height: 60px;
+  }
+
+  .variant-picks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 8px;
+    font-size: 12px;
+  }
+
+  .variant-picks label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .row-tools {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .variant-editor {
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .variant-editor h3 {
+    margin: 0;
+    padding: 10px 11px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .variant-editor.master h3 { border-left: 4px solid var(--blue); }
+  .variant-editor.narrative h3 { border-left: 4px solid var(--green); }
+  .variant-editor.audit h3 { border-left: 4px solid var(--violet); }
+  .variant-editor.fourth h3 { border-left: 4px solid var(--amber); }
+
+  .variant-fields {
+    padding: 11px;
+    display: grid;
+    gap: 10px;
+  }
+
+  .recommendation {
+    display: grid;
+    gap: 9px;
+  }
+
+  .winner {
+    border: 1px solid #cdd7e5;
+    border-radius: 10px;
+    padding: 10px;
+    background: #fbfcfe;
+  }
+
+  .winner strong {
+    display: block;
+    font-size: 16px;
+  }
+
+  .bars {
+    display: grid;
+    gap: 7px;
+  }
+
+  .bar-row {
+    display: grid;
+    grid-template-columns: 92px 1fr 30px;
+    gap: 8px;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  .bar-track {
+    height: 9px;
+    border-radius: 999px;
+    background: #edf1f6;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: var(--blue);
+  }
+
+  .bar-fill.narrative { background: var(--green); }
+  .bar-fill.audit { background: var(--violet); }
+  .bar-fill.fourth { background: var(--amber); }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 22px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 2px 8px;
+    background: #fff;
+    color: #344054;
+    font-size: 11.5px;
+  }
+
+  .tag.must_keep, .tag.important_keep { border-color: #9ad4bd; color: #05603a; }
+  .tag.move_appendix, .tag.compress { border-color: #f3ca8b; color: #92400e; }
+  .tag.drop, .tag.irrelevant { border-color: #f3aaa4; color: #a5271d; }
+
+  .markdown-box {
+    min-height: 260px;
+    font-family: var(--mono);
+    font-size: 12px;
+    white-space: pre;
+  }
+
+  .notice {
+    border: 1px solid #d7e3f8;
+    border-radius: 9px;
+    background: #f6f9ff;
+    color: #344054;
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .empty {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .hidden { display: none !important; }
+
+  @media (max-width: 1220px) {
+    .app { grid-template-columns: 260px minmax(0, 1fr); }
+    .summary {
+      position: static;
+      height: auto;
+      grid-column: 1 / -1;
+      border-width: 1px 0 0 0;
+    }
+    .detail-row {
+      grid-template-columns: minmax(180px, 1fr) 145px 145px;
+    }
+    .detail-row > div:nth-child(4) { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 860px) {
+    .app { display: block; }
+    aside, .summary {
+      position: static;
+      height: auto;
+      border-width: 0 0 1px 0;
+    }
+    main { padding: 12px; }
+    .two, .three, .choice-grid.two-col {
+      grid-template-columns: 1fr;
+    }
+    .concern-row {
+      grid-template-columns: 1fr;
+    }
+    .score { justify-self: start; }
+    .detail-row {
+      grid-template-columns: 1fr;
+    }
+    .row-tools { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand">
+      <h1>Paper Decision Questionnaire</h1>
+      <div class="meta" id="save-status">Not saved yet</div>
+    </div>
+
+    <nav class="nav" aria-label="Questionnaire sections">
+      <a href="#part-identity"><span class="num">1</span>Strategic identity</a>
+      <a href="#part-risks"><span class="num">2</span>Reviewer risks</a>
+      <a href="#part-details"><span class="num">3</span>Detail triage</a>
+      <a href="#part-variants"><span class="num">4</span>Variant decisions</a>
+      <a href="#part-fourth"><span class="num">5</span>Fourth variant</a>
+      <a href="#part-export"><span class="num">6</span>Decision log</a>
+    </nav>
+
+    <div class="side-block">
+      <p class="side-title">Working draft</p>
+      <label class="field">
+        <span class="field-name">Decision set title</span>
+        <input type="text" data-field="title">
+      </label>
+    </div>
+
+    <div class="side-block">
+      <p class="side-title">Snapshots</p>
+      <div class="actions">
+        <input type="text" id="snapshot-name" placeholder="Snapshot name">
+        <button class="primary" id="save-snapshot">Save snapshot</button>
+      </div>
+      <div class="snapshot-list" id="snapshot-list"></div>
+    </div>
+
+    <div class="side-block">
+      <p class="side-title">Files</p>
+      <div class="actions">
+        <button id="export-json">Export JSON</button>
+        <button id="export-md">Export Markdown</button>
+        <button id="import-trigger">Import JSON</button>
+        <input class="hidden" type="file" id="import-file" accept="application/json,.json">
+        <button class="danger" id="reset-working">Reset working draft</button>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+    <section id="part-identity">
+      <div class="section-head">
+        <div>
+          <h2>Part 1: Strategic Identity</h2>
+          <div class="section-sub">Submission intent, remembered claim, and fourth-variant posture.</div>
+        </div>
+      </div>
+      <div class="section-body grid">
+        <label class="field">
+          <span class="field-name">One-sentence memory</span>
+          <textarea data-field="answers.memorySentence"></textarea>
+        </label>
+
+        <div class="grid two">
+          <div>
+            <span class="field-name">Optimize for</span>
+            <div class="choice-grid" id="optimize"></div>
+          </div>
+          <div>
+            <span class="field-name">Most dangerous objection</span>
+            <div class="choice-grid" id="dangerous-objection"></div>
+          </div>
+        </div>
+
+        <div class="grid two">
+          <div>
+            <span class="field-name">Closest existing variant</span>
+            <div class="choice-grid" id="closest-variant"></div>
+          </div>
+          <div>
+            <span class="field-name">Fourth variant central object</span>
+            <div class="choice-grid" id="central-object"></div>
+          </div>
+        </div>
+
+        <div class="grid two">
+          <div>
+            <span class="field-name">Sacrifice first if space is tight</span>
+            <div class="choice-grid" id="sacrifice-first"></div>
+          </div>
+          <div>
+            <span class="field-name">Fourth variant mode</span>
+            <div class="choice-grid" id="variant-mode"></div>
+          </div>
+        </div>
+
+        <label class="field">
+          <span class="field-name">Must not be sacrificed</span>
+          <textarea data-field="answers.neverSacrifice"></textarea>
+        </label>
+      </div>
+    </section>
+
+    <section id="part-risks">
+      <div class="section-head">
+        <div>
+          <h2>Part 2: Reviewer Risks</h2>
+          <div class="section-sub">Score the objections that should shape the next variant.</div>
+        </div>
+      </div>
+      <div class="section-body" id="concern-list"></div>
+    </section>
+
+    <section id="part-details">
+      <div class="section-head">
+        <div>
+          <h2>Part 3: Detail Triage</h2>
+          <div class="section-sub">Classify details as essential, movable, compressible, or irrelevant.</div>
+        </div>
+        <div class="detail-toolbar">
+          <button id="add-detail">Add detail</button>
+          <button id="sort-details">Sort by decision</button>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="detail-list" id="detail-list"></div>
+      </div>
+    </section>
+
+    <section id="part-variants">
+      <div class="section-head">
+        <div>
+          <h2>Part 4: Variant Decisions</h2>
+          <div class="section-sub">Record what each variant decides to foreground, compress, or risk.</div>
+        </div>
+      </div>
+      <div class="section-body grid two" id="variant-editors"></div>
+    </section>
+
+    <section id="part-fourth">
+      <div class="section-head">
+        <div>
+          <h2>Part 5: Fourth Variant Sketch</h2>
+          <div class="section-sub">Concrete direction for the next paper version.</div>
+        </div>
+      </div>
+      <div class="section-body grid two">
+        <label class="field">
+          <span class="field-name">Working title</span>
+          <input type="text" data-field="fourth.workingTitle">
+        </label>
+        <label class="field">
+          <span class="field-name">Central object</span>
+          <input type="text" data-field="fourth.centralObject">
+        </label>
+        <label class="field">
+          <span class="field-name">Core thesis</span>
+          <textarea data-field="fourth.thesis"></textarea>
+        </label>
+        <label class="field">
+          <span class="field-name">Acceptance risk</span>
+          <textarea data-field="fourth.acceptanceRisk"></textarea>
+        </label>
+        <label class="field">
+          <span class="field-name">Section changes</span>
+          <textarea data-field="fourth.sectionChanges"></textarea>
+        </label>
+        <label class="field">
+          <span class="field-name">Immediate edits</span>
+          <textarea data-field="fourth.nextEdits"></textarea>
+        </label>
+      </div>
+    </section>
+
+    <section id="part-export">
+      <div class="section-head">
+        <div>
+          <h2>Part 6: Decision Log</h2>
+          <div class="section-sub">Generated from the current answers.</div>
+        </div>
+        <button id="copy-md">Copy Markdown</button>
+      </div>
+      <div class="section-body">
+        <textarea class="markdown-box" id="markdown-preview" readonly></textarea>
+      </div>
+    </section>
+  </main>
+
+  <aside class="summary">
+    <p class="side-title">Recommendation</p>
+    <div class="recommendation" id="recommendation"></div>
+
+    <div class="side-block">
+      <p class="side-title">Important Details</p>
+      <div class="tag-list" id="important-tags"></div>
+    </div>
+
+    <div class="side-block">
+      <p class="side-title">Move / Drop</p>
+      <div class="tag-list" id="drop-tags"></div>
+    </div>
+
+    <div class="side-block">
+      <p class="side-title">Storage</p>
+      <div class="notice">
+        Answers autosave to this browser. Export JSON for archival storage and Markdown for the paper decision log.
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script>
+const STORAGE_KEY = "costSamplingPaperQuestionnaire.v1";
+
+const choiceDefs = {
+  optimize: [
+    ["acceptance_safety", "ICSE acceptance safety", "Conservative, broad, easy to scan."],
+    ["scientific_strength", "Stronger scientific contribution", "Sharper claim and stronger contribution framing."],
+    ["reviewer_clarity", "Reviewer clarity", "Fast comprehension under review pressure."],
+    ["method_reuse", "Methodological reusability", "Checklist or framework readers can apply."],
+    ["memorability", "Narrative memorability", "A paper reviewers can retell."],
+    ["artifact_credibility", "Artifact credibility", "Recomputable claims and durable evidence."],
+  ],
+  dangerousObjection: [
+    ["empirical_only", "Just an empirical observation", "The paper needs a bigger intellectual contribution."],
+    ["cost_model_arbitrary", "Cost model is arbitrary", "Definitions and sensitivity must do more work."],
+    ["not_broad", "Not broad enough", "Reviewers need breadth across systems and families."],
+    ["unclear_mechanism", "Unclear why count fails", "The story needs mechanisms, not only numbers."],
+    ["not_reusable", "Method is not reusable", "Readers need a repeatable audit or procedure."],
+    ["too_small", "Contribution too small for ICSE", "The paper needs a stronger hook and synthesis."],
+  ],
+  closestVariant: [
+    ["master", "Master-table", "Evidence-first, compact, reviewer-friendly."],
+    ["narrative", "Narrative-gallery", "Mechanism-first, explanatory, memorable."],
+    ["audit", "Audit-checklist", "Methodology-first, auditable, reusable."],
+    ["none", "Structurally different", "The fourth variant should not be a minor hybrid."],
+  ],
+  centralObject: [
+    ["decision_table", "Decision table", "Variant judgments by benchmark family."],
+    ["mechanism_figure", "Mechanism figure", "Why count and measured cost diverge."],
+    ["audit_checklist", "Audit checklist", "Validity checks for cost-proxy claims."],
+    ["regime_map", "Safe/unsafe regime map", "When count is acceptable or misleading."],
+    ["validity_framework", "Validity framework", "Reviewer-facing construct-validity structure."],
+    ["decision_procedure", "Cost-aware decision procedure", "A practical recipe for sampling choices."],
+  ],
+  sacrificeFirst: [
+    ["family_detail", "Family-level detail", "Compress per-family explanations."],
+    ["mechanism_examples", "Mechanism examples", "Keep fewer illustrative cases."],
+    ["related_work", "Related work", "Tighten the comparison section."],
+    ["validity_nuance", "Validity nuance", "Compress threats and caveats."],
+    ["artifact_detail", "Artifact detail", "Move replication detail out of the main line."],
+    ["numeric_precision", "Extra numeric precision", "Round or aggregate secondary numbers."],
+  ],
+  variantMode: [
+    ["hybrid", "Hybrid of the best three", "Consolidate evidence, mechanism, and audit."],
+    ["radical", "Radical reframing", "Change the contribution story."],
+    ["polished", "Conservative final candidate", "Optimize the likely submission version."],
+    ["diagnostic", "Diagnostic variant", "Learn which argument actually matters."],
+  ],
+};
+
+const concernDefs = [
+  ["breadth", "Breadth of evidence", "Risk that reviewers ask for more systems or families."],
+  ["mechanism", "Mechanism clarity", "Risk that reviewers see numbers but not causes."],
+  ["costModel", "Cost-model credibility", "Risk that measured cost looks arbitrary."],
+  ["decisionImpact", "Decision impact", "Risk that results look statistically interesting but practically weak."],
+  ["reuse", "Method reusability", "Risk that the paper lacks a reusable lesson."],
+  ["artifact", "Artifact traceability", "Risk that recomputation and auditability look underspecified."],
+  ["pageBudget", "Page budget", "Risk that the strongest story does not fit."],
+  ["contributionSize", "ICSE contribution size", "Risk that the contribution feels too narrow."],
+];
+
+const statusDefs = [
+  ["must_keep", "Must keep"],
+  ["important_keep", "Important keep"],
+  ["nice_keep", "Nice to keep"],
+  ["compress", "Compress"],
+  ["move_appendix", "Move/appendix"],
+  ["drop", "Drop"],
+  ["irrelevant", "Irrelevant"],
+  ["unknown", "Unclear"],
+];
+
+const variantDefs = [
+  ["master", "Master-table variant"],
+  ["narrative", "Narrative-gallery variant"],
+  ["audit", "Audit-checklist variant"],
+  ["fourth", "Fourth variant"],
+];
+
+const defaultDetails = [
+  {
+    title: "538/1,666 promoted choices change under measured cost",
+    status: "must_keep",
+    importance: 5,
+    variants: ["master", "narrative", "audit", "fourth"],
+    notes: "Headline decision-impact fact; should stay in abstract, intro, and RQ2."
+  },
+  {
+    title: "TrainCost, Ratio, flips, and Pareto-front replay fields",
+    status: "must_keep",
+    importance: 5,
+    variants: ["audit", "fourth"],
+    notes: "Needed for artifact credibility and reproducibility."
+  },
+  {
+    title: "Min-max normalization and acquisition-vs-target cost wording",
+    status: "must_keep",
+    importance: 5,
+    variants: ["master", "audit", "fourth"],
+    notes: "Protects the construct-validity claim from definitional objections."
+  },
+  {
+    title: "Master family decision table",
+    status: "important_keep",
+    importance: 4,
+    variants: ["master", "fourth"],
+    notes: "Compactly communicates breadth and decision impact."
+  },
+  {
+    title: "Mechanism gallery with four measured-cost failure modes",
+    status: "important_keep",
+    importance: 4,
+    variants: ["narrative", "fourth"],
+    notes: "Best visual explanation for why sample count fails as a proxy."
+  },
+  {
+    title: "Measured-cost audit checklist",
+    status: "important_keep",
+    importance: 4,
+    variants: ["audit", "fourth"],
+    notes: "Turns reviewer concerns into a reusable method."
+  },
+  {
+    title: "Linux resource-cost details",
+    status: "compress",
+    importance: 3,
+    variants: ["audit", "fourth"],
+    notes: "Keep definitions and sensitivity; avoid operational digressions."
+  },
+  {
+    title: "Learner-sensitivity detail",
+    status: "move_appendix",
+    importance: 3,
+    variants: ["master", "audit"],
+    notes: "Useful robustness evidence but probably not a central narrative object."
+  },
+  {
+    title: "Extra numeric precision in family subresults",
+    status: "compress",
+    importance: 2,
+    variants: ["master"],
+    notes: "Use rounded or aggregated values unless a number changes interpretation."
+  },
+  {
+    title: "Expanded related-work survey",
+    status: "drop",
+    importance: 2,
+    variants: ["fourth"],
+    notes: "Keep the precise gap; avoid survey-like breadth."
+  },
+];
+
+const defaultVariantDecisions = {
+  master: {
+    coreFeature: "Cross-family decision summary table.",
+    foreground: "Breadth, scanability, and concrete decision changes.",
+    compress: "Mechanism examples and long-form explanation.",
+    risk: "May feel less intuitive or less methodologically reusable.",
+    whyWin: "Safest when reviewers need evidence density.",
+    whyLose: "Can read as a strong empirical report rather than a memorable contribution."
+  },
+  narrative: {
+    coreFeature: "Measured-cost mechanism gallery.",
+    foreground: "Why count fails and what shapes the failure modes.",
+    compress: "Some table density and page-budget margin.",
+    risk: "Costs space and pushes references to page 11.",
+    whyWin: "Best when reviewer understanding is the main risk.",
+    whyLose: "May look less compact and less immediately auditable."
+  },
+  audit: {
+    coreFeature: "Measured-cost reporting audit checklist.",
+    foreground: "Construct validity, reusability, and artifact traceability.",
+    compress: "Some empirical storytelling and visual intuition.",
+    risk: "Can feel methodological if the empirical punch is not kept visible.",
+    whyWin: "Best when the contribution should be a reusable review standard.",
+    whyLose: "May underplay the breadth of the empirical result."
+  },
+  fourth: {
+    coreFeature: "To be determined from the questionnaire.",
+    foreground: "",
+    compress: "",
+    risk: "",
+    whyWin: "",
+    whyLose: ""
+  }
+};
+
+const defaultState = {
+  title: "Fourth variant decision log",
+  answers: {
+    memorySentence: "",
+    optimize: [],
+    dangerousObjection: "",
+    closestVariant: "",
+    centralObject: "",
+    sacrificeFirst: [],
+    neverSacrifice: "",
+    variantMode: ""
+  },
+  concerns: Object.fromEntries(concernDefs.map(([key]) => [key, 3])),
+  detailRows: defaultDetails,
+  variants: defaultVariantDecisions,
+  fourth: {
+    workingTitle: "",
+    centralObject: "",
+    thesis: "",
+    acceptanceRisk: "",
+    sectionChanges: "",
+    nextEdits: ""
+  }
+};
+
+let store = loadStore();
+let state = store.working;
+
+function freshState() {
+  return JSON.parse(JSON.stringify(defaultState));
+}
+
+function loadStore() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return { working: freshState(), snapshots: [] };
+    const parsed = JSON.parse(raw);
+    return {
+      working: mergeState(freshState(), parsed.working || parsed),
+      snapshots: Array.isArray(parsed.snapshots) ? parsed.snapshots : []
+    };
+  } catch {
+    return { working: freshState(), snapshots: [] };
+  }
+}
+
+function mergeState(base, incoming) {
+  const merged = { ...base, ...incoming };
+  merged.answers = { ...base.answers, ...(incoming.answers || {}) };
+  merged.concerns = { ...base.concerns, ...(incoming.concerns || {}) };
+  merged.fourth = { ...base.fourth, ...(incoming.fourth || {}) };
+  merged.variants = { ...base.variants, ...(incoming.variants || {}) };
+  merged.detailRows = Array.isArray(incoming.detailRows) ? incoming.detailRows : base.detailRows;
+  return merged;
+}
+
+function saveStore() {
+  store.working = state;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+  const now = new Date();
+  document.getElementById("save-status").textContent = `Saved ${now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`;
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function id() {
+  if (crypto && crypto.randomUUID) return crypto.randomUUID();
+  return "id-" + Date.now() + "-" + Math.random().toString(16).slice(2);
+}
+
+function getPath(root, path) {
+  return path.split(".").reduce((acc, key) => acc ? acc[key] : undefined, root);
+}
+
+function setPath(root, path, value) {
+  const keys = path.split(".");
+  let cursor = root;
+  while (keys.length > 1) {
+    const key = keys.shift();
+    if (!cursor[key] || typeof cursor[key] !== "object") cursor[key] = {};
+    cursor = cursor[key];
+  }
+  cursor[keys[0]] = value;
+}
+
+function renderChoiceGroup(targetId, field, choices, type) {
+  const holder = document.getElementById(targetId);
+  const current = getPath(state, field);
+  holder.innerHTML = choices.map(([value, label, desc]) => {
+    const checked = type === "checkbox"
+      ? Array.isArray(current) && current.includes(value)
+      : current === value;
+    return `
+      <label class="choice">
+        <input type="${type}" name="${field}" data-choice-field="${field}" value="${value}" ${checked ? "checked" : ""}>
+        <span>${escapeHtml(label)}<em>${escapeHtml(desc)}</em></span>
+      </label>`;
+  }).join("");
+}
+
+function renderStaticFields() {
+  document.querySelectorAll("[data-field]").forEach(input => {
+    const value = getPath(state, input.dataset.field);
+    input.value = value ?? "";
+  });
+
+  renderChoiceGroup("optimize", "answers.optimize", choiceDefs.optimize, "checkbox");
+  renderChoiceGroup("dangerous-objection", "answers.dangerousObjection", choiceDefs.dangerousObjection, "radio");
+  renderChoiceGroup("closest-variant", "answers.closestVariant", choiceDefs.closestVariant, "radio");
+  renderChoiceGroup("central-object", "answers.centralObject", choiceDefs.centralObject, "radio");
+  renderChoiceGroup("sacrifice-first", "answers.sacrificeFirst", choiceDefs.sacrificeFirst, "checkbox");
+  renderChoiceGroup("variant-mode", "answers.variantMode", choiceDefs.variantMode, "radio");
+}
+
+function renderConcerns() {
+  const holder = document.getElementById("concern-list");
+  holder.innerHTML = concernDefs.map(([key, label, desc]) => `
+    <div class="concern-row">
+      <div class="concern-label"><strong>${escapeHtml(label)}</strong><span>${escapeHtml(desc)}</span></div>
+      <input type="range" min="1" max="5" value="${Number(state.concerns[key] || 3)}" data-concern="${key}">
+      <span class="score" id="score-${key}">${Number(state.concerns[key] || 3)}</span>
+    </div>
+  `).join("");
+}
+
+function renderDetails() {
+  const holder = document.getElementById("detail-list");
+  holder.innerHTML = state.detailRows.map((row, index) => {
+    const variants = row.variants || [];
+    return `
+      <div class="detail-row" data-detail-row="${index}">
+        <div>
+          <span class="mini-label">Detail</span>
+          <textarea data-detail-index="${index}" data-detail-field="title">${escapeHtml(row.title)}</textarea>
+        </div>
+        <div>
+          <span class="mini-label">Decision</span>
+          <select data-detail-index="${index}" data-detail-field="status">
+            ${statusDefs.map(([value, label]) => `<option value="${value}" ${row.status === value ? "selected" : ""}>${escapeHtml(label)}</option>`).join("")}
+          </select>
+        </div>
+        <div>
+          <span class="mini-label">Importance</span>
+          <input type="range" min="1" max="5" value="${Number(row.importance || 3)}" data-detail-index="${index}" data-detail-field="importance">
+          <span class="score">${Number(row.importance || 3)}</span>
+        </div>
+        <div>
+          <span class="mini-label">Notes</span>
+          <textarea data-detail-index="${index}" data-detail-field="notes">${escapeHtml(row.notes)}</textarea>
+          <div class="variant-picks">
+            ${variantDefs.map(([key, label]) => `
+              <label><input type="checkbox" data-detail-index="${index}" data-detail-variant="${key}" ${variants.includes(key) ? "checked" : ""}>${escapeHtml(label.replace(" variant", ""))}</label>
+            `).join("")}
+          </div>
+        </div>
+        <div class="row-tools">
+          <button class="icon" title="Move up" data-move-detail="${index}" data-direction="-1">↑</button>
+          <button class="icon" title="Move down" data-move-detail="${index}" data-direction="1">↓</button>
+          <button class="icon danger" title="Delete" data-delete-detail="${index}">×</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderVariants() {
+  const holder = document.getElementById("variant-editors");
+  holder.innerHTML = variantDefs.map(([key, label]) => {
+    const v = state.variants[key] || {};
+    return `
+      <div class="variant-editor ${key}">
+        <h3>${escapeHtml(label)}</h3>
+        <div class="variant-fields">
+          ${variantField(key, "coreFeature", "Core feature", v.coreFeature)}
+          ${variantField(key, "foreground", "Foreground", v.foreground)}
+          ${variantField(key, "compress", "Compress / omit", v.compress)}
+          ${variantField(key, "risk", "Risk introduced", v.risk)}
+          ${variantField(key, "whyWin", "Why this may win", v.whyWin)}
+          ${variantField(key, "whyLose", "Why this may lose", v.whyLose)}
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function variantField(key, field, label, value) {
+  return `
+    <label class="field">
+      <span class="field-name">${escapeHtml(label)}</span>
+      <textarea data-variant-key="${key}" data-variant-field="${field}">${escapeHtml(value || "")}</textarea>
+    </label>`;
+}
+
+function scoreRecommendation() {
+  const scores = { master: 0, narrative: 0, audit: 0, fourth: 0 };
+  const add = (key, amount) => { scores[key] += amount; };
+  const opts = state.answers.optimize || [];
+  if (opts.includes("acceptance_safety")) { add("master", 3); add("audit", 1); }
+  if (opts.includes("scientific_strength")) { add("fourth", 2); add("audit", 1); add("narrative", 1); }
+  if (opts.includes("reviewer_clarity")) { add("narrative", 2); add("master", 1); }
+  if (opts.includes("method_reuse")) { add("audit", 3); add("fourth", 1); }
+  if (opts.includes("memorability")) { add("narrative", 3); add("fourth", 1); }
+  if (opts.includes("artifact_credibility")) { add("audit", 2); add("master", 1); }
+
+  const objection = state.answers.dangerousObjection;
+  if (objection === "empirical_only") { add("audit", 2); add("fourth", 2); }
+  if (objection === "cost_model_arbitrary") { add("audit", 3); add("fourth", 1); }
+  if (objection === "not_broad") { add("master", 3); }
+  if (objection === "unclear_mechanism") { add("narrative", 3); }
+  if (objection === "not_reusable") { add("audit", 3); }
+  if (objection === "too_small") { add("fourth", 3); add("audit", 1); }
+
+  const closest = state.answers.closestVariant;
+  if (scores[closest] !== undefined) add(closest, 2);
+  if (closest === "none") add("fourth", 2);
+
+  const object = state.answers.centralObject;
+  if (object === "decision_table") add("master", 2);
+  if (object === "mechanism_figure") add("narrative", 2);
+  if (object === "audit_checklist") add("audit", 2);
+  if (["regime_map", "validity_framework", "decision_procedure"].includes(object)) add("fourth", 3);
+
+  const mode = state.answers.variantMode;
+  if (mode === "hybrid") add("fourth", 3);
+  if (mode === "radical") add("fourth", 3);
+  if (mode === "polished") { add("master", 2); add("audit", 1); }
+  if (mode === "diagnostic") add("fourth", 2);
+
+  const c = state.concerns || {};
+  add("master", Number(c.breadth || 0) + Number(c.pageBudget || 0) * .5);
+  add("narrative", Number(c.mechanism || 0) + Number(c.decisionImpact || 0) * .4);
+  add("audit", Number(c.costModel || 0) + Number(c.reuse || 0) + Number(c.artifact || 0) * .8);
+  add("fourth", Number(c.contributionSize || 0) + Number(c.decisionImpact || 0) * .5);
+
+  state.detailRows.forEach(row => {
+    if (!["must_keep", "important_keep"].includes(row.status)) return;
+    const weight = row.status === "must_keep" ? .7 : .35;
+    (row.variants || []).forEach(key => {
+      if (scores[key] !== undefined) add(key, weight * Number(row.importance || 3));
+    });
+  });
+
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  return { scores, sorted, winner: sorted[0][0] };
+}
+
+function renderRecommendation() {
+  const rec = scoreRecommendation();
+  const holder = document.getElementById("recommendation");
+  const max = Math.max(...Object.values(rec.scores), 1);
+  const winnerLabel = variantDefs.find(([key]) => key === rec.winner)?.[1] || rec.winner;
+  holder.innerHTML = `
+    <div class="winner">
+      <strong>${escapeHtml(winnerLabel)}</strong>
+      <span class="meta">${escapeHtml(recommendationText(rec.winner))}</span>
+    </div>
+    <div class="bars">
+      ${rec.sorted.map(([key, score]) => `
+        <div class="bar-row">
+          <span>${escapeHtml(shortVariantName(key))}</span>
+          <span class="bar-track"><span class="bar-fill ${key}" style="width:${Math.round((score / max) * 100)}%"></span></span>
+          <strong>${score.toFixed(1)}</strong>
+        </div>
+      `).join("")}
+    </div>
+  `;
+
+  const important = state.detailRows.filter(row => ["must_keep", "important_keep"].includes(row.status));
+  const movable = state.detailRows.filter(row => ["compress", "move_appendix", "drop", "irrelevant"].includes(row.status));
+  renderTags("important-tags", important);
+  renderTags("drop-tags", movable);
+}
+
+function shortVariantName(key) {
+  return { master: "Master", narrative: "Narrative", audit: "Audit", fourth: "Fourth" }[key] || key;
+}
+
+function recommendationText(key) {
+  return {
+    master: "Evidence density and reviewer scanability are currently strongest.",
+    narrative: "Mechanism explanation and memorability are currently strongest.",
+    audit: "Reusable validity method and auditability are currently strongest.",
+    fourth: "A new synthesis or reframing is currently justified."
+  }[key] || "";
+}
+
+function renderTags(targetId, rows) {
+  const holder = document.getElementById(targetId);
+  if (!rows.length) {
+    holder.innerHTML = `<span class="empty">No details classified yet.</span>`;
+    return;
+  }
+  holder.innerHTML = rows.slice(0, 16).map(row => `
+    <span class="tag ${escapeHtml(row.status)}">${escapeHtml(row.title)}</span>
+  `).join("");
+}
+
+function renderSnapshots() {
+  const holder = document.getElementById("snapshot-list");
+  if (!store.snapshots.length) {
+    holder.innerHTML = `<div class="empty">No snapshots yet.</div>`;
+    return;
+  }
+  holder.innerHTML = store.snapshots
+    .slice()
+    .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)))
+    .map(snap => `
+      <div class="snapshot">
+        <strong>${escapeHtml(snap.name)}</strong>
+        <span>${escapeHtml(new Date(snap.createdAt).toLocaleString())}</span>
+        <div class="snapshot-actions">
+          <button class="small" data-load-snapshot="${snap.id}">Load</button>
+          <button class="small danger" data-delete-snapshot="${snap.id}">Delete</button>
+        </div>
+      </div>
+    `).join("");
+}
+
+function generateMarkdown() {
+  const rec = scoreRecommendation();
+  const winnerLabel = variantDefs.find(([key]) => key === rec.winner)?.[1] || rec.winner;
+  const choiceLabel = (group, value) => {
+    const found = (choiceDefs[group] || []).find(([key]) => key === value);
+    return found ? found[1] : value || "";
+  };
+  const choiceLabels = (group, values) => (values || []).map(value => choiceLabel(group, value)).filter(Boolean);
+  const detailLine = row => `- **${row.title || "(untitled detail)"}**: ${statusLabel(row.status)}, importance ${row.importance || 3}/5. ${row.notes || ""}`.trim();
+  const important = state.detailRows.filter(row => ["must_keep", "important_keep"].includes(row.status));
+  const movable = state.detailRows.filter(row => ["compress", "move_appendix", "drop", "irrelevant"].includes(row.status));
+
+  const lines = [];
+  lines.push(`# ${state.title || "Paper decision log"}`);
+  lines.push("");
+  lines.push(`Generated: ${new Date().toISOString()}`);
+  lines.push("");
+  lines.push("## Strategic identity");
+  lines.push("");
+  lines.push(`- One-sentence memory: ${state.answers.memorySentence || ""}`);
+  lines.push(`- Optimize for: ${choiceLabels("optimize", state.answers.optimize).join(", ") || ""}`);
+  lines.push(`- Most dangerous objection: ${choiceLabel("dangerousObjection", state.answers.dangerousObjection)}`);
+  lines.push(`- Closest existing variant: ${choiceLabel("closestVariant", state.answers.closestVariant)}`);
+  lines.push(`- Fourth variant central object: ${choiceLabel("centralObject", state.answers.centralObject)}`);
+  lines.push(`- Sacrifice first: ${choiceLabels("sacrificeFirst", state.answers.sacrificeFirst).join(", ") || ""}`);
+  lines.push(`- Must not be sacrificed: ${state.answers.neverSacrifice || ""}`);
+  lines.push(`- Fourth variant mode: ${choiceLabel("variantMode", state.answers.variantMode)}`);
+  lines.push("");
+  lines.push("## Recommendation");
+  lines.push("");
+  lines.push(`- Recommended direction: **${winnerLabel}**`);
+  rec.sorted.forEach(([key, score]) => {
+    lines.push(`- ${shortVariantName(key)} score: ${score.toFixed(1)}`);
+  });
+  lines.push("");
+  lines.push("## Reviewer risks");
+  lines.push("");
+  concernDefs.forEach(([key, label]) => {
+    lines.push(`- ${label}: ${state.concerns[key] || 3}/5`);
+  });
+  lines.push("");
+  lines.push("## Important details");
+  lines.push("");
+  lines.push(...(important.length ? important.map(detailLine) : ["- None classified."]));
+  lines.push("");
+  lines.push("## Move, compress, drop, or irrelevant");
+  lines.push("");
+  lines.push(...(movable.length ? movable.map(detailLine) : ["- None classified."]));
+  lines.push("");
+  lines.push("## Variant decision log");
+  variantDefs.forEach(([key, label]) => {
+    const v = state.variants[key] || {};
+    lines.push("");
+    lines.push(`### ${label}`);
+    lines.push("");
+    lines.push(`- Core feature: ${v.coreFeature || ""}`);
+    lines.push(`- Foreground: ${v.foreground || ""}`);
+    lines.push(`- Compress / omit: ${v.compress || ""}`);
+    lines.push(`- Risk introduced: ${v.risk || ""}`);
+    lines.push(`- Why this may win: ${v.whyWin || ""}`);
+    lines.push(`- Why this may lose: ${v.whyLose || ""}`);
+  });
+  lines.push("");
+  lines.push("## Fourth variant sketch");
+  lines.push("");
+  lines.push(`- Working title: ${state.fourth.workingTitle || ""}`);
+  lines.push(`- Central object: ${state.fourth.centralObject || ""}`);
+  lines.push(`- Core thesis: ${state.fourth.thesis || ""}`);
+  lines.push(`- Acceptance risk: ${state.fourth.acceptanceRisk || ""}`);
+  lines.push(`- Section changes: ${state.fourth.sectionChanges || ""}`);
+  lines.push(`- Immediate edits: ${state.fourth.nextEdits || ""}`);
+  lines.push("");
+  return lines.join("\n");
+}
+
+function statusLabel(status) {
+  return statusDefs.find(([key]) => key === status)?.[1] || status || "Unclear";
+}
+
+function renderMarkdown() {
+  document.getElementById("markdown-preview").value = generateMarkdown();
+}
+
+function renderAll() {
+  renderStaticFields();
+  renderConcerns();
+  renderDetails();
+  renderVariants();
+  renderRecommendation();
+  renderSnapshots();
+  renderMarkdown();
+}
+
+function afterChange() {
+  saveStore();
+  renderRecommendation();
+  renderMarkdown();
+}
+
+document.addEventListener("input", event => {
+  const target = event.target;
+  if (target.dataset.field) {
+    setPath(state, target.dataset.field, target.value);
+    afterChange();
+  }
+  if (target.dataset.concern) {
+    state.concerns[target.dataset.concern] = Number(target.value);
+    document.getElementById("score-" + target.dataset.concern).textContent = target.value;
+    afterChange();
+  }
+  if (target.dataset.detailField) {
+    const row = state.detailRows[Number(target.dataset.detailIndex)];
+    const field = target.dataset.detailField;
+    row[field] = field === "importance" ? Number(target.value) : target.value;
+    if (field === "importance") {
+      target.nextElementSibling.textContent = target.value;
+    }
+    afterChange();
+  }
+  if (target.dataset.variantField) {
+    const key = target.dataset.variantKey;
+    if (!state.variants[key]) state.variants[key] = {};
+    state.variants[key][target.dataset.variantField] = target.value;
+    afterChange();
+  }
+});
+
+document.addEventListener("change", event => {
+  const target = event.target;
+  if (target.dataset.choiceField) {
+    const field = target.dataset.choiceField;
+    const current = getPath(state, field);
+    if (target.type === "checkbox") {
+      const values = new Set(Array.isArray(current) ? current : []);
+      if (target.checked) values.add(target.value);
+      else values.delete(target.value);
+      setPath(state, field, Array.from(values));
+    } else {
+      setPath(state, field, target.value);
+    }
+    afterChange();
+  }
+  if (target.dataset.detailVariant) {
+    const row = state.detailRows[Number(target.dataset.detailIndex)];
+    const values = new Set(row.variants || []);
+    if (target.checked) values.add(target.dataset.detailVariant);
+    else values.delete(target.dataset.detailVariant);
+    row.variants = Array.from(values);
+    afterChange();
+  }
+  if (target.id === "import-file") {
+    importJson(target.files[0]);
+  }
+});
+
+document.addEventListener("click", event => {
+  const target = event.target;
+  if (target.id === "add-detail") {
+    state.detailRows.push({ title: "", status: "unknown", importance: 3, variants: ["fourth"], notes: "" });
+    saveStore();
+    renderDetails();
+    renderRecommendation();
+    renderMarkdown();
+  }
+  if (target.id === "sort-details") {
+    const rank = Object.fromEntries(statusDefs.map(([key], index) => [key, index]));
+    state.detailRows.sort((a, b) => (rank[a.status] ?? 99) - (rank[b.status] ?? 99) || Number(b.importance || 0) - Number(a.importance || 0));
+    saveStore();
+    renderDetails();
+    renderRecommendation();
+    renderMarkdown();
+  }
+  if (target.dataset.deleteDetail) {
+    const index = Number(target.dataset.deleteDetail);
+    if (confirm("Delete this detail row?")) {
+      state.detailRows.splice(index, 1);
+      saveStore();
+      renderDetails();
+      renderRecommendation();
+      renderMarkdown();
+    }
+  }
+  if (target.dataset.moveDetail) {
+    const index = Number(target.dataset.moveDetail);
+    const next = index + Number(target.dataset.direction);
+    if (next >= 0 && next < state.detailRows.length) {
+      const [row] = state.detailRows.splice(index, 1);
+      state.detailRows.splice(next, 0, row);
+      saveStore();
+      renderDetails();
+    }
+  }
+  if (target.id === "save-snapshot") saveSnapshot();
+  if (target.dataset.loadSnapshot) loadSnapshot(target.dataset.loadSnapshot);
+  if (target.dataset.deleteSnapshot) deleteSnapshot(target.dataset.deleteSnapshot);
+  if (target.id === "export-json") downloadJson();
+  if (target.id === "export-md") downloadMarkdown();
+  if (target.id === "copy-md") copyMarkdown();
+  if (target.id === "import-trigger") document.getElementById("import-file").click();
+  if (target.id === "reset-working") resetWorking();
+});
+
+function saveSnapshot() {
+  const nameInput = document.getElementById("snapshot-name");
+  const name = nameInput.value.trim() || state.title || "Decision snapshot";
+  store.snapshots.push({
+    id: id(),
+    name,
+    createdAt: new Date().toISOString(),
+    state: JSON.parse(JSON.stringify(state))
+  });
+  nameInput.value = "";
+  saveStore();
+  renderSnapshots();
+}
+
+function loadSnapshot(snapshotId) {
+  const snap = store.snapshots.find(item => item.id === snapshotId);
+  if (!snap) return;
+  state = mergeState(freshState(), JSON.parse(JSON.stringify(snap.state)));
+  saveStore();
+  renderAll();
+}
+
+function deleteSnapshot(snapshotId) {
+  const snap = store.snapshots.find(item => item.id === snapshotId);
+  if (!snap) return;
+  if (!confirm(`Delete snapshot "${snap.name}"?`)) return;
+  store.snapshots = store.snapshots.filter(item => item.id !== snapshotId);
+  saveStore();
+  renderSnapshots();
+}
+
+function downloadJson() {
+  downloadFile(`${safeFilename(state.title || "paper-decisions")}.json`, JSON.stringify({ working: state, snapshots: store.snapshots }, null, 2), "application/json");
+}
+
+function downloadMarkdown() {
+  downloadFile(`${safeFilename(state.title || "paper-decisions")}.md`, generateMarkdown(), "text/markdown");
+}
+
+function downloadFile(filename, content, type) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function safeFilename(name) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "paper-decisions";
+}
+
+function importJson(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const parsed = JSON.parse(reader.result);
+      store = {
+        working: mergeState(freshState(), parsed.working || parsed),
+        snapshots: Array.isArray(parsed.snapshots) ? parsed.snapshots : []
+      };
+      state = store.working;
+      saveStore();
+      renderAll();
+    } catch (error) {
+      alert("Could not import JSON: " + error.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+async function copyMarkdown() {
+  const markdown = generateMarkdown();
+  try {
+    await navigator.clipboard.writeText(markdown);
+    document.getElementById("copy-md").textContent = "Copied";
+    setTimeout(() => document.getElementById("copy-md").textContent = "Copy Markdown", 1200);
+  } catch {
+    const box = document.getElementById("markdown-preview");
+    box.focus();
+    box.select();
+  }
+}
+
+function resetWorking() {
+  if (!confirm("Reset the working draft? Snapshots will be kept.")) return;
+  state = freshState();
+  saveStore();
+  renderAll();
+}
+
+renderAll();
+saveStore();
+</script>
+</body>
+</html>

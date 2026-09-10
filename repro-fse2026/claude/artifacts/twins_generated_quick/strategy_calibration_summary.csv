@@ -1,0 +1,15 @@
+cost_property,strategy,scopes,calibrated,miscalibrated,inconclusive,median_of_medians,median_abs_deviation
+energy,balanced,14,4,0,10,1.0027858600920334,0.006750954351749661
+energy,cheapOracle,14,0,0,14,nan,nan
+energy,diversity,14,0,0,14,nan,nan
+energy,expensiveOracle,14,0,0,14,nan,nan
+energy,pairwise,14,0,0,14,nan,nan
+energy,pilotCost,14,0,4,10,0.8543846775116088,0.14561532248839115
+energy,random,14,3,0,11,0.9963018328766247,0.01851834577433653
+performance,balanced,14,4,0,10,1.010445670555679,0.013672735064541253
+performance,cheapOracle,14,0,0,14,nan,nan
+performance,diversity,14,0,0,14,nan,nan
+performance,expensiveOracle,14,0,0,14,nan,nan
+performance,pairwise,14,0,0,14,nan,nan
+performance,pilotCost,14,0,4,10,0.8302341971543024,0.16976580284569764
+performance,random,14,4,0,10,0.9966350973257707,0.016381681214875377

@@ -1,0 +1,320 @@
+\section{Empirical Study Design} \label{sec:study_design}
+
+This section describes the design of the empirical study we conducted to evaluate the ranking differences between different sampling strategies concerning a new metric: \textit{sampling cost}.
+%the number of configurations in learning software configuration spaces. 
+In the context of this work, \textit{sampling cost} means computational time spent to generate a sample, the execution and measurement cost of a sample of configurations. 
+%Our objective is to focus on the generation and measurement of configurations during the performance prediction. 
+For all research questions, we consider the lower the sampling cost by a specific sampling strategy, the cheaper it is. 
+Beyond sampling cost, we analyze three other metrics: number of features, sampling size, prediction accuracy, and prediction time.
+With this study, we intend to evaluate the cost of learning-based approaches in real-world settings.
+
+%In this section, 
+Next, we introduce our research questions, the considered subject system, and the experiment setup.
+
+\subsection{Research Questions} \label{research_questions}
+
+We conducted a series of experiments to evaluate six sampling strategies and to compare our results to the original results in~\cite{kaltenecker2019} and \cite{pereira2020}. 
+We aim at answering the underlying general research question: 
+\textit{What is the difference (if any) between the sample size and the true sampling cost, and how does this affect previous scientific conclusions?}
+
+The assumption of previous works is that there is an equal ratio between the two measures.
+If the assumption of an equal ratio between the two measures does not hold, then it is a construct validity threat to the papers that do not use computational sampling cost and use only sampling size as an assessment metric for real computational cost. 
+
+To systematically investigate such a threat, we aim at answering the following four research questions:
+
+\begin{itemize}
+    \item \textbf{(RQ1)} 
+    Sampling Cost: 
+    Is there a sampling strategy more costly than others?
+    %(requires to consider multiple systems/datasets) 
+    %Hypothesis: maybe some sampling tends to pick more costly configurations 
+    %Does the execution time change significantly according to the number of configurations for each sampling type?
+    
+    \item \textbf{(RQ2)} 
+    Statistical Correlations: 
+    What are the statistical correlations (if any) between different measures of sampling cost and performance prediction errors? %size and sampling measurement time?
+
+    \item \textbf{(RQ3)} 
+    Strategy Differences: 
+    How do the rankings of learning with different sampling strategies change when considering the new sampling cost?
+    %comparing with previous work? 
+    %cost+accuracy = How to compute the ranking? Combine cost and accuracy
+    %using sampling measurement time as a cost measure instead of sampling size? 
+    %It is more an intermediate RQ… the key RQ is the cost-effectiveness (cost+accuracy => metric? cost model?)
+
+    \item \textbf{(RQ4)} 
+    Strategy Sensitivity: 
+    What is the cost influence of different sampling strategies over different inputs and non-functional properties?
+\end{itemize}
+
+%How we attempt to answer the research questions
+
+%Is there a sampling strategy more costly than others?
+\paragraph{RQ1 – Sampling Cost}
+This research question aims to address the foundational problem of how to tackle the potentially prohibitive cost of generating and measuring configurations (\textit{a.k.a.} sampling cost). %\ma{I see what you mean here, but I would not cite the survey here... It's better to re-explain the problem in a self-contained way.}
+This was and remains one of the most important problems for the practical application of learning large configurable systems.
+The sampling cost is computed from the start of its generation until the end of the execution and performance labeling (\ie measurement) of the sampled configurations for each sampling strategy. 
+Therefore, the sampling cost measure is the computational cost of executing and measuring a sample of configurations for training and testing.
+
+The computational cost for a set of 100 independent runs $r_{i}, i \in \llbracket 1:100 \rrbracket$; a given training size $n$ and testing size $m$; and strategy $s$ is computed as follows:
+% \begin{equation}
+%     cost(s, t) = \sum_{r=1}^{100} \frac{time\_sampling(s, t) + time\_measurement(s, t)}{100}
+%     \label{eq:sampling-cost}
+% \end{equation}
+\begin{equation}
+    CompCost(s) = \frac{\sum_{i=1}^{100} Cost(r_{i}, s, n) + Cost(r_{i}, s, m)}{100}
+    \label{eq:sampling-cost-prop}
+\end{equation}
+where $Cost(r_{i}, s, n)$ (resp. $Cost(r_{i}, s, m)$) refers to the cost (\eg the time to measure) of measuring the training part (resp. the testing part) of the run $r_{i}$ for the sampling strategy $s$. 
+Our goal with this research question is to understand the underlying computational cost of measuring, as induced by the way we sample.
+
+
+\ma{intuitively, the "random baseline" is quite important... we might be interested to compare each sampling strategy with random... \ie is it much more expensive?}
+
+\ma{in~\cite{harmanMutationFSE2020}, they compute the percentage of execution time needed by
+a strategy in relation to using the full set (Equation 1). looks interesting}
+
+To answer the first research question, we rank sampling strategies based on their sampling cost computed by Equation~\ref{eq:sampling-cost-prop}. 
+Moreover, we use a Kruskal-Wallis test~\cite{kruskal1952} and pair-wise one-sided Mann-Whitney $U$ tests~\cite{mann1947} to identify whether the average sampling cost of two sampling strategies differs significantly ($p < 0.05$)~\cite{arcuri2011}.
+In addition, we compute the effect size $\hat{A}_{12}$~\cite{vargha2000} (small(>0.56), medium(>0.64), and large(>0.71)) to easily compare the sampling cost of two sampling strategies.
+
+\ma{in fact I like the proposal based on statistical tests... maybe we can add other analysis to provide *insights* about the cost of each sampling and the practical significance says (eg strategy YYY is 20\% more costly than random and is worth)}
+
+%\ma{this RQ: I guess the "t" parameter is important... why t=100? is it only possible to use t=100 with pair-wise since the sample size may be < than 100? Perhaps I misunderstand "t" which is just a way to repeat experiments for stochastic algorithms (but I'm not sure I really have impression it's sampling size). Anyway we should have a(nother) parameter for controlling the sampling size... N=1, 2, 3 as in the ICPE paper where sampling size is N multiplied by the number of features?} 
+
+\ma{to clarify previous comment: we need to repeat experiments (for sure!) but also control/report on the sampling size sensitivity}
+
+\ma{this RQ is sensitive to a subject system (I think it's obvious but I prefer to comment on this)... should we envision a per-system report? or a "global" report on the overall cost of a strategy whatever the subject system is... (it can be more tricky to do)} 
+
+
+
+
+%What are the statistical correlations (if any) between performance prediction errors and sampling costs?
+\paragraph{RQ2 – Statistical Correlations}
+To answer \textit{RQ2}, we compare the results of sampling cost used in \textit{RQ1} to the conventional measure of sampling size used by previous work.
+In previous works, the computational cost of a given training size $n$ and testing size $m$ is computed as follows:
+\begin{equation}
+    SizeCost(s) = n+m
+    \label{eq:sampling-size}
+\end{equation}
+
+\ju{This RQ is about the relationship between sampling size (traditional measure of cost) and actual computational cost... just to show that "sampling size" hides important details about the cost}
+
+%\ma{we should first define what performance prediction error is (MAPE I guess?)}
+
+First, we investigate if there are statistical correlations between the cost measures of Equations~\ref{eq:sampling-cost-prop} and~\ref{eq:sampling-size}.
+%By sampling subsets of configurations in different sizes as previous works, 
+We evaluate whether the ratio is 1 for the percentage of sampled configurations to the sampling time needed to 
+%generate a set of configurations, 
+execute and measure a set of configurations.
+In other words, we are investigating whether by reducing the sample size by more than 70\%, we also reduce the sampling cost by more than 70\%.
+
+%Based on the error values found by previous works in the literature, we 
+Second, we deeply investigate if there are statistical correlations between the sampling cost, prediction error, and number of features. %, and learning time.
+For instance, we suspect that there might be a different correlation between prediction error and the sampling cost computed in Equation~\ref{eq:sampling-cost-prop} and the sampling cost computed in Equation~\ref{eq:sampling-size} considered by previous works (based only on sampling size).
+By assessing the correlations of such properties, we can identify a trade-off between such measures.
+
+We use Spearman's rank correlation coefficient test~\cite{} to assess the correlations. According to Finkelstein et al.~\cite{}, Spearman’s $p$ threshold of $\pm 0.7$ indicates a strong correlation between the variables. Thus, following previous work, in this paper we consider:
+
+\begin{itemize}
+    \item as positive correlation, any large positive value (near to $1.0$). %, for example of $p \geq 0.7$  
+    %strong positive correlation, i.e., if the value of one of the variables increases, the value of the other variable increases as well.
+    \item as negative correlation, any large negative value (near to $-1.0$). 
+    %indicates a strong negative correlation, i.e., the value of one variable decreases with the other’s increasing and vice-versa.
+    \item a value near $0$ (both positive or negative) indicates the absence of any correlation between the two measures. %, and hence those variables are independent of each other.
+\end{itemize}
+
+Each cell in the table is also represented by shades of color. Here darker shades of the color indicate smaller values while brighter shades correspond to larger values (near to 1).
+
+\ma{a negative correlation is actually something less than zero... so we have to be careful here. We should rather use very strong, strong, moderate, or absence of correlations when we want to refer to the strength of the correlation. -0.8 is actually a very strong, negative correlation. But of course, a negative correlation is something to look at because it suggests an inverse ranking for instance}
+
+%How do the rankings of learning with different sampling strategies change when comparing with previous work?
+
+\ju{RQ3 and RQ4 are about a comparison with previous scientific studies/practice... it is about the tradeoff/combination of cost and prediction error to conclude about a "best" sampling strategy}
+
+\paragraph{RQ3 – Strategy Differences}
+For evaluating the validity of previous work conclusions, the third research question asks whether previous scientific findings might be affected in general. 
+Previous scientific findings in the field rely on the tradeoff of sampling size and prediction error~\cite{pereira2020, kaltenecker2019}.
+Here, we check whether the practice of using computational cost measures impacts a specific important foundation finding on which the product line community relies. 
+To assess the scientific impact of the differences between these measures, we conduct a set of experiments to replicate the findings of Kalternecker et al.~\cite{kaltenecker2019}. 
+%Notice that Kalternecker et al.~\cite{kaltenecker2019} applied six sampling strategies to 10 configurable systems.
+Beyond conducting the experiments with the set of systems that were used in the original work~\cite{kaltenecker2019}, our experiments use different inputs and non-functional properties of a system to compare the findings with \cite{pereira2020}.
+
+%This question was answered in 2019, and the answer has been relied upon in much of the subsequent work over the recent years.
+For assessing the ranking differences, we rank the strategies according to the prediction error $MRE$ and sampling cost of either Equation~\ref{eq:sampling-cost-prop} or Equation~\ref{eq:sampling-size}, as follows:
+\ju{inspired by \cite{sarkar2015}}
+
+% \begin{equation}
+%     TotalCompCost = TotalCost_{Eq. 1} + MRE
+%     \label{eq:total-cost-1}
+% \end{equation}
+
+% \begin{equation}
+%     TotalSizeCost = TotalCost_{Eq. 2} + MRE
+%     \label{eq:total-cost-2}
+% \end{equation}
+
+\begin{equation}
+    Cost(s, t, n) = norm(MRE(s)) + (t * norm({Eq. 1})) + (n * norm({Eq. 2}))
+    \label{eq:total-cost}
+\end{equation}
+
+In Equation \ref{eq:total-cost}, $norm$ refers to the normalization of each metric. MRE is the mean rate prediction error of the prediction model~\cite{kaltenecker2019} built with the $n$ sampled configurations using the sampling strategy $s$. We use the weights $t$ and $n$ for a mean of comparison. Thus, if we set $t=1$ and $n=0$, we take into account the tradeoff between MRE and computational cost (Eq.~\ref{eq:sampling-cost-prop}), otherwise if we set $n=1$ and $t=0$, we take into account the tradeoff between MRE and the sample size (Eq.~\ref{eq:sampling-size}). 
+
+We rank the 6 sampling strategies $s$ according to the total cost of Equation~\ref{eq:total-cost}, taking into account the weights 1 and 0 for both, the time $t$ and the sample size $n$. Then, we sort the values for the 6 sampling strategies from ‘small’ (position 1) to ‘large’ (position 6), that is:
+
+\begin{equation}
+    rank(t,n) = Cost(s_1,t,n) \leq Cost(s_2,t,n) \leq ... \leq Cost(s_6,t,n)
+    \label{eq:ranking}
+\end{equation}
+
+Then, the cost sampling rank order is compared.
+We assess the disagreement between the two rankings using the mean rank difference:
+
+\begin{equation}
+    disag. = \frac{\sum_{i=1}^{6} |rank_{s_{i}}(1,0) - rank_{s_{i}}(0,1)|}{6}
+    \label{eq:disagreement}
+\end{equation}
+
+This metric
+%measure simply counts how many of the sampling strategies 
+%in Equation~\ref{eq:total-cost} with the weights $t=1$ and $n=0$ were ordered incorrectly according to the same equation with the weights $t=0$ and $n=1$; and
+%disagree according to the ranking position.
+measures the average of the magnitude of the ranking difference. The values vary between 0 and 1.
+Values close to 0 mean higher agreement, and values close to 1 mean higher disagreement.
+If the ranks of strategies change, it indicates that reporting results based on only one sampling cost strategy may yield different conclusions (\ie based either only on computational cost or sampling size).
+
+%per system and for all systems
+
+\paragraph{RQ4 – Strategy Sensitivity}
+The originality of \textit{RQ4} is to what extent sampling cost of the \emph{same} configurable system (here: x264) is sensitive to other factors, such as different inputs and non-functional properties.
+This exploration is necessary to enhance the generalization of any findings to different contexts. 
+
+To address \textit{RQ4}, we analyze the sensitivity of the ranking computed according to Equation~\ref{eq:ranking} to other contexts.
+%We conduct an in-depth study of x264,
+We choose to deeply investigate x264 instead of the other case studies documented in \red{Table x} because x264 is the most used case study in the literature~\cite{julianasurvey}.
+Furthermore, x264 is used as a baseline for comparison in Pereira et al. work~\cite{pereira2020}.
+x264 is a popular and highly configurable video encoder implemented in C.
+\red{Describe if others...}
+
+With this study, we aim to investigate, for instance, whether the ranking computed in \textit{RQ3} suffers any modification across different variations of x264 (\ie inputs, performance properties). 
+For x264, as the benchmark, we encoded 17 different input videos from raw YUV to the H.264 codec %compressed format
+and measured two quantitative performance properties: encoding time and encoding size. %of 1,152 configurations of x264.
+
+\begin{itemize}
+    \item Encoding time (in short \textbf{time}): how many seconds x264 takes to encode a video.
+    \item Encoding size of the output video (in short \textbf{size}): compression size (in bytes) of an output video in the H.264 format.
+\end{itemize}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lrrr}
+        \toprule
+            ID & video & \#times & stability \\
+        \midrule
+            $x264_{0}$ & bridge\_far\_cif.y4m & 5 & 0.010127 \\
+            $x264_{1}$ & ice\_cif.y4m & 5 & 0.044476 \\
+            $x264_{2}$ & flower\_sif.y4m & 5 & 0.036826 \\
+            $x264_{3}$ & claire\_qcif.y4m & 5 & 0.086958 \\
+            $x264_{4}$ & sintel\_trailer\_2k\_480p24.y4m & 9 & 0.009481 \\
+            $x264_{5}$ & football\_cif.y4m & 5 & 0.029640 \\
+            $x264_{6}$ & crowd\_run\_1080p50.y4m & 3 & 0.005503 \\
+            $x264_{7}$ & blue\_sky\_1080p25.y4m & 8 & 0.010468 \\
+            $x264_{8}$ & FourPeople\_1280x720\_60.y4m & 11 & 0.011258 \\
+            $x264_{9}$ & sunflower\_1080p25.y4m & 4 & 0.006066 \\
+            $x264_{10}$ & deadline\_cif.y4m & 23 & 0.014536 \\
+            $x264_{11}$ & bridge\_close\_cif.y4m & 5 & 0.009892 \\
+            $x264_{12}$ & husky\_cif.y4m & 5 & 0.028564 \\
+            $x264_{13}$ & tennis\_sif.y4m & 5 & 0.044731 \\
+            $x264_{14}$ & riverbed\_1080p25.y4m & 3 & 0.007625 \\
+            $x264_{15}$ & 720p50\_parkrun\_ter.y4m & 8 & 0.010531 \\
+            $x264_{16}$ & soccer\_4cif.y4m & 16 & 0.011847 \\
+        \bottomrule
+    \end{tabular}
+    \caption{The input videos considered in our experiment}
+    \label{tab:input_videos}
+\end{table}
+
+In Table~\ref{tab:input_videos}, we provide an overview of the encoded input videos.
+This number of inputs allows us to draw conclusions about the practicality of sampling strategies for diversified conditions of x264.
+
+\subsection{Subject System} \label{subsec:system}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lrrrr}
+    \toprule
+        Name &  Domain & |C| & |O| & Performance \\
+    \midrule
+        7Z & File archive utility & 68640 & 44 & Compression time \\
+        BDB-C & Embedded database & 2560 & 18 & Response time \\
+        DUNE & Multigrid solver & 2304 & 32 & Solving time \\
+        HIPAcc & Image processing & 13485 & 54 & Solving time \\
+        JAVAGC & Garbage collector & 193536 & 39 & Time \\
+        LLVM & Compiler  & 1024 & 11 & Compilation time \\
+        LRZIP & File archive utility & 432 & 19 & Compression time \\
+        POLLY & Code optimizer & 60000 & 40 & Runtime \\
+        VP9 & Video encoder & 216 000 & 42 & Encoding time \\
+        X264 & Video encoder & 1152 & 16 & Encoding time \\
+    \bottomrule
+    \end{tabular}
+    \caption{Software Systems}
+    \label{tab:system}
+\end{table}
+
+We evaluated all case studies documented in the systematic literature review of Pereira et al.~\cite{julianasurvey}. 
+First, we filter all papers that made their material available.
+Then, we filter the material containing the configurable system feature model and each valid configuration performance measurement.
+%measuring and reporting the execution time
+The feature model is required to reuse the sampling generation strategies by Kaltenecker et al.~\cite{kaltenecker2019}. %, and the time measurement is required to compute the sampling cost in Equation~\ref{eq:sampling-cost-prop}. 
+\red{Table~\ref{tab:system}} presents the results of our filter.
+Based on this filter, we identified \red{n} different systems and \red{m} different datasets. 
+We provide the variability model and the performance measurements of each system on our supplementary material\footnote{\url{link}}.
+
+\ju{Table system_num_study - to do!}
+% Study & System & Performance measurement(s) & #datasets & Evaluation Metrics & Sample Strategies
+% \cite{pereira2020, kaltenecker2019} & x264 & time and size & 17
+% \cite{kaltenecker2019} & .... & .... & 1
+
+We observe that x264 is the most used configurable system in the literature among the ones in \red{Table~\ref{tab:system_num_study}}. 
+For x264, authors used 17 different configuration datasets, 17 of them using different input videos and NFPs.
+They compare if either the input video or the NFP influences the ranking of the greatest performed sampling-based approaches. 
+The dataset from ??? [cite] considering the input video ....., is commonly used as a baseline for comparison in the others works [cite].
+To evaluate the degree to which the sampling computational cost affects scientific conclusions of previous work, we then divided these case studies into two categories: 
+(1) Non-sensitivity analysis (RQ1-3): \red{Table x}; and
+(2) Sensitivity analysis: \red{Table y} (RQ4)
+
+We evaluated all cost measures for each of the categories and sampling strategies described in Kaltenecker et al.~\cite{kaltenecker2019} (see Section~\ref{sec:experiment}).
+
+
+\subsection{Experiment Setup} \label{sec:experiment}
+
+\ju{(1) replication of ICSE’19 paper about distance-based sampling and (2) replication of our own ICPE’20 paper}
+For comparison, we used the same experiment design than in Pereira et al.~\cite{pereira2020} and Kaltenecker et al.~\cite{kaltenecker2019}.
+%To evaluate the accuracy and sampling cost over different inputs and non-functional-properties, 
+
+To answer all research questions, we use the six sampling strategies defined by Kalternecker et al.~\cite{kaltenecker2019} and introduced in Section~\ref{sampling}.
+% We compare six sampling strategies: t-wise, solver-based, randomized solver-based, distance-based, diversified distance-based, and random.
+We conducted experiments using three different sample sizes: $t$=1, $t$=2, and $t$=3.
+As described in Section~\ref{sampling}, $t$-wise sampling covers all combinations of $t$ configuration options being selected.
+Setting maximum $t$ equal 3 is a common practice when dealing with such kinds of pair-wise sampling strategies~\cite{}, since it would be impractical to evaluate $t$>3. 
+We learn a performance model based on the sample sets along with the corresponding performance measurements defined by the different sampling strategies.
+
+In this paper, we use step-wise multiple linear regression~\cite{siegmund2015FSE} as in Kaltenecker et al.~\cite{kaltenecker2019} and Pereiraet al.~\cite{pereira2020}. According to Kaltenecker et al.~\cite{kaltenecker2019}, multiple linear regression is often as accurate as CART and random forests.
+%To calculate the prediction error rate, we use the resulting performance models to predict the performance of the entire dataset of valid configurations $C$.
+We calculate the error rate of a prediction model in terms of the \textit{mean relative error} (MRE - Equation~\ref{eq:mre}).
+MRE is used to estimate the accuracy between the exact measurements and the predicted one.
+\begin{equation}
+    MRE = \frac{1}{|C|} \sum_{c \in C} \frac{|measured_{c} - predicted_{c}|}{measured_{c}}
+    \label{eq:mre}
+\end{equation}
+Where $C$ is the set of all valid configurations used as the validation set, and $measured_{c}$ and $predicted_{c}$ indicate the measured and predicted values of performance for configuration $c$ with $c \in C$, respectively.
+The exact value of $measured_{c}$ is measured at runtime while running the configuration $c$, and the predicted values of $predicted_{c}$ is computed based on the model built with a sample of configurations $t$ (see Section~\ref{sampling}).
+We computed the mean error rate for each sample size, configurable system and its variation (if any), \eg input video and performance property. A lower error rate indicates a higher accuracy.
+
+The sampling strategies are evaluated with \red{n} configurable systems (see Section~\ref{subsec:system}).
+Each system and strategy were executed for 100 independent runs. The execution of multiple independent runs is conducted to 
+%Running the sampling strategies multiple times is done to 
+minimize the threat related to variations in the randomness of sampling strategies (more details in Section~\ref{sampling}).
+%mitigate these uncertainties.
+Hence, in the end of the experiment execution, we have 100 execution times for each strategy per system, sample size, input data, and non-functional property.

@@ -1,0 +1,182 @@
+\section{Study Design}
+\label{sec:design}
+
+\subsection{Corpora}
+\label{sec:corpora}
+
+Table~\ref{tab:corpora} summarizes the six corpora. Each corpus
+contributes \emph{decision scopes}: one scope is a (measurement context,
+budget level) cell in which strategies are compared. Scopes are the unit
+of all counts reported in this paper (851 in total).
+
+\begin{table}[t]
+  \centering\small
+  \caption{Corpora of the study. ``Scopes'' are (context $\times$ budget
+  level) decision cells; $\kappa$ is the measured acquisition-cost
+  property.}
+  \label{tab:corpora}
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}llrrl@{}}
+    \toprule
+    Corpus (role) & Contexts & Budgets & Scopes & Cost $\kappa$ \\
+    \midrule
+    FSE artifact (close replication) & 7 systems & $t2$ & 7 & runtime \\
+    x264 / ICPE'20 (replication) & 17 inputs $\times$ 2 targets & $t1$--$t3$ (fixed $t2$) & 34 & encoding time \\
+    ENERGY / Twins (extension) & 14 systems $\times$ 4 cost/target pairs & $n8$--$n64$ & 220 & energy or runtime \\
+    WORKLOAD / ICSE'23 (extension) & 9 systems, all 93 workloads & $n8$--$n64$ & 359 & wall time \\
+    Linux / TuxKConfig (external validity) & 7 releases & 1\%, 2\%, 5\% of pool & 21 & vmlinux size \\
+    LCBench (external validity) & 35 OpenML datasets & $n8$--$n64$ & 210 & training runtime \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\emph{FSE artifact.} We reuse the original artifact
+\citep{weis2026artifact} directly: its per-system
+\texttt{measurements.csv} universes (1{,}024--193{,}536 configurations)
+and its shipped per-run sample files for all five strategies, including
+the authors' own \srs{} runs (100 repetitions per system at the
+per-system $t2$ budget of 56--843 configurations). This makes \rqone{} on
+this corpus a close replication with exact data reuse; only the analysis
+is independently reimplemented. Notably, these seven exhaustively
+measured systems and the archive strategy families (random,
+solver-based, distance-based, $t$-wise, at $t$-wise-derived budget
+levels) originate from the ICSE'19 distance-based sampling study
+\citep{kaltenecker2019distance}, which \citet{weis2026risk} build on; our
+replication therefore simultaneously revisits the measurement population
+of that earlier study, under a guarantee outcome instead of a
+prediction-error one. The acquisition cost of a configuration is its
+measured performance (the time to execute the benchmark that the study
+measures), so re-indexing by cost requires no additional data.
+
+\emph{x264.} The ICPE'20 corpus \citep{pereira2020sampling} measures
+201{,}600 executions of x264 across 17 input videos with two target
+properties (encoding time, output size). It ships the same
+archive-format strategy families as the FSE artifact plus two more
+(distance-based and Henard's diversified variant), at three $t$-wise
+budget levels; encoding time serves as $\kappa$ for both targets.
+Following the FSE protocol we fix $t2$ for headline counts (34 scopes)
+and use all levels for scaling analyses.
+
+\emph{ENERGY.} The Twins corpus \citep{weber2023twins} measures energy
+and runtime for 14 systems (2{,}304--68{,}640 configurations after
+revision pinning). Because it measures two cost-like properties, it lets
+us cross the target and the cost construct: each system contributes four
+scenarios (target, $\kappa$) $\in$ \{energy, runtime\}$^2$, asking the
+FSE question under a different \emph{notion} of cost.
+
+\emph{WORKLOAD.} The ICSE'23 workload-impact corpus
+\citep{muehlbauer2023workload} measures 9 systems across 93
+workload/input contexts. Each (system, workload) pair is a context;
+the measured wall time (throughput for the h2 database, with inverse
+orientation) is both target and $\kappa$. This family probes whether
+guarantee-per-cost decisions are stable across workloads of the same
+system.
+
+\emph{Linux and LCBench (external validity).} The TuxKConfig pools
+\citep{martin2022transfer} cover seven kernel releases (25k--92k measured
+configurations each, $\approx$10k options); the target and $\kappa$ are
+the built kernel size. LCBench \citep{zimmer2021autopytorch} provides 35
+hyperparameter-optimization pools of 2{,}000 configurations each; the
+target is final validation accuracy and $\kappa$ is training runtime.
+Both are \emph{measured pools}, not exhaustive spaces: all posterior-risk
+statements for them are pool-relative. LCBench additionally leaves the
+configurable-software population entirely---a deliberate stress test, and
+the corpus where cost and target are most weakly coupled.
+
+\subsection{Strategies}
+\label{sec:strategies}
+
+The two archive-based corpora (FSE artifact, x264) use the strategy
+samples shipped with their artifacts: uniform random, solver-based,
+diversified distance-based, $t$-wise (x264 adds distance-based and
+Henard's variant), plus \srs. The four remaining corpora use a
+generated-sampling protocol with five deployable strategies:
+uniform \randomS, \balanced{} (option-frequency balancing),
+\diShe{} (max--min distance space filling), \pairwise{} (greedy pair
+coverage), and \pilotcost{} (a cost-aware strategy that spends 20\% of
+the budget on a random pilot, fits a ridge model \emph{of the cost}, and
+diversifies among predicted-cheap configurations); Linux replaces
+\pairwise/\pilotcost{} with \textsf{coverage} and \textsf{uncertainty}
+(residual-driven active learning) samplers suited to its scale. \srs{} is
+generated natively on all these corpora. Diagnostic oracle strategies
+(cheapest-/most-expensive-first) are excluded from all headline counts.
+
+\subsection{\srs{} audit}
+\label{sec:srsaudit}
+
+Because \srs{} carries the headline recommendation of
+\citet{weis2026risk}, we audited our reimplementation against the
+artifact notebook line by line and behaviorally. All protocol constants
+match (batch size 25, two-sided Welch $p<0.05$, worst-case orientation,
+random fill, budget clamp). On a synthetic system (3{,}000
+configurations, 40 seeds), the posterior-risk distributions of the two
+implementations are statistically indistinguishable (Mann--Whitney
+$p=0.95$), and both dominate uniform random ($p<10^{-5}$), reproducing
+the paper's headline in vitro. The audit surfaced one discrepancy worth
+recording: the artifact's random fill draws from the current recursion
+pool \emph{including} already-selected configurations, so its samples can
+contain duplicates; dedu\-pli\-cated, its shipped $t2$ \srs{} samples are
+1--5 configurations short of nominal size in 2--42\% of runs per system.
+Our implementation never duplicates (the conservative choice for cost
+accounting); the FSE-artifact corpus results use the artifact's own
+samples regardless, so \rqone{} on that corpus is unaffected by
+reimplementation choices.
+
+\subsection{Protocol decisions}
+\label{sec:protocol}
+
+All runs use the worst-case orientation (maximum bound); the prior
+confidence uses the artifact's exponent convention $N{+}1$ (a full rerun
+with exponent $N$ changes no decision in any corpus). Stochastic
+strategies use 100 seeds on the replication corpora and Linux, 30 on the
+generated families and LCBench; deterministic strategies (\diShe,
+\pairwise) contribute one run per scope. Budget grids are capped at $\min(30\%$ of the pool$, 256)$
+configurations for the generated families (four levels, $n{=}8$--$64$)
+and at 1\%/2\%/5\% of the pool for Linux. All pipelines are seeded and
+deterministic end to end; as an incidental check, an interrupted Linux
+run reproduced its first release bit-identically when resumed three days
+later.
+
+\subsection{Hypotheses, statistics, and decision metrics}
+\label{sec:stats}
+
+Within each scope we test, following the FSE-style protocol:
+\textbf{H1}~posterior-risk distributions differ across strategies
+(Kruskal--Wallis \citep{kruskal1952use});
+\textbf{H5}~\srs{} has lower posterior risk than \randomS{} and
+\textbf{H6}~\srs's acquisition cost differs from \randomS's
+(Mann--Whitney \citep{mann1947test}, with Vargha--Delaney $\hat{A}_{12}$
+effect sizes \citep{vargha2000critique}). Three further outcomes are
+decision rules rather than tests: \textbf{H2}~the top recommendation
+(highest integrated-confidence discrepancy) differs between the
+size-indexed and cost-indexed baselines; \textbf{H3}~\srs{} is the best
+cost-normalized choice ($\omega_{\mathrm{cost}}$,
+Section~\ref{sec:costargument}); \textbf{H4}~the (confidence, budget)
+Pareto frontier differs between the size axis and the measured-cost axis
+(flagged when frontier membership differs; quantified by Jaccard
+overlap). For the significance-based hypotheses we control the false
+discovery rate at $0.05$ with Benjamini--Hochberg within each (corpus,
+hypothesis) family \citep{benjamini1995controlling} and report corrected
+counts wherever correction changes them.
+
+\subsection{Equal-spend protocol}
+\label{sec:equalspend}
+
+The $\omega_{\mathrm{cost}}$ handicap compares a strategy's guarantees to
+the random-sampling prior \emph{at the size its spend would buy}. To
+verify that conclusions are not an artifact of this counterfactual, we
+add a literal protocol: fix a budget $B = n_{\mathrm{ref}} \cdot
+\bar{\kappa}$ (uniform random's expected spend at reference size
+$n_{\mathrm{ref}} \in \{8,16,32,64\}$) and let \emph{every} strategy buy
+as many configurations as $B$ affords (per-seed binary search on its own
+sample size, capped at the protocol grid; cap hits are censoring and are
+reported). The outcome is the realized posterior risk at equal measured
+spend. We run this on ENERGY (110 scopes; strong cost--target coupling)
+and LCBench (140 scopes; weak coupling), 30 seeds each.
+
+\subsection{Reproducibility}
+
+Every run is scripted; a command-level manifest records inputs (with
+checksums), protocol parameters, and outputs. Long-running sweeps are
+checkpointed per context and resumable. Aggregate result tables,
+hypothesis tests, and all figures are versioned alongside the code.

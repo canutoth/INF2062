@@ -1,0 +1,95 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{What kind of replication outcome is this?}
+
+Our results are simultaneously a strong confirmation and a strong
+qualification of \citet{weis2026risk}, and it is worth being precise
+about which is which. Everything the original paper \emph{measures}
+replicates: the guarantee framework discriminates strategies wherever we
+take it, its statistical behavior is robust to FDR correction, and on the
+original artifact---with the authors' own strategy samples---every
+headline claim reproduces under an independent reimplementation. What
+does not generalize is the \emph{decision layer} built on top: which
+strategy to recommend, and at what budget. Both turned out to be
+population-relative in ways the original single-corpus,
+single-budget-scale design could not observe. This is precisely the
+epistemic value that replication studies are supposed to add
+\citep{shull2008role,gomez2014understanding}: not a verdict on the
+original, but a map of where its conclusions hold.
+
+\subsection{The triple: strategy, outcome, coupling}
+
+The equal-spend experiments turn the cost argument from an accounting
+observation into a mechanism. In learning-oriented settings, cost-aware
+sampling is defensible: cheap configurations carry option-effect
+information a learner can use, so buying more of them per unit spend can
+be a real gain \citep{sarkar2015cost,nair2017bad}. For worst-case bounds
+the same policy can be self-defeating, because a bound is an extreme
+order statistic: only samples near the top of the target distribution
+move it, and when acquisition cost correlates with the target, those are
+exactly the configurations a cost-avoider skips. The \pilotcost{} flip
+(risk ratio $6.6\times$ worse under strong coupling, $0.75\times$ under
+weak) is the cleanest demonstration we know of that
+\emph{cost-effectiveness is not a strategy property}: the same strategy,
+under the same equal-spend accounting, is the right choice for one
+(outcome, coupling) pair and the wrong one for another. Evaluations that
+report a single ``best strategy per dollar'' without fixing the outcome
+and characterizing the coupling are underdetermined.
+
+The \srs{} budget gradient is the second face of the same coin. \srs{}
+spends its early budget learning \emph{where} to sample; that investment
+amortizes only if enough budget remains to exploit it. At the original
+study's $t$-wise-scale budgets it does; at $n{=}8$--$64$ it does not.
+Neither our small-budget result nor the original large-budget result is
+wrong---they sit at different points of an amortization curve that
+Figure~\ref{fig:equalspend}B makes explicit.
+
+\subsection{Implications}
+
+\emph{For practitioners.} First, budget in measured units, not samples:
+the frontier of defensible choices moves in 97.5\% of scopes when the
+axis switches, and same-size samples can differ in real spend by an order
+of magnitude. Second, think in frontiers, not winners: the single top
+recommendation is unstable across corpora, but frontier membership is
+informative---on Linux, \srs{} is never the winner yet almost always
+worth considering, at a quantifiable premium. Third, match the strategy
+to the deliverable: space-filling strategies (\diShe, \pairwise) are the
+robust default for small-budget bounds; \srs{} earns its cost at large
+budgets on configurable software; cost-aware selection helps only when
+the target and the cost are decoupled.
+
+\emph{For researchers evaluating sampling strategies.} Posterior
+risk/confidence deserves adoption as a standard outcome: it is
+learner-free, cheap to compute on measured universes, and---as our
+851-scope study shows---transportable. But evaluations should report the
+measured-cost axis alongside sample size (both are available in every
+corpus we used at zero additional measurement cost), state the
+cost--target coupling of their subjects, and span more than one budget
+scale before issuing strategy recommendations. Our results suggest a
+reporting template: guarantees per budget under both axes, frontier
+membership rather than single winners, and equal-spend spot checks for
+any cost-aware strategy.
+
+\emph{For the FSE~2026 framework itself.} Nothing in our data challenges
+the framework; two extensions would widen its reach. First, a
+cost-indexed prior ($N_{\mathrm{eff}}$, Section~\ref{sec:costargument})
+is a drop-in addition that turns the existing $\omega$ into a
+cost-normalized decision criterion. Second, the pool-relative variant we
+used for Linux and LCBench---posterior risk with respect to a large
+measured pool rather than an exhaustive universe---extends the framework
+to systems whose spaces cannot be enumerated, at the price of re-scoping
+the guarantee to the pool.
+
+\subsection{Why the guarantee setting is the right test bed}
+
+Had we observed these effects on a prediction-error outcome, a skeptic
+could attribute them to learner idiosyncrasies---regressor choice is
+known to interact with sampling \citep{kaltenecker2020interplay}.
+Posterior risk removes that escape: no learner is involved, so every
+decision change under cost re-indexing is attributable to the cost
+construct itself. The guarantee setting is also where the practical
+stakes are highest---bounds are typically bought under explicit
+measurement budgets---and where the mechanism is most transparent,
+because an extreme order statistic makes the location of ``useful
+information'' analytically obvious.

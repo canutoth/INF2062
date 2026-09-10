@@ -1,0 +1,16 @@
+target_context,cost_context,strategy,level,n,pct_n,median_pct_cost,median_train_cost,median_mre,pareto_count,pareto_empirical,system,cost_property,target_property,scenario
+lrzip,lrzip,random,t1,18,0.041666666666666664,0.0410567111817393,10419515.0,1.419326338397339,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,solverBased,t1,18,0.041666666666666664,0.009274539892330815,2353725.0,0.7896091942573623,1,1,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,henard,t1,18,0.041666666666666664,0.017964447559645914,4559080.0,1.158902801180122,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,distBased,t1,18,0.041666666666666664,0.039240596114611545,9958615.0,1.0530449984060892,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,divDistBased,t1,18,0.041666666666666664,0.02459409503169432,6241575.0,0.9144881505587266,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,random,t2,99,0.22916666666666666,0.23542972629829856,59748175.0,1.2826193201209835,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,solverBased,t2,99,0.22916666666666666,0.06576870198867438,16691010.0,0.7482739627550035,1,1,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,henard,t2,99,0.22916666666666666,0.16169712922881005,41036060.0,1.6565640454688182,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,distBased,t2,99,0.22916666666666666,0.15563239244584554,39496930.0,1.015867356485608,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,divDistBased,t2,99,0.22916666666666666,0.23187196909693242,58845275.0,1.2524181039144546,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,random,t3,250,0.5787037037037037,0.5799343601086027,147177759.5,0.10178307007706146,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,solverBased,t3,250,0.5787037037037037,0.5047308615388633,128092354.0,0.3461842096849085,0,1,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,henard,t3,250,0.5787037037037037,0.6405086715672299,162550519.0,0.3835625381580823,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,distBased,t3,250,0.5787037037037037,0.5178130960999239,131412409.0,0.13301972032223927,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,divDistBased,t3,250,0.5787037037037037,0.5170150181446602,131209870.0,0.0792081172789471,1,1,lrzip,performance,performance,cost_performance__target_performance

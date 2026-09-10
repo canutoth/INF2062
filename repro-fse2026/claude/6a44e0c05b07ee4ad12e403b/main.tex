@@ -1,0 +1,178 @@
+\documentclass[10pt,conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% ICSE 2027 Research Track -- IEEE conference template
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{cite}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xspace}
+\usepackage{siunitx}
+\usepackage{balance}
+\usepackage{adjustbox}
+\usepackage[skip=2pt,font=footnotesize]{caption}
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalise,nameinlink]{cleveref}
+\usepackage[strict=true,english=american]{csquotes}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{environ}
+\usepackage{tcolorbox}
+\usepackage{soul}
+\usepackage{listings}
+\usepackage{balance}
+% Character protrusion + font expansion: tightens line breaking (typically
+% 1--2% shorter) without changing font size, margins, or wording. Improves,
+% rather than degrades, readability. Used to help meet the 10-page text limit.
+\usepackage{microtype}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COMMANDS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\etal[0]{\emph{et al.}\xspace}
+\newcommand{\ie}{\emph{i.e.,}\xspace}
+\newcommand{\eg}{\emph{e.g.,}\xspace}
+\newcommand{\cf}{\emph{cf.}}
+\newcommand{\etc}{\emph{etc.}\xspace}
+\newcommand{\wrt}{w.r.t.\xspace}
+\newcommand\hoption[1]{\texttt{#1}}
+\newcommand{\nbconfigurations}{1{,}152}
+\newcommand{\percent}{\,\%}
+%% ----------------------------------------------------------------------
+%% Family and dataset macros
+%% ----------------------------------------------------------------------
+%% Family labels (the evidence families introduced in
+%% Sec.~\ref{subsec:families}). Rendered in all caps as taxonomic
+%% labels; \xspace handles trailing-space etiquette. Change once here
+%% to restyle paper-wide.
+\newcommand{\StudyReplication}{REPLICATION\xspace}
+\newcommand{\StudyReplicationICSE}{REPLICATION-\allowbreak ICSE19\xspace}
+\newcommand{\StudyReplicationICPE}{REPLICATION-\allowbreak ICPE20\xspace}
+\newcommand{\StudyEnergy}{ENERGY\xspace}
+\newcommand{\StudyWorkload}{WORKLOAD\xspace}
+\newcommand{\StudyLCBench}{LCBENCH\xspace}
+\newcommand{\StudyLinux}{LINUX\xspace}
+
+%% Dataset/artifact names that are external publications worth citing
+%% directly. Internal artifact names (the previous ``NewRuns'',
+%% ``Twins'') are not used: families plus citations are clearer.
+\newcommand{\dsXmat}{x264 ICPE\,2020}
+\newcommand{\dsWLI}{workload-impact ICSE\,2023}
+\newcommand{\dsLCBench}{LCBench\xspace}
+\newcommand{\dsTux}{TuxKConfig}
+
+\newcommand{\rqfinding}[2]{%
+  \begin{tcolorbox}[
+    colback=gray!6,
+    colframe=black!60,
+    title=\textbf{#1},
+    fonttitle=\small,
+    boxsep=0.7mm,
+    left=2mm,right=2mm,top=1mm,bottom=1mm,
+    before skip=3pt,after skip=3pt
+  ]
+  \small #2
+  \end{tcolorbox}
+}
+\newcommand{\plusminus}{$\pm$\,}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+%% Notation conventions used throughout the paper
+\newcommand{\TrainCost}{\mathit{TrainCost}}
+\newcommand{\SizeCost}{\mathit{SizeCost}}
+\newcommand{\FullCost}{\mathit{FullCost}}
+\newcommand{\Ratio}{\mathit{Ratio}}
+\newcommand{\Bias}{\mathit{Bias}}
+\newcommand{\MRE}{\mathit{MRE}}
+
+%% Column types reused from earlier draft
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\DeclareUnicodeCharacter{2212}{-}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Sample Size Is Not Sampling Cost:\\A Construct-Validity Study of Performance\\ Prediction for Configurable Systems}
+% Alternatives the authors considered (kept here as a record):
+%   * "Sample Size or Sampling Cost? Performance Prediction of Configurable Systems Revisited"
+%   * "From Sample Size to Sampling Cost in Performance Prediction of Configurable Systems"
+%   * "Cost vs. Count in Sampling-Based Performance Prediction of Configurable Systems"
+
+\author{\IEEEauthorblockN{Anonymous Author(s)}}
+
+\maketitle
+
+\begin{abstract}
+Sampling-based performance prediction for configurable systems is usually
+evaluated by accuracy and sample size. The assumption from several previous studies is that counting the number
+of measured configurations is a valid proxy for acquisition cost. We test that
+premise across six corpora: replications of Kaltenecker (ICSE'19) and Pereira
+(ICPE'20, x264), performance--energy and workload-sensitive datasets, an
+\StudyLCBench tuning corpus, and Linux kernel releases. We replace count-based
+effort with measured cost, the sum of the measured costs of a strategy's training
+sample, an acquisition cost except on Linux, where cost is image size and serves
+as a resource-budget stress test.
+Sample size is positively correlated with measured cost everywhere, so the proxy
+is not arbitrary, but it is far from sufficient. Same-size samples can differ in
+measured cost by more than an order of magnitude, and a larger sample can be
+cheaper than a smaller one. Re-running the replication studies' own
+Kruskal--Wallis sampler test at a fixed measured budget, rather than a fixed
+sample size, changes the set of statistically tied-best samplers in $38$--$55\%$
+of comparisons across the five non-Linux families and in all of them on Linux. Of
+these, $12$--$55\%$ reproduce in $\ge95\%$ of bootstrap resamples, most robustly on
+the replications and Linux. The measured-cost Pareto-efficient choice set robustly
+differs from the count-based one in $73$--$100\%$ of scenarios, the more stable
+decision-level evidence. Measuring cost also surfaces \emph{cost-aware}
+samplers the count view cannot see, which reach better accuracy at the same
+measured budget. For researchers and practitioners, the lesson is concrete:
+sampling efficiency cannot be claimed from sample count, because the count-best
+sampler is frequently not the cost-effective one once cost is charged. These
+results do not invalidate fixed-sample accuracy comparisons, but efficiency claims
+based on sample count require measured-cost calibration.
+\end{abstract}
+
+\input{1-introduction.tex}
+\input{2-background.tex}
+\input{8-related_work.tex}    % continues Section II (Background and Related Work)
+\input{3-cost_model.tex}
+\input{4-study_design.tex}
+\input{5-results.tex}
+\input{6-discussion.tex}
+\input{7-threats.tex}
+\input{9-conclusion.tex}
+
+%\section*{Acknowledgments}
+%Anonymized for review.
+
+\newpage
+\bibliographystyle{IEEEtran}
+\bibliography{MYfull,ml,macher,jhipster}
+
+\end{document}

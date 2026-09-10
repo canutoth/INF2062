@@ -1,0 +1,2 @@
+scope,scope_value,statistic,statistic_value,p_value,effect,effect_value,effect_label,verdict,notes
+scenario,lcbench|datasets,kruskal_wallis_p,0.9999993347716872,0.9999993347716872,ratio_spread,0.19536872543571226,negligible,refutes,K-W on 35 inputs: p=1; eta^2=0; ratio spread=0.195

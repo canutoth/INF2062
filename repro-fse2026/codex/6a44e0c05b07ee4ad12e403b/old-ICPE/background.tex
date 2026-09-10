@@ -1,0 +1,198 @@
+%£\section{Background and Motivation} \label{sec:background}
+\section{Background and Related Work} \label{sec:background}
+In this section, we introduce basic concepts of configurable software systems and motivate the use of learning techniques in this field. Furthermore, we briefly describe six state-of-the-art sampling strategies used in our experiments.
+
+
+ % \ma{process of learning?}
+ 
+ \begin{figure*}
+ \includegraphics[scale=0.285]{x264-sampling.pdf}
+ \vspace*{-2mm}
+\caption{Design study: sampling effect on performance predictions of x264 configurations}
+\label{fig:study}
+ \end{figure*}
+
+\subsection{Learning Software Configuration Spaces}
+%\subsection{x264, options, and configurations}
+
+% \ju{Introduction.}
+
+ x264 is a command-line tool to encode video streams into the H.264/MPEG-4 AVC format. 
+ Users can configure x264 through the selection of numerous options, some having an effect on the time needed to encode a video, on the quality or the size of the output video, \etc 
+ A configuration of x264 is an assignment of values to options. In our study and as in~\cite{kaltenecker2019}, we only consider Boolean options that can be selected or deselected. As in most configurable systems, not all combinations of options are valid due to constraints among options. For instance, \hoption{ref\_1}, \hoption{ref\_5}, and \hoption{ref\_9} are mutually exclusive and at least one of these options should be selected. 
+ 
+Executing and measuring every valid configuration to know about its performance or identify the performance-optimal one is often unfeasible or costly. To overcome this problem, machine learning techniques rely on a small and representative \emph{sample} of configurations (see Figure~\ref{fig:study}).
+%Figure~\ref{fig:study} shows an overview of the learning process.
+Each configuration of the sample is executed and labelled with a performance measurement (\eg encoding time). The sample is then used for \emph{training} a learning algorithm (\ie a regressor) that builds a performance model capable of predicting the performance of unmeasured configurations. 
+ The performance model may lead to prediction errors. The overall goal is to obtain high \emph{accuracy} roughly computed as the difference between actual performances and predicted performances (more details are given hereafter). 
+ % 
+ How to efficiently sample, measure, and learn is subject to intensive research~\cite{julianasurvey}. In case important (interactions among) options are not included in the training set, the learning phase can hardly generalize to the whole population of configurations. Hence, sampling is a crucial step of the overall learning process with an effect on the accuracy of the \mbox{prediction model.}
+
+
+ % The sample is augmented with performance values
+ 
+ %Numerous research works have proposed learning strategies to predict the performance of configurations with a good accuracy and a reasonable sample of measurements.
+ 
+ 
+ % that give rise to 1,152 valid configurations.
+ 
+ % x264 is a widely considered configurable system in the scientific literature. 
+ 
+ 
+% A configurable software system o
+%For specific non-functional properties, such as time, performance measurement is most costly then to other as size.
+
+ 
+
+% As an example, consider the configurable video codec X264.
+
+% Different non-functional properties (\eg encoding time and encoding size) can be used to indicate the performance of x264 in different configurations.
+% Table ? lists a sample of 5 randomly-selected configurations of X264 and corresponding performance measurements (\ie time and size) for 3 different input videos.
+% We represent features as $\{f_1, f_2, f_3,..., f_{16}\}$ of binary decision variables ($f$ is assigned the value 1 if selected, and 0 otherwise).
+ 
+
+
+\subsection{Sampling Strategies} \label{sampling}
+
+Several sampling strategies have been proposed in the literature about software product lines and configurable systems~\cite{thuem2014, julianasurvey, DBLP:conf/splc/VarshosazATRMS18}. 
+% , either for testing or learning . 
+
+\emph{Sampling for testing.} Some works consider sampling for the specific case of testing configurations. There is not necessarily a learning phase and the goal of sampling is mostly to find and cover as many faults as possible. For instance, Medeiros \etal compared 10 sampling algorithms to detect different faults in configurable systems~\cite{MKRGA:ICSE16}. Arcuri \etal theoretically demonstrate that a uniform random sampling strategy may outperform coverage-based sampling~\cite{Arcuri2012} (see hereafter).
+% Yet, they also found that it was able to find at least 66\% of the faults. 
+Halin \etal demonstrated that uniform random sampling forms a strong baseline for faults and failure efficiency on the JHipster case \cite{Halin2018}. Varshosaz \etal~\cite{DBLP:conf/splc/VarshosazATRMS18} conducted a survey of sampling for testing configurable systems. Though the purpose differs, some of these sampling strategies are also relevant and considered in the context of performance prediction. 
+ 
+% We have discussed these techniques in Section \ref{sec:introduction}. Unfortunately the impact of random sampling on resulting samples is not discussed in this survey, the authors just mentioned that the non-determinism inherent to these techniques can be an issue in a regression testing scenario. 
+
+
+% We need additional cases with \textit{enumerable configuration spaces} (like the BLAST model studied by Cashman \etal~\cite{cohenASE2018}) to confirm or refute this result.
+
+\emph{Sampling for learning.} Pereira \etal~\cite{julianasurvey} review several sampling strategies specifically used for learning configuration spaces. We now present an overview of six sampling strategies also considered in~\cite{kaltenecker2019} and used in our study. All strategies have the merit of being agnostic of the domain (no specific knowledge or prior analysis are needed) and are directly applicable to any configurable system. \\[-7pt]
+
+\textit{Random sampling} aims to cover the configuration space \emph{uniformly}. Throughout the paper, we refer to random as uniform random sampling. The challenge is to select one configuration amongst all the \emph{valid} ones in such a way each configuration receives an equal probability to be included in the sample. 
+An obvious solution is to enumerate all valid configurations
+.and randomly pick a sample from the whole population. However, enumerative approaches quickly do not scale with a large number of configurations. 
+Oh \etal~\cite{jehooh2017} rely on binary decision diagrams to compactly represent a configuration space, which may not scale for very large systems~\cite{mendonca2008}.
+Another line of research is to rely on satisfiability (SAT) solvers. 
+For instance, UniGen~\cite{chakraborty2013scalable,DBLP:conf/tacas/ChakrabortyFMSV15} 
+uses a hashing-based functions to synthesize samples in a nearly uniform manner with strong theoretical guarantees. These theoretical properties come at a cost: the hashing-based approach requires adding large clauses to formulas. % These clauses grow quadratically in size with the number of variables in the formula, which can raise scalability issues.
+ Plazar \etal~\cite{plazar2019} showed that state-of-the-art algorithms are either not able to produce any sample or unable to generate uniform samples for the SAT instances considered. 
+ Overall, a true uniform random sampling may be hard to realize, especially for large configurable systems. At the scale of the x264 study~\cite{kaltenecker2019}, though, uniform sampling is possible (the whole population is \nbconfigurations\xspace configurations). The specific question we explore here is whether random is effective for learning (in case it is applicable as in x264).  
+
+When random sampling is not applicable, several alternate techniques have been proposed typically by sacrificing some uniformity for a substantial increase in performance. 
+
+% use hash functions to split the configuration
+% space recursively in multiple regions, and they select
+% configurations from each of the region
+
+\paragraph{Solver-based.} Many works rely on off-the-shelf
+constraint solver, such as SAT4J~\cite{sat4j} or Z3~\cite{Z3}, for sampling. 
+For instance, a random seed can be set to the Z3 solver and internally influences the variable selection heuristics, which can have an effect on the exploration of valid configurations.
+Henard \etal noticed that solvers' internal order yields non-uniform (and predictable) exploration of the configuration space~\cite{DBLP:journals/tse/HenardPPKHT14}.
+Hence, these strategies do not guarantee true randomness as
+in uniform random sampling. Often the sample set consists of a locally clustered set of configurations. 
+% sample set in the configuration space. 
+% We performed each
+% sampling 100 times with different random seeds from 1 to
+% 100.
+ 
+
+\paragraph{Randomized solver-based.} To weaken the locality drawback of solver-based sampling, Henard \etal change the order of variables and constraints at each solver run. This strategy, called \emph{randomized solver-based sampling} in Kaltenecker et al.~\cite{kaltenecker2019}, increases diversity of configurations. Though it cannot give any guarantees about randomness, the diversity may help to capture important interactions between options for performance prediction. \\[-7pt]
+
+% For configurable systems, Henard \etal noticed that SAT solvers' internal order yields non-uniform (and predictable) exploration of the search space potentially biasing results of search-based configuration selection and prioritization~\cite{DBLP:journals/tse/HenardPPKHT14}.
+
+
+% and QuickSampler~\cite{DBLP:conf/icse/DutraLBS18} because they exhibit interesting trade-offs with respect to uniformity and scalability (e.g., \quicksampler sacrifices some uniformity for a substantial increase in performance).  
+
+\textit{Coverage-based sampling} aims to optimize the sample with regards to a coverage criterion. Many criteria can be considered such as statement coverage that requires the analysis of the source code. In this paper and as in Kaltenecker et al.~\cite{kaltenecker2019}, we rely on $t$-wise sampling~\cite{Kuhn2004,Johansen2012,Cohen2008}. This sampling strategy selects configurations to cover all combinations of $t$ selected options.
+For instance, pair-wise ($t$=2) sampling covers all pairwise
+combinations of options being selected. There are different methods to compute $t$-wise sampling. As in~\cite{kaltenecker2019}, we rely on the implementation of Siegmund \etal~\cite{siegmund2012a}. 
+
+% To identify the influence of pairs of configuration options
+% and not to be affected by influences of other configuration
+% options, 
+
+% Sarkar et al. showed that such a
+% frequency-based sampling further improves the accuracy of
+% performance models learned based on the sample set [22].
+% Other coverage-oriented sampling strategies are, for example,
+% statement-coverage sampling [23] or most-enabled-disabled
+% sampling [24]. Statement-coverage sampling is a white-box
+% strategy, in which the configurations are selected such that
+% every block of optional code from the software system is selected,
+% at least, once; whereas most-enabled-disabled sampling
+% selects just one configuration where all configuration options
+% are selected and one where all configuration options are
+% deselected. The main problem of these strategies is that they
+% require prior knowledge to select a proper coverage criterion.
+
+
+
+
+
+\paragraph{Distance-based.} Kaltenecker \etal~\cite{kaltenecker2019} propose distance-based sampling.  
+The idea is to cover the configuration
+space by selecting configurations according to a given probability
+distribution (typically a uniform distribution) and a distance metric. 
+The underlying benefit is that distance-based sampling can better scale compared to an enumerative-based random sampling, while the generated samples are closed to those obtained with a uniform random. \\[-5pt]
+% with different distance
+% values (and therewith interaction degrees)
+
+\textit{Diversified distance-based sampling} is a variant of distance-based sampling~\cite{kaltenecker2019}. The principle is to increase diversity
+of the sample set by iteratively adding configurations that contain the least frequently selected options. The intended benefit is to avoid missing the inclusion of some (important) options in the process. 
+
+% There are many ways of sampling configurations depending on testing objectives. T-wise sampling adopts a Combinatorial Interaction Testing (CIT) approach, which relies on the hypothesis that most faults are caused by undesired interactions of a small number of features \cite{Kuhn2004}. T-wise sampling being an NP-complete problem in the presence of constraints, various heuristics have been proposed \cite{Lopez-Herrejon2015a}, from greedy algorithms \cite{Johansen2012,Cohen2008} to meta-heuristics \cite{garvin2011evaluating,Ensan2012}. Meta-heuristics are also at the heart of dissimilarity sampling techniques that maximize distances between configurations \cite{DBLP:journals/tse/HenardPPKHT14,DBLP:conf/splc/Al-HajjajiTMLS14}. There are also approaches that combines several objectives (coverage, cost of configurations, \etc) \cite{Guo2017,SayyadMA13,Henard:2015:CMS:2818754.2818819}. These techniques exhibit different tradeoffs between the need to maximise the distances and preserving the validity of generated solutions, this validity being checked typically using SAT solvers. Evolutionary algorithms generally start from initial random solutions, and the way they are produced matters \cite{Cantu-Paz:2002:RNP:2955491.2955546}. For example, Maaranen \etal observed an improvement of 10\% on average when using uniformly distributed random numbers for initialization \cite{Maaranen:2004:QIP:1665296.1665757}. De Perthuis de Laillevault \etal theoretically demonstrated the relevance of repeated uniform random sampling to initialize the population of evolutionary algorithms \cite{dePerthuisdeLaillevault:2015:MNS:2739480.2754760}. For configurable systems, Henard \etal noticed that SAT solvers' internal order yields non-uniform (and predictable) exploration of the search space potentially biasing results of search-based configuration selection and prioritization \cite{DBLP:journals/tse/HenardPPKHT14}. Other criteria rely on the idea of minimal (as few features selected as possible) and maximal (as many features selected as possible) configurations \cite{Abal:2014,MKRGA:ICSE16}. Randomness is involved in such criteria too. For example, one-enabled selects one random configuration having only one feature enabled, most-enabled-disabled selects minimal/maximal configurations (several pairs of configurations may satisfy the criterion). In their experiments, Medeiros \etal relied on the first configuration returned by the SAT solver \cite{MKRGA:ICSE16}. However, Halin \etal showed that taking the first configuration did not reveal faults in their studied system, while an approach relying on random sampling was effective \cite{Halin2018}. In the absence of constraints between the options, Arcuri \etal theoretically demonstrate that a uniform random sampling strategy may outperform t-wise sampling \cite{Arcuri2012}. Random sampling thus typically serves as a baseline to evaluate and compare sampling strategies.
+
+
+
+
+%\subsection{Performance Influence Model} \label{learning}
+\subsection{Sampling Effect on x264} 
+
+
+
+% \ju{Describe Kaltenecker et al.~\cite{kaltenecker2019} work.}
+ This paper aims to replicate the study of Kaltenecker \etal~\cite{kaltenecker2019}.
+While Kaltenecker \etal analyse a wide variety of systems from different domains, we focus on the analysis of a single configurable system.
+%The previous work~\cite{kaltenecker2019} has considered different systems, however did not take into account the different factors related to each system that can change the results.
+ Compared to that paper, our study enables a deeper analysis of sampling strategies over the possible influences of inputs and performance properties. Specifically, we analyze a set of seventeen input videos and two non-functional properties. As in~\cite{kaltenecker2019}, we collect results of 100 independent experiments to increase statistical confidence and external validity.
+We aim at exploring whether the results obtained in~\cite{kaltenecker2019} may be generalized over different variations of a single configurable system.
+Interestingly, numerous papers have specifically considered the x264 configurable system for assessing their proposals~\cite{julianasurvey,jamshidi2018,jamshidi2017b,sarkar2015, valov2015,valov2017,jehooh2017,temple2017a,guo2013ASE}, but a fixed performance property or input video is usually considered. % 
+Jamshidi \etal~\cite{jamshidi2017b} explore the impacts of versions, workloads, and hardware of several configurable systems, including x264. However, the effect of sampling strategies was not considered. In~\cite{jamshidi2018}, sampling strategies for transfer learning were investigated; we are not considering such scenarios in our study.
+Overall, given a configurable system like x264, practitioners face the problem of choosing the right techniques for "sampling, measuring, learning". Specifically, we aim to understand what sampling strategy to use and whether there exists a sampling to rule any configuration space of x264. 
+
+% It is important to notice that once we change the input video, the performance values also change for the same configuration.
+% For example, for the configuration $C_0$, the encoding time is 3.1876, 0.5060, and 0.5256 for the input videos $x264_0$, $x264_1$, and $x264_2$ respectively.
+% We can observe the same performance variability for encoding size.
+% Now, consider the input video $x264_0$ (see Figure ?b)).
+% This is the same input video used in~\cite{kaltenecker2019}.
+% For this input video, we report different encoding times for the same configuration (\eg, for $C_0$ we report 3.1876 while Kaltenecker et al.~\cite{kaltenecker2019} reported ?).
+% The performance values differ due to the different hardware characteristics we used for measurements. 
+ The use of different input videos obviously changes the raw and absolute performance values, but it can also change the overall distribution of configuration measurements.
+Figure~\ref{fig:distribs} gives two distributions over two input videos for the performance property \emph{size} for the whole population of valid configurations. Pearson correlation between the performance measurements of $x264_{2}$ and $x264_{15}$ is -0.35,
+%while Spearman correlation is -0.021, 
+suggesting a weak, negative correlation. 
+The differences among distributions question the existence of a one-size-fits-all sampling capable of generating a representative sample set whatever the input videos or performance properties. 
+Another hypothesis is that the way the sampling is done can pay off for some distributions but not for all.  
+
+\begin{figure}
+  \begin{center}
+    \subfloat[flower\_sif.y4m $x264_{2}$]{
+      \includegraphics[width=0.32\textwidth]{sunflower-distrib.pdf}
+      \label{subfig:sunflower}
+    }
+    \qquad
+    \vspace*{-2mm}
+    \subfloat[720p50\_parkrun\_ter.y4m $x264_{15}$]{
+      \includegraphics[width=0.32\textwidth]{park-distrib.pdf}
+      \label{subfig:park}
+                         }
+    \vspace*{-2mm}
+    \caption{The size distribution of \nbconfigurations\xspace configurations of x264 over two input videos}
+    \vspace*{-4mm}
+    \label{fig:distribs}
+  \end{center}
+\end{figure}
+   
+   
+Given the vast variety of possible input videos and performance properties that may be considered, the performance variability of configurations grows even more. %to compute the performance of a single configurable system
+ Our aim is to investigate how such factors affect the overall prediction accuracy of different sampling strategies: \emph{Is there a dominant sampling strategy for performance prediction of the same configurable system?}

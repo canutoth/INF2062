@@ -1,0 +1,337 @@
+hypothesis,question,supports,refutes,inconclusive,total,family,system,target_property,cost_property
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,7z,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,7z,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,7z,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,7z,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,7z,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,7z,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,7z,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,7z,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,7z,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,7z,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,0,4,0,4,energy,7z,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,1,4,energy,7z,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,7z,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,7z,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,7z,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,7z,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,7z,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,7z,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,7z,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,3,0,4,energy,7z,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,7z,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,7z,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,0,4,0,4,energy,7z,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,1,4,energy,7z,performance,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,Apache,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,Apache,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,Apache,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,Apache,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,0,4,0,4,energy,Apache,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,Apache,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,Apache,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,Apache,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,Apache,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,Apache,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,0,3,1,4,energy,Apache,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,Apache,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,Apache,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,Apache,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,Apache,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,Apache,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,0,4,0,4,energy,Apache,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,Apache,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,Apache,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,Apache,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,Apache,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,Apache,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,0,3,1,4,energy,Apache,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,Apache,performance,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,HSQLDB,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,HSQLDB,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,HSQLDB,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,HSQLDB,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,2,1,4,energy,HSQLDB,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,HSQLDB,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,HSQLDB,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,HSQLDB,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,HSQLDB,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,HSQLDB,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,HSQLDB,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,HSQLDB,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,HSQLDB,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,HSQLDB,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,HSQLDB,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,HSQLDB,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,2,1,4,energy,HSQLDB,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,HSQLDB,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,HSQLDB,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,HSQLDB,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,HSQLDB,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,HSQLDB,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,HSQLDB,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,HSQLDB,performance,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,LLVM,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,LLVM,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,1,3,0,4,energy,LLVM,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,LLVM,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,2,2,0,4,energy,LLVM,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,LLVM,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,LLVM,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,LLVM,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,1,3,0,4,energy,LLVM,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,LLVM,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,2,2,0,4,energy,LLVM,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,LLVM,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,LLVM,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,LLVM,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,1,3,0,4,energy,LLVM,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,LLVM,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,2,2,0,4,energy,LLVM,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,LLVM,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,LLVM,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,LLVM,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,1,3,0,4,energy,LLVM,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,LLVM,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,2,2,0,4,energy,LLVM,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,LLVM,performance,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,MongoDB,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,MongoDB,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,1,3,0,4,energy,MongoDB,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,MongoDB,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,MongoDB,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,MongoDB,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,MongoDB,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,MongoDB,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,1,3,0,4,energy,MongoDB,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,MongoDB,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,MongoDB,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,MongoDB,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,MongoDB,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,MongoDB,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,1,3,0,4,energy,MongoDB,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,MongoDB,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,MongoDB,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,MongoDB,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,MongoDB,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,MongoDB,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,1,3,0,4,energy,MongoDB,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,MongoDB,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,MongoDB,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,MongoDB,performance,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,PostgreSQL,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,PostgreSQL,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,PostgreSQL,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,PostgreSQL,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,PostgreSQL,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,PostgreSQL,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,PostgreSQL,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,PostgreSQL,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,PostgreSQL,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,PostgreSQL,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,PostgreSQL,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,PostgreSQL,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,PostgreSQL,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,PostgreSQL,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,PostgreSQL,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,PostgreSQL,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,PostgreSQL,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,PostgreSQL,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,PostgreSQL,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,PostgreSQL,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,PostgreSQL,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,PostgreSQL,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,PostgreSQL,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,PostgreSQL,performance,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,VP8,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,VP8,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,VP8,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,VP8,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,0,3,1,4,energy,VP8,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,VP8,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,VP8,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,VP8,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,VP8,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,VP8,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,VP8,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,VP8,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,VP8,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,VP8,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,VP8,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,VP8,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,0,3,1,4,energy,VP8,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,VP8,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,VP8,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,VP8,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,VP8,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,VP8,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,VP8,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,VP8,performance,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,1,2,0,3,energy,brotli,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,2,0,3,energy,brotli,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,3,0,3,energy,brotli,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,3,0,0,3,energy,brotli,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,2,0,3,energy,brotli,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,0,3,energy,brotli,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,1,2,0,3,energy,brotli,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,2,0,3,energy,brotli,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,3,0,3,energy,brotli,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,3,0,0,3,energy,brotli,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,2,0,3,energy,brotli,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,0,3,energy,brotli,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,1,1,1,3,energy,brotli,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,2,0,3,energy,brotli,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,3,0,3,energy,brotli,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,3,0,0,3,energy,brotli,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,2,0,3,energy,brotli,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,0,3,energy,brotli,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,1,1,1,3,energy,brotli,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,2,0,3,energy,brotli,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,3,0,3,energy,brotli,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,3,0,0,3,energy,brotli,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,2,0,3,energy,brotli,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,0,3,energy,brotli,performance,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,exastencils,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,exastencils,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,exastencils,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,exastencils,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,0,3,1,4,energy,exastencils,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,3,0,4,energy,exastencils,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,exastencils,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,exastencils,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,exastencils,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,exastencils,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,exastencils,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,3,0,4,energy,exastencils,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,exastencils,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,exastencils,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,exastencils,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,exastencils,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,0,3,1,4,energy,exastencils,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,3,0,4,energy,exastencils,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,exastencils,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,exastencils,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,exastencils,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,exastencils,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,exastencils,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,1,4,energy,exastencils,performance,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,jump3r,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,3,1,0,4,energy,jump3r,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,1,3,0,4,energy,jump3r,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,jump3r,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,0,4,0,4,energy,jump3r,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,1,4,energy,jump3r,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,jump3r,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,3,1,0,4,energy,jump3r,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,jump3r,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,jump3r,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,0,4,0,4,energy,jump3r,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,1,4,energy,jump3r,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,jump3r,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,3,1,0,4,energy,jump3r,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,jump3r,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,jump3r,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,0,4,0,4,energy,jump3r,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,1,4,energy,jump3r,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,jump3r,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,3,1,0,4,energy,jump3r,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,jump3r,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,jump3r,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,0,4,0,4,energy,jump3r,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,1,4,energy,jump3r,performance,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,kanzi,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,kanzi,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,kanzi,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,kanzi,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,2,2,0,4,energy,kanzi,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,1,4,energy,kanzi,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,kanzi,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,2,2,0,4,energy,kanzi,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,kanzi,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,kanzi,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,2,1,4,energy,kanzi,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,1,4,energy,kanzi,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,kanzi,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,kanzi,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,kanzi,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,kanzi,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,2,2,0,4,energy,kanzi,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,1,4,energy,kanzi,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,kanzi,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,2,2,0,4,energy,kanzi,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,kanzi,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,kanzi,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,2,1,4,energy,kanzi,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,1,2,1,4,energy,kanzi,performance,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,lrzip,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,lrzip,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,lrzip,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,lrzip,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,2,1,4,energy,lrzip,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,lrzip,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,lrzip,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,3,0,4,energy,lrzip,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,lrzip,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,lrzip,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,lrzip,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,lrzip,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,lrzip,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,lrzip,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,lrzip,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,lrzip,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,2,1,4,energy,lrzip,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,lrzip,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,lrzip,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,3,0,4,energy,lrzip,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,lrzip,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,lrzip,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,lrzip,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,lrzip,performance,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,nginx,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,3,0,4,energy,nginx,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,nginx,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,nginx,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,nginx,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,nginx,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,nginx,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,2,2,0,4,energy,nginx,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,nginx,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,nginx,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,nginx,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,nginx,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,nginx,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,3,0,4,energy,nginx,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,nginx,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,nginx,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,nginx,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,nginx,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,nginx,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,2,2,0,4,energy,nginx,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,nginx,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,nginx,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,1,3,0,4,energy,nginx,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,nginx,performance,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,x264,energy,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,x264,energy,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,x264,energy,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,x264,energy,energy
+FSE5,SRS has lower posterior risk than random sampling.,2,2,0,4,energy,x264,energy,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,x264,energy,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,x264,performance,energy
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,3,0,4,energy,x264,performance,energy
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,x264,performance,energy
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,x264,performance,energy
+FSE5,SRS has lower posterior risk than random sampling.,2,2,0,4,energy,x264,performance,energy
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,x264,performance,energy
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,x264,energy,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,0,4,0,4,energy,x264,energy,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,x264,energy,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,x264,energy,performance
+FSE5,SRS has lower posterior risk than random sampling.,2,2,0,4,energy,x264,energy,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,x264,energy,performance
+FSE1,Posterior risk differs across sampling strategies at the same nominal budget.,4,0,0,4,energy,x264,performance,performance
+FSE2,Cost-normalized integrated confidence changes the top recommendation.,1,3,0,4,energy,x264,performance,performance
+FSE3,SRS remains the best recommendation after empirical-cost normalization.,0,4,0,4,energy,x264,performance,performance
+FSE4,Empirical-cost normalization changes the confidence Pareto frontier.,4,0,0,4,energy,x264,performance,performance
+FSE5,SRS has lower posterior risk than random sampling.,2,2,0,4,energy,x264,performance,performance
+FSE6,SRS and random sampling have different empirical acquisition costs.,2,2,0,4,energy,x264,performance,performance

@@ -1,0 +1,156 @@
+hypothesis,scope,scope_value,statistic,statistic_value,p_value,effect,effect_value,effect_label,verdict,notes
+H1a,system,HSQLDB|cost=energy,cv_cost,0.3584342031726361,nan,p90_over_p10,2.259886348729324,moderate,supports,CV=0.358; p90/p10=2.26
+H1b,system,HSQLDB|cost=energy,kruskal_wallis_min_p,3.978447278012275e-42,3.978447278012275e-42,eta_squared_max,0.6595436408983065,large,supports,K-W per level: 11/11 levels with p<0.05; min p=3.98e-42; max eta^2=0.66
+H2a,system,HSQLDB|cost=energy,spearman_rho,0.9910667792404142,0.0,rho,0.9910667792404142,strong positive,supports,Spearman rho=0.991 on n=3322 (records-level)
+H2b,system,HSQLDB|cost=energy,median_ratio,0.9927811622537689,nan,abs_deviation_from_1,0.00721883774623111,calibrated,inconclusive,"median ratio=0.993; 95% CI [0.991,0.994]; |median-1|=0.00722"
+H2c,system,HSQLDB|cost=energy,kruskal_wallis_p,3.161143326462334e-248,3.161143326462334e-248,eta_squared,0.3462456690005927,large,supports,K-W p=3.16e-248; eta^2=0.346; k=5 strategies
+H1a,system,HSQLDB|cost=performance,cv_cost,0.3189722736474824,nan,p90_over_p10,2.0448,moderate,supports,CV=0.319; p90/p10=2.04
+H1b,system,HSQLDB|cost=performance,kruskal_wallis_min_p,1.716219842083808e-42,1.716219842083808e-42,eta_squared_max,0.6652617857044008,large,supports,K-W per level: 11/11 levels with p<0.05; min p=1.72e-42; max eta^2=0.665
+H2a,system,HSQLDB|cost=performance,spearman_rho,0.991430140631547,0.0,rho,0.991430140631547,strong positive,supports,Spearman rho=0.991 on n=3322 (records-level)
+H2b,system,HSQLDB|cost=performance,median_ratio,0.9949901564715328,nan,abs_deviation_from_1,0.005009843528467228,calibrated,inconclusive,"median ratio=0.995; 95% CI [0.993,0.996]; |median-1|=0.00501"
+H2c,system,HSQLDB|cost=performance,kruskal_wallis_p,5.48052380845816e-276,5.48052380845816e-276,eta_squared,0.38485121768318975,large,supports,K-W p=5.48e-276; eta^2=0.385; k=5 strategies
+H3a,system,HSQLDB|cost=energy|target=energy,top1_flips,2.0,nan,flip_fraction,0.2857142857142857,occasional flips,supports,top-1 flips 2/7; mean Kendall tau=0.894
+H4a,system,HSQLDB|cost=energy|target=energy,exclusive_pairs,5.0,nan,pareto_jaccard,0.6875,different,supports,|count|=11; |empirical|=16; only_count=0; only_empirical=5; Jaccard=0.688
+H4b,system,HSQLDB|cost=energy|target=energy,pareto_jaccard,0.6875,nan,frontier_size_diff,5.0,frontiers differ,supports,|count|=11; |empirical|=16; Jaccard=0.688
+H3a,system,HSQLDB|cost=energy|target=performance,top1_flips,4.0,nan,flip_fraction,0.5714285714285714,frequent flips,supports,top-1 flips 4/7; mean Kendall tau=0.881
+H4a,system,HSQLDB|cost=energy|target=performance,exclusive_pairs,7.0,nan,pareto_jaccard,0.6111111111111112,different,supports,|count|=11; |empirical|=18; only_count=0; only_empirical=7; Jaccard=0.611
+H4b,system,HSQLDB|cost=energy|target=performance,pareto_jaccard,0.6111111111111112,nan,frontier_size_diff,7.0,frontiers differ,supports,|count|=11; |empirical|=18; Jaccard=0.611
+H3a,system,HSQLDB|cost=performance|target=energy,top1_flips,1.0,nan,flip_fraction,0.14285714285714285,rare flips,supports,top-1 flips 1/7; mean Kendall tau=0.896
+H4a,system,HSQLDB|cost=performance|target=energy,exclusive_pairs,5.0,nan,pareto_jaccard,0.6875,different,supports,|count|=11; |empirical|=16; only_count=0; only_empirical=5; Jaccard=0.688
+H4b,system,HSQLDB|cost=performance|target=energy,pareto_jaccard,0.6875,nan,frontier_size_diff,5.0,frontiers differ,supports,|count|=11; |empirical|=16; Jaccard=0.688
+H3a,system,HSQLDB|cost=performance|target=performance,top1_flips,4.0,nan,flip_fraction,0.5714285714285714,frequent flips,supports,top-1 flips 4/7; mean Kendall tau=0.889
+H4a,system,HSQLDB|cost=performance|target=performance,exclusive_pairs,7.0,nan,pareto_jaccard,0.6111111111111112,different,supports,|count|=11; |empirical|=18; only_count=0; only_empirical=7; Jaccard=0.611
+H4b,system,HSQLDB|cost=performance|target=performance,pareto_jaccard,0.6111111111111112,nan,frontier_size_diff,7.0,frontiers differ,supports,|count|=11; |empirical|=18; Jaccard=0.611
+H1a,system,brotli_1.0.7|cost=energy,cv_cost,1.9740751979132634,nan,p90_over_p10,50.056649256729585,very large,supports,CV=1.97; p90/p10=50.1
+H1b,system,brotli_1.0.7|cost=energy,kruskal_wallis_min_p,3.2152671027964927e-25,3.2152671027964927e-25,eta_squared_max,0.39404723520911955,large,supports,K-W per level: 7/7 levels with p<0.05; min p=3.22e-25; max eta^2=0.394
+H2a,system,brotli_1.0.7|cost=energy,spearman_rho,0.9067893918630525,0.0,rho,0.9067893918630525,strong positive,supports,Spearman rho=0.907 on n=2114 (records-level)
+H2b,system,brotli_1.0.7|cost=energy,median_ratio,1.0339993434001031,nan,abs_deviation_from_1,0.03399934340010313,calibrated,inconclusive,"median ratio=1.03; 95% CI [1.02,1.05]; |median-1|=0.034"
+H2c,system,brotli_1.0.7|cost=energy,kruskal_wallis_p,2.608731627967031e-07,2.608731627967031e-07,eta_squared,0.015276825538492788,small,supports,K-W p=2.61e-07; eta^2=0.0153; k=5 strategies
+H1a,system,brotli_1.0.7|cost=performance,cv_cost,2.092341246498047,nan,p90_over_p10,149.43335796994324,very large,supports,CV=2.09; p90/p10=149
+H1b,system,brotli_1.0.7|cost=performance,kruskal_wallis_min_p,2.6126609162442186e-25,2.6126609162442186e-25,eta_squared_max,0.3954678734981667,large,supports,K-W per level: 7/7 levels with p<0.05; min p=2.61e-25; max eta^2=0.395
+H2a,system,brotli_1.0.7|cost=performance,spearman_rho,0.9012928664917447,0.0,rho,0.9012928664917447,strong positive,supports,Spearman rho=0.901 on n=2114 (records-level)
+H2b,system,brotli_1.0.7|cost=performance,median_ratio,1.0354114970581088,nan,abs_deviation_from_1,0.035411497058108754,calibrated,inconclusive,"median ratio=1.04; 95% CI [1.02,1.05]; |median-1|=0.0354"
+H2c,system,brotli_1.0.7|cost=performance,kruskal_wallis_p,5.596467919961227e-07,5.596467919961227e-07,eta_squared,0.014512116077993029,small,supports,K-W p=5.6e-07; eta^2=0.0145; k=5 strategies
+H3a,system,brotli_1.0.7|cost=energy|target=energy,top1_flips,7.0,nan,flip_fraction,1.0,frequent flips,supports,top-1 flips 7/7; mean Kendall tau=0.647
+H4a,system,brotli_1.0.7|cost=energy|target=energy,exclusive_pairs,5.0,nan,pareto_jaccard,0.2857142857142857,different,supports,|count|=3; |empirical|=6; only_count=1; only_empirical=4; Jaccard=0.286
+H4b,system,brotli_1.0.7|cost=energy|target=energy,pareto_jaccard,0.2857142857142857,nan,frontier_size_diff,3.0,frontiers differ,supports,|count|=3; |empirical|=6; Jaccard=0.286
+H3a,system,brotli_1.0.7|cost=energy|target=performance,top1_flips,0.0,nan,flip_fraction,0.0,no flips,refutes,top-1 flips 0/7; mean Kendall tau=0.653
+H4a,system,brotli_1.0.7|cost=energy|target=performance,exclusive_pairs,5.0,nan,pareto_jaccard,0.4444444444444444,different,supports,|count|=5; |empirical|=8; only_count=1; only_empirical=4; Jaccard=0.444
+H4b,system,brotli_1.0.7|cost=energy|target=performance,pareto_jaccard,0.4444444444444444,nan,frontier_size_diff,3.0,frontiers differ,supports,|count|=5; |empirical|=8; Jaccard=0.444
+H3a,system,brotli_1.0.7|cost=performance|target=energy,top1_flips,7.0,nan,flip_fraction,1.0,frequent flips,supports,top-1 flips 7/7; mean Kendall tau=0.64
+H4a,system,brotli_1.0.7|cost=performance|target=energy,exclusive_pairs,5.0,nan,pareto_jaccard,0.2857142857142857,different,supports,|count|=3; |empirical|=6; only_count=1; only_empirical=4; Jaccard=0.286
+H4b,system,brotli_1.0.7|cost=performance|target=energy,pareto_jaccard,0.2857142857142857,nan,frontier_size_diff,3.0,frontiers differ,supports,|count|=3; |empirical|=6; Jaccard=0.286
+H3a,system,brotli_1.0.7|cost=performance|target=performance,top1_flips,7.0,nan,flip_fraction,1.0,frequent flips,supports,top-1 flips 7/7; mean Kendall tau=0.648
+H4a,system,brotli_1.0.7|cost=performance|target=performance,exclusive_pairs,6.0,nan,pareto_jaccard,0.25,different,supports,|count|=4; |empirical|=6; only_count=2; only_empirical=4; Jaccard=0.25
+H4b,system,brotli_1.0.7|cost=performance|target=performance,pareto_jaccard,0.25,nan,frontier_size_diff,2.0,frontiers differ,supports,|count|=4; |empirical|=6; Jaccard=0.25
+H1a,system,jump3r|cost=energy,cv_cost,5.537982396968118,nan,p90_over_p10,2.199922588683302,very large,supports,CV=5.54; p90/p10=2.2
+H1b,system,jump3r|cost=energy,kruskal_wallis_min_p,2.8548401838275843e-41,2.8548401838275843e-41,eta_squared_max,0.6461387463249638,large,supports,K-W per level: 9/9 levels with p<0.05; min p=2.85e-41; max eta^2=0.646
+H2a,system,jump3r|cost=energy,spearman_rho,0.8412613971593356,0.0,rho,0.8412613971593356,strong positive,supports,Spearman rho=0.841 on n=2718 (records-level)
+H2b,system,jump3r|cost=energy,median_ratio,0.3577662787557526,nan,abs_deviation_from_1,0.6422337212442474,severe miscalibration,supports,"median ratio=0.358; 95% CI [0.356,0.36]; |median-1|=0.642"
+H2c,system,jump3r|cost=energy,kruskal_wallis_p,1.6730873509963458e-276,1.6730873509963458e-276,eta_squared,0.47140739109011126,large,supports,K-W p=1.67e-276; eta^2=0.471; k=5 strategies
+H1a,system,jump3r|cost=performance,cv_cost,7.104246462801668,nan,p90_over_p10,4.50432050274941,very large,supports,CV=7.1; p90/p10=4.5
+H1b,system,jump3r|cost=performance,kruskal_wallis_min_p,2.067409714285528e-44,2.067409714285528e-44,eta_squared_max,0.6953082372254883,large,supports,K-W per level: 9/9 levels with p<0.05; min p=2.07e-44; max eta^2=0.695
+H2a,system,jump3r|cost=performance,spearman_rho,0.7546518826772312,0.0,rho,0.7546518826772312,strong positive,supports,Spearman rho=0.755 on n=2718 (records-level)
+H2b,system,jump3r|cost=performance,median_ratio,0.16815872391870978,nan,abs_deviation_from_1,0.8318412760812902,severe miscalibration,supports,"median ratio=0.168; 95% CI [0.166,0.171]; |median-1|=0.832"
+H2c,system,jump3r|cost=performance,kruskal_wallis_p,2.6670697153335193e-296,2.6670697153335193e-296,eta_squared,0.5050631534979644,large,supports,K-W p=2.67e-296; eta^2=0.505; k=5 strategies
+H3a,system,jump3r|cost=energy|target=energy,top1_flips,4.0,nan,flip_fraction,0.5714285714285714,frequent flips,supports,top-1 flips 4/7; mean Kendall tau=0.642
+H4a,system,jump3r|cost=energy|target=energy,exclusive_pairs,2.0,nan,pareto_jaccard,0.75,different,supports,|count|=6; |empirical|=8; only_count=0; only_empirical=2; Jaccard=0.75
+H4b,system,jump3r|cost=energy|target=energy,pareto_jaccard,0.75,nan,frontier_size_diff,2.0,frontiers differ,supports,|count|=6; |empirical|=8; Jaccard=0.75
+H3a,system,jump3r|cost=energy|target=performance,top1_flips,6.0,nan,flip_fraction,0.8571428571428571,frequent flips,supports,top-1 flips 6/7; mean Kendall tau=0.662
+H4a,system,jump3r|cost=energy|target=performance,exclusive_pairs,3.0,nan,pareto_jaccard,0.7,different,supports,|count|=7; |empirical|=10; only_count=0; only_empirical=3; Jaccard=0.7
+H4b,system,jump3r|cost=energy|target=performance,pareto_jaccard,0.7,nan,frontier_size_diff,3.0,frontiers differ,supports,|count|=7; |empirical|=10; Jaccard=0.7
+H3a,system,jump3r|cost=performance|target=energy,top1_flips,6.0,nan,flip_fraction,0.8571428571428571,frequent flips,supports,top-1 flips 6/7; mean Kendall tau=0.58
+H4a,system,jump3r|cost=performance|target=energy,exclusive_pairs,2.0,nan,pareto_jaccard,0.75,different,supports,|count|=6; |empirical|=8; only_count=0; only_empirical=2; Jaccard=0.75
+H4b,system,jump3r|cost=performance|target=energy,pareto_jaccard,0.75,nan,frontier_size_diff,2.0,frontiers differ,supports,|count|=6; |empirical|=8; Jaccard=0.75
+H3a,system,jump3r|cost=performance|target=performance,top1_flips,7.0,nan,flip_fraction,1.0,frequent flips,supports,top-1 flips 7/7; mean Kendall tau=0.591
+H4a,system,jump3r|cost=performance|target=performance,exclusive_pairs,7.0,nan,pareto_jaccard,0.5,different,supports,|count|=7; |empirical|=14; only_count=0; only_empirical=7; Jaccard=0.5
+H4b,system,jump3r|cost=performance|target=performance,pareto_jaccard,0.5,nan,frontier_size_diff,7.0,frontiers differ,supports,|count|=7; |empirical|=14; Jaccard=0.5
+H1a,system,lrzip|cost=energy,cv_cost,2.0032261274211995,nan,p90_over_p10,27.142129223572645,very large,supports,CV=2; p90/p10=27.1
+H1b,system,lrzip|cost=energy,kruskal_wallis_min_p,1.0034707863011867e-42,1.0034707863011867e-42,eta_squared_max,0.6689114121125137,large,supports,K-W per level: 8/8 levels with p<0.05; min p=1e-42; max eta^2=0.669
+H2a,system,lrzip|cost=energy,spearman_rho,0.7305402964966616,0.0,rho,0.7305402964966616,strong positive,supports,Spearman rho=0.731 on n=2416 (records-level)
+H2b,system,lrzip|cost=energy,median_ratio,0.8420137278999638,nan,abs_deviation_from_1,0.15798627210003624,moderate miscalibration,supports,"median ratio=0.842; 95% CI [0.816,0.866]; |median-1|=0.158"
+H2c,system,lrzip|cost=energy,kruskal_wallis_p,0.0,0.0,eta_squared,0.6527529647162323,large,supports,K-W p=0; eta^2=0.653; k=5 strategies
+H1a,system,lrzip|cost=performance,cv_cost,2.180354131694009,nan,p90_over_p10,32.1951579404736,very large,supports,CV=2.18; p90/p10=32.2
+H1b,system,lrzip|cost=performance,kruskal_wallis_min_p,9.764339430913394e-43,9.764339430913394e-43,eta_squared_max,0.6690971525408613,large,supports,K-W per level: 8/8 levels with p<0.05; min p=9.76e-43; max eta^2=0.669
+H2a,system,lrzip|cost=performance,spearman_rho,0.7152664551063549,0.0,rho,0.7152664551063549,strong positive,supports,Spearman rho=0.715 on n=2416 (records-level)
+H2b,system,lrzip|cost=performance,median_ratio,0.8237374487746902,nan,abs_deviation_from_1,0.17626255122530976,moderate miscalibration,supports,"median ratio=0.824; 95% CI [0.798,0.85]; |median-1|=0.176"
+H2c,system,lrzip|cost=performance,kruskal_wallis_p,0.0,0.0,eta_squared,0.6439363524825005,large,supports,K-W p=0; eta^2=0.644; k=5 strategies
+H3a,system,lrzip|cost=energy|target=energy,top1_flips,3.0,nan,flip_fraction,0.42857142857142855,occasional flips,supports,top-1 flips 3/7; mean Kendall tau=0.524
+H4a,system,lrzip|cost=energy|target=energy,exclusive_pairs,11.0,nan,pareto_jaccard,0.3888888888888889,different,supports,|count|=7; |empirical|=18; only_count=0; only_empirical=11; Jaccard=0.389
+H4b,system,lrzip|cost=energy|target=energy,pareto_jaccard,0.3888888888888889,nan,frontier_size_diff,11.0,frontiers differ,supports,|count|=7; |empirical|=18; Jaccard=0.389
+H3a,system,lrzip|cost=energy|target=performance,top1_flips,2.0,nan,flip_fraction,0.2857142857142857,occasional flips,supports,top-1 flips 2/7; mean Kendall tau=0.546
+H4a,system,lrzip|cost=energy|target=performance,exclusive_pairs,13.0,nan,pareto_jaccard,0.3157894736842105,different,supports,|count|=7; |empirical|=18; only_count=1; only_empirical=12; Jaccard=0.316
+H4b,system,lrzip|cost=energy|target=performance,pareto_jaccard,0.3157894736842105,nan,frontier_size_diff,11.0,frontiers differ,supports,|count|=7; |empirical|=18; Jaccard=0.316
+H3a,system,lrzip|cost=performance|target=energy,top1_flips,4.0,nan,flip_fraction,0.5714285714285714,frequent flips,supports,top-1 flips 4/7; mean Kendall tau=0.507
+H4a,system,lrzip|cost=performance|target=energy,exclusive_pairs,10.0,nan,pareto_jaccard,0.4117647058823529,different,supports,|count|=7; |empirical|=17; only_count=0; only_empirical=10; Jaccard=0.412
+H4b,system,lrzip|cost=performance|target=energy,pareto_jaccard,0.4117647058823529,nan,frontier_size_diff,10.0,frontiers differ,supports,|count|=7; |empirical|=17; Jaccard=0.412
+H3a,system,lrzip|cost=performance|target=performance,top1_flips,3.0,nan,flip_fraction,0.42857142857142855,occasional flips,supports,top-1 flips 3/7; mean Kendall tau=0.532
+H4a,system,lrzip|cost=performance|target=performance,exclusive_pairs,12.0,nan,pareto_jaccard,0.25,different,supports,|count|=7; |empirical|=13; only_count=3; only_empirical=9; Jaccard=0.25
+H4b,system,lrzip|cost=performance|target=performance,pareto_jaccard,0.25,nan,frontier_size_diff,6.0,frontiers differ,supports,|count|=7; |empirical|=13; Jaccard=0.25
+H1a,system,MongoDB|cost=energy,cv_cost,0.16689495921801553,nan,p90_over_p10,1.588989935114699,small,supports,CV=0.167; p90/p10=1.59
+H1b,system,MongoDB|cost=energy,kruskal_wallis_min_p,4.929218634185544e-43,4.929218634185544e-43,eta_squared_max,0.673745484923768,large,supports,K-W per level: 8/8 levels with p<0.05; min p=4.93e-43; max eta^2=0.674
+H2a,system,MongoDB|cost=energy,spearman_rho,0.9815192710394612,0.0,rho,0.9815192710394612,strong positive,supports,Spearman rho=0.982 on n=2416 (records-level)
+H2b,system,MongoDB|cost=energy,median_ratio,0.9964370349812228,nan,abs_deviation_from_1,0.0035629650187771755,calibrated,inconclusive,"median ratio=0.996; 95% CI [0.995,0.998]; |median-1|=0.00356"
+H2c,system,MongoDB|cost=energy,kruskal_wallis_p,0.0,0.0,eta_squared,0.6520072583293979,large,supports,K-W p=0; eta^2=0.652; k=5 strategies
+H1a,system,MongoDB|cost=performance,cv_cost,0.14172263391076279,nan,p90_over_p10,1.4738652713254712,small,inconclusive,CV=0.142; p90/p10=1.47
+H1b,system,MongoDB|cost=performance,kruskal_wallis_min_p,1.965373426237864e-43,1.965373426237864e-43,eta_squared_max,0.6799977922737089,large,supports,K-W per level: 8/8 levels with p<0.05; min p=1.97e-43; max eta^2=0.68
+H2a,system,MongoDB|cost=performance,spearman_rho,0.9816151046667548,0.0,rho,0.9816151046667548,strong positive,supports,Spearman rho=0.982 on n=2416 (records-level)
+H2b,system,MongoDB|cost=performance,median_ratio,0.9968904702183774,nan,abs_deviation_from_1,0.0031095297816225997,calibrated,inconclusive,"median ratio=0.997; 95% CI [0.996,0.998]; |median-1|=0.00311"
+H2c,system,MongoDB|cost=performance,kruskal_wallis_p,0.0,0.0,eta_squared,0.6562310065044658,large,supports,K-W p=0; eta^2=0.656; k=5 strategies
+H3a,system,MongoDB|cost=energy|target=energy,top1_flips,2.0,nan,flip_fraction,0.2857142857142857,occasional flips,supports,top-1 flips 2/7; mean Kendall tau=0.921
+H4a,system,MongoDB|cost=energy|target=energy,exclusive_pairs,7.0,nan,pareto_jaccard,0.5333333333333333,different,supports,|count|=8; |empirical|=15; only_count=0; only_empirical=7; Jaccard=0.533
+H4b,system,MongoDB|cost=energy|target=energy,pareto_jaccard,0.5333333333333333,nan,frontier_size_diff,7.0,frontiers differ,supports,|count|=8; |empirical|=15; Jaccard=0.533
+H3a,system,MongoDB|cost=energy|target=performance,top1_flips,2.0,nan,flip_fraction,0.2857142857142857,occasional flips,supports,top-1 flips 2/7; mean Kendall tau=0.935
+H4a,system,MongoDB|cost=energy|target=performance,exclusive_pairs,5.0,nan,pareto_jaccard,0.5833333333333334,different,supports,|count|=7; |empirical|=12; only_count=0; only_empirical=5; Jaccard=0.583
+H4b,system,MongoDB|cost=energy|target=performance,pareto_jaccard,0.5833333333333334,nan,frontier_size_diff,5.0,frontiers differ,supports,|count|=7; |empirical|=12; Jaccard=0.583
+H3a,system,MongoDB|cost=performance|target=energy,top1_flips,2.0,nan,flip_fraction,0.2857142857142857,occasional flips,supports,top-1 flips 2/7; mean Kendall tau=0.938
+H4a,system,MongoDB|cost=performance|target=energy,exclusive_pairs,7.0,nan,pareto_jaccard,0.5333333333333333,different,supports,|count|=8; |empirical|=15; only_count=0; only_empirical=7; Jaccard=0.533
+H4b,system,MongoDB|cost=performance|target=energy,pareto_jaccard,0.5333333333333333,nan,frontier_size_diff,7.0,frontiers differ,supports,|count|=8; |empirical|=15; Jaccard=0.533
+H3a,system,MongoDB|cost=performance|target=performance,top1_flips,2.0,nan,flip_fraction,0.2857142857142857,occasional flips,supports,top-1 flips 2/7; mean Kendall tau=0.947
+H4a,system,MongoDB|cost=performance|target=performance,exclusive_pairs,5.0,nan,pareto_jaccard,0.5833333333333334,different,supports,|count|=7; |empirical|=12; only_count=0; only_empirical=5; Jaccard=0.583
+H4b,system,MongoDB|cost=performance|target=performance,pareto_jaccard,0.5833333333333334,nan,frontier_size_diff,5.0,frontiers differ,supports,|count|=7; |empirical|=12; Jaccard=0.583
+H1a,system,PostgreSQL_11.2|cost=energy,cv_cost,0.057507305071580105,nan,p90_over_p10,1.1508901005058136,negligible,refutes,CV=0.0575; p90/p10=1.15
+H1b,system,PostgreSQL_11.2|cost=energy,kruskal_wallis_min_p,1.2631335447637327e-42,1.2631335447637327e-42,eta_squared_max,0.6673463990990706,large,supports,K-W per level: 8/11 levels with p<0.05; min p=1.26e-42; max eta^2=0.667
+H2a,system,PostgreSQL_11.2|cost=energy,spearman_rho,0.9958590438489214,0.0,rho,0.9958590438489214,strong positive,supports,Spearman rho=0.996 on n=3322 (records-level)
+H2b,system,PostgreSQL_11.2|cost=energy,median_ratio,0.998808843443121,nan,abs_deviation_from_1,0.0011911565568789584,calibrated,inconclusive,"median ratio=0.999; 95% CI [0.999,0.999]; |median-1|=0.00119"
+H2c,system,PostgreSQL_11.2|cost=energy,kruskal_wallis_p,1.7341180627117932e-185,1.7341180627117932e-185,eta_squared,0.25896733154615914,large,supports,K-W p=1.73e-185; eta^2=0.259; k=5 strategies
+H1a,system,PostgreSQL_11.2|cost=performance,cv_cost,0.06759384566841396,nan,p90_over_p10,1.1765090710794395,negligible,refutes,CV=0.0676; p90/p10=1.18
+H1b,system,PostgreSQL_11.2|cost=performance,kruskal_wallis_min_p,1.4237591009057284e-42,1.4237591009057284e-42,eta_squared_max,0.6665323265218355,large,supports,K-W per level: 9/11 levels with p<0.05; min p=1.42e-42; max eta^2=0.667
+H2a,system,PostgreSQL_11.2|cost=performance,spearman_rho,0.9958451451898974,0.0,rho,0.9958451451898974,strong positive,supports,Spearman rho=0.996 on n=3322 (records-level)
+H2b,system,PostgreSQL_11.2|cost=performance,median_ratio,0.9985686571024383,nan,abs_deviation_from_1,0.0014313428975617493,calibrated,inconclusive,"median ratio=0.999; 95% CI [0.998,0.999]; |median-1|=0.00143"
+H2c,system,PostgreSQL_11.2|cost=performance,kruskal_wallis_p,1.4575585674944113e-193,1.4575585674944113e-193,eta_squared,0.27020435596691766,large,supports,K-W p=1.46e-193; eta^2=0.27; k=5 strategies
+H3a,system,PostgreSQL_11.2|cost=energy|target=energy,top1_flips,1.0,nan,flip_fraction,0.14285714285714285,rare flips,supports,top-1 flips 1/7; mean Kendall tau=0.981
+H4a,system,PostgreSQL_11.2|cost=energy|target=energy,exclusive_pairs,7.0,nan,pareto_jaccard,0.6111111111111112,different,supports,|count|=11; |empirical|=18; only_count=0; only_empirical=7; Jaccard=0.611
+H4b,system,PostgreSQL_11.2|cost=energy|target=energy,pareto_jaccard,0.6111111111111112,nan,frontier_size_diff,7.0,frontiers differ,supports,|count|=11; |empirical|=18; Jaccard=0.611
+H3a,system,PostgreSQL_11.2|cost=energy|target=performance,top1_flips,0.0,nan,flip_fraction,0.0,no flips,refutes,top-1 flips 0/7; mean Kendall tau=0.981
+H4a,system,PostgreSQL_11.2|cost=energy|target=performance,exclusive_pairs,6.0,nan,pareto_jaccard,0.6470588235294118,different,supports,|count|=11; |empirical|=17; only_count=0; only_empirical=6; Jaccard=0.647
+H4b,system,PostgreSQL_11.2|cost=energy|target=performance,pareto_jaccard,0.6470588235294118,nan,frontier_size_diff,6.0,frontiers differ,supports,|count|=11; |empirical|=17; Jaccard=0.647
+H3a,system,PostgreSQL_11.2|cost=performance|target=energy,top1_flips,0.0,nan,flip_fraction,0.0,no flips,refutes,top-1 flips 0/7; mean Kendall tau=0.978
+H4a,system,PostgreSQL_11.2|cost=performance|target=energy,exclusive_pairs,7.0,nan,pareto_jaccard,0.6111111111111112,different,supports,|count|=11; |empirical|=18; only_count=0; only_empirical=7; Jaccard=0.611
+H4b,system,PostgreSQL_11.2|cost=performance|target=energy,pareto_jaccard,0.6111111111111112,nan,frontier_size_diff,7.0,frontiers differ,supports,|count|=11; |empirical|=18; Jaccard=0.611
+H3a,system,PostgreSQL_11.2|cost=performance|target=performance,top1_flips,0.0,nan,flip_fraction,0.0,no flips,refutes,top-1 flips 0/7; mean Kendall tau=0.976
+H4a,system,PostgreSQL_11.2|cost=performance|target=performance,exclusive_pairs,5.0,nan,pareto_jaccard,0.6875,different,supports,|count|=11; |empirical|=16; only_count=0; only_empirical=5; Jaccard=0.688
+H4b,system,PostgreSQL_11.2|cost=performance|target=performance,pareto_jaccard,0.6875,nan,frontier_size_diff,5.0,frontiers differ,supports,|count|=11; |empirical|=16; Jaccard=0.688
+H1a,system,x264|cost=energy,cv_cost,0.4133475968046524,nan,p90_over_p10,3.0058064334720505,large,supports,CV=0.413; p90/p10=3.01
+H1b,system,x264|cost=energy,kruskal_wallis_min_p,1.525061661480147e-42,1.525061661480147e-42,eta_squared_max,0.6660648846341582,large,supports,K-W per level: 9/9 levels with p<0.05; min p=1.53e-42; max eta^2=0.666
+H2a,system,x264|cost=energy,spearman_rho,0.9754265019001972,0.0,rho,0.9754265019001972,strong positive,supports,Spearman rho=0.975 on n=2718 (records-level)
+H2b,system,x264|cost=energy,median_ratio,0.9835559940563343,nan,abs_deviation_from_1,0.016444005943665685,calibrated,inconclusive,"median ratio=0.984; 95% CI [0.98,0.987]; |median-1|=0.0164"
+H2c,system,x264|cost=energy,kruskal_wallis_p,0.0,0.0,eta_squared,0.6560954727539801,large,supports,K-W p=0; eta^2=0.656; k=5 strategies
+H1a,system,x264|cost=performance,cv_cost,0.5945128087774894,nan,p90_over_p10,4.410235259402329,large,supports,CV=0.595; p90/p10=4.41
+H1b,system,x264|cost=performance,kruskal_wallis_min_p,1.9816219577198758e-42,1.9816219577198758e-42,eta_squared_max,0.6642838784419766,large,supports,K-W per level: 9/9 levels with p<0.05; min p=1.98e-42; max eta^2=0.664
+H2a,system,x264|cost=performance,spearman_rho,0.953988285530368,0.0,rho,0.953988285530368,strong positive,supports,Spearman rho=0.954 on n=2718 (records-level)
+H2b,system,x264|cost=performance,median_ratio,0.9755716925589621,nan,abs_deviation_from_1,0.024428307441037855,calibrated,inconclusive,"median ratio=0.976; 95% CI [0.97,0.98]; |median-1|=0.0244"
+H2c,system,x264|cost=performance,kruskal_wallis_p,0.0,0.0,eta_squared,0.6512414315618699,large,supports,K-W p=0; eta^2=0.651; k=5 strategies
+H3a,system,x264|cost=energy|target=energy,top1_flips,5.0,nan,flip_fraction,0.7142857142857143,frequent flips,supports,top-1 flips 5/7; mean Kendall tau=0.8
+H4a,system,x264|cost=energy|target=energy,exclusive_pairs,9.0,nan,pareto_jaccard,0.5,different,supports,|count|=9; |empirical|=18; only_count=0; only_empirical=9; Jaccard=0.5
+H4b,system,x264|cost=energy|target=energy,pareto_jaccard,0.5,nan,frontier_size_diff,9.0,frontiers differ,supports,|count|=9; |empirical|=18; Jaccard=0.5
+H3a,system,x264|cost=energy|target=performance,top1_flips,4.0,nan,flip_fraction,0.5714285714285714,frequent flips,supports,top-1 flips 4/7; mean Kendall tau=0.798
+H4a,system,x264|cost=energy|target=performance,exclusive_pairs,9.0,nan,pareto_jaccard,0.5,different,supports,|count|=9; |empirical|=18; only_count=0; only_empirical=9; Jaccard=0.5
+H4b,system,x264|cost=energy|target=performance,pareto_jaccard,0.5,nan,frontier_size_diff,9.0,frontiers differ,supports,|count|=9; |empirical|=18; Jaccard=0.5
+H3a,system,x264|cost=performance|target=energy,top1_flips,5.0,nan,flip_fraction,0.7142857142857143,frequent flips,supports,top-1 flips 5/7; mean Kendall tau=0.755
+H4a,system,x264|cost=performance|target=energy,exclusive_pairs,8.0,nan,pareto_jaccard,0.5294117647058824,different,supports,|count|=9; |empirical|=17; only_count=0; only_empirical=8; Jaccard=0.529
+H4b,system,x264|cost=performance|target=energy,pareto_jaccard,0.5294117647058824,nan,frontier_size_diff,8.0,frontiers differ,supports,|count|=9; |empirical|=17; Jaccard=0.529
+H3a,system,x264|cost=performance|target=performance,top1_flips,4.0,nan,flip_fraction,0.5714285714285714,frequent flips,supports,top-1 flips 4/7; mean Kendall tau=0.752
+H4a,system,x264|cost=performance|target=performance,exclusive_pairs,7.0,nan,pareto_jaccard,0.5625,different,supports,|count|=9; |empirical|=16; only_count=0; only_empirical=7; Jaccard=0.562
+H4b,system,x264|cost=performance|target=performance,pareto_jaccard,0.5625,nan,frontier_size_diff,7.0,frontiers differ,supports,|count|=9; |empirical|=16; Jaccard=0.562
+H3b,global,all_twins_cost_target_scenarios,spearman_rho_cv_flips,0.7189332688555261,1.6329079197630776e-05,rho,0.7189332688555261,strong,supports,"Spearman(CV, top1 flips) rho=0.719 across n=28 cost-target scenarios"

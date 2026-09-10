@@ -1,0 +1,74 @@
+hypothesis,scope,scope_value,statistic,statistic_name,p_value,effect,effect_value,effect_label,verdict,notes
+H1a,system,batik,1.027105064930512,cost_cv_max,nan,cost_cv_range,0.9076358233610085,very large,supports,cost CV range 0.1195-1.027 across 11 workloads
+H2a,system,batik,0.8932480928161837,proxy_spearman_min,nan,rho_range,0.09140916248300013,strong,supports,Spearman rho range 0.8932-0.9847 across workloads
+H2b,system,batik,0.1400614545046608,max_abs_ratio_deviation,nan,ratio_range,0.12824786792275056,miscalibrated,supports,median %cost/%n range 0.8599-0.9882 across workloads
+H3a,system,batik,4.0,rank_top1_flips_max,nan,flip_fraction_max,0.5714285714285714,frequent flips,supports,top-1 agreement range 0.4286-1; worst flips=4/7
+H4a,system,batik,0.4,pareto_jaccard_min,nan,exclusive_frontiers,0.6,different,supports,Pareto Jaccard range 0.4-0.8 across workloads
+H4b,system,batik,0.4,pareto_jaccard_min,nan,frontier_overlap,0.4,frontiers differ,supports,minimum Pareto Jaccard=0.4
+H5a,system,batik,3.8172492812063255e-26,h5a_p_value,3.8172492812063255e-26,ratio_spread,0.12824786792275056,supports,supports,workload ratio spread=0.1282; stored H5a verdict=supports
+H5c,system,batik,0.713586149150528,kendall_tau_min,nan,median_pareto_jaccard,0.5714285714285714,moderately stable,supports,mean Kendall tau range 0.7136-0.9031; median Pareto Jaccard=0.5714
+H1a,system,dconvert,0.3827780538153384,cost_cv_max,nan,cost_cv_range,0.3563875928490715,moderate,supports,cost CV range 0.02639-0.3828 across 12 workloads
+H2a,system,dconvert,0.9216777946281759,proxy_spearman_min,nan,rho_range,0.0465909204019902,strong,supports,Spearman rho range 0.9217-0.9683 across workloads
+H2b,system,dconvert,0.04754463237048179,max_abs_ratio_deviation,nan,ratio_range,0.04647261335828912,borderline,inconclusive,median %cost/%n range 0.9525-0.9989 across workloads
+H3a,system,dconvert,7.0,rank_top1_flips_max,nan,flip_fraction_max,1.0,frequent flips,supports,top-1 agreement range 0-1; worst flips=7/7
+H4a,system,dconvert,0.2857142857142857,pareto_jaccard_min,nan,exclusive_frontiers,0.7142857142857143,different,supports,Pareto Jaccard range 0.2857-0.5714 across workloads
+H4b,system,dconvert,0.2857142857142857,pareto_jaccard_min,nan,frontier_overlap,0.2857142857142857,frontiers differ,supports,minimum Pareto Jaccard=0.2857
+H5a,system,dconvert,2.9473716668687945e-60,h5a_p_value,2.9473716668687945e-60,ratio_spread,0.04647261335828912,supports,supports,workload ratio spread=0.04647; stored H5a verdict=supports
+H5c,system,dconvert,0.7648700505843362,kendall_tau_min,nan,median_pareto_jaccard,0.5,moderately stable,supports,mean Kendall tau range 0.7649-0.9819; median Pareto Jaccard=0.5
+H1a,system,h2,0.29939981164814083,cost_cv_max,nan,cost_cv_range,0.19410304204115936,moderate,supports,cost CV range 0.1053-0.2994 across 8 workloads
+H2a,system,h2,0.9715271943834709,proxy_spearman_min,nan,rho_range,0.013403629363696545,strong,supports,Spearman rho range 0.9715-0.9849 across workloads
+H2b,system,h2,0.02159325270284529,max_abs_ratio_deviation,nan,ratio_range,0.017075599386968676,borderline,inconclusive,median %cost/%n range 0.9784-0.9955 across workloads
+H3a,system,h2,3.0,rank_top1_flips_max,nan,flip_fraction_max,0.42857142857142855,occasional flips,supports,top-1 agreement range 0.5714-1; worst flips=3/7
+H4a,system,h2,0.2857142857142857,pareto_jaccard_min,nan,exclusive_frontiers,0.7142857142857143,different,supports,Pareto Jaccard range 0.2857-0.375 across workloads
+H4b,system,h2,0.2857142857142857,pareto_jaccard_min,nan,frontier_overlap,0.2857142857142857,frontiers differ,supports,minimum Pareto Jaccard=0.2857
+H5a,system,h2,9.2613344745478e-12,h5a_p_value,9.2613344745478e-12,ratio_spread,0.017075599386968676,inconclusive,inconclusive,workload ratio spread=0.01708; stored H5a verdict=inconclusive
+H5c,system,h2,0.832752613240418,kendall_tau_min,nan,median_pareto_jaccard,0.3205128205128205,moderately stable,supports,mean Kendall tau range 0.8328-0.9104; median Pareto Jaccard=0.3205
+H1a,system,jump3r,0.5851304558251438,cost_cv_max,nan,cost_cv_range,0.22448965822861383,large,supports,cost CV range 0.3606-0.5851 across 6 workloads
+H2a,system,jump3r,0.8996379848490773,proxy_spearman_min,nan,rho_range,0.055539313029548065,strong,supports,Spearman rho range 0.8996-0.9552 across workloads
+H2b,system,jump3r,0.03431071013799447,max_abs_ratio_deviation,nan,ratio_range,0.011274306693569214,borderline,inconclusive,median %cost/%n range 0.9657-0.977 across workloads
+H3a,system,jump3r,3.0,rank_top1_flips_max,nan,flip_fraction_max,0.42857142857142855,occasional flips,supports,top-1 agreement range 0.5714-0.7143; worst flips=3/7
+H4a,system,jump3r,0.375,pareto_jaccard_min,nan,exclusive_frontiers,0.625,different,supports,Pareto Jaccard range 0.375-0.5714 across workloads
+H4b,system,jump3r,0.375,pareto_jaccard_min,nan,frontier_overlap,0.375,frontiers differ,supports,minimum Pareto Jaccard=0.375
+H5a,system,jump3r,0.5507169536625203,h5a_p_value,0.5507169536625203,ratio_spread,0.011274306693569214,refutes,refutes,workload ratio spread=0.01127; stored H5a verdict=refutes
+H5c,system,jump3r,0.622505972085804,kendall_tau_min,nan,median_pareto_jaccard,0.3875,unstable,supports,mean Kendall tau range 0.6225-0.7613; median Pareto Jaccard=0.3875
+H1a,system,kanzi,2.366808367002993,cost_cv_max,nan,cost_cv_range,1.5583886390961417,very large,supports,cost CV range 0.8084-2.367 across 9 workloads
+H2a,system,kanzi,0.5723546796793131,proxy_spearman_min,nan,rho_range,0.36611087792264474,moderate,supports,Spearman rho range 0.5724-0.9385 across workloads
+H2b,system,kanzi,0.17713121178305324,max_abs_ratio_deviation,nan,ratio_range,0.1786325408284377,miscalibrated,supports,median %cost/%n range 0.8229-1.002 across workloads
+H3a,system,kanzi,7.0,rank_top1_flips_max,nan,flip_fraction_max,1.0,frequent flips,supports,top-1 agreement range 0-1; worst flips=7/7
+H4a,system,kanzi,0.25,pareto_jaccard_min,nan,exclusive_frontiers,0.75,different,supports,Pareto Jaccard range 0.25-1 across workloads
+H4b,system,kanzi,0.25,pareto_jaccard_min,nan,frontier_overlap,0.25,frontiers differ,supports,minimum Pareto Jaccard=0.25
+H5a,system,kanzi,1.096097305397683e-10,h5a_p_value,1.096097305397683e-10,ratio_spread,0.1786325408284377,supports,supports,workload ratio spread=0.1786; stored H5a verdict=supports
+H5c,system,kanzi,0.5480446724144203,kendall_tau_min,nan,median_pareto_jaccard,1.0,unstable,supports,mean Kendall tau range 0.548-0.6595; median Pareto Jaccard=1
+H1a,system,lrzip,1.5588001461280152,cost_cv_max,nan,cost_cv_range,1.3707980202469887,very large,supports,cost CV range 0.188-1.559 across 13 workloads
+H2a,system,lrzip,0.8971466579107794,proxy_spearman_min,nan,rho_range,0.09125443157496871,strong,supports,Spearman rho range 0.8971-0.9884 across workloads
+H2b,system,lrzip,0.054674607653821594,max_abs_ratio_deviation,nan,ratio_range,0.07223534427662448,miscalibrated,supports,median %cost/%n range 0.9824-1.055 across workloads
+H3a,system,lrzip,7.0,rank_top1_flips_max,nan,flip_fraction_max,1.0,frequent flips,supports,top-1 agreement range 0-1; worst flips=7/7
+H4a,system,lrzip,0.3333333333333333,pareto_jaccard_min,nan,exclusive_frontiers,0.6666666666666667,different,supports,Pareto Jaccard range 0.3333-1 across workloads
+H4b,system,lrzip,0.3333333333333333,pareto_jaccard_min,nan,frontier_overlap,0.3333333333333333,frontiers differ,supports,minimum Pareto Jaccard=0.3333
+H5a,system,lrzip,0.000729317060757537,h5a_p_value,0.000729317060757537,ratio_spread,0.07223534427662448,inconclusive,inconclusive,workload ratio spread=0.07224; stored H5a verdict=inconclusive
+H5c,system,lrzip,0.7009232264334305,kendall_tau_min,nan,median_pareto_jaccard,1.0,moderately stable,supports,mean Kendall tau range 0.7009-0.9167; median Pareto Jaccard=1
+H1a,system,x264,0.9509195150208234,cost_cv_max,nan,cost_cv_range,0.10502628367246525,large,supports,cost CV range 0.8459-0.9509 across 9 workloads
+H2a,system,x264,0.7311505236198617,proxy_spearman_min,nan,rho_range,0.04136644347537466,strong,supports,Spearman rho range 0.7312-0.7725 across workloads
+H2b,system,x264,0.06743631988074794,max_abs_ratio_deviation,nan,ratio_range,0.018256870891582455,miscalibrated,supports,median %cost/%n range 0.9326-0.9508 across workloads
+H3a,system,x264,5.0,rank_top1_flips_max,nan,flip_fraction_max,0.7142857142857143,frequent flips,supports,top-1 agreement range 0.2857-0.5714; worst flips=5/7
+H4a,system,x264,0.25,pareto_jaccard_min,nan,exclusive_frontiers,0.75,different,supports,Pareto Jaccard range 0.25-0.6667 across workloads
+H4b,system,x264,0.25,pareto_jaccard_min,nan,frontier_overlap,0.25,frontiers differ,supports,minimum Pareto Jaccard=0.25
+H5a,system,x264,0.9439153652210552,h5a_p_value,0.9439153652210552,ratio_spread,0.018256870891582455,refutes,refutes,workload ratio spread=0.01826; stored H5a verdict=refutes
+H5c,system,x264,0.42521008403361343,kendall_tau_min,nan,median_pareto_jaccard,0.4444444444444444,unstable,supports,mean Kendall tau range 0.4252-0.4899; median Pareto Jaccard=0.4444
+H1a,system,xz,1.534042742421763,cost_cv_max,nan,cost_cv_range,1.227354996471233,very large,supports,cost CV range 0.3067-1.534 across 13 workloads
+H2a,system,xz,0.6614838195411381,proxy_spearman_min,nan,rho_range,0.31106719960251406,moderate,supports,Spearman rho range 0.6615-0.9726 across workloads
+H2b,system,xz,0.18088371336780806,max_abs_ratio_deviation,nan,ratio_range,0.16561277740721692,miscalibrated,supports,median %cost/%n range 0.8191-0.9847 across workloads
+H3a,system,xz,7.0,rank_top1_flips_max,nan,flip_fraction_max,1.0,frequent flips,supports,top-1 agreement range 0-0.8571; worst flips=7/7
+H4a,system,xz,0.375,pareto_jaccard_min,nan,exclusive_frontiers,0.625,different,supports,Pareto Jaccard range 0.375-0.75 across workloads
+H4b,system,xz,0.375,pareto_jaccard_min,nan,frontier_overlap,0.375,frontiers differ,supports,minimum Pareto Jaccard=0.375
+H5a,system,xz,2.587417031517979e-41,h5a_p_value,2.587417031517979e-41,ratio_spread,0.16561277740721692,supports,supports,workload ratio spread=0.1656; stored H5a verdict=supports
+H5c,system,xz,0.5307117969138876,kendall_tau_min,nan,median_pareto_jaccard,0.5714285714285714,unstable,supports,mean Kendall tau range 0.5307-0.848; median Pareto Jaccard=0.5714
+H1a,system,z3,1.8613595342045233,cost_cv_max,nan,cost_cv_range,1.6180032305209109,very large,supports,cost CV range 0.2434-1.861 across 12 workloads
+H2a,system,z3,0.6807533518954481,proxy_spearman_min,nan,rho_range,0.30456465861212045,moderate,supports,Spearman rho range 0.6808-0.9853 across workloads
+H2b,system,z3,0.34236820696426506,max_abs_ratio_deviation,nan,ratio_range,0.33845111091933455,miscalibrated,supports,median %cost/%n range 0.6576-0.9961 across workloads
+H3a,system,z3,5.0,rank_top1_flips_max,nan,flip_fraction_max,0.7142857142857143,frequent flips,supports,top-1 agreement range 0.2857-1; worst flips=5/7
+H4a,system,z3,0.3333333333333333,pareto_jaccard_min,nan,exclusive_frontiers,0.6666666666666667,different,supports,Pareto Jaccard range 0.3333-1 across workloads
+H4b,system,z3,0.3333333333333333,pareto_jaccard_min,nan,frontier_overlap,0.3333333333333333,frontiers differ,supports,minimum Pareto Jaccard=0.3333
+H5a,system,z3,4.816515541610935e-103,h5a_p_value,4.816515541610935e-103,ratio_spread,0.33845111091933455,supports,supports,workload ratio spread=0.3385; stored H5a verdict=supports
+H5c,system,z3,0.5099611273080661,kendall_tau_min,nan,median_pareto_jaccard,0.7083333333333333,unstable,supports,mean Kendall tau range 0.51-0.8722; median Pareto Jaccard=0.7083
+H3b,global,all_workload_batch_systems,spearman_rho_cv_flips,,0.14483925554394772,rho,0.5270462766947299,moderate,supports,"Spearman(median cost CV, max top1 flips) rho=0.527 across n=9 systems"

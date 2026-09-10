@@ -1,0 +1,13 @@
+target_context,cost_context,strategy,records,spearman_n_train_cost,median_calibration_ratio,q1_calibration_ratio,q3_calibration_ratio,median_bias,system,cost_property,target_property,scenario
+BerkeleyDBC,BerkeleyDBC,ALL,30,0.8820165992904012,0.8213105744423694,0.21254332334676274,1.1502463751577057,-0.17868942555763057,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,random,6,0.956182887467515,0.9789629821484871,0.782275169292234,1.1207367233219354,-0.021037017851512907,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,solverBased,6,0.956182887467515,0.20305598266274275,0.20017929666640774,0.20591693958204563,-0.7969440173372573,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,henard,6,0.956182887467515,0.26389721662185545,0.18925476935344107,0.4501351541902801,-0.7361027833781446,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,distBased,6,0.956182887467515,1.483078166364105,1.217819627008089,1.5677421702701921,0.48307816636410505,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,divDistBased,6,0.956182887467515,1.1027194664886908,1.016497652082912,1.1564034643062042,0.10271946648869079,BerkeleyDBC,performance,performance,cost_performance__target_performance
+lrzip,lrzip,ALL,30,0.9386165949667906,0.8435446088907939,0.4347781619994836,1.0295275324923017,-0.15645539110920614,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,random,6,0.956182887467515,1.0819357489854569,0.983855315688221,1.3080314212716595,0.08193574898545686,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,solverBased,6,0.956182887467515,0.39055905748552044,0.28802142217245963,0.738692515779635,-0.6094409425144796,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,henard,6,0.956182887467515,0.5958265349065174,0.49474746434251826,0.92236551706848,-0.4041734650934826,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,distBased,6,0.956182887467515,0.6863999734399215,0.4074725590642708,0.8272395781602473,-0.31360002656007846,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,divDistBased,6,0.956182887467515,1.00089386784852,0.9084582772545253,1.0328878672344008,0.0008938678485199691,lrzip,performance,performance,cost_performance__target_performance

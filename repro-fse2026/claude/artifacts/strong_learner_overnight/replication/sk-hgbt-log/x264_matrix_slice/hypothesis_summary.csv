@@ -1,0 +1,12 @@
+hypothesis,scopes,supports,refutes,inconclusive,global_verdict
+H1a,6,4,1,1,supported (4/6)
+H1b,6,6,0,0,supported (6/6)
+H2a,6,6,0,0,supported (6/6)
+H2b,6,0,2,4,"mixed (sup=0, ref=2, inc=4 of 6)"
+H2c,6,6,0,0,supported (6/6)
+H3a,12,8,4,0,supported (8/12)
+H4a,12,11,1,0,supported (11/12)
+H4b,12,11,1,0,supported (11/12)
+H5a,4,2,0,2,supported (2/4)
+H5b,1,1,0,0,supported (1/1)
+H5c,1,1,0,0,supported (1/1)

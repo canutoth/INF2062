@@ -1,0 +1,9 @@
+hypothesis,scope,scope_value,statistic,statistic_value,p_value,effect,effect_value,effect_label,verdict,notes
+H1a,system,v5.08,cv_cost,1.013991826217584,nan,p90_over_p10,4.0175734400435,very large,supports,CV=1.01; p90/p10=4.02
+H1b,system,v5.08,kruskal_wallis_min_p,6.0027471646324945e-19,6.0027471646324945e-19,eta_squared_max,0.34355171373589183,large,supports,K-W per level: 5/5 levels with p<0.05; min p=6e-19; max eta^2=0.344
+H2a,system,v5.08,spearman_rho,0.9672049562718632,0.0,rho,0.9672049562718632,strong positive,supports,Spearman rho=0.967 on n=1270 (records-level)
+H2b,system,v5.08,median_ratio,0.9997254898686216,nan,abs_deviation_from_1,0.0002745101313783582,calibrated,refutes,"median ratio=1; 95% CI [0.998,1]; |median-1|=0.000275"
+H2c,system,v5.08,kruskal_wallis_p,2.9721564624430087e-37,2.9721564624430087e-37,eta_squared,0.13801073363733216,medium,supports,K-W p=2.97e-37; eta^2=0.138; k=5 strategies
+H3a,system,v5.08,top1_flips,6.0,nan,flip_fraction,0.8571428571428571,frequent flips,supports,top-1 flips 6/7; mean Kendall tau=0.745
+H4a,system,v5.08,exclusive_pairs,4.0,nan,pareto_jaccard,0.5,different,supports,|count|=4; |empirical|=8; only_count=0; only_empirical=4; Jaccard=0.5
+H4b,system,v5.08,pareto_jaccard,0.5,nan,frontier_size_diff,4.0,frontiers differ,supports,|count|=4; |empirical|=8; Jaccard=0.5

@@ -1,0 +1,187 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph*{Hypothesis verdicts at a glance.}
+\Cref{tab:hypothesis-verdicts} lets us read the structure of the
+findings as a small number of compatible patterns rather than as a long
+list of numbers. Cost is heterogeneous (H1a) and selection-biased by
+strategy (H1b) wherever $\TrainCost$ is non-trivial, and on those same
+scopes $n$ is well rank-correlated (H2a) but strategy-biased (H2c).
+H2b --- ``the median calibration ratio is not centered at $1$'' --- is
+supported only when the practical bias clears a $5\%$ floor; on the
+remaining systems the ratio is statistically off-$1$ but not
+practically. The decision-level claims H3a, H4a and H4b are existential
+(``rankings sometimes diverge''/``some pairs flip Pareto status'')
+and they hold as soon as a single scope flips, which happens on
+$3/7$ \StudyReplication systems for H3a, $5/7$ for H4a/H4b, and on
+$25$--$65/68$ x264 input/scenario pairs. Cross-system, the
+strongest signal is H3b: rank-flip count and per-configuration cost CV
+correlate at Spearman $\rho=0.90$ on seven systems, $p=6.3\!\times\!
+10^{-3}$. Heterogeneity is therefore the single best predictor of
+cost-model fragility, and the diagnostic below operationalizes that
+finding.
+
+\paragraph*{When is $n$ safe?}
+The empirical answer is system-, scenario-, and context-dependent. On
+the \StudyReplication batch, four systems (Dune, HIPAcc, LLVM, Polly) support the
+size-as-cost abstraction without flipping any top-$1$ recommendation
+across $\lambda$ values; for those systems sample size is a usable cost
+proxy in practice. Three (7Z, BerkeleyDBC, and especially lrzip) do not:
+their per-configuration cost CV exceeds $1$, calibration ratios drift
+$10$--$20\%$ from $1$, and rankings flip in $\geq\!1/7$ budgets. On
+x264, even when calibration is benign in aggregate, the
+cost-target scenario matters: predicting size while paying time-based
+cost ($\text{cost}=\text{time}, \text{target}=\text{size}$) is the
+weakest scenario in both rank agreement ($0.82$) and Pareto overlap
+($0.38$).
+
+\paragraph*{When does empirical cost matter most?}
+Two predictors of decision-level disagreement emerge. The first is
+heterogeneity: lrzip ($p_{90}/p_{10}\!=\!47.0$, $\mathrm{CV}\!=\!1.98$)
+has the most rank flips ($5/7$ across $\lambda$), and the cross-system
+H3b correlation between cost CV and rank-flip count is Spearman
+$\rho\!=\!0.90$ ($p\!=\!6.3\!\times\!10^{-3}$, $n\!=\!7$ \StudyReplication
+systems). Pareto-front instability is more subtle: the lowest Pareto
+Jaccard is on LLVM ($0.33$), not on the most heterogeneous systems,
+because under count cost LLVM admits only three non-dominated pairs
+while empirical cost reveals nine; this is a low-CV system where the
+empirical-cost view simply has more discriminative power than the
+count view, not a fragility induced by heterogeneity. The second
+predictor is target--cost asymmetry: predicting size while paying
+time-based cost on x264 is the worst scenario despite x264's
+relatively benign cost CV ($0.21$--$0.39$). A practitioner whose
+acquisition cost is dominated by a single resource and whose
+prediction target differs from that resource is exactly the case
+where empirical cost should not be proxied by $n$.
+
+\paragraph*{A practical diagnostic.}
+The cost CV and the calibration ratio
+$\mathit{TrainCostPct}/\mathit{SizePct}$ can both be estimated from a
+small pilot sample. We recommend the following lightweight check before
+committing to a size-based budget: (i) measure a uniform random pilot
+of $\sim\!\!2$--$5\%$ of $|C|$ and compute the cost CV, (ii) for each
+candidate strategy, draw a few small samples and compute the median
+$\mathit{TrainCostPct}/\mathit{SizePct}$, (iii) if either CV $>0.5$ or
+the per-strategy ratio is far from $1$, switch the budget objective to
+$\TrainCost$ rather than $n$. The cost reported as RQ2 calibration in
+the \StudyReplication systems can be reproduced from a $5\%$ pilot in seconds for
+all systems we studied.
+
+\paragraph*{Linux complements but does not aggregate.}
+The Linux cross-version study (\StudyLinux family in
+\Cref{sec:results}) is reported separately because its protocol
+differs structurally from \StudyReplication: pool-based subsampling instead of synthesis-based sampling,
+storage-bound cost ($\mathit{cost}(c)$ $=$ uncompressed binary size)
+instead of time-based cost, and a strategy set that includes
+\texttt{uncertainty} (active learning) and \texttt{diversity}
+(farthest-first) which have no analogues in the \StudyReplication
+protocol. The clean headline on Linux is neither ``always use empirical
+cost'' nor ``$n$ is a fine proxy'': across seven releases
+(v4.13, v4.15, v4.20, v5.0, v5.04, v5.07, v5.08), \emph{calibration is a property of the
+strategy, not the system}. Empirical $\TrainCost$ is required as
+soon as the strategy panel includes AL or diversity-aware samplers
+(\texttt{diversity} pays $\sim\!\!2\times$ its count budget on
+\emph{every} release: medians $2.28, 2.23, 2.27, 2.06, 2.09, 2.00, 2.02$ (window $[2.00, 2.28]$) across seven\nindependent randconfig pools, the most robust positive finding in
+the paper; \texttt{uncertainty}'s drift direction is sensitive to
+absolute $n$, with cross-over $n$ pool-dependent); $n$ remains a
+usable proxy for cost-blind samplers (\texttt{random},
+\texttt{balanced}, \texttt{coverage} are calibrated within $\\pm 0.7\\%$ of $1$ on every release with Spearman $\rho\!\geq\!0.97$).
+Three of the synthesis-based findings travel: (i) heavy-tailed cost
+is again the most reliable predictor of decision-level instability
+\emph{within a fixed protocol} (Linux v4.13 CV $1.43$ behaves like
+lrzip CV $1.98$), but the H3b cross-system correlation does
+\emph{not} extend to the Linux pool: three of seven \StudyLinux releases
+share the same $2/7$ flip count across pool sizes $19{,}952$--$92{,}562$ and CVs $0.99$--$1.43$, while v5.04 flips $7/7$, v5.07 flips $4/7$, and v5.08 flips $6/7$ for a
+level-grid reason unrelated to its CV; (ii) the empirical-cost
+Pareto front is again strictly larger than the count-cost front on
+all seven releases; (iii) the calibration story is again
+strategy-specific rather than a single per-system aggregate. Three
+findings are Linux-specific: \texttt{diversity} drifts to
+$\sim\!\!2\times$ expected cost on all seven releases (7$\times$ replication), \texttt{uncertainty} exhibits an $n$-dependent
+calibration seam whose direction is sensitive to absolute $n$, and
+ranking instability tracks the level grid rather than pool size or
+cost CV (v5.0, the smallest pool, flips $2/7$ like the larger v4.13
+and v4.15; v5.04, v5.07, v5.08 with their tie-prone level grids flip $7/7$, $4/7$, $6/7$).
+None of these has an analogue in the synthesis-based studies
+because the corresponding strategies and pool-based regime are not
+in the synthesis-based panel; this is a reason to keep Linux
+separate, not to aggregate.
+
+\paragraph*{\StudyEnergy complements but does not aggregate.}
+The the performance--energy corpus generated-sampling study
+(\StudyEnergy family in \Cref{sec:results}) is reported separately for the same
+reason as Linux: the protocol differs structurally. \StudyEnergy draws
+samples from a measured configuration universe under a strategy panel
+(\texttt{random}, \texttt{balanced}, \texttt{diversity},
+\texttt{pairwise}, \texttt{pilotCost}) that overlaps neither with the
+synthesis-based panel nor with the Linux pool-based panel, and
+exposes two cost properties (\emph{performance} and \emph{energy})
+which let us probe a non-time cost dimension explicitly. The
+qualitative findings travel: $n$ is rank-correlated with empirical
+cost ($\rho\!\geq\!0.71$ on every system), strategy-specific
+calibration bias survives when aggregate medians look calibrated, and
+empirical-cost Pareto frontiers differ from count frontiers in
+$28/28$ scenarios. Quantitatively, \StudyEnergy also extends the dynamic
+range of the paper: jump3r is the most heterogeneous case anywhere in
+this work (CV $\!=\!7.10$), and PostgreSQL\,11.2 is the most
+homogeneous (CV $\!=\!0.06$); both exist within the same protocol,
+which is informative for any practitioner whose acquisition cost is
+in the ``unknown CV'' regime. the \StudyEnergy specific findings include the
+stark brotli\,1.0.7 result --- top-$1$ agreement of $0$ on three of
+four scenarios, despite a moderate pool size --- and the fact that
+performance and energy give qualitatively similar but quantitatively
+distinct calibration patterns. Aggregating \StudyEnergy with the other tiers
+would mix four incompatible sampling mechanisms; we keep them
+separate.
+
+\paragraph*{Cost dimensions beyond time.}
+Wall-clock measurement time is the canonical operational constraint
+and the one we instantiate for \StudyReplication. The x264 $2\times 2$
+matrix exercises one non-time cost dimension (output size as cost),
+the Linux study exercises another (uncompressed binary size as cost),
+and the \StudyEnergy study exercises a third (energy as an additional cost
+property alongside performance, with both used as cost and as
+target). The qualitative pattern of cost heterogeneity (x264 size:
+$\text{CV}=0.04$--$0.31$, $p_{90}/p_{10}=1.12$--$2.21$; Linux:
+$\text{CV}\!=\!1.0$--$1.4$, $p_{90}/p_{10}\!=\!4.0$--$6.0$ across
+the three releases), calibration miscalibration ($\sim\!\!0.96$--
+$1.03$ median on x264 size, strongly strategy-dependent on Linux),
+and Pareto-overlap change still hold under the size-based cost
+dimensions. The mathematical content of $\TrainCost$ is unchanged
+under such substitutions; only the operational interpretation
+changes. Replicating the empirical findings under energy-bound or
+bandwidth-bound $\mathit{cost}(c)$ is a clean follow-up.
+
+\paragraph*{Implications for prior conclusions.}
+The data partly validates and partly contradicts the size-as-cost
+abstraction. On systems with low cost heterogeneity (LLVM, Polly), the
+abstraction is essentially fine and previously published rankings under
+$(n, \MRE)$ transfer to $(\TrainCost, \MRE)$ without rework. On systems
+with high heterogeneity (lrzip, BerkeleyDBC) and on x264 scenarios with
+target--cost asymmetry, the previously published rankings deserve
+re-statement in terms of empirical cost. We recommend that future
+configurable-systems sampling studies report both $\SizeCost$ and
+$\TrainCost$ alongside any accuracy metric, so that the cost-model
+choice is visible rather than hidden. For Pareto-style claims, Li \etal's
+methodological guidance is also directly relevant: papers should report the
+front comparison that answers their actual decision question, rather than
+defaulting to a generic Pareto indicator whose assumptions are left implicit
+\cite{li2020pareto}. The same caution extends beyond the classical sampling
+papers we revisit. Configurable-systems research often compares methods under
+numbers of measurements, evaluations, or count-based budgets because those
+quantities are convenient, reproducible, and often directionally correlated
+with real cost. Our results show that this convention is not arbitrary, but it
+is also not automatically calibrated. The safe interpretation is therefore
+simple: count-based findings remain informative about ordering effort, while
+any claim about actual resource savings should be read as provisional unless
+measured acquisition cost is shown to track the count budget. Papers that
+already calibrate counts from measured wall-clock budgets take a stronger first
+step, and our results support that direction rather than contradict it
+\cite{chen2021multiobj,chen2023aspirations}.
+
+\paragraph*{Beyond configurable software systems.}
+Real-runtime ML and HPO benchmarks (\eg LCBench, NAS-Bench-201) are an
+interesting cross-domain testbed for the same calibration question. We
+deprioritized them in this paper to keep the empirical claim anchored
+in configurable software, but they remain a clean candidate for future
+cross-domain replication.

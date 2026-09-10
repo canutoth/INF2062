@@ -1,0 +1,7 @@
+target_context,cost_context,strategy,records,spearman_n_train_cost,median_calibration_ratio,q1_calibration_ratio,q3_calibration_ratio,median_bias,system,cost_property,target_property,scenario
+BerkeleyDBC,BerkeleyDBC,ALL,150,0.869667932236139,0.735633146479012,0.19326993753846025,1.0830729735766966,-0.264366853520988,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,random,30,0.9433332612731562,0.9643699465190625,0.8222383987825449,1.1046347448195806,-0.03563005348093751,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,solverBased,30,0.9435431941257104,0.1871968132038237,0.1745283835898142,0.19320908852139979,-0.8128031867961762,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,henard,30,0.9433332612731562,0.19778434197906164,0.1685313944083142,0.46696124148725904,-0.8022156580209383,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,distBased,30,0.9433332612731562,1.3412233081154668,1.092651690700629,1.5330849987526234,0.34122330811546675,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,divDistBased,30,0.9433332612731562,0.9881392721636012,0.6913160762028792,1.0818142997846145,-0.011860727836398799,BerkeleyDBC,performance,performance,cost_performance__target_performance

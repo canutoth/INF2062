@@ -1,0 +1,16 @@
+target_context,cost_context,strategy,level,n,pct_n,median_pct_cost,median_train_cost,median_mre,pareto_count,pareto_empirical,system,cost_property,target_property,scenario
+lrzip,lrzip,random,t1,18,0.041666666666666664,0.0410567111817393,10419515.0,0.6354812590807029,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,solverBased,t1,18,0.041666666666666664,0.009274539892330815,2353725.0,0.4889337653100835,1,1,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,henard,t1,18,0.041666666666666664,0.017964447559645914,4559080.0,0.7529577566489083,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,distBased,t1,18,0.041666666666666664,0.039240596114611545,9958615.0,0.7006059706692569,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,divDistBased,t1,18,0.041666666666666664,0.02459409503169432,6241575.0,0.6478493657253981,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,random,t2,99,0.22916666666666666,0.23542972629829856,59748175.0,0.27705868499748704,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,solverBased,t2,99,0.22916666666666666,0.06576870198867438,16691010.0,0.31008996080236356,0,1,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,henard,t2,99,0.22916666666666666,0.16169712922881005,41036060.0,0.4564151902549264,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,distBased,t2,99,0.22916666666666666,0.15563239244584554,39496930.0,0.2697525672747675,0,1,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,divDistBased,t2,99,0.22916666666666666,0.23187196909693242,58845275.0,0.263055848415377,1,1,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,random,t3,250,0.5787037037037037,0.5799343601086027,147177759.5,0.2628974781863057,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,solverBased,t3,250,0.5787037037037037,0.5047308615388633,128092354.0,0.3189562993137803,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,henard,t3,250,0.5787037037037037,0.6405086715672299,162550519.0,0.5110550315225079,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,distBased,t3,250,0.5787037037037037,0.5178130960999239,131412409.0,0.2725914242473587,0,0,lrzip,performance,performance,cost_performance__target_performance
+lrzip,lrzip,divDistBased,t3,250,0.5787037037037037,0.5170150181446602,131209870.0,0.2589521616311604,1,1,lrzip,performance,performance,cost_performance__target_performance

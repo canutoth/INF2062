@@ -1,0 +1,37 @@
+\begin{table*}
+\centering 
+%\scriptsize
+% \begin{adjustbox}{max width=\textwidth}
+\begin{adjustbox}{max width=500pt}
+	\begin{tabular}{eabdabdabdabd}
+	\toprule
+		Rank & \multicolumn{3}{c}{BerkeleyDBC}& \multicolumn{3}{c}{LLVM}& \multicolumn{3}{c}{lrzip}& \multicolumn{3}{c}{x264}\\
+		\cmidrule(lr){1-1} \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10} \cmidrule(lr){11-13}  
+  
+		& $t=1$& $t=2$& $t=3$& $t=1$& $t=2$& $t=3$& $t=1$& $t=2$& $t=3$& $t=1$& $t=2$& $t=3$\\[0.1cm] 
+		& & & & & & & & & & & & \\[-0.2cm]
+  
+		0 & distBased(18.238) &	distBased(147.836) &	distBased(852.72) &	distBased(2367.983) &	distBased(11935.37) &	distBased(36579.23) &	distBased(2200890.0) &	distBased(23440383.77) &	distBased(98893399.0) &	distBased(3734.192) &	distBased(18949.845) &	distBased(60075.724)\\
+		& & & & & & & & & & & & \\[-0.2cm]
+  
+        1 & distBased(19.617) &	distBased(154.245) &	distBased(1428.353) &	distBased(2381.026) &	distBased(12858.052) &	distBased(39806.278) &	distBased(3230699.15) &	distBased(36336270.0) &	distBased(123598284.27) &	distBased(4945.663) &	distBased(29275.776) &	distBased(96767.487)\\
+		& & & & & & & & & & & & \\[-0.2cm]
+        
+        2 & distBased(29.209) &	distBased(229.566) &	distBased(1440.938) &	distBased(2480.442) &	distBased(12884.058) &	distBased(40717.69) &	distBased(5525081.0) &	distBased(38400389.98) &	distBased(131879788.98) &	distBased(5119.642) &	distBased(29370.332) &	distBased(97384.667)\\
+		& & & & & & & & & & & & \\[-0.2cm]
+  
+        3 & distBased(76.388) &	distBased(787.618) &	distBased(2970.513) &	distBased(2613.2) &	distBased(13264.694) &	distBased(41456.022) &	distBased(7167913.6) &	distBased(42690653.9) &	distBased(133352305.87) &	distBased(5395.067) &	distBased(29463.337) &	distBased(98224.844)\\
+		& & & & & & & & & & & & \\[-0.2cm]
+  
+        4 & distBased(117.593) &	distBased(874.889) &	distBased(3146.266) &	distBased(2649.672) &	distBased(13271.907) &	distBased(41542.458) &	distBased(9468044.0) &	distBased(57271662.0) &	distBased(146134877.63) &	distBased(5502.379) &	distBased(30211.166) &	distBased(98624.611)\\
+		& & & & & & & & & & & & \\[-0.2cm]
+  
+        5 & distBased(129.991) &	distBased(1158.45) &	distBased(4047.592) &	distBased(2654.492) &	distBased(13466.601) &	distBased(42031.492) &	distBased(11349891.99) &	distBased(58045085.42) &	distBased(159080969.71) &	distBased(6076.92) &	distBased(33519.43) &	distBased(110452.058)\\
+		\bottomrule
+	\end{tabular}
+\end{adjustbox}
+\caption{Ranking position of t-wise, (randomized) solver-based, (diversified) distance-based, and random sampling for the prediction of \underline{cost measurement} for 10 case studies. The bottom row contains the number of samples, the sampling approach name, and the total cost mean across all input samplings. The top-3 sampling approaches per sample size are highlighted in bold.} 
+%if the Mann-Whitney $U$ test reported a significant difference ($p < 0.05$).} 
+\vspace*{-6mm}
+\label{tab:RQ1_time_ranking} 
+\end{table*}

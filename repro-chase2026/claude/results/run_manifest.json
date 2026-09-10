@@ -1,0 +1,29 @@
+{
+  "generated_at_utc": "2026-09-10T19:11:10Z",
+  "study": "Emotion Recognition in Agile Software Meetings (CHASE 2026) — text-based LLM track",
+  "modules_run": [
+    "03",
+    "04",
+    "05"
+  ],
+  "modules_skipped": {
+    "01": "Ollama inference (no-context) — delivered bundles are used instead",
+    "02": "Ollama inference (with context) — delivered bundles are used instead"
+  },
+  "module_exit_codes": {
+    "03": 0,
+    "04": 0,
+    "05": 0
+  },
+  "randomness": "none — the evaluation path is deterministic pandas/sklearn scoring; no seed is set because no stochastic operation exists (Spec 00 §3)",
+  "output_root": "/Users/theocanuto/Documents/inf2390/repro-chase2026/claude/results",
+  "resolved_versions": {
+    "python": "3.10.20",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "pandas": "2.1.4",
+    "numpy": "1.26.4",
+    "sklearn": "1.3.2",
+    "ollama": "0.6.2",
+    "tqdm": "4.70.0"
+  }
+}

@@ -1,0 +1,45 @@
+\section{Background and Related Work}
+\label{sec:background}
+\label{sec:related_work}
+
+A configurable system exposes options whose valid combinations form a configuration space $C$. For a fixed workload and non-functional property, each
+configuration $c\in C$ has a measured value $y_c$ such as runtime, output size,
+or energy. Sampling-based performance prediction trains a regression model
+$\hat y$ from a measured subset $S\subset C$ and evaluates prediction error,
+typically mean relative error
+($\MRE=(1/|T|)\sum_{c\in T}|y_c-\hat y_c|/|y_c|$, lower is better), on
+held-out configurations $T$~\cite{siegmund2015FSE,kaltenecker2019,pereira2020,julianasurvey}.
+
+\paragraph*{Sampling strategies}
+The configurable-systems literature offers several domain-agnostic families.
+Random sampling draws configurations uniformly. Solver-based sampling asks
+SAT/SMT solvers (Sat4j, Z3) for valid configurations, and its randomized variant
+perturbs solver order for diversity \cite{DBLP:journals/tse/HenardPPKHT14}.
+$t$-wise sampling covers option-value combinations
+\cite{Kuhn2004,Cohen2008,Johansen2012}. Distance-based and diversified
+distance-based sampling spread the sample in feature space \cite{kaltenecker2019}.
+When artifacts provide measured pools rather than feature-model handles, we use
+pool-based analogues: \emph{balanced} keeps option frequencies close to the pool,
+\emph{coverage} matches marginal option coverage, \emph{diversity} spreads by
+Hamming distance, \emph{uncertainty} adds high-residual configurations,
+\emph{pairwise} covers option-value pairs, and \emph{pilot-cost} learns a small
+pilot cost model before choosing configurations predicted inexpensive.
+
+\paragraph*{How prior work counts effort.}
+Sampling-based performance prediction has studied random, solver-based,
+coverage-based, distance-based, progressive, and transfer-learning strategies
+\cite{guo2013ASE,sarkar2015,siegmund2015FSE,nair2018c,kaltenecker2019,julianasurvey},
+and almost all of them equate measurement effort with sample size. Sarkar
+\etal, the closest cost-aware precedent, define a composite objective with
+training, testing, model, and error cost, but collapse acquisition effort to a
+term proportional to $n$ under unit per-configuration cost \cite{sarkar2015}.
+Westermann \etal discuss the number of measurement points needed for a target
+error \cite{westermann2012}. Guo \etal vary measurement budgets ($N$, $2N$,
+$3N$, and a larger reference $M$) \cite{guo2013ASE}. Siegmund \etal report
+Pareto trade-offs between accuracy and number of measurements
+\cite{siegmund2015FSE}. Kaltenecker \etal compare strategies at common
+sample sizes \cite{kaltenecker2019}. Siegmund \etal also report elapsed hours
+for some heuristics \cite{siegmund2012a}, but not as a test of whether $n$ is a
+valid cost proxy. To our knowledge the proxy itself has not been evaluated in
+this literature: our contribution is not a new sampler but a validity study of
+that effort axis.

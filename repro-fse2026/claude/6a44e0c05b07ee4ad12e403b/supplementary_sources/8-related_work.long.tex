@@ -1,0 +1,153 @@
+\section{Related Work}
+\label{sec:related_work}
+
+We complement the cost-model background of \Cref{subsec:cost-models} with a
+discussion of five threads most directly relevant to this paper:
+cost-aware sampling for configurable systems, learning configuration spaces
+in general, cost-aware sampling and active learning in machine learning,
+input/workload sensitivity, and multi-objective evaluation.
+
+\paragraph*{Cost-aware sampling for configurable systems.}
+The closest prior work is Sarkar \etal~\cite{sarkar2015}, which introduces
+progressive and projective sampling under a composite cost combining training
+acquisition, testing acquisition, model building, and prediction error. As
+discussed in \Cref{subsec:cost-models}, that paper collapses acquisition cost
+to $2n$, baking in equal cost per configuration. Our work tests this
+simplification empirically rather than adopting or rejecting it
+\emph{a priori}. Westermann \etal~\cite{westermann2012} formulate efficiency
+as ``required number of measurement points'' for a target error---another
+count-based abstraction. The data-mining roots of these formulations are
+Weiss and Tian's utility-based sampling and Last's projective sampling
+\red{[cite Weiss \& Tian, ICDM/PKDD 2008; Last, KDD 2009 -- bib entries
+needed]}, both of which fit partial learning curves and runtime curves
+to estimate a utility-optimal training-set size. They reason in terms of
+training-set size and aggregate runtime curves rather than per-configuration
+heterogeneous measurement time.
+
+\paragraph*{Learning configuration spaces.}
+Beyond cost-aware sampling, a large body of work studies how to predict
+performance of configurable systems with smaller and better-chosen
+samples. Guo \etal~\cite{guo2013ASE,Guo2017} train predictors from samples of
+size $N,2N,3N,M$. Siegmund
+\etal~\cite{siegmund2012a,siegmund2013,siegmund2015FSE} build
+performance-influence models with $t$-wise and option-frequency designs.
+Nair \etal~\cite{nair2017,nair2018c,nair2018a} explore spectral, rank-based,
+and progressive sampling. Jamshidi \etal~\cite{jamshidi2017b,jamshidi2018}
+study transfer learning across environments. Temple
+\etal~\cite{temple2017a} approach the problem from a learning-theoretic
+angle. Kaltenecker \etal~\cite{kaltenecker2019} systematically compare
+distance-based sampling to $t$-wise, solver-based, and randomized
+solver-based. The systematic review of Pereira \etal~\cite{julianasurvey}
+catalogues this lineage. Our work does not propose a new prediction approach
+or a new sampler; it asks whether the cost axis under which these approaches
+are compared is calibrated.
+
+\paragraph*{Cost-aware sampling and active learning in ML.}
+Outside configurable systems, the machine-learning community has
+investigated heterogeneous per-instance acquisition cost for nearly two
+decades. Settles, Craven, and Friedland's
+\red{[cite Settles--Craven--Friedland, NIPS workshop 2008]} study of
+\emph{active learning with real annotation costs} measures human labeling
+times in four real-world domains and shows directly that
+\emph{reducing the number of labeled instances does not necessarily reduce
+total acquisition cost}---the same observation we make for configurable
+systems, in a different domain. Beygelzimer \etal{}'s COAL
+\red{[cite Beygelzimer et al., COAL]}, Margineantu's active cost-sensitive
+learning \red{[cite Margineantu]}, and Arora \etal{}'s annotation-cost
+prediction \red{[cite Arora--Nyberg--Rose]} all treat acquisition cost as a
+heterogeneous, possibly predictable, per-instance quantity. The recent
+survey of Herde \etal{} \red{[cite Herde et al.]} catalogues uniform and
+heterogeneous cost types in active learning. Contardo
+\etal{} \red{[cite Contardo et al.]} extend the picture to feature-acquisition
+cost, where each feature has its own price.
+
+The configurable-systems performance-prediction literature has not absorbed
+this lesson: it has continued to use count-based proxies even though ML
+active learning has known for years that count is not cost when instances
+are heterogeneous. Our paper is the configurable-systems analogue of
+Settles \etal: we measure heterogeneous per-configuration cost, test
+whether sample count is a calibrated proxy, and ask whether replacing
+counts with measured times changes scientific conclusions.
+
+\paragraph*{Recent configurable-systems cost conventions.}
+Recent papers by Tao Chen and collaborators provide an important nearby
+comparison point because they also reason about expensive measurements,
+tuning budgets, and resource efficiency for configurable systems. Tuning,
+transfer, and prediction papers frequently express effort as numbers of
+measurements, evaluations, or target-environment samples, because counts are
+simple to compare, reproduce, and re-use across studies
+\cite{chen2021multiobj,chen2023aspirations,chen2024admmo,gong2024sempl}. Some
+studies already strengthen this practice by calibrating counts from measured
+wall-clock budgets \cite{chen2021multiobj,chen2023aspirations}. Our
+contribution is not to revisit those algorithms, but to isolate the common
+untested assumption beneath them: whether count is a calibrated proxy for
+measured acquisition cost, and whether conclusions survive when that assumption
+is checked.
+
+\paragraph*{Cost-aware regression vs. cost-aware acquisition.}
+A reviewer might object that ``cost-aware regression'' is already a
+literature, citing utility-based regression by Torgo and Ribeiro
+\red{[cite Torgo--Ribeiro]}. That literature is conceptually distinct: it
+weights \emph{prediction errors} by a domain-defined relevance/utility
+function over the target value, so high-stakes errors count more than
+low-stakes ones. It is about the asymmetric value of being wrong, not
+about the cost of acquiring a label. Our work is about the latter. Both
+notions of ``cost'' are legitimate, and neither subsumes the other.
+
+\paragraph*{Model-building cost vs.\ acquisition cost.}
+There is also recent Chen-line work on the cost of building configurable-system
+performance models. Gong and Chen compare encoding schemes using both
+prediction accuracy and model training time, including hyperparameter search
+\cite{gong2022encoding}; Xiang \etal{} study measured online adaptation
+overhead \cite{xiang2026dhda}; the recent DCPL survey maps the broader
+deep-learning literature \cite{gong2024dcpl}; and Domland analyzes
+context-sensitive landscape structure for tuning \cite{ye2026domland}. These
+are real and relevant cost or context questions, but they are not the
+acquisition-cost question we study here. We focus on the resource spent to
+acquire labels for sampled configurations, not the compute spent fitting or
+updating the predictor once those labels are available.
+
+\paragraph*{Input and workload sensitivity.}
+Pereira \etal~\cite{pereira2020} show that on x264, the ranking of sampling
+strategies varies markedly across $17$ input videos and two performance
+properties. Recent tuning-analysis work likewise argues that workload effects
+are system-dependent rather than uniform \cite{ye2026domland}.
+\red{[cite Lesoil et al., JSS 2023; Lesoil et al., JSS 2024;
+Mühlbauer et al., ICSE 2023]} extend this point to broader collections of
+configurable systems and to input-aware models, and the \dsWLI
+study explicitly catalogues per-configuration measurement times across
+$6$--$13$ workloads on each of nine systems---data we reuse in
+\Cref{subsec:datasets}. Our use of multiple inputs and properties is not an
+attempt to (re)establish that context matters. It is established. What is
+new is the question whether the validity of the size-as-cost abstraction is
+itself context-dependent: in some inputs $n$ may be a fine proxy, and in
+others not.
+
+\paragraph*{Multi-objective evaluation.}
+Several works compare strategies on combined accuracy/effort
+objectives. Sarkar \etal~\cite{sarkar2015} use a scalar composite. Siegmund
+\etal~\cite{siegmund2015FSE} report Pareto trade-offs between accuracy and
+number of measurements. Our composite objectives in
+\Cref{subsec:composite} use the same shape but are evaluated under both
+cost models, and are paired with a Pareto comparison
+(\Cref{subsec:pareto},\Cref{subsec:rq4}) so the conclusions are not hostage
+to a single $\lambda$. Li \etal~\cite{li2020pareto} further argue that
+Pareto-based SBSE evaluation should select indicators that reflect the problem
+nature and decision-maker preferences. Our use of frontier membership change
+and overlap follows that guidance: we compare the same finite set of
+strategy--budget candidates under two cost models, so the key question is
+choice-set stability rather than generic front-approximation quality.
+
+\paragraph*{What we are not.}
+We are not proposing a new sampling strategy and we make no claim of
+methodological novelty in cost-aware sampling \emph{in general}; the ML
+active-learning lineage above already developed the heterogeneous-cost
+framing. We are revisiting the cost term in the configurable-systems
+performance-prediction literature, where the count-based abstraction has
+remained the operational default. The closest empirical precedent in this
+literature is Siegmund \etal~\cite{siegmund2012a}, which reports both the
+number of measurements and the time in hours of each heuristic but treats
+time as descriptive effort rather than as a proxy-validity question. We
+frame the proxy-validity question explicitly, instrument it across systems,
+inputs, properties and strategies, and compare conclusions under
+count-based and empirical-cost objectives.

@@ -1,0 +1,135 @@
+\appendices
+
+\section{x264 Input Videos}
+\label{app:input-videos}
+
+The full list of x264 input videos used in Tier-1A
+(\Cref{subsec:datasets}) is reproduced below. The \emph{\#times} column
+is the number of repeated measurements per configuration on that input;
+\emph{stability} is the per-input coefficient of variation across
+repetitions, used to audit measurement noise.
+
+\begin{table}[h]
+    \centering
+    \footnotesize
+    \begin{tabular}{lrrr}
+        \toprule
+            ID & video & \#times & stability \\
+        \midrule
+            $x264_{0}$ & bridge\_far\_cif.y4m & 5 & 0.010127 \\
+            $x264_{1}$ & ice\_cif.y4m & 5 & 0.044476 \\
+            $x264_{2}$ & flower\_sif.y4m & 5 & 0.036826 \\
+            $x264_{3}$ & claire\_qcif.y4m & 5 & 0.086958 \\
+            $x264_{4}$ & sintel\_trailer\_2k\_480p24.y4m & 9 & 0.009481 \\
+            $x264_{5}$ & football\_cif.y4m & 5 & 0.029640 \\
+            $x264_{6}$ & crowd\_run\_1080p50.y4m & 3 & 0.005503 \\
+            $x264_{7}$ & blue\_sky\_1080p25.y4m & 8 & 0.010468 \\
+            $x264_{8}$ & FourPeople\_1280x720\_60.y4m & 11 & 0.011258 \\
+            $x264_{9}$ & sunflower\_1080p25.y4m & 4 & 0.006066 \\
+            $x264_{10}$ & deadline\_cif.y4m & 23 & 0.014536 \\
+            $x264_{11}$ & bridge\_close\_cif.y4m & 5 & 0.009892 \\
+            $x264_{12}$ & husky\_cif.y4m & 5 & 0.028564 \\
+            $x264_{13}$ & tennis\_sif.y4m & 5 & 0.044731 \\
+            $x264_{14}$ & riverbed\_1080p25.y4m & 3 & 0.007625 \\
+            $x264_{15}$ & 720p50\_parkrun\_ter.y4m & 8 & 0.010531 \\
+            $x264_{16}$ & soccer\_4cif.y4m & 16 & 0.011847 \\
+        \bottomrule
+    \end{tabular}
+    \caption{x264 input videos used in our experiments.}
+    \label{tab:input_videos}
+\end{table}
+
+\section{Visual Sketch of the Running Example}
+\label{app:running-example-figure}
+
+\Cref{fig:running-example} complements \Cref{tab:running-example} and
+\Cref{tab:running-example-scale} by visualizing how the Pareto
+trade-off changes shape with the cost model. Two sampling strategies
+(A: cheap-leaning, B: expensive-leaning) are evaluated at sample sizes
+$n\in\{8,16,32,64,128\}$ on a synthetic configurable system. Each
+$(\text{strategy}, n)$ combination is a point in the cost--accuracy plane: the
+$y$-axis is the MRE of a regressor trained on the sample, identical in
+both panels; the $x$-axis is the count $\SizeCost=n$ on the left and
+the measured $\TrainCost$ on the right. Numbers are illustrative orders
+of magnitude consistent with x264-scale encoding-time spreads
+(\Cref{sec:results} reports actual measured values).
+
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}
+\begin{groupplot}[
+    group style={group size=2 by 1, horizontal sep=1.6cm},
+    width=0.46\textwidth,
+    height=5.4cm,
+    ymin=3, ymax=25,
+    ylabel={Predictor MRE (\%)},
+    grid=major,
+    grid style={dashed,gray!25},
+    legend cell align=left,
+    legend style={font=\footnotesize, draw=none, fill=white, fill opacity=0.9, text opacity=1},
+    title style={font=\small\bfseries, yshift=-1ex},
+    label style={font=\small},
+    tick label style={font=\footnotesize}
+]
+
+% PANEL A
+\nextgroupplot[
+    title={(a) Cost as sample size: $\SizeCost = n$},
+    xlabel={Sample size $n$ (log scale)},
+    xmin=6, xmax=170,
+    xmode=log,
+    log basis x=2,
+    xtick={8,16,32,64,128},
+    xticklabels={8,16,32,64,128},
+    legend style={at={(0.97,0.97)}, anchor=north east}
+]
+\addplot[red!75!black, very thick, mark=square*, mark size=2.5pt]
+    coordinates {(8,22) (16,18) (32,15) (64,11) (128,8)};
+\addlegendentry{Strategy A (cheap)}
+\addplot[blue!70!black, very thick, mark=*, mark size=2.5pt]
+    coordinates {(8,14) (16,11) (32,8) (64,6) (128,5)};
+\addlegendentry{Strategy B (expensive)}
+\addplot[black, line width=1.4pt, dashed, mark=none, forget plot]
+    coordinates {(8,14) (16,11) (32,8) (64,6) (128,5)};
+\node[anchor=north west, font=\footnotesize, align=left] at (axis cs:9, 24)
+    {Pareto front $=$ B only:\\B dominates A everywhere};
+
+% PANEL B
+\nextgroupplot[
+    title={(b) Cost as measurement time: $\TrainCost$},
+    xlabel={$\TrainCost$ (seconds, log scale)},
+    xmin=5, xmax=4000,
+    xmode=log,
+    xtick={10,100,1000},
+    xticklabels={$10$,$10^{2}$,$10^{3}$},
+    legend style={at={(0.03,0.03)}, anchor=south west}
+]
+% Strategy A
+\addplot[red!75!black, very thick, mark=square*, mark size=2.5pt]
+    coordinates {(8,22) (18,18) (40,15) (95,11) (220,8)};
+\addlegendentry{Strategy A}
+% Strategy B
+\addplot[blue!70!black, very thick, mark=*, mark size=2.5pt]
+    coordinates {(60,14) (130,11) (290,8) (700,6) (2400,5)};
+\addlegendentry{Strategy B}
+% Pareto front through non-dominated points from BOTH strategies
+\addplot[black, line width=1.4pt, dashed, mark=none, forget plot]
+    coordinates {(8,22) (18,18) (40,15) (60,14) (95,11) (220,8) (700,6) (2400,5)};
+% Mark the two B points that are now dominated
+\addplot[gray, mark=x, mark size=5pt, only marks, mark options={line width=1.5pt}, forget plot]
+    coordinates {(130,11) (290,8)};
+\node[anchor=north west, font=\footnotesize, align=left] at (axis cs:7, 24)
+    {Pareto front $=$ both;\\two B points become\\dominated ($\times$)};
+\end{groupplot}
+\end{tikzpicture}
+\caption{The Pareto trade-off changes shape with the cost model. Under
+count-based cost (\textbf{a}), Strategy~B's curve lies below
+Strategy~A's at every $n$ and the Pareto front is just B. Under
+measured cost (\textbf{b}), points from \emph{both} strategies are on
+the front: A's cheap-leaning samples dominate the low-cost end, B's
+expensive-leaning samples dominate the high-accuracy end, and two of
+B's points (gray $\times$) become dominated. The strategy you would
+recommend, and the $(s,n)$ combinations that are Pareto-efficient at all,
+depend on which cost dimension you measure.}
+\label{fig:running-example}
+\end{figure*}

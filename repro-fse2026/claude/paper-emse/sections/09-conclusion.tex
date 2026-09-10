@@ -1,0 +1,26 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We replicated the FSE~2026 posterior-guarantee study of configuration
+sampling strategies across six corpora and 851 decision scopes, and
+re-indexed its decisions by measured acquisition cost. The framework
+replicates without qualification: posterior risk and confidence
+discriminate strategies in $\approx$95\% of scopes, on targets from
+encoding time to kernel size to model accuracy, with no learner in the
+loop. The recommendations attached to it are population-relative: \srs's
+superiority holds at the original study's budget scale on configurable
+software and vanishes elsewhere; under measured cost it is never the best
+choice outside the replication corpora, though often a defensible one at
+a quantifiable premium.
+
+The cost re-indexing yields the paper's central empirical fact---the
+guarantee/cost Pareto frontier differs from the sample-size frontier in
+97.5\% of scopes---and the equal-spend experiments explain the
+recommendation instability mechanistically: cost--target coupling
+determines whether cheap volume can substitute for expensive information,
+and budget scale determines whether guided search amortizes. A counted
+sample is not a faithful budget for guarantees; and ``cost-effective'' is
+not a property a sampling strategy has, but one it exhibits relative to
+an outcome and a coupling. We release all code, result tables, and a
+command-level manifest to make both the replication and the extension
+independently checkable.

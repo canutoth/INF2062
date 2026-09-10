@@ -1,0 +1,16 @@
+target_context,cost_context,strategy,level,n,pct_n,median_pct_cost,median_train_cost,median_mre,pareto_count,pareto_empirical,system,cost_property,target_property,scenario
+BerkeleyDBC,BerkeleyDBC,random,t1,15,0.005859375,0.005699711491945902,120.70878996538463,0.8258319375920604,0,0,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,solverBased,t1,15,0.005859375,0.001042956087709318,22.087778918690965,0.5860610900435571,0,0,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,henard,t1,15,0.005859375,0.0008812228745502398,18.662584418016188,0.5231888261371214,1,1,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,distBased,t1,15,0.005859375,0.005943615070448686,125.87419278812416,2.0090612171561544,0,0,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,divDistBased,t1,15,0.005859375,0.0032267167489256126,68.33557713828708,0.7097875314779059,0,0,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,random,t2,97,0.037890625,0.03811828473405207,807.2710403509474,0.3221130500232434,1,1,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,solverBased,t2,97,0.037890625,0.007060362618297976,149.5247311334741,0.504222083969853,0,0,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,henard,t2,97,0.037890625,0.006647358975140278,140.7781182413466,0.4828441409237697,0,1,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,distBased,t2,97,0.037890625,0.05656803322569458,1198.0007849597446,0.377817214847932,0,0,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,divDistBased,t2,97,0.037890625,0.04104786775002341,869.3139036538957,0.3338402247487819,0,0,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,random,t3,363,0.141796875,0.14058221737082663,2977.257598645525,0.2877910112971144,0,1,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,solverBased,t3,363,0.141796875,0.026714533606835483,565.7617987730457,0.5527221536097631,0,0,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,henard,t3,363,0.141796875,0.06826759539480236,1445.7747283520348,0.37607351717909476,0,0,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,distBased,t3,363,0.141796875,0.19823954734592034,4198.327567496242,0.29148218142920534,0,0,BerkeleyDBC,performance,performance,cost_performance__target_performance
+BerkeleyDBC,BerkeleyDBC,divDistBased,t3,363,0.141796875,0.1507612869471759,3192.830469881345,0.28158337764074887,1,1,BerkeleyDBC,performance,performance,cost_performance__target_performance

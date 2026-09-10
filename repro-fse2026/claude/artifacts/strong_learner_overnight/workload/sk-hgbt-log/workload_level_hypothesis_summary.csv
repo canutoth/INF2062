@@ -1,0 +1,9 @@
+hypothesis,scopes,supports,refutes,inconclusive,global_verdict
+H1a,93,81,6,6,supported (81/93)
+H1b,93,88,0,5,supported (88/93)
+H2a,93,93,0,0,supported (93/93)
+H2b,93,34,10,49,"mixed (sup=34, ref=10, inc=49 of 93)"
+H2c,93,87,4,2,supported (87/93)
+H3a,93,70,23,0,supported (70/93)
+H4a,93,72,21,0,supported (72/93)
+H4b,93,72,21,0,supported (72/93)

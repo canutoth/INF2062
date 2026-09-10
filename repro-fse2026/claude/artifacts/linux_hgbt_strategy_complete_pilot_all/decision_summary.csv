@@ -1,0 +1,8 @@
+release,rank_top1_flips,rank_lambdas,mean_kendall_tau,mean_top3_overlap,top1_count_mode,top1_empirical_mode,pareto_count_n,pareto_empirical_n,pareto_overlap_n,pareto_jaccard,pareto_count_pairs,pareto_empirical_pairs
+413,7,7,0.3333333333333333,0.3333333333333333,coverage_n01000,uncertainty_n01000,1,4,1,0.25,coverage_n01000,"balanced_n01000, cheapOracle_n01000, coverage_n01000, uncertainty_n01000"
+415,7,7,0.047619047619047616,0.3333333333333333,coverage_n00425,cheapOracle_n00425,1,5,1,0.2,coverage_n00425,"balanced_n00425, cheapOracle_n00425, coverage_n00425, random_n00425, uncertainty_n00425"
+420,7,7,0.14285714285714285,0.3333333333333333,balanced_n00254,cheapOracle_n00254,1,4,1,0.25,balanced_n00254,"balanced_n00254, cheapOracle_n00254, random_n00254, uncertainty_n00254"
+500,6,7,0.42857142857142855,0.3333333333333333,random_n00215,uncertainty_n00215,1,3,1,0.3333333333333333,random_n00215,"cheapOracle_n00215, random_n00215, uncertainty_n00215"
+504,6,7,0.3333333333333333,0.3333333333333333,coverage_n00279,uncertainty_n00279,1,3,1,0.3333333333333333,coverage_n00279,"cheapOracle_n00279, coverage_n00279, uncertainty_n00279"
+507,6,7,0.3333333333333333,0.3333333333333333,balanced_n00218,uncertainty_n00218,1,3,1,0.3333333333333333,balanced_n00218,"balanced_n00218, cheapOracle_n00218, uncertainty_n00218"
+508,6,7,0.14285714285714285,0.3333333333333333,coverage_n00237,uncertainty_n00237,1,4,1,0.25,coverage_n00237,"cheapOracle_n00237, coverage_n00237, random_n00237, uncertainty_n00237"

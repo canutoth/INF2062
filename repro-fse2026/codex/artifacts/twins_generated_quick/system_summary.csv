@@ -1,0 +1,15 @@
+system,analysis_context,filter,rows_before_cap,rows_used,row_cap,report
+7z,7z,,68640,5000,5000,7z/7z_generated_report.md
+Apache,Apache_2.4.38,revision=2.4.38,640,640,0,Apache_2_4_38/Apache_generated_report.md
+brotli,brotli_1.0.7,revision=1.0.7,180,180,0,brotli_1_0_7/brotli_generated_report.md
+exastencils,exastencils,,86058,5000,5000,exastencils/exastencils_generated_report.md
+HSQLDB,HSQLDB,,864,864,0,HSQLDB/HSQLDB_generated_report.md
+jump3r,jump3r,,4296,4296,0,jump3r/jump3r_generated_report.md
+kanzi,kanzi,,3202,3202,0,kanzi/kanzi_generated_report.md
+LLVM,LLVM,,65536,5000,5000,LLVM/LLVM_generated_report.md
+lrzip,lrzip,,5184,5000,5000,lrzip/lrzip_generated_report.md
+MongoDB,MongoDB,,6840,5000,5000,MongoDB/MongoDB_generated_report.md
+nginx,nginx,,4416,4416,0,nginx/nginx_generated_report.md
+PostgreSQL,PostgreSQL_11.2,revision=11.2,864,864,0,PostgreSQL_11_2/PostgreSQL_generated_report.md
+VP8,VP8_v1.8.0,revision=v1.8.0,2736,2736,0,VP8_v1_8_0/VP8_generated_report.md
+x264,x264,,4608,4608,0,x264/x264_generated_report.md

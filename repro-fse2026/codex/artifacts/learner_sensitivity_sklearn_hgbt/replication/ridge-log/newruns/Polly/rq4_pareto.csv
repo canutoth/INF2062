@@ -1,0 +1,10 @@
+target_context,cost_context,strategy,level,n,pct_n,median_pct_cost,median_train_cost,median_mre,pareto_count,pareto_empirical,system,cost_property,target_property,scenario
+Polly,Polly,random,t1,28,0.0007389032564522088,0.0007582821392984699,770.075,0.3599366358361602,0,0,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,solverBased,t1,28,0.0007389032564522088,0.0007020450756632378,712.9633333333331,0.2964678073207148,1,1,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,divDistBased,t1,28,0.0007389032564522088,0.0006662156312040095,676.5766666666666,0.3333262289306852,0,1,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,random,t2,345,0.009104343695571858,0.009230046130327685,9373.5925,0.25983839851666746,1,1,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,solverBased,t2,345,0.009104343695571858,0.009205710434231879,9348.878333333334,0.26059147934223353,0,1,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,divDistBased,t2,345,0.009104343695571858,0.008950671813981903,9089.873333333335,0.284338606090741,0,1,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,random,t3,2172,0.05731778117907848,0.05763537121750584,58531.72083333333,0.25266221893188967,1,1,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,solverBased,t3,2172,0.05731778117907848,0.05654727996100052,57426.707500000004,0.29489393214712273,0,0,Polly,performance,performance,cost_performance__target_performance
+Polly,Polly,divDistBased,t3,2172,0.05731778117907848,0.05661312756085567,57493.57916666666,0.26614291939836576,0,0,Polly,performance,performance,cost_performance__target_performance

@@ -1,0 +1,3 @@
+hypothesis,scope,scope_value,statistic,statistic_value,p_value,effect,effect_value,effect_label,verdict,notes
+H5a,system,lcbench,h5a_p_value,0.9999993347716872,0.9999993347716872,ratio_spread,0.19536872543571226,refutes,refutes,dataset-level ratio spread=0.1954; stored H5a verdict=refutes
+H5c,system,lcbench,kendall_tau_min,0.3594976452119309,nan,median_pareto_jaccard,0.5,unstable,supports,mean Kendall tau range 0.3595-0.686; median Pareto Jaccard=0.5

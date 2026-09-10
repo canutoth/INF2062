@@ -1,0 +1,10 @@
+context,n_combos,n_count_eff,n_meas_eff,jaccard,n_missed,p_differ
+jump3r/energy,45,4,4,1.0,0,0.517
+kanzi/energy,45,6,5,0.2222,3,1.0
+lrzip/energy,40,7,17,0.4118,10,1.0
+x264/energy,45,9,18,0.5,9,1.0
+nginx/energy,45,9,14,0.4375,7,1.0
+VP8/energy,30,5,6,0.8333,1,0.896
+HSQLDB/energy,55,11,17,0.6471,6,1.0
+Apache/energy,35,7,8,0.875,1,1.0
+exastencils/energy,30,5,7,0.7143,2,1.0

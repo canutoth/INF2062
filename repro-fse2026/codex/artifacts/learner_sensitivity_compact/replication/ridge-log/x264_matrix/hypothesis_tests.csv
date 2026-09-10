@@ -1,0 +1,29 @@
+hypothesis,scope,scope_value,statistic,statistic_value,p_value,effect,effect_value,effect_label,verdict,notes,cost_property,target_property,scenario,input_index
+H1a,system,x264_0|cost=time,cv_cost,0.3049973724178075,nan,p90_over_p10,2.25374925014997,moderate,supports,"CV=0.305; p90/p10=2.25; CV 95% CI [0.295,0.314]",time,time,cost_time__target_time,0
+H1b,system,x264_0|cost=time,kruskal_wallis_min_p,0.06047876163225454,0.06047876163225454,eta_squared_max,0.9292397660818716,large,inconclusive,K-W per level: 0/3 levels with p<0.05; min p=0.0605; max eta^2=0.929,time,time,cost_time__target_time,0
+H2a,system,x264_0|cost=time,spearman_rho,0.9433551227408425,7.344628683477517e-18,rho,0.9433551227408425,strong positive,supports,Spearman rho=0.943 on n=36 (records-level),time,time,cost_time__target_time,0
+H2b,system,x264_0|cost=time,median_ratio,0.9891533701711807,nan,abs_deviation_from_1,0.010846629828819343,calibrated,refutes,"median ratio=0.989; 95% CI [0.971,1.04]; |median-1|=0.0108",time,time,cost_time__target_time,0
+H2c,system,x264_0|cost=time,kruskal_wallis_p,0.00022561814691074298,0.00022561814691074298,eta_squared,0.6304378925081892,large,supports,K-W p=0.000226; eta^2=0.63; k=6 strategies,time,time,cost_time__target_time,0
+H3a,system,x264_0|cost=time|target=time,top1_flips,0.0,nan,flip_fraction,0.0,no flips,refutes,top-1 flips 0/7; mean Kendall tau=0.897,time,time,cost_time__target_time,0
+H4a,system,x264_0|cost=time|target=time,exclusive_pairs,3.0,nan,pareto_jaccard,0.5,different,supports,|count|=3; |empirical|=6; only_count=0; only_empirical=3; Jaccard=0.5,time,time,cost_time__target_time,0
+H4b,system,x264_0|cost=time|target=time,pareto_jaccard,0.5,nan,frontier_size_diff,3.0,frontiers differ,supports,|count|=3; |empirical|=6; Jaccard=0.5,time,time,cost_time__target_time,0
+H3a,system,x264_0|cost=time|target=size,top1_flips,0.0,nan,flip_fraction,0.0,no flips,refutes,top-1 flips 0/7; mean Kendall tau=0.807,time,size,cost_time__target_size,0
+H4a,system,x264_0|cost=time|target=size,exclusive_pairs,5.0,nan,pareto_jaccard,0.375,different,supports,|count|=3; |empirical|=8; only_count=0; only_empirical=5; Jaccard=0.375,time,size,cost_time__target_size,0
+H4b,system,x264_0|cost=time|target=size,pareto_jaccard,0.375,nan,frontier_size_diff,5.0,frontiers differ,supports,|count|=3; |empirical|=8; Jaccard=0.375,time,size,cost_time__target_size,0
+H1a,system,x264_0|cost=size,cv_cost,0.31759608846542614,nan,p90_over_p10,2.2274686336366414,moderate,supports,"CV=0.318; p90/p10=2.23; CV 95% CI [0.308,0.327]",size,time,cost_size__target_time,0
+H1b,system,x264_0|cost=size,kruskal_wallis_min_p,0.0721156205003364,0.0721156205003364,eta_squared_max,0.8520467836257316,large,inconclusive,K-W per level: 0/3 levels with p<0.05; min p=0.0721; max eta^2=0.852,size,time,cost_size__target_time,0
+H2a,system,x264_0|cost=size,spearman_rho,0.9433551227408425,7.344628683477517e-18,rho,0.9433551227408425,strong positive,supports,Spearman rho=0.943 on n=36 (records-level),size,time,cost_size__target_time,0
+H2b,system,x264_0|cost=size,median_ratio,0.9898087575975019,nan,abs_deviation_from_1,0.010191242402498135,calibrated,refutes,"median ratio=0.99; 95% CI [0.906,1.02]; |median-1|=0.0102",size,time,cost_size__target_time,0
+H2c,system,x264_0|cost=size,kruskal_wallis_p,0.002506563277984669,0.002506563277984669,eta_squared,0.4459822897443594,large,supports,K-W p=0.00251; eta^2=0.446; k=6 strategies,size,time,cost_size__target_time,0
+H3a,system,x264_0|cost=size|target=time,top1_flips,1.0,nan,flip_fraction,0.14285714285714285,rare flips,supports,top-1 flips 1/7; mean Kendall tau=0.852,size,time,cost_size__target_time,0
+H4a,system,x264_0|cost=size|target=time,exclusive_pairs,2.0,nan,pareto_jaccard,0.6,different,supports,|count|=3; |empirical|=5; only_count=0; only_empirical=2; Jaccard=0.6,size,time,cost_size__target_time,0
+H4b,system,x264_0|cost=size|target=time,pareto_jaccard,0.6,nan,frontier_size_diff,2.0,frontiers differ,supports,|count|=3; |empirical|=5; Jaccard=0.6,size,time,cost_size__target_time,0
+H3a,system,x264_0|cost=size|target=size,top1_flips,0.0,nan,flip_fraction,0.0,no flips,refutes,top-1 flips 0/7; mean Kendall tau=0.856,size,size,cost_size__target_size,0
+H4a,system,x264_0|cost=size|target=size,exclusive_pairs,7.0,nan,pareto_jaccard,0.3,different,supports,|count|=3; |empirical|=10; only_count=0; only_empirical=7; Jaccard=0.3,size,size,cost_size__target_size,0
+H4b,system,x264_0|cost=size|target=size,pareto_jaccard,0.3,nan,frontier_size_diff,7.0,frontiers differ,supports,|count|=3; |empirical|=10; Jaccard=0.3,size,size,cost_size__target_size,0
+H5a,scenario,cost_time__target_time,kruskal_wallis_p,nan,nan,ratio_spread,nan,nan,inconclusive,not enough inputs,time,time,cost_time__target_time,
+H5a,scenario,cost_time__target_size,kruskal_wallis_p,nan,nan,ratio_spread,nan,nan,inconclusive,not enough inputs,time,size,cost_time__target_size,
+H5a,scenario,cost_size__target_time,kruskal_wallis_p,nan,nan,ratio_spread,nan,nan,inconclusive,not enough inputs,size,time,cost_size__target_time,
+H5a,scenario,cost_size__target_size,kruskal_wallis_p,nan,nan,ratio_spread,nan,nan,inconclusive,not enough inputs,size,size,cost_size__target_size,
+H5b,global,x264_matrix,flip_rate_diff,-0.07142857142857142,nan,abs_diff,0.07142857142857142,small gap,supports,flip rate target=time=0.0714; target=size=0; diff (size-time)=-0.0714,,,global,
+H5c,global,x264_matrix,mean_kendall_tau,0.8532022458106049,nan,median_jaccard,0.4375,large instability,supports,mean Kendall tau=0.853; median Pareto Jaccard=0.438; composite instability=0.709,,,global,

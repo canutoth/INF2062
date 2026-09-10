@@ -1,0 +1,58 @@
+\paragraph*{Sampling strategy choice is subject-specific (panel validity).}
+The choice of sampling strategies could itself drive the result. One concrete
+hypothesis is that the cost-aware \texttt{pilotCost} sampler we add explains most
+of the changes. We test this hypothesis with an experiment: we remove
+\texttt{pilotCost} and the cost-aware bounds and re-run the comparison with only
+the cost-unaware \texttt{random} and \texttt{balanced} samplers. The measured-cost
+top group still changes in $59\%$ of \StudyEnergy, $52\%$ of \StudyWorkload, and
+$32\%$ of \StudyLCBench\ comparisons (versus $50/46/42\%$ with the full set), the
+count-recommended sampler is evicted in up to $22\%$, and Pareto fronts still
+differ in $62$--$71\%$ of scenarios. The effect is thus a property of the cost
+axis, not of the sampler we add, and the statistical verdicts are robust to
+dropping it. Along the way the experiment teaches something more general: even
+among cost-unaware samplers the cost-effective choice is subject- and
+budget-specific, so practitioners should choose per subject rather than assume a
+universal best. Consistently, the change also holds on the two replications and
+\StudyLinux, which contain no cost-aware sampler and reuse the published
+\StudyReplicationICSE\ and \StudyReplicationICPE\ strategy sets unchanged.
+
+\paragraph*{Construct validity (what ``cost'' includes).}
+We charge the measured cost of \emph{acquiring} the selected training
+configurations, not the cost of \emph{selecting} them: constraint solving,
+pairwise-distance computation, or active-learning retraining. This scope is
+deliberate and conservative: prior sampling studies measure effort as sample
+\emph{size} and thus ignore selection cost as well, so our cost axis is already a
+strict improvement on the count baseline we compare against, and because most
+strategies select a sample once and for all, any selection cost is amortized over
+the campaign and small beside measurement.
+
+\paragraph*{Internal validity (learners, seeds, grid).}
+Prediction error, and thus which sampler wins RQ2 and RQ3, can depend on the
+learner and on sampling noise (RQ1 does not, as it precedes any model fit). To
+mitigate this we keep the replication studies' original ridge learner and re-run
+the entire decision analysis under CART and the scikit-learn random forest
+\cite{sklearn_api}, with gradient boosting on the high-dimensional Linux space,
+which agrees with the random forest.
+The strong learners cut error sharply (median MRE on \StudyReplicationICSE\
+$0.26{\to}0.07$) yet do not restore the count proxy: count-versus-measured
+top-choice agreement stays at $0.43$--$0.81$ and measured-cost Pareto fronts still
+differ (Jaccard $0.30$--$0.57$). We average over repeated seeds (about $100$ runs
+per cell for the replication archives and $30$ for the generated families) and
+bootstrap every reported proportion ($B{=}1000$). Because sample sizes are
+discrete, we judge decisions by Pareto changes across the size grid, not at a
+single budget point.
+
+
+
+\paragraph*{External validity.}
+The systems span compilers, encoders, databases, archivers, energy, workloads,
+machine-learning runtime, and Linux releases, all real configurable software
+measured in prior studies rather than synthetic, though still a finite, curated
+set, and we run many per-scope tests. We therefore report the families separately and rest
+the claims on patterns that repeat across them rather than on any single test. A
+system that recurs in two families is not a redundant replicate: it is measured on
+a different non-functional property and context (x264, for instance, contributes
+encoding time and output size over $17$ videos in \StudyReplicationICPE\ but
+energy in \StudyEnergy), so agreement across families is evidence over genuinely
+different measurement settings, not the same one repeated. Per-scope statistics,
+$p$-values, and effect sizes are in the anonymized artifact~\cite{artifact}.

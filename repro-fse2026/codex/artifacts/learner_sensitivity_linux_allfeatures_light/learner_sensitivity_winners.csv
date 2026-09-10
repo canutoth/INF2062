@@ -1,0 +1,8 @@
+family,label,best_mre_learner,best_mre,rank_stability_learner,rank_top1_agreement,pareto_stability_learner,pareto_jaccard
+LINUX,413,ridge-log,0.3131109157386777,gbt-log,0.0,gbt-log,0.6
+LINUX,415,ridge-log,0.362475158471952,gbt-log,0.0,gbt-log,0.42857142857142855
+LINUX,420,ridge-log,0.36821916275584265,gbt-log,0.0,ridge-log,0.6
+LINUX,500,ridge-log,0.3819882468110486,gbt-log,0.0,ridge-log,0.6
+LINUX,504,ridge-log,0.3611813730544713,gbt-log,0.0,gbt-log,0.5
+LINUX,507,ridge-log,0.3534975590922459,gbt-log,0.0,gbt-log,0.5
+LINUX,508,ridge-log,0.35119317971102554,gbt-log,0.0,ridge-log,0.6

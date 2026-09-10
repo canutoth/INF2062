@@ -1,0 +1,2 @@
+hypothesis,scope,scope_value,statistic,statistic_value,p_value,effect,effect_value,effect_label,verdict,notes
+H5a,scenario,kanzi|cost=time|target=time,kruskal_wallis_p,0.026558138985293217,0.026558138985293217,ratio_spread,0.20821976390709973,small,supports,K-W on 9 inputs: p=0.0266; eta^2=0.0111; ratio spread=0.208

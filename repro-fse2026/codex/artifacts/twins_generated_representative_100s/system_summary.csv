@@ -1,0 +1,8 @@
+system,analysis_context,filter,rows_before_cap,rows_used,row_cap,report
+HSQLDB,HSQLDB,,864,864,0,HSQLDB/HSQLDB_generated_report.md
+brotli,brotli_1.0.7,revision=1.0.7,180,180,0,brotli_1_0_7/brotli_generated_report.md
+jump3r,jump3r,,4296,4296,0,jump3r/jump3r_generated_report.md
+lrzip,lrzip,,5184,5184,0,lrzip/lrzip_generated_report.md
+MongoDB,MongoDB,,6840,6840,0,MongoDB/MongoDB_generated_report.md
+PostgreSQL,PostgreSQL_11.2,revision=11.2,864,864,0,PostgreSQL_11_2/PostgreSQL_generated_report.md
+x264,x264,,4608,4608,0,x264/x264_generated_report.md
